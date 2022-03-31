@@ -1,0 +1,508 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+MERGED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+MERGED from [:espresso] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/espresso/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:integration_test] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/integration_test/intermediates/merged_manifest/debug/AndroidManifest.xml:7:1-12:12
+MERGED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-89:12
+MERGED from [:path_provider_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.test.ext:truth:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b9a582b935189ca536324aab35bcf6e7/transformed/jetified-truth-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:17:1-53:12
+MERGED from [androidx.test.espresso:espresso-intents:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4907c662ea58a83c6246df77e6291994/transformed/espresso-intents-3.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:rules:1.2.0] /Users/bootpay/.gradle/caches/transforms-3/9b9a9cad98d44c281159ea939465d53a/transformed/rules-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/af7cfff134cc1b4b0f83950173d4aad7/transformed/espresso-contrib-3.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.test.espresso:espresso-accessibility:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4a40013b849350dae945158641feb8bb/transformed/espresso-accessibility-3.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.test.espresso:espresso-web:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/fdd5da0f1796898729422e3a30292e55/transformed/espresso-web-3.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] /Users/bootpay/.gradle/caches/transforms-3/d5738bafedb5e8ca84111872aa254ef7/transformed/espresso-core-3.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:runner:1.2.0] /Users/bootpay/.gradle/caches/transforms-3/a9b0bc0f5e894413940c55c3aa9cca0c/transformed/runner-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.ext:junit:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a309e00c77ea980f301a2a0bc7e2c43/transformed/jetified-junit-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.espresso.idling:idling-concurrent:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/ea2b5af901965ea28861fb52b7b56b3a/transformed/idling-concurrent-3.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] /Users/bootpay/.gradle/caches/transforms-3/1f39fbf1de86052f440b9dfb8dd334b9/transformed/espresso-idling-resource-3.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/53ae67e1fd84772c7408eff2e57cb7be/transformed/webkit-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.test:monitor:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/ca7a7de16b2505fe395c4817e5fa80ba/transformed/monitor-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b098dde000b81f81d847fce16ad3bc04/transformed/material-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/c073fb1ff6cbb7502adbb264312e1da7/transformed/recyclerview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a04e77f8117fbd322cf993be49e16fa/transformed/appcompat-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/4e1861a3bfafe57ad70b34a2ff25a854/transformed/vectordrawable-animated-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/8e7fd72d87e20ae04ebd28a5f9e79b11/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/22a51f44cdda660ee1b80324ead41660/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/bootpay/.gradle/caches/transforms-3/56abd26d6b24f81a9b5fc979f954a723/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/6a3129cfd504ed00e640aaa6583f3eea/transformed/transition-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/cc799678192709bceae81fa20a37187c/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/780765cea0c567bec6ca8db99cd43cba/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/094c5049f2f17ef069571633cbe3069f/transformed/jetified-activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/244493283b924bdab6270ba5f46952f0/transformed/coordinatorlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/9e5bac1f89003abf622e3422923228db/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/058d6c0c5747b5b4ce36017fadd3626c/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/c737135e2039c6aa4422151570c825bf/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/7f12bd1a771dd87c830f5d5a90fbdbe2/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/4666547609bee097a70e3acc6d3c3166/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/875ecb51d934b714383279d37fbbf224/transformed/vectordrawable-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] /Users/bootpay/.gradle/caches/transforms-3/77368fcbe74f28065fdfe7b340d83da3/transformed/core-1.6.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/bootpay/.gradle/caches/transforms-3/b2409f7f7047d916fdb8ce5cd1855f71/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/303841d5a01881781d7bcd0b9a1b8466/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/bc210aa728a4eeea33d4ed954c0cfcd1/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/cf8ca0b38745219b010b20e3080e51d9/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/80c89437fc250e842b2f71e0d613c9ff/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a89849bfd38ecbffaf5b00436d2e3bd/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/989dfec6fc7a4daefb140f0c011fcef1/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/8ca7186ef83368b8549809152ed428ce/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/485578c608519582fc751ff2f7c88476/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/bootpay/.gradle/caches/transforms-3/4f632648e53e556eed5f40f2824d9ac5/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/f07d901af75c0e63256d6d0ab15ab0e0/transformed/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/140757696eca7ec1efbdf7371a4acde0/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/6b80c278120ff42ff6ece3f9d926c639/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/bootpay/.gradle/caches/transforms-3/a48dcb6983f73a065cdd1587f4cda38a/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/bootpay/.gradle/caches/transforms-3/437e772228a813b0fd4bde3f8ec9dd31/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:1:1-25:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:1:1-25:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:1:1-25:12
+	package
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:2:3-48
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:1-43:12
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:4:3-31:17
+MERGED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:4:3-31:17
+MERGED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:4:3-31:17
+MERGED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:26:5-51:19
+MERGED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:26:5-51:19
+MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/af7cfff134cc1b4b0f83950173d4aad7/transformed/espresso-contrib-3.1.0/AndroidManifest.xml:24:5-20
+MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/af7cfff134cc1b4b0f83950173d4aad7/transformed/espresso-contrib-3.1.0/AndroidManifest.xml:24:5-20
+MERGED from [androidx.test.espresso:espresso-accessibility:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4a40013b849350dae945158641feb8bb/transformed/espresso-accessibility-3.1.0/AndroidManifest.xml:24:5-20
+MERGED from [androidx.test.espresso:espresso-accessibility:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4a40013b849350dae945158641feb8bb/transformed/espresso-accessibility-3.1.0/AndroidManifest.xml:24:5-20
+MERGED from [com.google.android.material:material:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b098dde000b81f81d847fce16ad3bc04/transformed/material-1.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b098dde000b81f81d847fce16ad3bc04/transformed/material-1.0.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.core:core:1.6.0] /Users/bootpay/.gradle/caches/transforms-3/77368fcbe74f28065fdfe7b340d83da3/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] /Users/bootpay/.gradle/caches/transforms-3/77368fcbe74f28065fdfe7b340d83da3/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/bootpay/.gradle/caches/transforms-3/4f632648e53e556eed5f40f2824d9ac5/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/bootpay/.gradle/caches/transforms-3/4f632648e53e556eed5f40f2824d9ac5/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] /Users/bootpay/.gradle/caches/transforms-3/77368fcbe74f28065fdfe7b340d83da3/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:7:5-44
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:7:5-44
+	android:icon
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:6:5-39
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:6:5-39
+	android:usesCleartextTraffic
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:5:5-40
+meta-data#flutterEmbedding
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:8:5-10:29
+	android:value
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:10:9-26
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:9:9-40
+activity#io.flutter.embedding.android.FlutterActivity
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:11:5-30:16
+	android:launchMode
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:14:7-37
+	android:hardwareAccelerated
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:13:7-41
+	android:windowSoftInputMode
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:18:7-49
+	android:exported
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:15:7-30
+	android:configChanges
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:12:7-138
+	android:theme
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:17:7-41
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:16:7-66
+meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:23:7-25:31
+	android:value
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:25:9-29
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:24:9-74
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:26:7-29:23
+action#android.intent.action.MAIN
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:27:9-60
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:27:17-58
+category#android.intent.category.LAUNCHER
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:28:9-68
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:28:19-66
+uses-permission#android.permission.INTERNET
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:37:3-64
+MERGED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:37:3-64
+MERGED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:37:3-64
+MERGED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-67
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:37:20-62
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:42:3-66
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml:42:20-63
+uses-sdk
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+MERGED from [:espresso] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/espresso/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:espresso] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/espresso/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:integration_test] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/integration_test/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-44
+MERGED from [:integration_test] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/integration_test/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-44
+MERGED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [androidx.test.ext:truth:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b9a582b935189ca536324aab35bcf6e7/transformed/jetified-truth-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.ext:truth:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b9a582b935189ca536324aab35bcf6e7/transformed/jetified-truth-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-intents:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4907c662ea58a83c6246df77e6291994/transformed/espresso-intents-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-intents:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4907c662ea58a83c6246df77e6291994/transformed/espresso-intents-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:rules:1.2.0] /Users/bootpay/.gradle/caches/transforms-3/9b9a9cad98d44c281159ea939465d53a/transformed/rules-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:rules:1.2.0] /Users/bootpay/.gradle/caches/transforms-3/9b9a9cad98d44c281159ea939465d53a/transformed/rules-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/af7cfff134cc1b4b0f83950173d4aad7/transformed/espresso-contrib-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/af7cfff134cc1b4b0f83950173d4aad7/transformed/espresso-contrib-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-accessibility:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4a40013b849350dae945158641feb8bb/transformed/espresso-accessibility-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-accessibility:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/4a40013b849350dae945158641feb8bb/transformed/espresso-accessibility-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-web:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/fdd5da0f1796898729422e3a30292e55/transformed/espresso-web-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-web:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/fdd5da0f1796898729422e3a30292e55/transformed/espresso-web-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] /Users/bootpay/.gradle/caches/transforms-3/d5738bafedb5e8ca84111872aa254ef7/transformed/espresso-core-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] /Users/bootpay/.gradle/caches/transforms-3/d5738bafedb5e8ca84111872aa254ef7/transformed/espresso-core-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.2.0] /Users/bootpay/.gradle/caches/transforms-3/a9b0bc0f5e894413940c55c3aa9cca0c/transformed/runner-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.2.0] /Users/bootpay/.gradle/caches/transforms-3/a9b0bc0f5e894413940c55c3aa9cca0c/transformed/runner-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.ext:junit:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a309e00c77ea980f301a2a0bc7e2c43/transformed/jetified-junit-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.ext:junit:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a309e00c77ea980f301a2a0bc7e2c43/transformed/jetified-junit-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso.idling:idling-concurrent:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/ea2b5af901965ea28861fb52b7b56b3a/transformed/idling-concurrent-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso.idling:idling-concurrent:3.1.0] /Users/bootpay/.gradle/caches/transforms-3/ea2b5af901965ea28861fb52b7b56b3a/transformed/idling-concurrent-3.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] /Users/bootpay/.gradle/caches/transforms-3/1f39fbf1de86052f440b9dfb8dd334b9/transformed/espresso-idling-resource-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] /Users/bootpay/.gradle/caches/transforms-3/1f39fbf1de86052f440b9dfb8dd334b9/transformed/espresso-idling-resource-3.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/53ae67e1fd84772c7408eff2e57cb7be/transformed/webkit-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/53ae67e1fd84772c7408eff2e57cb7be/transformed/webkit-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.test:monitor:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/ca7a7de16b2505fe395c4817e5fa80ba/transformed/monitor-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/ca7a7de16b2505fe395c4817e5fa80ba/transformed/monitor-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b098dde000b81f81d847fce16ad3bc04/transformed/material-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/b098dde000b81f81d847fce16ad3bc04/transformed/material-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/c073fb1ff6cbb7502adbb264312e1da7/transformed/recyclerview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/c073fb1ff6cbb7502adbb264312e1da7/transformed/recyclerview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a04e77f8117fbd322cf993be49e16fa/transformed/appcompat-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a04e77f8117fbd322cf993be49e16fa/transformed/appcompat-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/4e1861a3bfafe57ad70b34a2ff25a854/transformed/vectordrawable-animated-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/4e1861a3bfafe57ad70b34a2ff25a854/transformed/vectordrawable-animated-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/8e7fd72d87e20ae04ebd28a5f9e79b11/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/8e7fd72d87e20ae04ebd28a5f9e79b11/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/22a51f44cdda660ee1b80324ead41660/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/22a51f44cdda660ee1b80324ead41660/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/bootpay/.gradle/caches/transforms-3/56abd26d6b24f81a9b5fc979f954a723/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/bootpay/.gradle/caches/transforms-3/56abd26d6b24f81a9b5fc979f954a723/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/6a3129cfd504ed00e640aaa6583f3eea/transformed/transition-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/6a3129cfd504ed00e640aaa6583f3eea/transformed/transition-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/cc799678192709bceae81fa20a37187c/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/cc799678192709bceae81fa20a37187c/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/780765cea0c567bec6ca8db99cd43cba/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/780765cea0c567bec6ca8db99cd43cba/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/094c5049f2f17ef069571633cbe3069f/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/094c5049f2f17ef069571633cbe3069f/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/244493283b924bdab6270ba5f46952f0/transformed/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/244493283b924bdab6270ba5f46952f0/transformed/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/9e5bac1f89003abf622e3422923228db/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/9e5bac1f89003abf622e3422923228db/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/058d6c0c5747b5b4ce36017fadd3626c/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/058d6c0c5747b5b4ce36017fadd3626c/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/c737135e2039c6aa4422151570c825bf/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/c737135e2039c6aa4422151570c825bf/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/7f12bd1a771dd87c830f5d5a90fbdbe2/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/7f12bd1a771dd87c830f5d5a90fbdbe2/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/4666547609bee097a70e3acc6d3c3166/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/4666547609bee097a70e3acc6d3c3166/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/875ecb51d934b714383279d37fbbf224/transformed/vectordrawable-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/875ecb51d934b714383279d37fbbf224/transformed/vectordrawable-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] /Users/bootpay/.gradle/caches/transforms-3/77368fcbe74f28065fdfe7b340d83da3/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] /Users/bootpay/.gradle/caches/transforms-3/77368fcbe74f28065fdfe7b340d83da3/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/bootpay/.gradle/caches/transforms-3/b2409f7f7047d916fdb8ce5cd1855f71/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/bootpay/.gradle/caches/transforms-3/b2409f7f7047d916fdb8ce5cd1855f71/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/303841d5a01881781d7bcd0b9a1b8466/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/303841d5a01881781d7bcd0b9a1b8466/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/bc210aa728a4eeea33d4ed954c0cfcd1/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/bc210aa728a4eeea33d4ed954c0cfcd1/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/cf8ca0b38745219b010b20e3080e51d9/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/cf8ca0b38745219b010b20e3080e51d9/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/80c89437fc250e842b2f71e0d613c9ff/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/80c89437fc250e842b2f71e0d613c9ff/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a89849bfd38ecbffaf5b00436d2e3bd/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/5a89849bfd38ecbffaf5b00436d2e3bd/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/989dfec6fc7a4daefb140f0c011fcef1/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/989dfec6fc7a4daefb140f0c011fcef1/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/8ca7186ef83368b8549809152ed428ce/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/8ca7186ef83368b8549809152ed428ce/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/485578c608519582fc751ff2f7c88476/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/485578c608519582fc751ff2f7c88476/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/bootpay/.gradle/caches/transforms-3/4f632648e53e556eed5f40f2824d9ac5/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/bootpay/.gradle/caches/transforms-3/4f632648e53e556eed5f40f2824d9ac5/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/f07d901af75c0e63256d6d0ab15ab0e0/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/bootpay/.gradle/caches/transforms-3/f07d901af75c0e63256d6d0ab15ab0e0/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/140757696eca7ec1efbdf7371a4acde0/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/140757696eca7ec1efbdf7371a4acde0/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/6b80c278120ff42ff6ece3f9d926c639/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/bootpay/.gradle/caches/transforms-3/6b80c278120ff42ff6ece3f9d926c639/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/bootpay/.gradle/caches/transforms-3/a48dcb6983f73a065cdd1587f4cda38a/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/bootpay/.gradle/caches/transforms-3/a48dcb6983f73a065cdd1587f4cda38a/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/bootpay/.gradle/caches/transforms-3/437e772228a813b0fd4bde3f8ec9dd31/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/bootpay/.gradle/caches/transforms-3/437e772228a813b0fd4bde3f8ec9dd31/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml
+activity#kr.co.bootpay.webviewflutterexample.WebViewTestActivity
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:8:9-15:20
+	android:launchMode
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:10:13-43
+	android:hardwareAccelerated
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:13:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:14:13-55
+	android:configChanges
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:12:13-163
+	android:theme
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:11:13-47
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:9:13-48
+activity#kr.co.bootpay.webviewflutterexample.DriverExtensionActivity
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:16:9-23:20
+	android:launchMode
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:18:17-47
+	android:hardwareAccelerated
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:21:17-51
+	android:windowSoftInputMode
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:22:17-59
+	android:configChanges
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:20:17-167
+	android:theme
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:19:17-51
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/android/app/src/debug/AndroidManifest.xml:17:17-56
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:5-75
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:22-72
+queries
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:5-87:15
+package#com.nhnent.payapp
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-53
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:28:18-50
+package#com.lottemembers.android
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:29:9-60
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:29:18-57
+package#com.ssg.serviceapp.android.egiftcertificate
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:30:9-79
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:30:18-76
+package#com.inicis.kpay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:31:9-51
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:31:18-48
+package#com.tmoney.tmpay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:32:9-52
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:32:18-49
+package#viva.republica.toss
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:33:9-55
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:33:18-52
+package#com.kakao.talk
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:34:9-50
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:34:18-47
+package#com.mysmilepay.app
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:35:9-54
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:35:18-51
+package#com.lotte.lpay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:36:9-50
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:36:18-47
+package#finance.chai.app
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:37:9-52
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:37:18-49
+package#com.nhn.android.search
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:38:9-58
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:38:18-55
+package#kvp.jjy.MispAndroid320
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:42:9-58
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:42:18-55
+package#com.kbcard.kbkookmincard
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:43:9-60
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:43:18-57
+package#com.kbcard.cxh.appcard
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:44:9-58
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:44:18-55
+package#com.kbstar.liivbank
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:45:9-55
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:45:18-52
+package#com.kbstar.reboot
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:46:9-53
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:46:18-50
+package#com.samsung.android.spay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:47:9-60
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:47:18-57
+package#com.samsung.android.spaylite
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:48:9-64
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:48:18-61
+package#com.lge.lgpay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:49:9-49
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:49:18-46
+package#com.hanaskcard.paycla
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:50:9-57
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:50:18-54
+package#kr.co.hanamembers.hmscustomer
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:51:9-65
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:51:18-62
+package#com.lcacApp
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:52:9-47
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:52:18-44
+package#kr.co.samsungcard.mpocket
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:53:9-61
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:53:18-58
+package#com.shcard.smartpay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:54:9-55
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:54:18-52
+package#com.shinhancard.smartshinhan
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:55:9-64
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:55:18-61
+package#com.hyundaicard.appcard
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:56:9-59
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:56:18-56
+package#nh.smart.nhallonepay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:57:9-56
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:57:18-53
+package#com.wooricard.wpay
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:58:9-54
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:58:18-51
+package#com.wooricard.smartapp
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:59:9-58
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:59:18-55
+package#com.wooribank.smart.npib
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:60:9-60
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:60:18-57
+package#kr.co.citibank.citimobile
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:61:9-61
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:61:18-58
+package#com.kftc.bankpay.android
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:65:9-60
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:65:18-57
+package#com.kbankwith.smartbank
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:66:9-59
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:66:18-56
+package#com.knb.psb
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:67:9-47
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:67:18-44
+package#kr.co.kfcc.mobilebank
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:68:9-57
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:68:18-54
+package#com.nh.cashcardapp
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:69:9-54
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:69:18-51
+package#com.hanaskcard.rocomo.potal
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:73:9-63
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:73:18-60
+package#com.lumensoft.touchenappfree
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:74:9-64
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:74:18-61
+package#com.TouchEn.mVaccine.webs
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:78:9-61
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:78:18-58
+package#kr.co.shiftworks.vguardweb
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:79:9-62
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:79:18-59
+package#com.ahnlab.v3mobileplus
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:80:9-59
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:80:18-56
+package#com.kt.ktauth
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:84:9-49
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:84:18-46
+package#kr.danal.app.damoum
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:85:9-55
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:85:18-52
+package#uplus.membership
+ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:86:9-52
+	android:name
+		ADDED from [:bootpay_webview_flutter_android] /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/example/build/bootpay_webview_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:86:18-49
+uses-permission#android.permission.REORDER_TASKS
+ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:24:5-72
+	android:name
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:24:22-69
+activity#androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity
+ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:27:9-34:20
+	android:exported
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:29:13-36
+	android:theme
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:30:13-49
+	android:name
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:28:13-99
+intent-filter#action:name:android.intent.action.MAIN
+ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:31:13-33:29
+activity#androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity
+ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:35:9-42:20
+	android:exported
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:37:13-36
+	android:theme
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:38:13-49
+	android:name
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:36:13-95
+activity#androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity
+ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:43:9-50:20
+	android:exported
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:45:13-36
+	android:theme
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:46:13-56
+	android:name
+		ADDED from [androidx.test:core:1.4.0] /Users/bootpay/.gradle/caches/transforms-3/28fece74d7507c299cac43b7a7a19bed/transformed/jetified-core-1.4.0/AndroidManifest.xml:44:13-103

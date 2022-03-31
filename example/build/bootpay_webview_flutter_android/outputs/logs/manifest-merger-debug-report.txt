@@ -1,0 +1,205 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:2:1-82:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:2:1-82:12
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:2:1-82:12
+	package
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:3:5-43
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:7:5-74
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:7:22-72
+queries
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:13:5-81:15
+package#com.nhnent.payapp
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:25:9-53
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:25:18-50
+package#com.lottemembers.android
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:26:9-60
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:26:18-57
+package#com.ssg.serviceapp.android.egiftcertificate
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:27:9-79
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:27:18-76
+package#com.inicis.kpay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:28:9-51
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:28:18-48
+package#com.tmoney.tmpay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:29:9-52
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:29:18-49
+package#viva.republica.toss
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:30:9-55
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:30:18-52
+package#com.kakao.talk
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:31:9-50
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:31:18-47
+package#com.mysmilepay.app
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:32:9-54
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:32:18-51
+package#com.lotte.lpay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:33:9-50
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:33:18-47
+package#finance.chai.app
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:34:9-52
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:34:18-49
+package#com.nhn.android.search
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:35:9-58
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:35:18-55
+package#kvp.jjy.MispAndroid320
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:38:9-58
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:38:18-55
+package#com.kbcard.kbkookmincard
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:39:9-60
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:39:18-57
+package#com.kbcard.cxh.appcard
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:40:9-58
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:40:18-55
+package#com.kbstar.liivbank
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:41:9-55
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:41:18-52
+package#com.kbstar.reboot
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:42:9-53
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:42:18-50
+package#com.samsung.android.spay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:43:9-60
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:43:18-57
+package#com.samsung.android.spaylite
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:44:9-64
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:44:18-61
+package#com.lge.lgpay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:45:9-49
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:45:18-46
+package#com.hanaskcard.paycla
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:46:9-57
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:46:18-54
+package#kr.co.hanamembers.hmscustomer
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:47:9-65
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:47:18-62
+package#com.lcacApp
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:48:9-47
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:48:18-44
+package#kr.co.samsungcard.mpocket
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:49:9-61
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:49:18-58
+package#com.shcard.smartpay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:50:9-55
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:50:18-52
+package#com.shinhancard.smartshinhan
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:51:9-64
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:51:18-61
+package#com.hyundaicard.appcard
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:52:9-59
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:52:18-56
+package#nh.smart.nhallonepay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:53:9-56
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:53:18-53
+package#com.wooricard.wpay
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:54:9-54
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:54:18-51
+package#com.wooricard.smartapp
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:55:9-58
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:55:18-55
+package#com.wooribank.smart.npib
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:56:9-60
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:56:18-57
+package#kr.co.citibank.citimobile
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:57:9-61
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:57:18-58
+package#com.kftc.bankpay.android
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:61:9-60
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:61:18-57
+package#com.kbankwith.smartbank
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:62:9-59
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:62:18-56
+package#com.knb.psb
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:63:9-47
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:63:18-44
+package#kr.co.kfcc.mobilebank
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:64:9-57
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:64:18-54
+package#com.nh.cashcardapp
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:65:9-54
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:65:18-51
+package#com.hanaskcard.rocomo.potal
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:68:9-63
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:68:18-60
+package#com.lumensoft.touchenappfree
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:69:9-64
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:69:18-61
+package#com.TouchEn.mVaccine.webs
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:73:9-61
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:73:18-58
+package#kr.co.shiftworks.vguardweb
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:74:9-62
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:74:18-59
+package#com.ahnlab.v3mobileplus
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:75:9-59
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:75:18-56
+package#com.kt.ktauth
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:78:9-49
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:78:18-46
+package#kr.danal.app.damoum
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:79:9-55
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:79:18-52
+package#uplus.membership
+ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:80:9-52
+	android:name
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml:80:18-49
+uses-sdk
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml
+INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml
+		ADDED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/bootpay/bootpayPlugins/clients/flutter/bootpay_webview_flutter_v2/bootpay_webview_flutter_android/android/src/main/AndroidManifest.xml

@@ -7,7 +7,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:bootpay_webview_flutter_android/webview_android_cookie_manager.dart';
-import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
+import 'package:bootpay_webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 import 'src/android_webview.dart' as android_webview;
 

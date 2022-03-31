@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebChromeClientHostApi;
+import android.util.Log;
 
 /**
  * Host api implementation for {@link WebChromeClient}.
@@ -51,6 +52,8 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       return onCreateWindow(view, resultMsg, new WebView(view.getContext()));
     }
 
+
+
     /**
      * Verifies that a url opened by `Window.open` has a secure url.
      *
@@ -67,31 +70,52 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @VisibleForTesting
     boolean onCreateWindow(
         final WebView view, Message resultMsg, @Nullable WebView onCreateWindowWebView) {
+      Log.d("bootpay", "onCreateWindow");
+
       final WebViewClient windowWebViewClient =
           new WebViewClient() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public boolean shouldOverrideUrlLoading(
                 @NonNull WebView windowWebView, @NonNull WebResourceRequest request) {
+
+              Log.d("bootpay", "url 553: " + request.getUrl().toString());
+
+              if(BootpayUrlHelper.shouldOverrideUrlLoading(view, request)) {
+//                return true;
+                return false;
+              }
+
               if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
                 view.loadUrl(request.getUrl().toString());
               }
-              return true;
+//              return true;
+              return false;
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView windowWebView, String url) {
+              Log.d("bootpay", "url 66: " + url);
+
+              if(BootpayUrlHelper.shouldOverrideUrlLoading(view, url)) {
+//                return true;
+                return false;
+              }
+
               if (!webViewClient.shouldOverrideUrlLoading(view, url)) {
                 view.loadUrl(url);
               }
-              return true;
+//              return true;
+              return false;
             }
           };
 
       if (onCreateWindowWebView == null) {
         onCreateWindowWebView = new WebView(view.getContext());
       }
+      Log.d("bootpay", "setWebViewClient 33");
       onCreateWindowWebView.setWebViewClient(windowWebViewClient);
+
 
       final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
       transport.setWebView(onCreateWindowWebView);
@@ -115,6 +139,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      */
     public void setWebViewClient(WebViewClient webViewClient) {
       this.webViewClient = webViewClient;
+      Log.d("bootpay", "setWebViewClient 44");
     }
 
     @Override

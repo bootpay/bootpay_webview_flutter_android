@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:bootpay_webview_flutter_android/webview_surface_android.dart';
-import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
+import 'package:bootpay_webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 import 'navigation_decision.dart';
 import 'navigation_request.dart';
@@ -114,7 +114,9 @@ class _WebViewExampleState extends State<_WebViewExample> {
       // to allow calling Scaffold.of(context) so we can show a snackbar.
       body: Builder(builder: (BuildContext context) {
         return WebView(
-          initialUrl: 'https://flutter.dev',
+          // initialUrl: 'https://flutter.dev',
+          // initialUrl: 'https://www.bootpay.co.kr',
+          initialUrl: 'https://dev-js.bootapi.com/test/payment/',
           onWebViewCreated: (WebViewController controller) {
             _controller.complete(controller);
           },
@@ -135,9 +137,9 @@ class _WebViewExampleState extends State<_WebViewExample> {
           onPageFinished: (String url) {
             print('Page finished loading: $url');
           },
+
           javascriptChannels: _createJavascriptChannels(context),
           javascriptMode: JavascriptMode.unrestricted,
-          userAgent: 'Custom_User_Agent',
           backgroundColor: const Color(0x80000000),
         );
       }),

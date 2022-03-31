@@ -11,6 +11,7 @@ import android.os.Build;
 import android.view.KeyEvent;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebResourceErrorCompat;
 import androidx.webkit.WebViewClientCompat;
+import android.util.Log;
 
 /**
  * Host api implementation for {@link WebViewClient}.
@@ -61,6 +63,10 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public void onPageFinished(WebView view, String url) {
+      if(url.startsWith("https://nid.naver.com/nidlogin.login")) {
+        view.evaluateJavascript("document.getElementById('back').style.display='none';", null);
+      }
+
       if (flutterApi != null) {
         flutterApi.onPageFinished(this, view, url, reply -> {});
       }
@@ -82,8 +88,33 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
       }
     }
 
+//    @Override
+//    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+//
+//      Log.d("bootpay", "shouldInterceptRequest: " + url);
+////      if( url.contains("myFancyUrl") ) {
+////
+////        // Do something
+////
+////        try {
+////          return new WebResourceResponse("", "", new URL("http://myserver.com/myrootdocument.html").openStream());
+////        } catch(Exception exception) {
+////          Log.e( exception.toString() );
+////        }
+////      }
+//      return super.shouldInterceptRequest(view, url);
+//    }
+
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//      if(BootpayUrlHelper.shouldOverrideUrlLoading(view, request)) {
+//        return true;
+//      }
+      Log.d("bootpay", "url 11: " + request.getUrl().toString());
+      if(BootpayUrlHelper.shouldOverrideUrlLoading(view, request)) {
+        return shouldOverrideUrlLoading;
+      }
+
       if (flutterApi != null) {
         flutterApi.requestLoading(this, view, request, reply -> {});
       }
@@ -92,6 +123,16 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//      if(BootpayUrlHelper.shouldOverrideUrlLoading(view, request)) {
+//        return true;
+//      }
+
+      Log.d("bootpay", "url 22: " + url);
+
+      if(!BootpayUrlHelper.shouldOverrideUrlLoading(view, url)) {
+        return shouldOverrideUrlLoading;
+      }
+
       if (flutterApi != null) {
         flutterApi.urlLoading(this, view, url, reply -> {});
       }
@@ -137,6 +178,10 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public void onPageFinished(WebView view, String url) {
+      if(url.startsWith("https://nid.naver.com/nidlogin.login")) {
+        view.evaluateJavascript("document.getElementById('back').style.display='none';", null);
+      }
+
       if (flutterApi != null) {
         flutterApi.onPageFinished(this, view, url, reply -> {});
       }
@@ -169,6 +214,7 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
     @Override
     public boolean shouldOverrideUrlLoading(
         @NonNull WebView view, @NonNull WebResourceRequest request) {
+      Log.d("bootpay", "url 33: " + request.getUrl().toString());
       if (flutterApi != null) {
         flutterApi.requestLoading(this, view, request, reply -> {});
       }
@@ -177,6 +223,7 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+      Log.d("bootpay", "url 44: " + url);
       if (flutterApi != null) {
         flutterApi.urlLoading(this, view, url, reply -> {});
       }
@@ -216,9 +263,14 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
       // However, this if statement attempts to avoid using WebViewClientCompat on versions >= N due
       // to bug https://bugs.chromium.org/p/chromium/issues/detail?id=925887. Also, see
       // https://github.com/flutter/flutter/issues/29446.
+
+      Log.d("bootpay", "createWebViewClient: " + shouldOverrideUrlLoading);
+
       if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Log.d("bootpay", "createWebViewClient 11 ");
         return new WebViewClientImpl(flutterApi, shouldOverrideUrlLoading);
       } else {
+        Log.d("bootpay", "createWebViewClient 22");
         return new WebViewClientCompatImpl(flutterApi, shouldOverrideUrlLoading);
       }
     }

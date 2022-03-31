@@ -1,0 +1,147 @@
+androidx/test/espresso/flutter/api/FlutterAction.java
+ androidx.test.espresso.flutter.api.FlutterAction
+androidx/test/espresso/flutter/internal/protocol/impl/NoTransientCallbacksCondition.java
+ androidx.test.espresso.flutter.internal.protocol.impl.NoTransientCallbacksCondition
+androidx/test/espresso/flutter/internal/jsonrpc/message/ErrorObject.java
+ androidx.test.espresso.flutter.internal.jsonrpc.message.ErrorObject
+androidx/test/espresso/flutter/internal/jsonrpc/JsonRpcClient.java
+ androidx.test.espresso.flutter.internal.jsonrpc.JsonRpcClient
+ androidx.test.espresso.flutter.internal.jsonrpc.JsonRpcClient$1
+ androidx.test.espresso.flutter.internal.jsonrpc.JsonRpcClient$WebSocketListenerImpl
+androidx/test/espresso/flutter/api/WidgetAssertion.java
+ androidx.test.espresso.flutter.api.WidgetAssertion
+androidx/test/espresso/flutter/matcher/WithValueKeyMatcher.java
+ androidx.test.espresso.flutter.matcher.WithValueKeyMatcher
+androidx/test/espresso/flutter/internal/protocol/impl/NoPendingFrameCondition.java
+ androidx.test.espresso.flutter.internal.protocol.impl.NoPendingFrameCondition
+androidx/test/espresso/flutter/internal/protocol/impl/DartVmService.java
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmService
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmService$1
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmService$2
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmService$3
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmService$4
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmService$IsDartVmServiceReady
+androidx/test/espresso/flutter/matcher/FlutterMatchers.java
+ androidx.test.espresso.flutter.matcher.FlutterMatchers
+ androidx.test.espresso.flutter.matcher.FlutterMatchers$1
+ androidx.test.espresso.flutter.matcher.FlutterMatchers$IsFlutterViewMatcher
+androidx/test/espresso/flutter/internal/protocol/impl/NoPendingPlatformMessagesCondition.java
+ androidx.test.espresso.flutter.internal.protocol.impl.NoPendingPlatformMessagesCondition
+androidx/test/espresso/flutter/internal/protocol/impl/DartVmServiceUtil.java
+ androidx.test.espresso.flutter.internal.protocol.impl.DartVmServiceUtil
+androidx/test/espresso/flutter/exception/InvalidFlutterViewException.java
+ androidx.test.espresso.flutter.exception.InvalidFlutterViewException
+androidx/test/espresso/flutter/action/FlutterTypeTextAction.java
+ androidx.test.espresso.flutter.action.FlutterTypeTextAction
+ androidx.test.espresso.flutter.action.FlutterTypeTextAction$SetTextEntryEmulationAction
+androidx/test/espresso/flutter/action/WidgetCoordinatesCalculator.java
+ androidx.test.espresso.flutter.action.WidgetCoordinatesCalculator
+androidx/test/espresso/flutter/common/Constants.java
+ androidx.test.espresso.flutter.common.Constants
+androidx/test/espresso/flutter/internal/protocol/impl/WidgetInfoFactory.java
+ androidx.test.espresso.flutter.internal.protocol.impl.WidgetInfoFactory
+ androidx.test.espresso.flutter.internal.protocol.impl.WidgetInfoFactory$1
+ androidx.test.espresso.flutter.internal.protocol.impl.WidgetInfoFactory$WidgetRuntimeType
+androidx/test/espresso/flutter/action/FlutterActions.java
+ androidx.test.espresso.flutter.action.FlutterActions
+androidx/test/espresso/flutter/api/SyntheticAction.java
+ androidx.test.espresso.flutter.api.SyntheticAction
+androidx/test/espresso/flutter/common/Duration.java
+ androidx.test.espresso.flutter.common.Duration
+androidx/test/espresso/flutter/api/WidgetAction.java
+ androidx.test.espresso.flutter.api.WidgetAction
+androidx/test/espresso/flutter/matcher/WithTooltipMatcher.java
+ androidx.test.espresso.flutter.matcher.WithTooltipMatcher
+androidx/test/espresso/flutter/matcher/IsExistingMatcher.java
+ androidx.test.espresso.flutter.matcher.IsExistingMatcher
+androidx/test/espresso/flutter/internal/idgenerator/IdGenerators.java
+ androidx.test.espresso.flutter.internal.idgenerator.IdGenerators
+ androidx.test.espresso.flutter.internal.idgenerator.IdGenerators$1
+ androidx.test.espresso.flutter.internal.idgenerator.IdGenerators$2
+androidx/test/espresso/flutter/internal/idgenerator/IdException.java
+ androidx.test.espresso.flutter.internal.idgenerator.IdException
+androidx/test/espresso/flutter/internal/protocol/impl/GetOffsetResponse.java
+ androidx.test.espresso.flutter.internal.protocol.impl.GetOffsetResponse
+ androidx.test.espresso.flutter.internal.protocol.impl.GetOffsetResponse$1
+ androidx.test.espresso.flutter.internal.protocol.impl.GetOffsetResponse$Builder
+ androidx.test.espresso.flutter.internal.protocol.impl.GetOffsetResponse$Coordinates
+com/example/espresso/EspressoPlugin.java
+ com.example.espresso.EspressoPlugin
+androidx/test/espresso/flutter/exception/AmbiguousWidgetMatcherException.java
+ androidx.test.espresso.flutter.exception.AmbiguousWidgetMatcherException
+androidx/test/espresso/flutter/action/ActionUtil.java
+ androidx.test.espresso.flutter.action.ActionUtil
+ androidx.test.espresso.flutter.action.ActionUtil$FutureIdlingResource
+ androidx.test.espresso.flutter.action.ActionUtil$FutureIdlingResource$1
+androidx/test/espresso/flutter/internal/protocol/impl/WaitCondition.java
+ androidx.test.espresso.flutter.internal.protocol.impl.WaitCondition
+androidx/test/espresso/flutter/internal/protocol/impl/GetWidgetDiagnosticsResponse.java
+ androidx.test.espresso.flutter.internal.protocol.impl.GetWidgetDiagnosticsResponse
+ androidx.test.espresso.flutter.internal.protocol.impl.GetWidgetDiagnosticsResponse$DiagnosticNodeInfo
+ androidx.test.espresso.flutter.internal.protocol.impl.GetWidgetDiagnosticsResponse$WidgetProperty
+androidx/test/espresso/flutter/EspressoFlutter.java
+ androidx.test.espresso.flutter.EspressoFlutter
+ androidx.test.espresso.flutter.EspressoFlutter$1
+ androidx.test.espresso.flutter.EspressoFlutter$WidgetInteraction
+ androidx.test.espresso.flutter.EspressoFlutter$WidgetInteraction$ExceptionPropagator
+androidx/test/espresso/flutter/model/WidgetInfo.java
+ androidx.test.espresso.flutter.model.WidgetInfo
+androidx/test/espresso/flutter/internal/protocol/impl/GetVmResponse.java
+ androidx.test.espresso.flutter.internal.protocol.impl.GetVmResponse
+ androidx.test.espresso.flutter.internal.protocol.impl.GetVmResponse$Isolate
+androidx/test/espresso/flutter/action/ClickAction.java
+ androidx.test.espresso.flutter.action.ClickAction
+androidx/test/espresso/flutter/action/FlutterScrollToAction.java
+ androidx.test.espresso.flutter.action.FlutterScrollToAction
+ androidx.test.espresso.flutter.action.FlutterScrollToAction$ScrollIntoViewAction
+androidx/test/espresso/flutter/internal/jsonrpc/message/JsonRpcRequest.java
+ androidx.test.espresso.flutter.internal.jsonrpc.message.JsonRpcRequest
+ androidx.test.espresso.flutter.internal.jsonrpc.message.JsonRpcRequest$1
+ androidx.test.espresso.flutter.internal.jsonrpc.message.JsonRpcRequest$Builder
+androidx/test/espresso/flutter/api/FlutterTestingProtocol.java
+ androidx.test.espresso.flutter.api.FlutterTestingProtocol
+com/example/espresso/BuildConfig.java
+ com.example.espresso.BuildConfig
+androidx/test/espresso/flutter/internal/protocol/impl/FlutterProtocolException.java
+ androidx.test.espresso.flutter.internal.protocol.impl.FlutterProtocolException
+androidx/test/espresso/flutter/internal/protocol/impl/GetWidgetDiagnosticsAction.java
+ androidx.test.espresso.flutter.internal.protocol.impl.GetWidgetDiagnosticsAction
+androidx/test/espresso/flutter/internal/protocol/impl/GetOffsetAction.java
+ androidx.test.espresso.flutter.internal.protocol.impl.GetOffsetAction
+ androidx.test.espresso.flutter.internal.protocol.impl.GetOffsetAction$OffsetType
+androidx/test/espresso/flutter/assertion/FlutterAssertions.java
+ androidx.test.espresso.flutter.assertion.FlutterAssertions
+ androidx.test.espresso.flutter.assertion.FlutterAssertions$1
+ androidx.test.espresso.flutter.assertion.FlutterAssertions$MatchesWidgetAssertion
+androidx/test/espresso/flutter/internal/idgenerator/IdGenerator.java
+ androidx.test.espresso.flutter.internal.idgenerator.IdGenerator
+androidx/test/espresso/flutter/action/SyntheticClickAction.java
+ androidx.test.espresso.flutter.action.SyntheticClickAction
+ androidx.test.espresso.flutter.action.SyntheticClickAction$SyntheticClick
+androidx/test/espresso/flutter/assertion/FlutterViewAssertion.java
+ androidx.test.espresso.flutter.assertion.FlutterViewAssertion
+androidx/test/espresso/flutter/matcher/WithTypeMatcher.java
+ androidx.test.espresso.flutter.matcher.WithTypeMatcher
+androidx/test/espresso/flutter/matcher/IsDescendantOfMatcher.java
+ androidx.test.espresso.flutter.matcher.IsDescendantOfMatcher
+androidx/test/espresso/flutter/action/WaitUntilIdleAction.java
+ androidx.test.espresso.flutter.action.WaitUntilIdleAction
+androidx/test/espresso/flutter/action/FlutterViewAction.java
+ androidx.test.espresso.flutter.action.FlutterViewAction
+ androidx.test.espresso.flutter.action.FlutterViewAction$1
+ androidx.test.espresso.flutter.action.FlutterViewAction$2
+ androidx.test.espresso.flutter.action.FlutterViewAction$FlutterViewRenderedIdlingResource
+androidx/test/espresso/flutter/internal/protocol/impl/WaitForConditionAction.java
+ androidx.test.espresso.flutter.internal.protocol.impl.WaitForConditionAction
+androidx/test/espresso/flutter/action/WidgetInfoFetcher.java
+ androidx.test.espresso.flutter.action.WidgetInfoFetcher
+androidx/test/espresso/flutter/model/WidgetInfoBuilder.java
+ androidx.test.espresso.flutter.model.WidgetInfoBuilder
+androidx/test/espresso/flutter/api/WidgetMatcher.java
+ androidx.test.espresso.flutter.api.WidgetMatcher
+androidx/test/espresso/flutter/internal/jsonrpc/message/JsonRpcResponse.java
+ androidx.test.espresso.flutter.internal.jsonrpc.message.JsonRpcResponse
+androidx/test/espresso/flutter/matcher/WithTextMatcher.java
+ androidx.test.espresso.flutter.matcher.WithTextMatcher
+androidx/test/espresso/flutter/exception/NoMatchingWidgetException.java
+ androidx.test.espresso.flutter.exception.NoMatchingWidgetException
