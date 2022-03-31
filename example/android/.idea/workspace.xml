@@ -13,24 +13,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4bcf899-3d20-4969-be86-109dcef3cf1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/webview_flutter_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/webview_flutter_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/BootpayUrlHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/BootpayUrlHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebChromeClientHostApiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebChromeClientHostApiImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebViewClientHostApiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebViewClientHostApiImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../integration_test/webview_flutter_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../integration_test/webview_flutter_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/web_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/web_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lib/webview_android.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/webview_android.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lib/webview_android_cookie_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/webview_android_cookie_manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lib/webview_android_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/webview_android_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lib/webview_surface_android.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/webview_surface_android.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="e4bcf899-3d20-4969-be86-109dcef3cf1b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

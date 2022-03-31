@@ -1,8 +1,8 @@
 name: bootpay_webview_flutter_android
 description: webview_flutter_android 를 국내 결제환경에 맞게 fork 떠서 관리하는 프로젝트 입니다.
-repository: https://github.com/flutter/plugins/tree/main/packages/bootpay_webview_flutter/bootpay_webview_flutter_android
-issue_tracker: https://github.com/flutter/flutter/issues?q=is%3Aissue+is%3Aopen+label%3A%22p%3A+webview%22
-version: 2.8.3
+repository: https://github.com/bootpay/bootpay_webview_flutter_android
+issue_tracker: https://github.com/bootpay/bootpay_webview_flutter_android/issues
+version: 2.8.31
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
