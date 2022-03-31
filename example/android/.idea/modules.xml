@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/580091852/android.bootpay_webview_flutter_android.iml" filepath="$PROJECT_DIR$/.idea/modules/580091852/android.bootpay_webview_flutter_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1582277977/android.espresso.iml" filepath="$PROJECT_DIR$/.idea/modules/-1582277977/android.espresso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1571667843/android.integration_test.iml" filepath="$PROJECT_DIR$/.idea/modules/-1571667843/android.integration_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/452267105/android.path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/452267105/android.path_provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2077858697/android.path_provider_android.iml" filepath="$PROJECT_DIR$/.idea/modules/2077858697/android.path_provider_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1099334830/android.path_provider_ios.iml" filepath="$PROJECT_DIR$/.idea/modules/1099334830/android.path_provider_ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2039746323/android.path_provider_linux.iml" filepath="$PROJECT_DIR$/.idea/modules/2039746323/android.path_provider_linux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/197778577/android.path_provider_macos.iml" filepath="$PROJECT_DIR$/.idea/modules/197778577/android.path_provider_macos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1909402719/android.path_provider_windows.iml" filepath="$PROJECT_DIR$/.idea/modules/-1909402719/android.path_provider_windows.iml" />
+    </modules>
+  </component>
+</project>

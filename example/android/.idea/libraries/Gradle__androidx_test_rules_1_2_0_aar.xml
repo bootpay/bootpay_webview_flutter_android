@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.test:rules:1.2.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-1.2.0.aar/e1c2e3af6f91bcce72000ddcd2deff8f/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a77f901561337d30d35a66367012acf0/rules-1.2.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/45341d474c441407a2bd71d8dca7ee67/rules-1.2.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9b9a9cad98d44c281159ea939465d53a/transformed/rules-1.2.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9b9a9cad98d44c281159ea939465d53a/transformed/rules-1.2.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9b9a9cad98d44c281159ea939465d53a/transformed/rules-1.2.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/rules/1.2.0/c431850aeff78b61588e9bdba4182cd110a3a453/rules-1.2.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/rules/1.2.0/547bf1a52225f631ccbbea54445460f9a9fa9caa/rules-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
