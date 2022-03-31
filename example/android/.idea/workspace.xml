@@ -14,37 +14,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4bcf899-3d20-4969-be86-109dcef3cf1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/BootpayUrlHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/-1571667843/android.integration_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/-1582277977/android.espresso.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/-1909402719/android.path_provider_windows.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/1099334830/android.path_provider_ios.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/197778577/android.path_provider_macos.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/2039746323/android.path_provider_linux.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/2077858697/android.path_provider_android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/452267105/android.path_provider.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/580091852/android.bootpay_webview_flutter_android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/kr/co/bootpay/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/webview_flutter_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/webview_flutter_android.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/BootpayUrlHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/BootpayUrlHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebChromeClientHostApiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebChromeClientHostApiImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebViewClientHostApiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../android/src/main/java/kr/co/bootpay/webviewflutter/WebViewClientHostApiImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/io/flutter/plugins/DartIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/kr/co/bootpay/DartIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/io/flutter/plugins/webviewflutterexample/BackgroundColorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/kr/co/bootpay/webviewflutterexample/BackgroundColorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/io/flutter/plugins/webviewflutterexample/MainActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/kr/co/bootpay/webviewflutterexample/MainActivityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/io/flutter/plugins/webviewflutterexample/WebViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/kr/co/bootpay/webviewflutterexample/WebViewTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/flutter/plugins/webviewflutterexample/DriverExtensionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/kr/co/bootpay/webviewflutterexample/DriverExtensionActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/io/flutter/plugins/webviewflutterexample/WebViewTestActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/kr/co/bootpay/webviewflutterexample/WebViewTestActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../integration_test/webview_flutter_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../integration_test/webview_flutter_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lib/web_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/web_view.dart" afterDir="false" />
