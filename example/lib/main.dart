@@ -8,8 +8,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:bootpay_webview_flutter_android/webview_android.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:bootpay_webview_flutter_android/webview_surface_android.dart';
@@ -97,53 +99,105 @@ class _WebViewExample extends StatefulWidget {
 class _WebViewExampleState extends State<_WebViewExample> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
+  late WebViewController _myController;
+
+
+  Future<bool>_goBack(BuildContext context) async{
+    // _controller.future
+    if(await _myController.canGoBack()){
+      _myController.goBack();
+      return Future.value(false);
+    }
+
+    else{
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('앱을 종료 하시겠습니까?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _myController.goBack();
+                },
+                child: const Text('아니요'),
+              ),
+              TextButton(
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+                child: const Text('예'),
+              ),
+            ],
+          )
+      );
+      return Future.value(true);
+    }
+  }
+
+
+  @override
+
+  void initState() {
+
+    super.initState();
+
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF4CAF50),
-      appBar: AppBar(
-        title: const Text('Flutter WebView example'),
-        // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
-        actions: <Widget>[
-          _NavigationControls(_controller.future),
-          _SampleMenu(_controller.future),
-        ],
-      ),
-      // We're using a Builder here so we have a context that is below the Scaffold
-      // to allow calling Scaffold.of(context) so we can show a snackbar.
-      body: Builder(builder: (BuildContext context) {
-        return WebView(
-          // initialUrl: 'https://flutter.dev',
-          // initialUrl: 'https://www.bootpay.co.kr',
-          initialUrl: 'https://dev-js.bootapi.com/test/payment/',
-          onWebViewCreated: (WebViewController controller) {
-            _controller.complete(controller);
-          },
-          onProgress: (int progress) {
-            print('WebView is loading (progress : $progress%)');
-          },
-          navigationDelegate: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              print('blocking navigation to $request}');
-              return NavigationDecision.prevent;
-            }
-            print('allowing navigation to $request');
-            return NavigationDecision.navigate;
-          },
-          onPageStarted: (String url) {
-            print('Page started loading: $url');
-          },
-          onPageFinished: (String url) {
-            print('Page finished loading: $url');
-          },
+    return WillPopScope(
+      onWillPop: () => _goBack(context),
+      child: Scaffold(
+        backgroundColor: const Color(0xFF4CAF50),
+        appBar: AppBar(
+          title: const Text('Flutter WebView example'),
+          // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
+          actions: <Widget>[
+            _NavigationControls(_controller.future),
+            _SampleMenu(_controller.future),
+          ],
+        ),
+        // We're using a Builder here so we have a context that is below the Scaffold
+        // to allow calling Scaffold.of(context) so we can show a snackbar.
+        body: Builder(builder: (BuildContext context) {
+          return WebView(
+            // initialUrl: 'https://flutter.dev',
+            // initialUrl: 'https://www.bootpay.co.kr',
+            // initialUrl: 'https://dev-js.bootapi.com/test/payment/',
+            initialUrl: 'https://www.1588-39000.com/',
+            onWebViewCreated: (WebViewController webViewController) {
+              // _controller.complete(webViewController);
+              _myController = webViewController;
+            },
+            onProgress: (int progress) {
+              print('WebView is loading (progress : $progress%)');
+            },
+            navigationDelegate: (NavigationRequest request) {
+              if (request.url.startsWith('https://www.youtube.com/')) {
+                print('blocking navigation to $request}');
+                return NavigationDecision.prevent;
+              }
+              print('allowing navigation to $request');
+              return NavigationDecision.navigate;
+            },
+            onPageStarted: (String url) {
+              print('Page started loading: $url');
+            },
+            onPageFinished: (String url) {
+              print('Page finished loading: $url');
+            },
 
-          javascriptChannels: _createJavascriptChannels(context),
-          javascriptMode: JavascriptMode.unrestricted,
-          backgroundColor: const Color(0x80000000),
-        );
-      }),
-      floatingActionButton: favoriteButton(),
+            javascriptChannels: _createJavascriptChannels(context),
+            javascriptMode: JavascriptMode.unrestricted,
+            backgroundColor: const Color(0x80000000),
+          );
+        }),
+        floatingActionButton: favoriteButton(),
+      ),
     );
   }
 

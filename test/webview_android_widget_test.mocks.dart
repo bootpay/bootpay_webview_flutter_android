@@ -9,7 +9,7 @@ import 'dart:ui' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:bootpay_webview_flutter_android/src/android_webview.dart' as _i2;
 import 'package:bootpay_webview_flutter_android/webview_android_widget.dart' as _i7;
-import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart'
+import 'package:bootpay_webview_flutter_platform_interface/webview_flutter_platform_interface.dart'
     as _i3;
 
 // ignore_for_file: type=lint

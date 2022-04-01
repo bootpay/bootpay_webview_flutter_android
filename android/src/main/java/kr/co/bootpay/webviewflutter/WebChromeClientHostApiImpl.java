@@ -70,7 +70,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @VisibleForTesting
     boolean onCreateWindow(
         final WebView view, Message resultMsg, @Nullable WebView onCreateWindowWebView) {
-      Log.d("bootpay", "onCreateWindow");
 
       final WebViewClient windowWebViewClient =
           new WebViewClient() {
@@ -79,7 +78,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
             public boolean shouldOverrideUrlLoading(
                 @NonNull WebView windowWebView, @NonNull WebResourceRequest request) {
 
-              Log.d("bootpay", "url 553: " + request.getUrl().toString());
 
               if(BootpayUrlHelper.shouldOverrideUrlLoading(view, request)) {
 //                return true;
@@ -95,7 +93,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView windowWebView, String url) {
-              Log.d("bootpay", "url 66: " + url);
+
 
               if(BootpayUrlHelper.shouldOverrideUrlLoading(view, url)) {
 //                return true;
@@ -113,7 +111,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       if (onCreateWindowWebView == null) {
         onCreateWindowWebView = new WebView(view.getContext());
       }
-      Log.d("bootpay", "setWebViewClient 33");
       onCreateWindowWebView.setWebViewClient(windowWebViewClient);
 
 
@@ -139,7 +136,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      */
     public void setWebViewClient(WebViewClient webViewClient) {
       this.webViewClient = webViewClient;
-      Log.d("bootpay", "setWebViewClient 44");
     }
 
     @Override

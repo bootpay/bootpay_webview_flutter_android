@@ -1,5 +1,8 @@
-## 2.8.31
+## 2.8.32
+* usless log deleted 
+* test code bug fix
 
+## 2.8.31
 * fork project by bootpay 
 
 ## 2.8.3
