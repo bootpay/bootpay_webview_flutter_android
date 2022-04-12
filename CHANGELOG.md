@@ -1,3 +1,6 @@
+## 2.8.33
+* webview_flutter와 충돌나는 버그 수정 
+
 ## 2.8.32
 * usless log deleted 
 * test code bug fix

@@ -188,7 +188,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.CookieManagerHostApi.clearCookies",
+                "bootpay.flutter.pigeon.CookieManagerHostApi.clearCookies",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -221,7 +221,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.CookieManagerHostApi.setCookie", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.CookieManagerHostApi.setCookie", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -326,7 +326,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.create", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.create", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -355,7 +355,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.dispose", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.dispose", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -380,7 +380,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.loadData", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.loadData", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -418,7 +418,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl",
+                "bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -470,7 +470,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.loadUrl", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.loadUrl", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -503,7 +503,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.postUrl", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.postUrl", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -536,7 +536,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.getUrl", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.getUrl", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -561,7 +561,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.canGoBack", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.canGoBack", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -586,7 +586,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.canGoForward", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.canGoForward", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -611,7 +611,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.goBack", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.goBack", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -636,7 +636,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.goForward", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.goForward", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -661,7 +661,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.reload", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.reload", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -686,7 +686,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.clearCache", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.clearCache", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -716,7 +716,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.evaluateJavascript",
+                "bootpay.flutter.pigeon.WebViewHostApi.evaluateJavascript",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -759,7 +759,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.getTitle", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.getTitle", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -784,7 +784,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.scrollTo", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.scrollTo", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -817,7 +817,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.scrollBy", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.scrollBy", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -850,7 +850,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.getScrollX", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.getScrollX", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -875,7 +875,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.getScrollY", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.getScrollY", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -901,7 +901,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled",
+                "bootpay.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -927,7 +927,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewHostApi.setWebViewClient", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewHostApi.setWebViewClient", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -958,7 +958,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.addJavaScriptChannel",
+                "bootpay.flutter.pigeon.WebViewHostApi.addJavaScriptChannel",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -991,7 +991,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel",
+                "bootpay.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1024,7 +1024,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.setDownloadListener",
+                "bootpay.flutter.pigeon.WebViewHostApi.setDownloadListener",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1056,7 +1056,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.setWebChromeClient",
+                "bootpay.flutter.pigeon.WebViewHostApi.setWebChromeClient",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1088,7 +1088,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebViewHostApi.setBackgroundColor",
+                "bootpay.flutter.pigeon.WebViewHostApi.setBackgroundColor",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1166,7 +1166,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebSettingsHostApi.create", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebSettingsHostApi.create", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -1195,7 +1195,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebSettingsHostApi.dispose", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebSettingsHostApi.dispose", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -1221,7 +1221,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1252,7 +1252,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1283,7 +1283,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1314,7 +1314,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1345,7 +1345,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setUserAgentString",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setUserAgentString",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1376,7 +1376,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1407,7 +1407,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setSupportZoom",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setSupportZoom",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1438,7 +1438,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1469,7 +1469,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1500,7 +1500,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1531,7 +1531,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1562,7 +1562,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess",
+                "bootpay.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -1616,7 +1616,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.JavaScriptChannelHostApi.create", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.JavaScriptChannelHostApi.create", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -1672,7 +1672,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.JavaScriptChannelFlutterApi.dispose",
+              "bootpay.flutter.pigeon.JavaScriptChannelFlutterApi.dispose",
               getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg)),
@@ -1685,7 +1685,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.JavaScriptChannelFlutterApi.postMessage",
+              "bootpay.flutter.pigeon.JavaScriptChannelFlutterApi.postMessage",
               getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg, messageArg)),
@@ -1718,7 +1718,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebViewClientHostApi.create", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebViewClientHostApi.create", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -1800,7 +1800,7 @@ public class GeneratedAndroidWebView {
     public void dispose(Long instanceIdArg, Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
-              binaryMessenger, "dev.flutter.pigeon.WebViewClientFlutterApi.dispose", getCodec());
+              binaryMessenger, "bootpay.flutter.pigeon.WebViewClientFlutterApi.dispose", getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg)),
           channelReply -> {
@@ -1813,7 +1813,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.WebViewClientFlutterApi.onPageStarted",
+              "bootpay.flutter.pigeon.WebViewClientFlutterApi.onPageStarted",
               getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)),
@@ -1827,7 +1827,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.WebViewClientFlutterApi.onPageFinished",
+              "bootpay.flutter.pigeon.WebViewClientFlutterApi.onPageFinished",
               getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)),
@@ -1845,7 +1845,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.WebViewClientFlutterApi.onReceivedRequestError",
+              "bootpay.flutter.pigeon.WebViewClientFlutterApi.onReceivedRequestError",
               getCodec());
       channel.send(
           new ArrayList<Object>(
@@ -1865,7 +1865,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.WebViewClientFlutterApi.onReceivedError",
+              "bootpay.flutter.pigeon.WebViewClientFlutterApi.onReceivedError",
               getCodec());
       channel.send(
           new ArrayList<Object>(
@@ -1888,7 +1888,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.WebViewClientFlutterApi.requestLoading",
+              "bootpay.flutter.pigeon.WebViewClientFlutterApi.requestLoading",
               getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, requestArg)),
@@ -1901,7 +1901,7 @@ public class GeneratedAndroidWebView {
         Long instanceIdArg, Long webViewInstanceIdArg, String urlArg, Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
-              binaryMessenger, "dev.flutter.pigeon.WebViewClientFlutterApi.urlLoading", getCodec());
+              binaryMessenger, "bootpay.flutter.pigeon.WebViewClientFlutterApi.urlLoading", getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)),
           channelReply -> {
@@ -1933,7 +1933,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.DownloadListenerHostApi.create", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.DownloadListenerHostApi.create", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -1984,7 +1984,7 @@ public class GeneratedAndroidWebView {
     public void dispose(Long instanceIdArg, Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
-              binaryMessenger, "dev.flutter.pigeon.DownloadListenerFlutterApi.dispose", getCodec());
+              binaryMessenger, "bootpay.flutter.pigeon.DownloadListenerFlutterApi.dispose", getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg)),
           channelReply -> {
@@ -2003,7 +2003,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.DownloadListenerFlutterApi.onDownloadStart",
+              "bootpay.flutter.pigeon.DownloadListenerFlutterApi.onDownloadStart",
               getCodec());
       channel.send(
           new ArrayList<Object>(
@@ -2043,7 +2043,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.WebChromeClientHostApi.create", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.WebChromeClientHostApi.create", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -2098,7 +2098,7 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
-                binaryMessenger, "dev.flutter.pigeon.FlutterAssetManagerHostApi.list", getCodec());
+                binaryMessenger, "bootpay.flutter.pigeon.FlutterAssetManagerHostApi.list", getCodec());
         if (api != null) {
           channel.setMessageHandler(
               (message, reply) -> {
@@ -2124,7 +2124,7 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<>(
                 binaryMessenger,
-                "dev.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName",
+                "bootpay.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName",
                 getCodec());
         if (api != null) {
           channel.setMessageHandler(
@@ -2176,7 +2176,7 @@ public class GeneratedAndroidWebView {
     public void dispose(Long instanceIdArg, Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
-              binaryMessenger, "dev.flutter.pigeon.WebChromeClientFlutterApi.dispose", getCodec());
+              binaryMessenger, "bootpay.flutter.pigeon.WebChromeClientFlutterApi.dispose", getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg)),
           channelReply -> {
@@ -2189,7 +2189,7 @@ public class GeneratedAndroidWebView {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger,
-              "dev.flutter.pigeon.WebChromeClientFlutterApi.onProgressChanged",
+              "bootpay.flutter.pigeon.WebChromeClientFlutterApi.onProgressChanged",
               getCodec());
       channel.send(
           new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, progressArg)),

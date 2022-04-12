@@ -16,6 +16,10 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebChromeClientHostApi;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.view.Gravity;
+import android.app.AlertDialog;
 
 /**
  * Host api implementation for {@link WebChromeClient}.
@@ -78,41 +82,51 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
             public boolean shouldOverrideUrlLoading(
                 @NonNull WebView windowWebView, @NonNull WebResourceRequest request) {
 
-
+//              Log.d("bootpay", "shouldOverrideUrlLoading: " + request.getUrl().toString());
+//
               if(BootpayUrlHelper.shouldOverrideUrlLoading(view, request)) {
-//                return true;
-                return false;
+                return true;
               }
 
               if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
                 view.loadUrl(request.getUrl().toString());
               }
 //              return true;
-              return false;
+              return true;
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView windowWebView, String url) {
-
+//              Log.d("bootpay", "shouldOverrideUrlLoading: " + url);
 
               if(BootpayUrlHelper.shouldOverrideUrlLoading(view, url)) {
-//                return true;
-                return false;
+                return true;
               }
 
               if (!webViewClient.shouldOverrideUrlLoading(view, url)) {
                 view.loadUrl(url);
               }
 //              return true;
-              return false;
+              return true;
             }
+
           };
 
       if (onCreateWindowWebView == null) {
         onCreateWindowWebView = new WebView(view.getContext());
       }
+
       onCreateWindowWebView.setWebViewClient(windowWebViewClient);
 
+
+//      view.addView(onCreateWindowWebView,
+//              new FrameLayout.LayoutParams(
+//                      ViewGroup.LayoutParams.MATCH_PARENT,
+//                      ViewGroup.LayoutParams.MATCH_PARENT,
+//                      Gravity.NO_GRAVITY)
+//      );
+
+//      onCreateWindowWebView.loadUrl("https://www.naver.com");
 
       final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
       transport.setWebView(onCreateWindowWebView);
@@ -120,6 +134,33 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
       return true;
     }
+
+//    private void setting(Context context) {
+//      setWebChromeClient(new Client());
+////        if(javascriptInterfaceObject == null) addJavascriptInterface(new AndroidBridge(), "Android");
+//      addJavascriptInterface(new AndroidBridge(), "Android");
+//      CookieManager.getInstance().setAcceptCookie(true);
+//      WebSettings s = getSettings();
+//      if (Build.VERSION.SDK_INT >= 21) {
+////            s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+//        s.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+//        CookieManager.getInstance().setAcceptCookie(true);
+//        CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
+//      }
+//      s.setJavaScriptEnabled(true);
+//      s.setJavaScriptCanOpenWindowsAutomatically(true);
+//      s.setDomStorageEnabled(true);
+//      s.setSupportMultipleWindows(true);
+//      s.setLoadsImagesAutomatically(true);
+//      s.setUseWideViewPort(true);
+//      s.setLoadWithOverviewMode(true);
+//      s.setAppCacheEnabled(true);
+//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//        context.getApplicationInfo().flags &=  context.getApplicationInfo().FLAG_DEBUGGABLE;
+//        if (0 != context.getApplicationInfo().flags)
+//          WebView.setWebContentsDebuggingEnabled(true);
+//      }
+//    }
 
     @Override
     public void onProgressChanged(WebView view, int progress) {

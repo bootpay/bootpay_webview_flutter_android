@@ -9,10 +9,10 @@ import io.flutter.plugin.common.StandardMessageCodec;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugin.platform.PlatformViewFactory;
 
-class FlutterWebViewFactory extends PlatformViewFactory {
+class BTFlutterWebViewFactory extends PlatformViewFactory {
   private final InstanceManager instanceManager;
 
-  FlutterWebViewFactory(InstanceManager instanceManager) {
+  BTFlutterWebViewFactory(InstanceManager instanceManager) {
     super(StandardMessageCodec.INSTANCE);
     this.instanceManager = instanceManager;
   }

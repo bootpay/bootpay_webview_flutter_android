@@ -52,21 +52,21 @@ abstract class TestWebViewHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.create', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.create', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.create was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.create was null, expected non-null int.');
           final bool? arg_useHybridComposition = (args[1] as bool?);
           assert(arg_useHybridComposition != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.create was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.create was null, expected non-null bool.');
           api.create(arg_instanceId!, arg_useHybridComposition!);
           return <Object?, Object?>{};
         });
@@ -74,18 +74,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.dispose', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.dispose', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.dispose was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.dispose was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.dispose was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.dispose was null, expected non-null int.');
           api.dispose(arg_instanceId!);
           return <Object?, Object?>{};
         });
@@ -93,27 +93,27 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.loadData', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.loadData', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadData was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadData was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null int.');
           final String? arg_data = (args[1] as String?);
           assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null String.');
           final String? arg_mimeType = (args[2] as String?);
           assert(arg_mimeType != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null String.');
           final String? arg_encoding = (args[3] as String?);
           assert(arg_encoding != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadData was null, expected non-null String.');
           api.loadData(
               arg_instanceId!, arg_data!, arg_mimeType!, arg_encoding!);
           return <Object?, Object?>{};
@@ -122,33 +122,33 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null int.');
           final String? arg_baseUrl = (args[1] as String?);
           assert(arg_baseUrl != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
           final String? arg_data = (args[2] as String?);
           assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
           final String? arg_mimeType = (args[3] as String?);
           assert(arg_mimeType != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
           final String? arg_encoding = (args[4] as String?);
           assert(arg_encoding != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
           final String? arg_historyUrl = (args[5] as String?);
           assert(arg_historyUrl != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadDataWithBaseUrl was null, expected non-null String.');
           api.loadDataWithBaseUrl(arg_instanceId!, arg_baseUrl!, arg_data!,
               arg_mimeType!, arg_encoding!, arg_historyUrl!);
           return <Object?, Object?>{};
@@ -157,25 +157,25 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.loadUrl', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.loadUrl', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadUrl was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadUrl was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadUrl was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadUrl was null, expected non-null int.');
           final String? arg_url = (args[1] as String?);
           assert(arg_url != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadUrl was null, expected non-null String.');
           final Map<String?, String?>? arg_headers =
               (args[2] as Map<Object?, Object?>?)?.cast<String?, String?>();
           assert(arg_headers != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.loadUrl was null, expected non-null Map<String?, String?>.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.loadUrl was null, expected non-null Map<String?, String?>.');
           api.loadUrl(arg_instanceId!, arg_url!, arg_headers!);
           return <Object?, Object?>{};
         });
@@ -183,24 +183,24 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.postUrl', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.postUrl', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.postUrl was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.postUrl was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.postUrl was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.postUrl was null, expected non-null int.');
           final String? arg_url = (args[1] as String?);
           assert(arg_url != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.postUrl was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.postUrl was null, expected non-null String.');
           final Uint8List? arg_data = (args[2] as Uint8List?);
           assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.postUrl was null, expected non-null Uint8List.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.postUrl was null, expected non-null Uint8List.');
           api.postUrl(arg_instanceId!, arg_url!, arg_data!);
           return <Object?, Object?>{};
         });
@@ -208,18 +208,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.getUrl', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.getUrl', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getUrl was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getUrl was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getUrl was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getUrl was null, expected non-null int.');
           final String output = api.getUrl(arg_instanceId!);
           return <Object?, Object?>{'result': output};
         });
@@ -227,18 +227,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.canGoBack', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.canGoBack', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.canGoBack was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.canGoBack was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.canGoBack was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.canGoBack was null, expected non-null int.');
           final bool output = api.canGoBack(arg_instanceId!);
           return <Object?, Object?>{'result': output};
         });
@@ -246,18 +246,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.canGoForward', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.canGoForward', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.canGoForward was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.canGoForward was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.canGoForward was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.canGoForward was null, expected non-null int.');
           final bool output = api.canGoForward(arg_instanceId!);
           return <Object?, Object?>{'result': output};
         });
@@ -265,18 +265,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.goBack', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.goBack', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.goBack was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.goBack was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.goBack was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.goBack was null, expected non-null int.');
           api.goBack(arg_instanceId!);
           return <Object?, Object?>{};
         });
@@ -284,18 +284,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.goForward', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.goForward', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.goForward was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.goForward was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.goForward was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.goForward was null, expected non-null int.');
           api.goForward(arg_instanceId!);
           return <Object?, Object?>{};
         });
@@ -303,18 +303,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.reload', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.reload', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.reload was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.reload was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.reload was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.reload was null, expected non-null int.');
           api.reload(arg_instanceId!);
           return <Object?, Object?>{};
         });
@@ -322,21 +322,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.clearCache', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.clearCache', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.clearCache was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.clearCache was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.clearCache was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.clearCache was null, expected non-null int.');
           final bool? arg_includeDiskFiles = (args[1] as bool?);
           assert(arg_includeDiskFiles != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.clearCache was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.clearCache was null, expected non-null bool.');
           api.clearCache(arg_instanceId!, arg_includeDiskFiles!);
           return <Object?, Object?>{};
         });
@@ -344,21 +344,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.evaluateJavascript', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.evaluateJavascript', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.evaluateJavascript was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.evaluateJavascript was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.evaluateJavascript was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.evaluateJavascript was null, expected non-null int.');
           final String? arg_javascriptString = (args[1] as String?);
           assert(arg_javascriptString != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.evaluateJavascript was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.evaluateJavascript was null, expected non-null String.');
           final String output = await api.evaluateJavascript(
               arg_instanceId!, arg_javascriptString!);
           return <Object?, Object?>{'result': output};
@@ -367,18 +367,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.getTitle', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.getTitle', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getTitle was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getTitle was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getTitle was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getTitle was null, expected non-null int.');
           final String output = api.getTitle(arg_instanceId!);
           return <Object?, Object?>{'result': output};
         });
@@ -386,24 +386,24 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.scrollTo', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.scrollTo', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollTo was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollTo was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollTo was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollTo was null, expected non-null int.');
           final int? arg_x = (args[1] as int?);
           assert(arg_x != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollTo was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollTo was null, expected non-null int.');
           final int? arg_y = (args[2] as int?);
           assert(arg_y != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollTo was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollTo was null, expected non-null int.');
           api.scrollTo(arg_instanceId!, arg_x!, arg_y!);
           return <Object?, Object?>{};
         });
@@ -411,24 +411,24 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.scrollBy', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.scrollBy', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollBy was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollBy was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollBy was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollBy was null, expected non-null int.');
           final int? arg_x = (args[1] as int?);
           assert(arg_x != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollBy was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollBy was null, expected non-null int.');
           final int? arg_y = (args[2] as int?);
           assert(arg_y != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.scrollBy was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.scrollBy was null, expected non-null int.');
           api.scrollBy(arg_instanceId!, arg_x!, arg_y!);
           return <Object?, Object?>{};
         });
@@ -436,18 +436,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.getScrollX', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.getScrollX', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getScrollX was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getScrollX was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getScrollX was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getScrollX was null, expected non-null int.');
           final int output = api.getScrollX(arg_instanceId!);
           return <Object?, Object?>{'result': output};
         });
@@ -455,18 +455,18 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.getScrollY', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.getScrollY', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getScrollY was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getScrollY was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.getScrollY was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.getScrollY was null, expected non-null int.');
           final int output = api.getScrollY(arg_instanceId!);
           return <Object?, Object?>{'result': output};
         });
@@ -474,7 +474,7 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled',
+          'bootpay.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled',
           codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -482,11 +482,11 @@ abstract class TestWebViewHostApi {
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final bool? arg_enabled = (args[0] as bool?);
           assert(arg_enabled != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled was null, expected non-null bool.');
           api.setWebContentsDebuggingEnabled(arg_enabled!);
           return <Object?, Object?>{};
         });
@@ -494,21 +494,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.setWebViewClient', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.setWebViewClient', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebViewClient was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebViewClient was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebViewClient was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebViewClient was null, expected non-null int.');
           final int? arg_webViewClientInstanceId = (args[1] as int?);
           assert(arg_webViewClientInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebViewClient was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebViewClient was null, expected non-null int.');
           api.setWebViewClient(arg_instanceId!, arg_webViewClientInstanceId!);
           return <Object?, Object?>{};
         });
@@ -516,21 +516,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.addJavaScriptChannel', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.addJavaScriptChannel', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.addJavaScriptChannel was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.addJavaScriptChannel was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.addJavaScriptChannel was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.addJavaScriptChannel was null, expected non-null int.');
           final int? arg_javaScriptChannelInstanceId = (args[1] as int?);
           assert(arg_javaScriptChannelInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.addJavaScriptChannel was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.addJavaScriptChannel was null, expected non-null int.');
           api.addJavaScriptChannel(
               arg_instanceId!, arg_javaScriptChannelInstanceId!);
           return <Object?, Object?>{};
@@ -539,21 +539,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel was null, expected non-null int.');
           final int? arg_javaScriptChannelInstanceId = (args[1] as int?);
           assert(arg_javaScriptChannelInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.removeJavaScriptChannel was null, expected non-null int.');
           api.removeJavaScriptChannel(
               arg_instanceId!, arg_javaScriptChannelInstanceId!);
           return <Object?, Object?>{};
@@ -562,21 +562,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.setDownloadListener', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.setDownloadListener', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setDownloadListener was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setDownloadListener was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setDownloadListener was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setDownloadListener was null, expected non-null int.');
           final int? arg_listenerInstanceId = (args[1] as int?);
           assert(arg_listenerInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setDownloadListener was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setDownloadListener was null, expected non-null int.');
           api.setDownloadListener(arg_instanceId!, arg_listenerInstanceId!);
           return <Object?, Object?>{};
         });
@@ -584,21 +584,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.setWebChromeClient', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.setWebChromeClient', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebChromeClient was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebChromeClient was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebChromeClient was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebChromeClient was null, expected non-null int.');
           final int? arg_clientInstanceId = (args[1] as int?);
           assert(arg_clientInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setWebChromeClient was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setWebChromeClient was null, expected non-null int.');
           api.setWebChromeClient(arg_instanceId!, arg_clientInstanceId!);
           return <Object?, Object?>{};
         });
@@ -606,21 +606,21 @@ abstract class TestWebViewHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewHostApi.setBackgroundColor', codec,
+          'bootpay.flutter.pigeon.WebViewHostApi.setBackgroundColor', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setBackgroundColor was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setBackgroundColor was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setBackgroundColor was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setBackgroundColor was null, expected non-null int.');
           final int? arg_color = (args[1] as int?);
           assert(arg_color != null,
-              'Argument for dev.flutter.pigeon.WebViewHostApi.setBackgroundColor was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewHostApi.setBackgroundColor was null, expected non-null int.');
           api.setBackgroundColor(arg_instanceId!, arg_color!);
           return <Object?, Object?>{};
         });
@@ -654,21 +654,21 @@ abstract class TestWebSettingsHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.create', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.create', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.create was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.create was null, expected non-null int.');
           final int? arg_webViewInstanceId = (args[1] as int?);
           assert(arg_webViewInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.create was null, expected non-null int.');
           api.create(arg_instanceId!, arg_webViewInstanceId!);
           return <Object?, Object?>{};
         });
@@ -676,18 +676,18 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.dispose', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.dispose', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.dispose was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.dispose was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.dispose was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.dispose was null, expected non-null int.');
           api.dispose(arg_instanceId!);
           return <Object?, Object?>{};
         });
@@ -695,21 +695,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled was null, expected non-null int.');
           final bool? arg_flag = (args[1] as bool?);
           assert(arg_flag != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setDomStorageEnabled was null, expected non-null bool.');
           api.setDomStorageEnabled(arg_instanceId!, arg_flag!);
           return <Object?, Object?>{};
         });
@@ -717,7 +717,7 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically',
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically',
           codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -725,14 +725,14 @@ abstract class TestWebSettingsHostApi {
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically was null, expected non-null int.');
           final bool? arg_flag = (args[1] as bool?);
           assert(arg_flag != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptCanOpenWindowsAutomatically was null, expected non-null bool.');
           api.setJavaScriptCanOpenWindowsAutomatically(
               arg_instanceId!, arg_flag!);
           return <Object?, Object?>{};
@@ -741,7 +741,7 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows',
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows',
           codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -749,14 +749,14 @@ abstract class TestWebSettingsHostApi {
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows was null, expected non-null int.');
           final bool? arg_support = (args[1] as bool?);
           assert(arg_support != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setSupportMultipleWindows was null, expected non-null bool.');
           api.setSupportMultipleWindows(arg_instanceId!, arg_support!);
           return <Object?, Object?>{};
         });
@@ -764,21 +764,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled was null, expected non-null int.');
           final bool? arg_flag = (args[1] as bool?);
           assert(arg_flag != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setJavaScriptEnabled was null, expected non-null bool.');
           api.setJavaScriptEnabled(arg_instanceId!, arg_flag!);
           return <Object?, Object?>{};
         });
@@ -786,21 +786,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setUserAgentString', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setUserAgentString', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setUserAgentString was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setUserAgentString was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setUserAgentString was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setUserAgentString was null, expected non-null int.');
           final String? arg_userAgentString = (args[1] as String?);
           assert(arg_userAgentString != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setUserAgentString was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setUserAgentString was null, expected non-null String.');
           api.setUserAgentString(arg_instanceId!, arg_userAgentString!);
           return <Object?, Object?>{};
         });
@@ -808,7 +808,7 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture',
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture',
           codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -816,14 +816,14 @@ abstract class TestWebSettingsHostApi {
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture was null, expected non-null int.');
           final bool? arg_require = (args[1] as bool?);
           assert(arg_require != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setMediaPlaybackRequiresUserGesture was null, expected non-null bool.');
           api.setMediaPlaybackRequiresUserGesture(
               arg_instanceId!, arg_require!);
           return <Object?, Object?>{};
@@ -832,21 +832,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setSupportZoom', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setSupportZoom', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setSupportZoom was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setSupportZoom was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setSupportZoom was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setSupportZoom was null, expected non-null int.');
           final bool? arg_support = (args[1] as bool?);
           assert(arg_support != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setSupportZoom was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setSupportZoom was null, expected non-null bool.');
           api.setSupportZoom(arg_instanceId!, arg_support!);
           return <Object?, Object?>{};
         });
@@ -854,7 +854,7 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode',
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode',
           codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -862,14 +862,14 @@ abstract class TestWebSettingsHostApi {
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode was null, expected non-null int.');
           final bool? arg_overview = (args[1] as bool?);
           assert(arg_overview != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setLoadWithOverviewMode was null, expected non-null bool.');
           api.setLoadWithOverviewMode(arg_instanceId!, arg_overview!);
           return <Object?, Object?>{};
         });
@@ -877,21 +877,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort was null, expected non-null int.');
           final bool? arg_use = (args[1] as bool?);
           assert(arg_use != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setUseWideViewPort was null, expected non-null bool.');
           api.setUseWideViewPort(arg_instanceId!, arg_use!);
           return <Object?, Object?>{};
         });
@@ -899,21 +899,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls was null, expected non-null int.');
           final bool? arg_enabled = (args[1] as bool?);
           assert(arg_enabled != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setDisplayZoomControls was null, expected non-null bool.');
           api.setDisplayZoomControls(arg_instanceId!, arg_enabled!);
           return <Object?, Object?>{};
         });
@@ -921,21 +921,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls was null, expected non-null int.');
           final bool? arg_enabled = (args[1] as bool?);
           assert(arg_enabled != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setBuiltInZoomControls was null, expected non-null bool.');
           api.setBuiltInZoomControls(arg_instanceId!, arg_enabled!);
           return <Object?, Object?>{};
         });
@@ -943,21 +943,21 @@ abstract class TestWebSettingsHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess', codec,
+          'bootpay.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess was null.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess was null, expected non-null int.');
           final bool? arg_enabled = (args[1] as bool?);
           assert(arg_enabled != null,
-              'Argument for dev.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebSettingsHostApi.setAllowFileAccess was null, expected non-null bool.');
           api.setAllowFileAccess(arg_instanceId!, arg_enabled!);
           return <Object?, Object?>{};
         });
@@ -979,21 +979,21 @@ abstract class TestJavaScriptChannelHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.JavaScriptChannelHostApi.create', codec,
+          'bootpay.flutter.pigeon.JavaScriptChannelHostApi.create', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.JavaScriptChannelHostApi.create was null.');
+              'Argument for bootpay.flutter.pigeon.JavaScriptChannelHostApi.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.JavaScriptChannelHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.JavaScriptChannelHostApi.create was null, expected non-null int.');
           final String? arg_channelName = (args[1] as String?);
           assert(arg_channelName != null,
-              'Argument for dev.flutter.pigeon.JavaScriptChannelHostApi.create was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.JavaScriptChannelHostApi.create was null, expected non-null String.');
           api.create(arg_instanceId!, arg_channelName!);
           return <Object?, Object?>{};
         });
@@ -1014,21 +1014,21 @@ abstract class TestWebViewClientHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebViewClientHostApi.create', codec,
+          'bootpay.flutter.pigeon.WebViewClientHostApi.create', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebViewClientHostApi.create was null.');
+              'Argument for bootpay.flutter.pigeon.WebViewClientHostApi.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebViewClientHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebViewClientHostApi.create was null, expected non-null int.');
           final bool? arg_shouldOverrideUrlLoading = (args[1] as bool?);
           assert(arg_shouldOverrideUrlLoading != null,
-              'Argument for dev.flutter.pigeon.WebViewClientHostApi.create was null, expected non-null bool.');
+              'Argument for bootpay.flutter.pigeon.WebViewClientHostApi.create was null, expected non-null bool.');
           api.create(arg_instanceId!, arg_shouldOverrideUrlLoading!);
           return <Object?, Object?>{};
         });
@@ -1050,18 +1050,18 @@ abstract class TestDownloadListenerHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.DownloadListenerHostApi.create', codec,
+          'bootpay.flutter.pigeon.DownloadListenerHostApi.create', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.DownloadListenerHostApi.create was null.');
+              'Argument for bootpay.flutter.pigeon.DownloadListenerHostApi.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.DownloadListenerHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.DownloadListenerHostApi.create was null, expected non-null int.');
           api.create(arg_instanceId!);
           return <Object?, Object?>{};
         });
@@ -1082,21 +1082,21 @@ abstract class TestWebChromeClientHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.WebChromeClientHostApi.create', codec,
+          'bootpay.flutter.pigeon.WebChromeClientHostApi.create', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.WebChromeClientHostApi.create was null.');
+              'Argument for bootpay.flutter.pigeon.WebChromeClientHostApi.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
-              'Argument for dev.flutter.pigeon.WebChromeClientHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebChromeClientHostApi.create was null, expected non-null int.');
           final int? arg_webViewClientInstanceId = (args[1] as int?);
           assert(arg_webViewClientInstanceId != null,
-              'Argument for dev.flutter.pigeon.WebChromeClientHostApi.create was null, expected non-null int.');
+              'Argument for bootpay.flutter.pigeon.WebChromeClientHostApi.create was null, expected non-null int.');
           api.create(arg_instanceId!, arg_webViewClientInstanceId!);
           return <Object?, Object?>{};
         });
@@ -1118,18 +1118,18 @@ abstract class TestAssetManagerHostApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.FlutterAssetManagerHostApi.list', codec,
+          'bootpay.flutter.pigeon.FlutterAssetManagerHostApi.list', codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.FlutterAssetManagerHostApi.list was null.');
+              'Argument for bootpay.flutter.pigeon.FlutterAssetManagerHostApi.list was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final String? arg_path = (args[0] as String?);
           assert(arg_path != null,
-              'Argument for dev.flutter.pigeon.FlutterAssetManagerHostApi.list was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.FlutterAssetManagerHostApi.list was null, expected non-null String.');
           final List<String?> output = api.list(arg_path!);
           return <Object?, Object?>{'result': output};
         });
@@ -1137,7 +1137,7 @@ abstract class TestAssetManagerHostApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName',
+          'bootpay.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName',
           codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -1145,11 +1145,11 @@ abstract class TestAssetManagerHostApi {
       } else {
         channel.setMockMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName was null.');
+              'Argument for bootpay.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final String? arg_name = (args[0] as String?);
           assert(arg_name != null,
-              'Argument for dev.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName was null, expected non-null String.');
+              'Argument for bootpay.flutter.pigeon.FlutterAssetManagerHostApi.getAssetFilePathByName was null, expected non-null String.');
           final String output = api.getAssetFilePathByName(arg_name!);
           return <Object?, Object?>{'result': output};
         });
