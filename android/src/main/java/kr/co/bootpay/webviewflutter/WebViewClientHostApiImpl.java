@@ -84,17 +84,39 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-      if (flutterApi != null) {
-        flutterApi.requestLoading(this, view, request, reply -> {});
+      String url = request.getUrl().toString();
+
+      if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+        //do deep link by doDeepLinkIfPayUrl function
+      } else if(BootpayUrlHelper.isPreventUrl(url)) {
+        //do nothing
+      } else {
+        if (flutterApi != null) {
+          flutterApi.requestLoading(this, view, request, reply -> {});
+        }
       }
+
+//      if (flutterApi != null) {
+//        flutterApi.requestLoading(this, view, request, reply -> {});
+//      }
       return shouldOverrideUrlLoading;
     }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      if (flutterApi != null) {
-        flutterApi.urlLoading(this, view, url, reply -> {});
+      if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+        //do deep link by doDeepLinkIfPayUrl function
+      } else if(BootpayUrlHelper.isPreventUrl(url)) {
+        //do nothing
+      } else {
+        if (flutterApi != null) {
+          flutterApi.urlLoading(this, view, url, reply -> {});
+        }
       }
+
+//      if (flutterApi != null) {
+//        flutterApi.urlLoading(this, view, url, reply -> {});
+//      }
       return shouldOverrideUrlLoading;
     }
 
@@ -169,16 +191,30 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
     @Override
     public boolean shouldOverrideUrlLoading(
         @NonNull WebView view, @NonNull WebResourceRequest request) {
-      if (flutterApi != null) {
-        flutterApi.requestLoading(this, view, request, reply -> {});
+      String url = request.getUrl().toString();
+
+      if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+        //do deep link by doDeepLinkIfPayUrl function
+      } else if(BootpayUrlHelper.isPreventUrl(url)) {
+        //do nothing
+      } else {
+        if (flutterApi != null) {
+          flutterApi.requestLoading(this, view, request, reply -> {});
+        }
       }
       return shouldOverrideUrlLoading;
     }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      if (flutterApi != null) {
-        flutterApi.urlLoading(this, view, url, reply -> {});
+      if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+        //do deep link by doDeepLinkIfPayUrl function
+      } else if(BootpayUrlHelper.isPreventUrl(url)) {
+        //do nothing
+      } else {
+        if (flutterApi != null) {
+          flutterApi.urlLoading(this, view, url, reply -> {});
+        }
       }
       return shouldOverrideUrlLoading;
     }

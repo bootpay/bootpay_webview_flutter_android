@@ -110,7 +110,8 @@ class _WebViewExampleState extends State<_WebViewExample> {
         ],
       ),
       body: WebView(
-        initialUrl: 'https://flutter.dev',
+        // initialUrl: 'https://flutter.dev',
+        initialUrl: 'https://dev-js.bootapi.com/test/payment/',
         onWebViewCreated: (WebViewController controller) {
           _controller.complete(controller);
         },
@@ -133,7 +134,7 @@ class _WebViewExampleState extends State<_WebViewExample> {
         },
         javascriptChannels: _createJavascriptChannels(context),
         javascriptMode: JavascriptMode.unrestricted,
-        userAgent: 'Custom_User_Agent',
+        // userAgent: 'Custom_User_Agent',
         backgroundColor: const Color(0x80000000),
       ),
       floatingActionButton: favoriteButton(),
