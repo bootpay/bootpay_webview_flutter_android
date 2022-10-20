@@ -1,3 +1,6 @@
+## 2.10.41
+* 재배포
+
 ## 2.10.4
 * bootpay fork 2.10.4
 * Updates code for `no_leading_underscores_for_local_identifiers` lint.
