@@ -23,7 +23,7 @@ import java.util.Map;
 
 /** Generated class from Pigeon. */
 @SuppressWarnings({"unused", "unchecked", "CodeBlock2Expr", "RedundantSuppression"})
-public class GeneratedAndroidWebView {
+public class GeneratedBootpayAndroidWebView {
 
   /** Generated class from Pigeon that represents data sent in messages. */
   public static class WebResourceRequestData {

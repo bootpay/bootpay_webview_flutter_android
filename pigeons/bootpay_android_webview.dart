@@ -14,10 +14,10 @@ import 'package:pigeon/pigeon.dart';
       'found in the LICENSE file.',
     ]),
     javaOut:
-        'android/src/main/java/kr/co/bootpay/webviewflutter/GeneratedAndroidWebView.java',
+        'android/src/main/java/kr/co/bootpay/webviewflutter/GeneratedBootpayAndroidWebView.java',
     javaOptions: JavaOptions(
       package: 'kr.co.bootpay.webviewflutter',
-      className: 'GeneratedAndroidWebView',
+      className: 'GeneratedBootpayAndroidWebView',
       copyrightHeader: <String>[
         'Copyright 2013 The Flutter Authors. All rights reserved.',
         'Use of this source code is governed by a BSD-style license that can be',

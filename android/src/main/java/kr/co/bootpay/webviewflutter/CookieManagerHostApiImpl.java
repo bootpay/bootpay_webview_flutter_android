@@ -7,9 +7,9 @@ package kr.co.bootpay.webviewflutter;
 import android.os.Build;
 import android.webkit.CookieManager;
 
-class CookieManagerHostApiImpl implements GeneratedAndroidWebView.CookieManagerHostApi {
+class CookieManagerHostApiImpl implements GeneratedBootpayAndroidWebView.CookieManagerHostApi {
   @Override
-  public void clearCookies(GeneratedAndroidWebView.Result<Boolean> result) {
+  public void clearCookies(GeneratedBootpayAndroidWebView.Result<Boolean> result) {
     CookieManager cookieManager = CookieManager.getInstance();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       cookieManager.removeAllCookies(result::success);

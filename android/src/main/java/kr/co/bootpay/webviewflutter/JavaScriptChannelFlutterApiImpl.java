@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaScriptChannelFlutterApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.JavaScriptChannelFlutterApi;
 
 /**
  * Flutter Api implementation for {@link JavaScriptChannel}.

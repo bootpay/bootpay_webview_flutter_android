@@ -124,7 +124,7 @@ public class WebViewClientTest {
     when(mockRequest.isForMainFrame()).thenReturn(true);
     when(mockRequest.getRequestHeaders()).thenReturn(null);
 
-    final GeneratedAndroidWebView.WebResourceRequestData data =
+    final GeneratedBootpayAndroidWebView.WebResourceRequestData data =
         WebViewClientFlutterApiImpl.createWebResourceRequestData(mockRequest);
     assertEquals(data.getRequestHeaders(), new HashMap<String, String>());
   }

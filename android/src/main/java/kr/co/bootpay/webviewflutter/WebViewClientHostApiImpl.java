@@ -24,7 +24,7 @@ import androidx.webkit.WebViewClientCompat;
  *
  * <p>Handles creating {@link WebViewClient}s that intercommunicate with a paired Dart object.
  */
-public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebViewClientHostApi {
+public class WebViewClientHostApiImpl implements GeneratedBootpayAndroidWebView.WebViewClientHostApi {
   private final InstanceManager instanceManager;
   private final WebViewClientCreator webViewClientCreator;
   private final WebViewClientFlutterApiImpl flutterApi;

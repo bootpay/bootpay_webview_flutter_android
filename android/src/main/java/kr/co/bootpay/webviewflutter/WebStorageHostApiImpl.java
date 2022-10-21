@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import android.webkit.WebStorage;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebStorageHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebStorageHostApi;
 
 /**
  * Host api implementation for {@link WebStorage}.

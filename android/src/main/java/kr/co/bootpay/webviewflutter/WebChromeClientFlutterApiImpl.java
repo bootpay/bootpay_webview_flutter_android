@@ -7,7 +7,7 @@ package kr.co.bootpay.webviewflutter;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebChromeClientFlutterApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebChromeClientFlutterApi;
 
 /**
  * Flutter Api implementation for {@link WebChromeClient}.

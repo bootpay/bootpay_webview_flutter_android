@@ -61,7 +61,7 @@ public class CookieManagerHostApiImplTest {
   public void clearCookiesShouldCallRemoveAllCookiesOnAndroidLAbove() {
     // Setup
     TestUtils.setFinalStatic(Build.VERSION.class, "SDK_INT", Build.VERSION_CODES.LOLLIPOP);
-    GeneratedAndroidWebView.Result<Boolean> result = mock(GeneratedAndroidWebView.Result.class);
+    GeneratedBootpayAndroidWebView.Result<Boolean> result = mock(GeneratedBootpayAndroidWebView.Result.class);
     CookieManagerHostApiImpl impl = new CookieManagerHostApiImpl();
     // Run
     impl.clearCookies(result);
@@ -74,7 +74,7 @@ public class CookieManagerHostApiImplTest {
   public void clearCookiesShouldCallRemoveAllCookieBelowAndroidL() {
     // Setup
     TestUtils.setFinalStatic(Build.VERSION.class, "SDK_INT", Build.VERSION_CODES.KITKAT_WATCH);
-    GeneratedAndroidWebView.Result<Boolean> result = mock(GeneratedAndroidWebView.Result.class);
+    GeneratedBootpayAndroidWebView.Result<Boolean> result = mock(GeneratedBootpayAndroidWebView.Result.class);
     CookieManagerHostApiImpl impl = new CookieManagerHostApiImpl();
     // Run
     impl.clearCookies(result);

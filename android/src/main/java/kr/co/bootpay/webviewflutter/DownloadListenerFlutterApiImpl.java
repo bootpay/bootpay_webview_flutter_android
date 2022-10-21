@@ -6,7 +6,7 @@ package kr.co.bootpay.webviewflutter;
 
 import android.webkit.DownloadListener;
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.DownloadListenerFlutterApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.DownloadListenerFlutterApi;
 
 /**
  * Flutter Api implementation for {@link DownloadListener}.

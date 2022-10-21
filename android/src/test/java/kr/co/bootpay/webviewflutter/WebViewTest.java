@@ -266,7 +266,7 @@ public class WebViewTest {
     testHostApiImpl.evaluateJavascript(
         0L,
         "2 + 2",
-        new GeneratedAndroidWebView.Result<String>() {
+        new GeneratedBootpayAndroidWebView.Result<String>() {
           @Override
           public void success(String result) {
             successValue[0] = result;
@@ -319,7 +319,7 @@ public class WebViewTest {
   public void getScrollPosition() {
     when(mockWebView.getScrollX()).thenReturn(1);
     when(mockWebView.getScrollY()).thenReturn(2);
-    final GeneratedAndroidWebView.WebViewPoint position = testHostApiImpl.getScrollPosition(0L);
+    final GeneratedBootpayAndroidWebView.WebViewPoint position = testHostApiImpl.getScrollPosition(0L);
     assertEquals((long) position.getX(), 1L);
     assertEquals((long) position.getY(), 2L);
   }

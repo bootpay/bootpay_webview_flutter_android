@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebChromeClientHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebChromeClientHostApi;
 
 /**
  * Host api implementation for {@link WebChromeClient}.

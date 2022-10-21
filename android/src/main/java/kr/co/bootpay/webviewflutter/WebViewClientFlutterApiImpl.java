@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebResourceErrorCompat;
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebViewClientFlutterApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebViewClientFlutterApi;
 import java.util.HashMap;
 
 /**
@@ -25,28 +25,28 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
   private final InstanceManager instanceManager;
 
   @RequiresApi(api = Build.VERSION_CODES.M)
-  static GeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
+  static GeneratedBootpayAndroidWebView.WebResourceErrorData createWebResourceErrorData(
       WebResourceError error) {
-    return new GeneratedAndroidWebView.WebResourceErrorData.Builder()
+    return new GeneratedBootpayAndroidWebView.WebResourceErrorData.Builder()
         .setErrorCode((long) error.getErrorCode())
         .setDescription(error.getDescription().toString())
         .build();
   }
 
   @SuppressLint("RequiresFeature")
-  static GeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
+  static GeneratedBootpayAndroidWebView.WebResourceErrorData createWebResourceErrorData(
       WebResourceErrorCompat error) {
-    return new GeneratedAndroidWebView.WebResourceErrorData.Builder()
+    return new GeneratedBootpayAndroidWebView.WebResourceErrorData.Builder()
         .setErrorCode((long) error.getErrorCode())
         .setDescription(error.getDescription().toString())
         .build();
   }
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-  static GeneratedAndroidWebView.WebResourceRequestData createWebResourceRequestData(
+  static GeneratedBootpayAndroidWebView.WebResourceRequestData createWebResourceRequestData(
       WebResourceRequest request) {
-    final GeneratedAndroidWebView.WebResourceRequestData.Builder requestData =
-        new GeneratedAndroidWebView.WebResourceRequestData.Builder()
+    final GeneratedBootpayAndroidWebView.WebResourceRequestData.Builder requestData =
+        new GeneratedBootpayAndroidWebView.WebResourceRequestData.Builder()
             .setUrl(request.getUrl().toString())
             .setIsForMainFrame(request.isForMainFrame())
             .setHasGesture(request.hasGesture())

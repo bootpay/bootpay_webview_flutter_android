@@ -6,7 +6,7 @@ package kr.co.bootpay.webviewflutter;
 
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebSettingsHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebSettingsHostApi;
 
 /**
  * Host api implementation for {@link WebSettings}.

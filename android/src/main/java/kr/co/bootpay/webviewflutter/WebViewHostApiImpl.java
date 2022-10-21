@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import io.flutter.plugin.platform.PlatformView;
 import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerImpl;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebViewHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebViewHostApi;
 import kr.co.bootpay.webviewflutter.WebChromeClientHostApiImpl.WebChromeClientImpl;
 import kr.co.bootpay.webviewflutter.WebViewClientHostApiImpl.ReleasableWebViewClient;
 import java.util.HashMap;
@@ -422,7 +422,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
 
   @Override
   public void evaluateJavascript(
-      Long instanceId, String javascriptString, GeneratedAndroidWebView.Result<String> result) {
+      Long instanceId, String javascriptString, GeneratedBootpayAndroidWebView.Result<String> result) {
     final WebView webView = (WebView) instanceManager.getInstance(instanceId);
     webView.evaluateJavascript(javascriptString, result::success);
   }
@@ -459,9 +459,9 @@ public class WebViewHostApiImpl implements WebViewHostApi {
 
   @NonNull
   @Override
-  public GeneratedAndroidWebView.WebViewPoint getScrollPosition(@NonNull Long instanceId) {
+  public GeneratedBootpayAndroidWebView.WebViewPoint getScrollPosition(@NonNull Long instanceId) {
     final WebView webView = Objects.requireNonNull(instanceManager.getInstance(instanceId));
-    return new GeneratedAndroidWebView.WebViewPoint.Builder()
+    return new GeneratedBootpayAndroidWebView.WebViewPoint.Builder()
         .setX((long) webView.getScrollX())
         .setY((long) webView.getScrollY())
         .build();
