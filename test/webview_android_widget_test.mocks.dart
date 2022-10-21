@@ -7,7 +7,7 @@ import 'dart:typed_data' as _i6;
 import 'dart:ui' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:bootpay_webview_flutter_android/src/android_webview.dart' as _i2;
+import 'package:bootpay_webview_flutter_android/src/bootpay_android_webview.dart' as _i2;
 import 'package:bootpay_webview_flutter_android/bootpay_webview_android_widget.dart' as _i7;
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart'
     as _i4;

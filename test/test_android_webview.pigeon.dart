@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart' show ReadBuffer, WriteBuffer;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:bootpay_webview_flutter_android/src/android_webview.pigeon.dart';
+import 'package:bootpay_webview_flutter_android/src/bootpay_android_webview.pigeon.dart';
 
 class _TestJavaObjectHostApiCodec extends StandardMessageCodec {
   const _TestJavaObjectHostApiCodec();

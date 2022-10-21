@@ -16,9 +16,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show BinaryMessenger;
 import 'package:flutter/widgets.dart' show AndroidViewSurface;
 
-import 'android_webview.pigeon.dart';
-import 'android_webview_api_impls.dart';
-import 'instance_manager.dart';
+import 'bootpay_android_webview.pigeon.dart';
+import 'bootpay_android_webview_api_impls.dart';
+import 'bootpay_instance_manager.dart';
 
 /// Root of the Java class hierarchy.
 ///

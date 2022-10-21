@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
 
-import 'src/android_webview.dart';
+import 'src/bootpay_android_webview.dart';
 import 'bootpay_webview_android.dart';
 import 'bootpay_webview_android_widget.dart';
 

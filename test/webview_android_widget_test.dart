@@ -9,10 +9,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:bootpay_webview_flutter_android/src/android_webview.dart'
+import 'package:bootpay_webview_flutter_android/src/bootpay_android_webview.dart'
     as android_webview;
-import 'package:bootpay_webview_flutter_android/src/android_webview_api_impls.dart';
-import 'package:bootpay_webview_flutter_android/src/instance_manager.dart';
+import 'package:bootpay_webview_flutter_android/src/bootpay_android_webview_api_impls.dart';
+import 'package:bootpay_webview_flutter_android/src/bootpay_instance_manager.dart';
 import 'package:bootpay_webview_flutter_android/bootpay_webview_android_widget.dart';
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
 

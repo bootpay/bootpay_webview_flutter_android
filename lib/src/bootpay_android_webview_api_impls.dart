@@ -9,9 +9,9 @@ import 'dart:ui';
 
 import 'package:flutter/services.dart' show BinaryMessenger;
 
-import 'android_webview.dart';
-import 'android_webview.pigeon.dart';
-import 'instance_manager.dart';
+import 'bootpay_android_webview.dart';
+import 'bootpay_android_webview.pigeon.dart';
+import 'bootpay_instance_manager.dart';
 
 /// Converts [WebResourceRequestData] to [WebResourceRequest]
 WebResourceRequest _toWebResourceRequest(WebResourceRequestData data) {

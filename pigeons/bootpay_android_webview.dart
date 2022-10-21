@@ -6,7 +6,7 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/android_webview.pigeon.dart',
+    dartOut: 'lib/src/bootpay_android_webview.pigeon.dart',
     dartTestOut: 'test/test_android_webview.pigeon.dart',
     dartOptions: DartOptions(copyrightHeader: <String>[
       'Copyright 2013 The Flutter Authors. All rights reserved.',
