@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import android.webkit.WebView;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.FlutterAssetManagerHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.FlutterAssetManagerHostApi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

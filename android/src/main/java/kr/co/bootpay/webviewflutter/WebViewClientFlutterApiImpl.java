@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebResourceErrorCompat;
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebViewClientFlutterApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebViewClientFlutterApi;
 import java.util.HashMap;
 
 /**
@@ -25,28 +25,28 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
   private final InstanceManager instanceManager;
 
   @RequiresApi(api = Build.VERSION_CODES.M)
-  static GeneratedBootpayAndroidWebView.WebResourceErrorData createWebResourceErrorData(
+  static BTGeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
       WebResourceError error) {
-    return new GeneratedBootpayAndroidWebView.WebResourceErrorData.Builder()
+    return new BTGeneratedAndroidWebView.WebResourceErrorData.Builder()
         .setErrorCode((long) error.getErrorCode())
         .setDescription(error.getDescription().toString())
         .build();
   }
 
   @SuppressLint("RequiresFeature")
-  static GeneratedBootpayAndroidWebView.WebResourceErrorData createWebResourceErrorData(
+  static BTGeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
       WebResourceErrorCompat error) {
-    return new GeneratedBootpayAndroidWebView.WebResourceErrorData.Builder()
+    return new BTGeneratedAndroidWebView.WebResourceErrorData.Builder()
         .setErrorCode((long) error.getErrorCode())
         .setDescription(error.getDescription().toString())
         .build();
   }
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-  static GeneratedBootpayAndroidWebView.WebResourceRequestData createWebResourceRequestData(
+  static BTGeneratedAndroidWebView.WebResourceRequestData createWebResourceRequestData(
       WebResourceRequest request) {
-    final GeneratedBootpayAndroidWebView.WebResourceRequestData.Builder requestData =
-        new GeneratedBootpayAndroidWebView.WebResourceRequestData.Builder()
+    final BTGeneratedAndroidWebView.WebResourceRequestData.Builder requestData =
+        new BTGeneratedAndroidWebView.WebResourceRequestData.Builder()
             .setUrl(request.getUrl().toString())
             .setIsForMainFrame(request.isForMainFrame())
             .setHasGesture(request.hasGesture())

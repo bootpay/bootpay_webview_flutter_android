@@ -58,7 +58,7 @@ public class WebChromeClientTest {
         new WebChromeClientCreator() {
           @Override
           public WebChromeClientImpl createWebChromeClient(
-              WebChromeClientFlutterApiImpl flutterApi, WebViewClient webViewClient) {
+                  WebChromeClientFlutterApiImpl flutterApi, WebViewClient webViewClient) {
             webChromeClient = super.createWebChromeClient(flutterApi, webViewClient);
             return webChromeClient;
           }

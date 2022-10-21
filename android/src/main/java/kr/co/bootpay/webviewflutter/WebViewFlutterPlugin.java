@@ -14,15 +14,15 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.platform.PlatformViewRegistry;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.CookieManagerHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.DownloadListenerHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.FlutterAssetManagerHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.JavaScriptChannelHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebChromeClientHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebSettingsHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebStorageHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebViewClientHostApi;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebViewHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.CookieManagerHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.DownloadListenerHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.FlutterAssetManagerHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.JavaScriptChannelHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebChromeClientHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebSettingsHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebStorageHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebViewClientHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebViewHostApi;
 
 /**
  * Java platform implementation of the webview_flutter plugin.

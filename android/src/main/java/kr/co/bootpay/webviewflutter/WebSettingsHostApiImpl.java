@@ -6,7 +6,7 @@ package kr.co.bootpay.webviewflutter;
 
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebSettingsHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebSettingsHostApi;
 
 /**
  * Host api implementation for {@link WebSettings}.
@@ -37,7 +37,7 @@ public class WebSettingsHostApiImpl implements WebSettingsHostApi {
    * @param webSettingsCreator handles creating {@link WebSettings}s
    */
   public WebSettingsHostApiImpl(
-      InstanceManager instanceManager, WebSettingsCreator webSettingsCreator) {
+          InstanceManager instanceManager, WebSettingsCreator webSettingsCreator) {
     this.instanceManager = instanceManager;
     this.webSettingsCreator = webSettingsCreator;
   }

@@ -24,7 +24,7 @@ import androidx.webkit.WebViewClientCompat;
  *
  * <p>Handles creating {@link WebViewClient}s that intercommunicate with a paired Dart object.
  */
-public class WebViewClientHostApiImpl implements GeneratedBootpayAndroidWebView.WebViewClientHostApi {
+public class WebViewClientHostApiImpl implements BTGeneratedAndroidWebView.WebViewClientHostApi {
   private final InstanceManager instanceManager;
   private final WebViewClientCreator webViewClientCreator;
   private final WebViewClientFlutterApiImpl flutterApi;
@@ -47,7 +47,7 @@ public class WebViewClientHostApiImpl implements GeneratedBootpayAndroidWebView.
      * @param shouldOverrideUrlLoading whether loading a url should be overridden
      */
     public WebViewClientImpl(
-        @NonNull WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
+            @NonNull WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
       this.shouldOverrideUrlLoading = shouldOverrideUrlLoading;
       this.flutterApi = flutterApi;
     }
@@ -141,11 +141,12 @@ public class WebViewClientHostApiImpl implements GeneratedBootpayAndroidWebView.
    */
   public static class WebViewClientCompatImpl extends WebViewClientCompat
       implements ReleasableWebViewClient {
-    private @Nullable WebViewClientFlutterApiImpl flutterApi;
+    private @Nullable
+    WebViewClientFlutterApiImpl flutterApi;
     private final boolean shouldOverrideUrlLoading;
 
     public WebViewClientCompatImpl(
-        @NonNull WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
+            @NonNull WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
       this.shouldOverrideUrlLoading = shouldOverrideUrlLoading;
       this.flutterApi = flutterApi;
     }
@@ -243,7 +244,7 @@ public class WebViewClientHostApiImpl implements GeneratedBootpayAndroidWebView.
      * @return the created {@link WebViewClient}
      */
     public WebViewClient createWebViewClient(
-        WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
+            WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
       // WebViewClientCompat is used to get
       // shouldOverrideUrlLoading(WebView view, WebResourceRequest request)
       // invoked by the webview on older Android devices, without it pages that use iframes will

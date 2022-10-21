@@ -52,7 +52,7 @@ public class WebViewClientTest {
         new WebViewClientCreator() {
           @Override
           public WebViewClient createWebViewClient(
-              WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
+                  WebViewClientFlutterApiImpl flutterApi, boolean shouldOverrideUrlLoading) {
             webViewClient =
                 (WebViewClientCompatImpl)
                     super.createWebViewClient(flutterApi, shouldOverrideUrlLoading);
@@ -124,7 +124,7 @@ public class WebViewClientTest {
     when(mockRequest.isForMainFrame()).thenReturn(true);
     when(mockRequest.getRequestHeaders()).thenReturn(null);
 
-    final GeneratedBootpayAndroidWebView.WebResourceRequestData data =
+    final BTGeneratedAndroidWebView.WebResourceRequestData data =
         WebViewClientFlutterApiImpl.createWebResourceRequestData(mockRequest);
     assertEquals(data.getRequestHeaders(), new HashMap<String, String>());
   }

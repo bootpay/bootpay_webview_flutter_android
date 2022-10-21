@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebChromeClientHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebChromeClientHostApi;
 
 /**
  * Host api implementation for {@link WebChromeClient}.
@@ -48,7 +48,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      * @param webViewClient receives forwarded calls from {@link WebChromeClient#onCreateWindow}
      */
     public WebChromeClientImpl(
-        @NonNull WebChromeClientFlutterApiImpl flutterApi, WebViewClient webViewClient) {
+            @NonNull WebChromeClientFlutterApiImpl flutterApi, WebViewClient webViewClient) {
       this.flutterApi = flutterApi;
       this.webViewClient = webViewClient;
     }
@@ -272,7 +272,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      * @return the created {@link DownloadListenerHostApiImpl.DownloadListenerImpl}
      */
     public WebChromeClientImpl createWebChromeClient(
-        WebChromeClientFlutterApiImpl flutterApi, WebViewClient webViewClient) {
+            WebChromeClientFlutterApiImpl flutterApi, WebViewClient webViewClient) {
       return new WebChromeClientImpl(flutterApi, webViewClient);
     }
   }

@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.JavaScriptChannelFlutterApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.JavaScriptChannelFlutterApi;
 
 /**
  * Flutter Api implementation for {@link JavaScriptChannel}.
@@ -29,7 +29,7 @@ public class JavaScriptChannelFlutterApiImpl extends JavaScriptChannelFlutterApi
 
   /** Passes arguments from {@link JavaScriptChannel#postMessage} to Dart. */
   public void postMessage(
-      JavaScriptChannel javaScriptChannel, String messageArg, Reply<Void> callback) {
+          JavaScriptChannel javaScriptChannel, String messageArg, Reply<Void> callback) {
     super.postMessage(getIdentifierForJavaScriptChannel(javaScriptChannel), messageArg, callback);
   }
 

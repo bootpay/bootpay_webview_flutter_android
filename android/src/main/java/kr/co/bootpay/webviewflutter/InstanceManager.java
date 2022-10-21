@@ -50,7 +50,7 @@ public class InstanceManager {
 
   private final Handler handler = new Handler(Looper.getMainLooper());
 
-  private final kr.co.bootpay.webviewflutter.InstanceManager.FinalizationListener finalizationListener;
+  private final InstanceManager.FinalizationListener finalizationListener;
 
   private long nextIdentifier = MIN_HOST_CREATED_IDENTIFIER;
   private boolean isClosed = false;

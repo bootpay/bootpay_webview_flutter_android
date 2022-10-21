@@ -7,7 +7,7 @@ package kr.co.bootpay.webviewflutter;
 import android.webkit.DownloadListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.DownloadListenerHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.DownloadListenerHostApi;
 
 /**
  * Host api implementation for {@link DownloadListener}.

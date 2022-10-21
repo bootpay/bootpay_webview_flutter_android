@@ -19,7 +19,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class FlutterAssetManagerHostApiImplTest {
-  @Mock FlutterAssetManager mockFlutterAssetManager;
+  @Mock
+  FlutterAssetManager mockFlutterAssetManager;
 
   FlutterAssetManagerHostApiImpl testFlutterAssetManagerHostApiImpl;
 

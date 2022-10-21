@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import android.webkit.WebStorage;
-import kr.co.bootpay.webviewflutter.GeneratedBootpayAndroidWebView.WebStorageHostApi;
+import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebStorageHostApi;
 
 /**
  * Host api implementation for {@link WebStorage}.
@@ -35,7 +35,7 @@ public class WebStorageHostApiImpl implements WebStorageHostApi {
    * @param webStorageCreator handles creating {@link WebStorage}s
    */
   public WebStorageHostApiImpl(
-      InstanceManager instanceManager, WebStorageCreator webStorageCreator) {
+          InstanceManager instanceManager, WebStorageCreator webStorageCreator) {
     this.instanceManager = instanceManager;
     this.webStorageCreator = webStorageCreator;
   }
