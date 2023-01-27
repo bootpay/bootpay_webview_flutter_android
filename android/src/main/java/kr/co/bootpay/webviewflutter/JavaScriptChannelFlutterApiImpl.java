@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.JavaScriptChannelFlutterApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaScriptChannelFlutterApi;
 
 /**
  * Flutter Api implementation for {@link JavaScriptChannel}.
@@ -29,22 +29,8 @@ public class JavaScriptChannelFlutterApiImpl extends JavaScriptChannelFlutterApi
 
   /** Passes arguments from {@link JavaScriptChannel#postMessage} to Dart. */
   public void postMessage(
-          JavaScriptChannel javaScriptChannel, String messageArg, Reply<Void> callback) {
+      JavaScriptChannel javaScriptChannel, String messageArg, Reply<Void> callback) {
     super.postMessage(getIdentifierForJavaScriptChannel(javaScriptChannel), messageArg, callback);
-  }
-
-  /**
-   * Communicates to Dart that the reference to a {@link JavaScriptChannel} was removed.
-   *
-   * @param javaScriptChannel The instance whose reference will be removed.
-   * @param callback Reply callback with return value from Dart.
-   */
-  public void dispose(JavaScriptChannel javaScriptChannel, Reply<Void> callback) {
-    if (instanceManager.containsInstance(javaScriptChannel)) {
-      dispose(getIdentifierForJavaScriptChannel(javaScriptChannel), callback);
-    } else {
-      callback.reply(null);
-    }
   }
 
   private long getIdentifierForJavaScriptChannel(JavaScriptChannel javaScriptChannel) {

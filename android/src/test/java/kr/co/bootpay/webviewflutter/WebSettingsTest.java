@@ -19,6 +19,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import kr.co.bootpay.webviewflutter.WebSettingsHostApiImpl.WebSettingsCreator;
+import kr.co.bootpay.webviewflutter.InstanceManager;
+import kr.co.bootpay.webviewflutter.WebSettingsHostApiImpl;
 
 public class WebSettingsTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();

@@ -1,3 +1,4 @@
+
 package kr.co.bootpay.webviewflutter;
 
 import android.content.Context;
@@ -5,18 +6,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.webkit.WebView;
 
+import androidx.core.content.IntentCompat;
+
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import io.flutter.plugin.common.MethodChannel;
+
 
 public class BootpayUrlHelper {
-
     public static boolean doDeepLinkIfPayUrl(WebView view, String url) {
         Intent intent = getIntentWithPackage(url);
         Context context = view.getContext();
@@ -31,29 +28,12 @@ public class BootpayUrlHelper {
             if(isInstallApp(intent, context)) return startApp(intent, context);
             else return startGooglePlay(intent, context);
         }
+
+//        return url.contains("vguardend");
         return false;
     }
 
-    public static boolean isPreventUrl(String url) {
-//        List<String> ignoreUrls = Arrays.asList(
-//                "pay.naver.com",
-//                "nicepay.co.kr",
-//                "payapp.kr",
-//                "bootpay.co.kr",
-//                "kcp.co.kr"
-//        );
-//        boolean isPreventUrl = false;
-//        for(String ignoreUrl : ignoreUrls) {
-//            if(url.contains(ignoreUrl)) {
-//                isPreventUrl = true;
-//                break;
-//            }
-//        }
-//        return isPreventUrl;
-        return false;
-    }
-
-    private static Boolean isSpecialCase(String url) {
+    public static Boolean isSpecialCase(String url) {
         return url.matches("^shinhan\\S+$")
                 || url.startsWith("kftc-bankpay://")
                 || url.startsWith("v3mobileplusweb://")
@@ -64,15 +44,15 @@ public class BootpayUrlHelper {
                 || url.startsWith("kakaotalk://");
     }
 
-    private static Boolean isIntent(String url) {
+    public static Boolean isIntent(String url) {
         return url.startsWith("intent:");
     }
-    private static Boolean isMarket(String url) {
+    public static Boolean isMarket(String url) {
         return url.startsWith("market://");
     }
 
 
-    private static Intent getIntentWithPackage(String url) {
+    public static Intent getIntentWithPackage(String url) {
         try {
             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
             if(intent.getPackage() == null) {
@@ -88,6 +68,7 @@ public class BootpayUrlHelper {
                 else if (url.startsWith("nhappvardansimclick")) intent.setPackage("nh.smart.nhallonepay");
                 else if (url.startsWith("citispay")) intent.setPackage("kr.co.citibank.citimobile");
                 else if (url.startsWith("kakaotalk")) intent.setPackage("com.kakao.talk");
+//                kvp.jjy.MispAndroid320
             }
             return intent;
         } catch (URISyntaxException e) {
@@ -96,7 +77,7 @@ public class BootpayUrlHelper {
         }
     }
 
-    private static boolean isInstallApp(Intent intent, Context context) {
+    public static boolean isInstallApp(Intent intent, Context context) {
         return isExistPackageInfo(intent, context) || isExistLaunchedIntent(intent, context);
     }
 
@@ -114,14 +95,13 @@ public class BootpayUrlHelper {
         return intent != null &&  intent.getPackage() != null && context.getPackageManager().getLaunchIntentForPackage(intent.getPackage()) != null;
     }
 
-    private static boolean startApp(Intent intent, Context context) {
-//        intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+    public static boolean startApp(Intent intent, Context context) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         return true;
     }
 
-    private static boolean startGooglePlay(Intent intent, Context context) {
+    public static boolean startGooglePlay(Intent intent, Context context) {
         final String appPackageName = intent.getPackage();
 
         if(appPackageName == null) {

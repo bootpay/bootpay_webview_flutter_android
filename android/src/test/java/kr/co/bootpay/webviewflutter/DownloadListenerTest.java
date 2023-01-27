@@ -6,11 +6,7 @@ package kr.co.bootpay.webviewflutter;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
-
-import android.webkit.DownloadListener;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,8 +16,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import kr.co.bootpay.webviewflutter.DownloadListenerFlutterApiImpl;
+import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl;
 import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerCreator;
 import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerImpl;
+import kr.co.bootpay.webviewflutter.InstanceManager;
 
 public class DownloadListenerTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -69,11 +68,5 @@ public class DownloadListenerTest {
             eq("mimetype"),
             eq(54L),
             any());
-
-    reset(mockFlutterApi);
-    downloadListener.release();
-    downloadListener.onDownloadStart("", "", "", "", 23);
-    verify(mockFlutterApi, never())
-        .onDownloadStart((DownloadListener) any(), any(), any(), any(), any(), eq(23), any());
   }
 }

@@ -6,8 +6,6 @@ package kr.co.bootpay.webviewflutter;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
 import android.os.Handler;
@@ -21,6 +19,10 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import kr.co.bootpay.webviewflutter.JavaScriptChannelHostApiImpl.JavaScriptChannelCreator;
+import kr.co.bootpay.webviewflutter.InstanceManager;
+import kr.co.bootpay.webviewflutter.JavaScriptChannel;
+import kr.co.bootpay.webviewflutter.JavaScriptChannelFlutterApiImpl;
+import kr.co.bootpay.webviewflutter.JavaScriptChannelHostApiImpl;
 
 public class JavaScriptChannelTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -64,10 +66,5 @@ public class JavaScriptChannelTest {
   public void postMessage() {
     javaScriptChannel.postMessage("A message post.");
     verify(mockFlutterApi).postMessage(eq(javaScriptChannel), eq("A message post."), any());
-
-    reset(mockFlutterApi);
-    javaScriptChannel.release();
-    javaScriptChannel.postMessage("a message");
-    verify(mockFlutterApi, never()).postMessage((JavaScriptChannel) any(), any(), any());
   }
 }

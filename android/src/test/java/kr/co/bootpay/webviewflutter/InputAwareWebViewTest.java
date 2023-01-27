@@ -15,6 +15,8 @@ import android.view.View;
 
 import org.junit.Test;
 
+import kr.co.bootpay.webviewflutter.InputAwareWebView;
+
 public class InputAwareWebViewTest {
   static class TestView extends View {
     Runnable postAction;

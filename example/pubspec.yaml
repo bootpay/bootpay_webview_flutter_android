@@ -18,7 +18,7 @@ dependencies:
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
     path: ../
-  bootpay_webview_flutter_platform_interface: ^1.9.51
+  bootpay_webview_flutter_platform_interface: 2.0.1
 
 dev_dependencies:
   espresso: ^0.2.0

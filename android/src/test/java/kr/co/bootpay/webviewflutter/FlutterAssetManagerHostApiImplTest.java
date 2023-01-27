@@ -18,6 +18,9 @@ import org.mockito.Mock;
 import java.io.IOException;
 import java.util.List;
 
+import kr.co.bootpay.webviewflutter.FlutterAssetManager;
+import kr.co.bootpay.webviewflutter.FlutterAssetManagerHostApiImpl;
+
 public class FlutterAssetManagerHostApiImplTest {
   @Mock
   FlutterAssetManager mockFlutterAssetManager;

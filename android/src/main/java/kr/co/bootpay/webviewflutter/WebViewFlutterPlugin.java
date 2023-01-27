@@ -14,15 +14,16 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.platform.PlatformViewRegistry;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.CookieManagerHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.DownloadListenerHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.FlutterAssetManagerHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.JavaScriptChannelHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebChromeClientHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebSettingsHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebStorageHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebViewClientHostApi;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebViewHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.CookieManagerHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.DownloadListenerHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.FlutterAssetManagerHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaObjectHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaScriptChannelHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebChromeClientHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebSettingsHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebStorageHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebViewClientHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebViewHostApi;
 
 /**
  * Java platform implementation of the webview_flutter plugin.
@@ -77,15 +78,22 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
       Context context,
       View containerView,
       FlutterAssetManager flutterAssetManager) {
-
-    instanceManager = InstanceManager.open(identifier -> {});
+    instanceManager =
+        InstanceManager.open(
+            identifier ->
+                new GeneratedAndroidWebView.JavaObjectFlutterApi(binaryMessenger)
+                    .dispose(identifier, reply -> {}));
 
     viewRegistry.registerViewFactory(
-        "kr.co.bootpay/webview", new FlutterWebViewFactory(instanceManager));
+        "plugins.flutter.io/webview", new FlutterWebViewFactory(instanceManager));
 
     webViewHostApi =
         new WebViewHostApiImpl(
-            instanceManager, new WebViewHostApiImpl.WebViewProxy(), context, containerView);
+            instanceManager,
+            binaryMessenger,
+            new WebViewHostApiImpl.WebViewProxy(),
+            context,
+            containerView);
     javaScriptChannelHostApi =
         new JavaScriptChannelHostApiImpl(
             instanceManager,
@@ -93,6 +101,7 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
             new JavaScriptChannelFlutterApiImpl(binaryMessenger, instanceManager),
             new Handler(context.getMainLooper()));
 
+    JavaObjectHostApi.setup(binaryMessenger, new JavaObjectHostApiImpl(instanceManager));
     WebViewHostApi.setup(binaryMessenger, webViewHostApi);
     JavaScriptChannelHostApi.setup(binaryMessenger, javaScriptChannelHostApi);
     WebViewClientHostApi.setup(

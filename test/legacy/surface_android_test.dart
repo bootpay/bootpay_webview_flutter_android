@@ -7,8 +7,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bootpay_webview_flutter_android/bootpay_webview_surface_android.dart';
-import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
+import 'package:bootpay_webview_flutter_android/src/legacy/webview_surface_android.dart';
+import 'package:bootpay_webview_flutter_platform_interface/src/webview_flutter_platform_interface_legacy.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +21,12 @@ void main() {
         (MethodCall call) async {
           log.add(call);
           if (call.method == 'resize') {
+            final Map<String, Object?> arguments =
+                (call.arguments as Map<Object?, Object?>)
+                    .cast<String, Object?>();
             return <String, Object?>{
-              'width': call.arguments['width'],
-              'height': call.arguments['height'],
+              'width': arguments['width'],
+              'height': arguments['height'],
             };
           }
         },

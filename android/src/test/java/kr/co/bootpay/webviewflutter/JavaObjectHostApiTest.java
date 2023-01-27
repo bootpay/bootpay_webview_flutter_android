@@ -8,6 +8,9 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+import kr.co.bootpay.webviewflutter.InstanceManager;
+import kr.co.bootpay.webviewflutter.JavaObjectHostApiImpl;
+
 public class JavaObjectHostApiTest {
   @Test
   public void dispose() {

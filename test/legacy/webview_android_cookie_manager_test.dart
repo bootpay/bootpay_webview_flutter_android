@@ -5,10 +5,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:bootpay_webview_flutter_android/src/bootpay_android_webview.dart'
+import 'package:bootpay_webview_flutter_android/src/android_webview.dart'
     as android_webview;
-import 'package:bootpay_webview_flutter_android/bootpay_webview_android_cookie_manager.dart';
-import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
+import 'package:bootpay_webview_flutter_android/src/legacy/webview_android_cookie_manager.dart';
+import 'package:bootpay_webview_flutter_platform_interface/src/webview_flutter_platform_interface_legacy.dart';
 
 import 'webview_android_cookie_manager_test.mocks.dart';
 

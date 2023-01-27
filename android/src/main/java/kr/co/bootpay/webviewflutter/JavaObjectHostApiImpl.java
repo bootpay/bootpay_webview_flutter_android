@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
  * <p>{@link Object} instances created by {@link JavaObjectHostApiImpl} are used to intercommunicate
  * with a paired Dart object.
  */
-public class JavaObjectHostApiImpl implements BTGeneratedAndroidWebView.JavaObjectHostApi {
+public class JavaObjectHostApiImpl implements GeneratedAndroidWebView.JavaObjectHostApi {
   private final InstanceManager instanceManager;
 
   /**
@@ -27,6 +27,10 @@ public class JavaObjectHostApiImpl implements BTGeneratedAndroidWebView.JavaObje
 
   @Override
   public void dispose(@NonNull Long identifier) {
+    final Object instance = instanceManager.getInstance(identifier);
+    if (instance instanceof WebViewHostApiImpl.WebViewPlatformView) {
+      ((WebViewHostApiImpl.WebViewPlatformView) instance).destroy();
+    }
     instanceManager.remove(identifier);
   }
 }

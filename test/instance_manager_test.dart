@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bootpay_webview_flutter_android/src/bootpay_instance_manager.dart';
+import 'package:bootpay_webview_flutter_android/src/instance_manager.dart';
 
 void main() {
   group('InstanceManager', () {

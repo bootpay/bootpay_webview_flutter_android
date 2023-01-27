@@ -18,6 +18,7 @@ import org.mockito.junit.MockitoRule;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.platform.PlatformViewRegistry;
+import kr.co.bootpay.webviewflutter.WebViewFlutterPlugin;
 
 public class WebViewFlutterPluginTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();

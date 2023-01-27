@@ -5,7 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import android.os.Handler;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.JavaScriptChannelHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaScriptChannelHostApi;
 
 /**
  * Host api implementation for {@link JavaScriptChannel}.

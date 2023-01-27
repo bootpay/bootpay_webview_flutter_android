@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.co.bootpay.webviewflutter">
+<manifest  xmlns:android="http://schemas.android.com/apk/res/android" package="kr.co.bootpay.webviewflutter">
     <!-- android 11 모든 앱 접근 권한 사용  (Google Play 가이드라인 참고 - 2021-02-19 기준 못찾았음) -->
     <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />-->
     <!-- android 11 Package Visibility 설정 (compileSdkVersion, targetSdkVersion 30 이상 설정시 필수) -->
@@ -80,5 +79,4 @@
         <!--해외결제-->
         <package android:name="com.eg.android.AlipayGphone" />
     </queries>
-
 </manifest>

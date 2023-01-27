@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebResourceErrorCompat;
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.BTGeneratedAndroidWebView.WebViewClientFlutterApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebViewClientFlutterApi;
 import java.util.HashMap;
 
 /**
@@ -25,28 +25,28 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
   private final InstanceManager instanceManager;
 
   @RequiresApi(api = Build.VERSION_CODES.M)
-  static BTGeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
+  static GeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
       WebResourceError error) {
-    return new BTGeneratedAndroidWebView.WebResourceErrorData.Builder()
+    return new GeneratedAndroidWebView.WebResourceErrorData.Builder()
         .setErrorCode((long) error.getErrorCode())
         .setDescription(error.getDescription().toString())
         .build();
   }
 
   @SuppressLint("RequiresFeature")
-  static BTGeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
+  static GeneratedAndroidWebView.WebResourceErrorData createWebResourceErrorData(
       WebResourceErrorCompat error) {
-    return new BTGeneratedAndroidWebView.WebResourceErrorData.Builder()
+    return new GeneratedAndroidWebView.WebResourceErrorData.Builder()
         .setErrorCode((long) error.getErrorCode())
         .setDescription(error.getDescription().toString())
         .build();
   }
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-  static BTGeneratedAndroidWebView.WebResourceRequestData createWebResourceRequestData(
+  static GeneratedAndroidWebView.WebResourceRequestData createWebResourceRequestData(
       WebResourceRequest request) {
-    final BTGeneratedAndroidWebView.WebResourceRequestData.Builder requestData =
-        new BTGeneratedAndroidWebView.WebResourceRequestData.Builder()
+    final GeneratedAndroidWebView.WebResourceRequestData.Builder requestData =
+        new GeneratedAndroidWebView.WebResourceRequestData.Builder()
             .setUrl(request.getUrl().toString())
             .setIsForMainFrame(request.isForMainFrame())
             .setHasGesture(request.hasGesture())
@@ -195,20 +195,6 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
       throw new IllegalStateException("Could not find identifier for WebView.");
     }
     urlLoading(getIdentifierForClient(webViewClient), webViewIdentifier, urlArg, callback);
-  }
-
-  /**
-   * Communicates to Dart that the reference to a {@link WebViewClient} was removed.
-   *
-   * @param webViewClient the instance whose reference will be removed
-   * @param callback reply callback with return value from Dart
-   */
-  public void dispose(WebViewClient webViewClient, Reply<Void> callback) {
-    if (instanceManager.containsInstance(webViewClient)) {
-      dispose(getIdentifierForClient(webViewClient), callback);
-    } else {
-      callback.reply(null);
-    }
   }
 
   private long getIdentifierForClient(WebViewClient webViewClient) {

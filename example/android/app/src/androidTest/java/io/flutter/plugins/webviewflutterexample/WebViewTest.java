@@ -7,9 +7,8 @@ package io.flutter.plugins.webviewflutterexample;
 import static org.junit.Assert.assertTrue;
 
 import androidx.test.core.app.ActivityScenario;
+import io.flutter.plugins.webviewflutter.WebViewFlutterPlugin;
 import org.junit.Test;
-
-import kr.co.bootpay.webviewflutter.WebViewFlutterPlugin;
 
 public class WebViewTest {
   @Test

@@ -17,6 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import kr.co.bootpay.webviewflutter.InstanceManager;
+import kr.co.bootpay.webviewflutter.WebStorageHostApiImpl;
+
 public class WebStorageHostApiImplTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 

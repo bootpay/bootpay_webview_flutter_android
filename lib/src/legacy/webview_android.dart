@@ -8,10 +8,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
+// ignore: implementation_imports
+import 'package:bootpay_webview_flutter_platform_interface/src/webview_flutter_platform_interface_legacy.dart';
 
-import 'src/bootpay_android_webview.dart';
-import 'bootpay_webview_android_widget.dart';
+import '../android_webview.dart';
+import 'webview_android_widget.dart';
 
 /// Builds an Android webview.
 ///
@@ -45,7 +46,7 @@ class AndroidWebView implements WebViewPlatform {
           onLongPress: () {},
           excludeFromSemantics: true,
           child: AndroidView(
-            viewType: 'kr.co.bootpay/webview',
+            viewType: 'plugins.flutter.io/webview',
             onPlatformViewCreated: (int id) {
               if (onWebViewPlatformCreated != null) {
                 onWebViewPlatformCreated(controller);
