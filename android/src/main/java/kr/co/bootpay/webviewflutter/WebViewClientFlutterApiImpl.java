@@ -91,6 +91,10 @@ public class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
     if (webViewIdentifier == null) {
       throw new IllegalStateException("Could not find identifier for WebView.");
     }
+
+    if(urlArg.contains("nid.naver.com"))
+      webView.evaluateJavascript("document.getElementById('back').remove()", null);
+
     onPageFinished(getIdentifierForClient(webViewClient), webViewIdentifier, urlArg, callback);
   }
 

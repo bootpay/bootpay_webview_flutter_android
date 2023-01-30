@@ -1,3 +1,6 @@
+## 3.2.12
+* npay update 
+
 ## 3.2.11
 * rename 
 

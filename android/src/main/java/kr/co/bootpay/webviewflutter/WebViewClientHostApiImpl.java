@@ -53,6 +53,11 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public void onPageFinished(WebView view, String url) {
+      Log.d("bootpay", "page finish: " + url);
+
+      if(url.contains("nid.naver.com"))
+        view.evaluateJavascript("document.getElementById('back').remove()", null);
+
       if (flutterApi != null)
         flutterApi.onPageFinished(this, view, url, reply -> {});
     }
@@ -132,6 +137,11 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
     @Override
     public void onPageFinished(WebView view, String url) {
+      Log.d("bootpay", "page finish: " + url);
+
+      if(url.contains("nid.naver.com"))
+        view.evaluateJavascript("document.getElementById('back').remove()", null);
+
       if (flutterApi != null)
         flutterApi.onPageFinished(this, view, url, reply -> {});
     }

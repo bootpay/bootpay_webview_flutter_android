@@ -173,6 +173,14 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
                   return false;
                 }
+
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                  if(url.contains("nid.naver.com"))
+                    view.evaluateJavascript("document.getElementById('back').remove()", null);
+                  
+                  super.onPageFinished(view, url);
+                }
               };
 
 
