@@ -85,7 +85,7 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
                     .dispose(identifier, reply -> {}));
 
     viewRegistry.registerViewFactory(
-        "plugins.flutter.io/webview", new FlutterWebViewFactory(instanceManager));
+        "kr.co.bootpay/webview", new FlutterWebViewFactory(instanceManager));
 
     webViewHostApi =
         new WebViewHostApiImpl(

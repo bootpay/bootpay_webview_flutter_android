@@ -1,3 +1,6 @@
+## 3.2.13
+* webview_flutter 와 충돌되지 않도록 rename 
+
 ## 3.2.12
 * npay update 
 
