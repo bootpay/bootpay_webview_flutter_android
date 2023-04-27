@@ -35,14 +35,13 @@ public class DownloadListenerHostApiImpl implements DownloadListenerHostApi {
 
     @Override
     public void onDownloadStart(
-        String url,
-        String userAgent,
-        String contentDisposition,
-        String mimetype,
-        long contentLength) {
-      if (flutterApi != null)
-        flutterApi.onDownloadStart(
-          this, url, userAgent, contentDisposition, mimetype, contentLength, reply -> {});
+            @NonNull String url,
+            @NonNull String userAgent,
+            @NonNull String contentDisposition,
+            @NonNull String mimetype,
+            long contentLength) {
+      flutterApi.onDownloadStart(
+              this, url, userAgent, contentDisposition, mimetype, contentLength, reply -> {});
     }
   }
 
@@ -54,7 +53,9 @@ public class DownloadListenerHostApiImpl implements DownloadListenerHostApi {
      * @param flutterApi handles sending messages to Dart
      * @return the created {@link DownloadListenerImpl}
      */
-    public DownloadListenerImpl createDownloadListener(DownloadListenerFlutterApiImpl flutterApi) {
+    @NonNull
+    public DownloadListenerImpl createDownloadListener(
+            @NonNull DownloadListenerFlutterApiImpl flutterApi) {
       return new DownloadListenerImpl(flutterApi);
     }
   }
@@ -67,18 +68,18 @@ public class DownloadListenerHostApiImpl implements DownloadListenerHostApi {
    * @param flutterApi handles sending messages to Dart
    */
   public DownloadListenerHostApiImpl(
-      InstanceManager instanceManager,
-      DownloadListenerCreator downloadListenerCreator,
-      DownloadListenerFlutterApiImpl flutterApi) {
+          @NonNull InstanceManager instanceManager,
+          @NonNull DownloadListenerCreator downloadListenerCreator,
+          @NonNull DownloadListenerFlutterApiImpl flutterApi) {
     this.instanceManager = instanceManager;
     this.downloadListenerCreator = downloadListenerCreator;
     this.flutterApi = flutterApi;
   }
 
   @Override
-  public void create(Long instanceId) {
+  public void create(@NonNull Long instanceId) {
     final DownloadListener downloadListener =
-        downloadListenerCreator.createDownloadListener(flutterApi);
+            downloadListenerCreator.createDownloadListener(flutterApi);
     instanceManager.addDartCreatedInstance(downloadListener, instanceId);
   }
 }

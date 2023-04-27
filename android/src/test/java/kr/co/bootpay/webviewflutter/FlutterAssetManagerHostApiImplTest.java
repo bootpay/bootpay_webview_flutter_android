@@ -11,19 +11,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.io.IOException;
-import java.util.List;
-
-import kr.co.bootpay.webviewflutter.FlutterAssetManager;
-import kr.co.bootpay.webviewflutter.FlutterAssetManagerHostApiImpl;
-
 public class FlutterAssetManagerHostApiImplTest {
-  @Mock
-  FlutterAssetManager mockFlutterAssetManager;
+  @Mock FlutterAssetManager mockFlutterAssetManager;
 
   FlutterAssetManagerHostApiImpl testFlutterAssetManagerHostApiImpl;
 

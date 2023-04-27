@@ -6,4 +6,4 @@ library bootpay_webview_flutter_android;
 
 export 'src/android_webview_controller.dart';
 export 'src/android_webview_cookie_manager.dart';
-export 'src/android_webview_platform.dart';
+export 'src/android_webview_platform.dart'; 

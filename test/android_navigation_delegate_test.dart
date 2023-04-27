@@ -5,17 +5,27 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:bootpay_webview_flutter_android/src/android_proxy.dart';
 import 'package:bootpay_webview_flutter_android/src/android_webview.dart'
-    as android_webview;
+as android_webview;
 import 'package:bootpay_webview_flutter_android/bootpay_webview_flutter_android.dart';
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
 
+import 'android_navigation_delegate_test.mocks.dart';
+import 'test_android_webview.g.dart';
+
+@GenerateMocks(<Type>[TestInstanceManagerHostApi])
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  // Mocks the call to clear the native InstanceManager.
+  TestInstanceManagerHostApi.setup(MockTestInstanceManagerHostApi());
+
   group('AndroidNavigationDelegate', () {
     test('onPageFinished', () {
       final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
+      AndroidNavigationDelegate(_buildCreationParams());
 
       late final String callbackUrl;
       androidNavigationDelegate
@@ -31,7 +41,7 @@ void main() {
 
     test('onPageStarted', () {
       final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
+      AndroidNavigationDelegate(_buildCreationParams());
 
       late final String callbackUrl;
       androidNavigationDelegate
@@ -47,11 +57,11 @@ void main() {
 
     test('onWebResourceError from onReceivedRequestError', () {
       final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
+      AndroidNavigationDelegate(_buildCreationParams());
 
       late final WebResourceError callbackError;
       androidNavigationDelegate.setOnWebResourceError(
-          (WebResourceError error) => callbackError = error);
+              (WebResourceError error) => callbackError = error);
 
       CapturingWebViewClient.lastCreatedDelegate.onReceivedRequestError!(
         android_webview.WebView.detached(),
@@ -78,11 +88,11 @@ void main() {
 
     test('onWebResourceError from onRequestError', () {
       final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
+      AndroidNavigationDelegate(_buildCreationParams());
 
       late final WebResourceError callbackError;
       androidNavigationDelegate.setOnWebResourceError(
-          (WebResourceError error) => callbackError = error);
+              (WebResourceError error) => callbackError = error);
 
       CapturingWebViewClient.lastCreatedDelegate.onReceivedError!(
         android_webview.WebView.detached(),
@@ -100,244 +110,244 @@ void main() {
 
     test(
         'onNavigationRequest from requestLoading should not be called when loadUrlCallback is not specified',
-        () {
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      NavigationRequest? callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.prevent;
-      });
+          NavigationRequest? callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.prevent;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
-        android_webview.WebView.detached(),
-        android_webview.WebResourceRequest(
-          url: 'https://www.google.com',
-          isForMainFrame: true,
-          isRedirect: true,
-          hasGesture: true,
-          method: 'GET',
-          requestHeaders: <String, String>{'X-Mock': 'mocking'},
-        ),
-      );
+          CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
+            android_webview.WebView.detached(),
+            android_webview.WebResourceRequest(
+              url: 'https://www.google.com',
+              isForMainFrame: true,
+              isRedirect: true,
+              hasGesture: true,
+              method: 'GET',
+              requestHeaders: <String, String>{'X-Mock': 'mocking'},
+            ),
+          );
 
-      expect(callbackNavigationRequest, isNull);
-    });
+          expect(callbackNavigationRequest, isNull);
+        });
 
     test(
         'onLoadRequest from requestLoading should not be called when navigationRequestCallback is not specified',
-        () {
-      final Completer<void> completer = Completer<void>();
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((_) {
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((_) {
+            completer.complete();
+            return completer.future;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
-        android_webview.WebView.detached(),
-        android_webview.WebResourceRequest(
-          url: 'https://www.google.com',
-          isForMainFrame: true,
-          isRedirect: true,
-          hasGesture: true,
-          method: 'GET',
-          requestHeaders: <String, String>{'X-Mock': 'mocking'},
-        ),
-      );
+          CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
+            android_webview.WebView.detached(),
+            android_webview.WebResourceRequest(
+              url: 'https://www.google.com',
+              isForMainFrame: true,
+              isRedirect: true,
+              hasGesture: true,
+              method: 'GET',
+              requestHeaders: <String, String>{'X-Mock': 'mocking'},
+            ),
+          );
 
-      expect(completer.isCompleted, false);
-    });
+          expect(completer.isCompleted, false);
+        });
 
     test(
         'onLoadRequest from requestLoading should not be called when onNavigationRequestCallback returns NavigationDecision.prevent',
-        () {
-      final Completer<void> completer = Completer<void>();
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((_) {
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((_) {
+            completer.complete();
+            return completer.future;
+          });
 
-      late final NavigationRequest callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.prevent;
-      });
+          late final NavigationRequest callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.prevent;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
-        android_webview.WebView.detached(),
-        android_webview.WebResourceRequest(
-          url: 'https://www.google.com',
-          isForMainFrame: true,
-          isRedirect: true,
-          hasGesture: true,
-          method: 'GET',
-          requestHeaders: <String, String>{'X-Mock': 'mocking'},
-        ),
-      );
+          CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
+            android_webview.WebView.detached(),
+            android_webview.WebResourceRequest(
+              url: 'https://www.google.com',
+              isForMainFrame: true,
+              isRedirect: true,
+              hasGesture: true,
+              method: 'GET',
+              requestHeaders: <String, String>{'X-Mock': 'mocking'},
+            ),
+          );
 
-      expect(callbackNavigationRequest.isMainFrame, true);
-      expect(callbackNavigationRequest.url, 'https://www.google.com');
-      expect(completer.isCompleted, false);
-    });
+          expect(callbackNavigationRequest.isMainFrame, true);
+          expect(callbackNavigationRequest.url, 'https://www.google.com');
+          expect(completer.isCompleted, false);
+        });
 
     test(
         'onLoadRequest from requestLoading should complete when onNavigationRequestCallback returns NavigationDecision.navigate',
-        () {
-      final Completer<void> completer = Completer<void>();
-      late final LoadRequestParams loadRequestParams;
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          late final LoadRequestParams loadRequestParams;
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((LoadRequestParams params) {
-        loadRequestParams = params;
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((LoadRequestParams params) {
+            loadRequestParams = params;
+            completer.complete();
+            return completer.future;
+          });
 
-      late final NavigationRequest callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.navigate;
-      });
+          late final NavigationRequest callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.navigate;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
-        android_webview.WebView.detached(),
-        android_webview.WebResourceRequest(
-          url: 'https://www.google.com',
-          isForMainFrame: true,
-          isRedirect: true,
-          hasGesture: true,
-          method: 'GET',
-          requestHeaders: <String, String>{'X-Mock': 'mocking'},
-        ),
-      );
+          CapturingWebViewClient.lastCreatedDelegate.requestLoading!(
+            android_webview.WebView.detached(),
+            android_webview.WebResourceRequest(
+              url: 'https://www.google.com',
+              isForMainFrame: true,
+              isRedirect: true,
+              hasGesture: true,
+              method: 'GET',
+              requestHeaders: <String, String>{'X-Mock': 'mocking'},
+            ),
+          );
 
-      expect(loadRequestParams.uri.toString(), 'https://www.google.com');
-      expect(loadRequestParams.headers, <String, String>{'X-Mock': 'mocking'});
-      expect(callbackNavigationRequest.isMainFrame, true);
-      expect(callbackNavigationRequest.url, 'https://www.google.com');
-      expect(completer.isCompleted, true);
-    });
+          expect(loadRequestParams.uri.toString(), 'https://www.google.com');
+          expect(loadRequestParams.headers, <String, String>{'X-Mock': 'mocking'});
+          expect(callbackNavigationRequest.isMainFrame, true);
+          expect(callbackNavigationRequest.url, 'https://www.google.com');
+          expect(completer.isCompleted, true);
+        });
 
     test(
         'onNavigationRequest from urlLoading should not be called when loadUrlCallback is not specified',
-        () {
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      NavigationRequest? callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.prevent;
-      });
+          NavigationRequest? callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.prevent;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
-        android_webview.WebView.detached(),
-        'https://www.google.com',
-      );
+          CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
+            android_webview.WebView.detached(),
+            'https://www.google.com',
+          );
 
-      expect(callbackNavigationRequest, isNull);
-    });
+          expect(callbackNavigationRequest, isNull);
+        });
 
     test(
         'onLoadRequest from urlLoading should not be called when navigationRequestCallback is not specified',
-        () {
-      final Completer<void> completer = Completer<void>();
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((_) {
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((_) {
+            completer.complete();
+            return completer.future;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
-        android_webview.WebView.detached(),
-        'https://www.google.com',
-      );
+          CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
+            android_webview.WebView.detached(),
+            'https://www.google.com',
+          );
 
-      expect(completer.isCompleted, false);
-    });
+          expect(completer.isCompleted, false);
+        });
 
     test(
         'onLoadRequest from urlLoading should not be called when onNavigationRequestCallback returns NavigationDecision.prevent',
-        () {
-      final Completer<void> completer = Completer<void>();
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((_) {
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((_) {
+            completer.complete();
+            return completer.future;
+          });
 
-      late final NavigationRequest callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.prevent;
-      });
+          late final NavigationRequest callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.prevent;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
-        android_webview.WebView.detached(),
-        'https://www.google.com',
-      );
+          CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
+            android_webview.WebView.detached(),
+            'https://www.google.com',
+          );
 
-      expect(callbackNavigationRequest.isMainFrame, true);
-      expect(callbackNavigationRequest.url, 'https://www.google.com');
-      expect(completer.isCompleted, false);
-    });
+          expect(callbackNavigationRequest.isMainFrame, true);
+          expect(callbackNavigationRequest.url, 'https://www.google.com');
+          expect(completer.isCompleted, false);
+        });
 
     test(
         'onLoadRequest from urlLoading should complete when onNavigationRequestCallback returns NavigationDecision.navigate',
-        () {
-      final Completer<void> completer = Completer<void>();
-      late final LoadRequestParams loadRequestParams;
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          late final LoadRequestParams loadRequestParams;
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((LoadRequestParams params) {
-        loadRequestParams = params;
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((LoadRequestParams params) {
+            loadRequestParams = params;
+            completer.complete();
+            return completer.future;
+          });
 
-      late final NavigationRequest callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.navigate;
-      });
+          late final NavigationRequest callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.navigate;
+          });
 
-      CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
-        android_webview.WebView.detached(),
-        'https://www.google.com',
-      );
+          CapturingWebViewClient.lastCreatedDelegate.urlLoading!(
+            android_webview.WebView.detached(),
+            'https://www.google.com',
+          );
 
-      expect(loadRequestParams.uri.toString(), 'https://www.google.com');
-      expect(loadRequestParams.headers, <String, String>{});
-      expect(callbackNavigationRequest.isMainFrame, true);
-      expect(callbackNavigationRequest.url, 'https://www.google.com');
-      expect(completer.isCompleted, true);
-    });
+          expect(loadRequestParams.uri.toString(), 'https://www.google.com');
+          expect(loadRequestParams.headers, <String, String>{});
+          expect(callbackNavigationRequest.isMainFrame, true);
+          expect(callbackNavigationRequest.url, 'https://www.google.com');
+          expect(completer.isCompleted, true);
+        });
 
     test('setOnNavigationRequest should override URL loading', () {
       final AndroidNavigationDelegate androidNavigationDelegate =
-          AndroidNavigationDelegate(_buildCreationParams());
+      AndroidNavigationDelegate(_buildCreationParams());
 
       androidNavigationDelegate.setOnNavigationRequest(
-        (NavigationRequest request) => NavigationDecision.navigate,
+            (NavigationRequest request) => NavigationDecision.navigate,
       );
 
       expect(
@@ -348,94 +358,115 @@ void main() {
 
     test(
         'onLoadRequest from onDownloadStart should not be called when navigationRequestCallback is not specified',
-        () {
-      final Completer<void> completer = Completer<void>();
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((_) {
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((_) {
+            completer.complete();
+            return completer.future;
+          });
 
-      CapturingDownloadListener.lastCreatedListener.onDownloadStart(
-        '',
-        '',
-        '',
-        '',
-        0,
-      );
+          CapturingDownloadListener.lastCreatedListener.onDownloadStart(
+            '',
+            '',
+            '',
+            '',
+            0,
+          );
 
-      expect(completer.isCompleted, false);
-    });
+          expect(completer.isCompleted, false);
+        });
 
     test(
         'onLoadRequest from onDownloadStart should not be called when onNavigationRequestCallback returns NavigationDecision.prevent',
-        () {
-      final Completer<void> completer = Completer<void>();
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((_) {
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((_) {
+            completer.complete();
+            return completer.future;
+          });
 
-      late final NavigationRequest callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.prevent;
-      });
+          late final NavigationRequest callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.prevent;
+          });
 
-      CapturingDownloadListener.lastCreatedListener.onDownloadStart(
-        'https://www.google.com',
-        '',
-        '',
-        '',
-        0,
-      );
+          CapturingDownloadListener.lastCreatedListener.onDownloadStart(
+            'https://www.google.com',
+            '',
+            '',
+            '',
+            0,
+          );
 
-      expect(callbackNavigationRequest.isMainFrame, true);
-      expect(callbackNavigationRequest.url, 'https://www.google.com');
-      expect(completer.isCompleted, false);
-    });
+          expect(callbackNavigationRequest.isMainFrame, true);
+          expect(callbackNavigationRequest.url, 'https://www.google.com');
+          expect(completer.isCompleted, false);
+        });
 
     test(
         'onLoadRequest from onDownloadStart should complete when onNavigationRequestCallback returns NavigationDecision.navigate',
-        () {
-      final Completer<void> completer = Completer<void>();
-      late final LoadRequestParams loadRequestParams;
-      final AndroidNavigationDelegate androidNavigationDelegate =
+            () {
+          final Completer<void> completer = Completer<void>();
+          late final LoadRequestParams loadRequestParams;
+          final AndroidNavigationDelegate androidNavigationDelegate =
           AndroidNavigationDelegate(_buildCreationParams());
 
-      androidNavigationDelegate.setOnLoadRequest((LoadRequestParams params) {
-        loadRequestParams = params;
-        completer.complete();
-        return completer.future;
-      });
+          androidNavigationDelegate.setOnLoadRequest((LoadRequestParams params) {
+            loadRequestParams = params;
+            completer.complete();
+            return completer.future;
+          });
 
-      late final NavigationRequest callbackNavigationRequest;
-      androidNavigationDelegate
-          .setOnNavigationRequest((NavigationRequest navigationRequest) {
-        callbackNavigationRequest = navigationRequest;
-        return NavigationDecision.navigate;
-      });
+          late final NavigationRequest callbackNavigationRequest;
+          androidNavigationDelegate
+              .setOnNavigationRequest((NavigationRequest navigationRequest) {
+            callbackNavigationRequest = navigationRequest;
+            return NavigationDecision.navigate;
+          });
 
-      CapturingDownloadListener.lastCreatedListener.onDownloadStart(
-        'https://www.google.com',
-        '',
-        '',
-        '',
-        0,
-      );
+          CapturingDownloadListener.lastCreatedListener.onDownloadStart(
+            'https://www.google.com',
+            '',
+            '',
+            '',
+            0,
+          );
 
-      expect(loadRequestParams.uri.toString(), 'https://www.google.com');
-      expect(loadRequestParams.headers, <String, String>{});
-      expect(callbackNavigationRequest.isMainFrame, true);
-      expect(callbackNavigationRequest.url, 'https://www.google.com');
-      expect(completer.isCompleted, true);
-    });
+          expect(loadRequestParams.uri.toString(), 'https://www.google.com');
+          expect(loadRequestParams.headers, <String, String>{});
+          expect(callbackNavigationRequest.isMainFrame, true);
+          expect(callbackNavigationRequest.url, 'https://www.google.com');
+          expect(completer.isCompleted, true);
+        });
+  });
+
+  test('onUrlChange', () {
+    final AndroidNavigationDelegate androidNavigationDelegate =
+    AndroidNavigationDelegate(_buildCreationParams());
+
+    late final AndroidUrlChange urlChange;
+    androidNavigationDelegate.setOnUrlChange(
+          (UrlChange change) {
+        urlChange = change as AndroidUrlChange;
+      },
+    );
+
+    CapturingWebViewClient.lastCreatedDelegate.doUpdateVisitedHistory!(
+      android_webview.WebView.detached(),
+      'https://www.google.com',
+      false,
+    );
+
+    expect(urlChange.url, 'https://www.google.com');
+    expect(urlChange.isReload, isFalse);
   });
 }
 
@@ -452,6 +483,7 @@ AndroidNavigationDelegateCreationParams _buildCreationParams() {
 }
 
 // Records the last created instance of itself.
+// ignore: must_be_immutable
 class CapturingWebViewClient extends android_webview.WebViewClient {
   CapturingWebViewClient({
     super.onPageFinished,
@@ -460,6 +492,9 @@ class CapturingWebViewClient extends android_webview.WebViewClient {
     super.onReceivedRequestError,
     super.requestLoading,
     super.urlLoading,
+    super.doUpdateVisitedHistory,
+    super.binaryMessenger,
+    super.instanceManager,
   }) : super.detached() {
     lastCreatedDelegate = this;
   }
@@ -480,20 +515,25 @@ class CapturingWebChromeClient extends android_webview.WebChromeClient {
   CapturingWebChromeClient({
     super.onProgressChanged,
     super.onShowFileChooser,
+    super.onPermissionRequest,
+    super.binaryMessenger,
+    super.instanceManager,
   }) : super.detached() {
     lastCreatedDelegate = this;
   }
   static CapturingWebChromeClient lastCreatedDelegate =
-      CapturingWebChromeClient();
+  CapturingWebChromeClient();
 }
 
 // Records the last created instance of itself.
 class CapturingDownloadListener extends android_webview.DownloadListener {
   CapturingDownloadListener({
     required super.onDownloadStart,
+    super.binaryMessenger,
+    super.instanceManager,
   }) : super.detached() {
     lastCreatedListener = this;
   }
   static CapturingDownloadListener lastCreatedListener =
-      CapturingDownloadListener(onDownloadStart: (_, __, ___, ____, _____) {});
+  CapturingDownloadListener(onDownloadStart: (_, __, ___, ____, _____) {});
 }

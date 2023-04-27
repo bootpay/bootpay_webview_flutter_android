@@ -11,15 +11,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.res.AssetManager;
-
+import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterAssets;
+import kr.co.bootpay.webviewflutter.FlutterAssetManager.PluginBindingFlutterAssetManager;
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-
-import java.io.IOException;
-
-import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterAssets;
-import kr.co.bootpay.webviewflutter.FlutterAssetManager.PluginBindingFlutterAssetManager;
 
 public class PluginBindingFlutterAssetManagerTest {
   @Mock AssetManager mockAssetManager;

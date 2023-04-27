@@ -8,6 +8,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
+import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerCreator;
+import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,12 +17,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
-import kr.co.bootpay.webviewflutter.DownloadListenerFlutterApiImpl;
-import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl;
-import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerCreator;
-import kr.co.bootpay.webviewflutter.DownloadListenerHostApiImpl.DownloadListenerImpl;
-import kr.co.bootpay.webviewflutter.InstanceManager;
 
 public class DownloadListenerTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -33,7 +29,7 @@ public class DownloadListenerTest {
 
   @Before
   public void setUp() {
-    instanceManager = InstanceManager.open(identifier -> {});
+    instanceManager = InstanceManager.create(identifier -> {});
 
     final DownloadListenerCreator downloadListenerCreator =
         new DownloadListenerCreator() {
@@ -52,7 +48,7 @@ public class DownloadListenerTest {
 
   @After
   public void tearDown() {
-    instanceManager.close();
+    instanceManager.stopFinalizationListener();
   }
 
   @Test

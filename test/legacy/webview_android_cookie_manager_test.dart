@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:bootpay_webview_flutter_android/src/android_webview.dart'
-    as android_webview;
+as android_webview;
 import 'package:bootpay_webview_flutter_android/src/legacy/webview_android_cookie_manager.dart';
 import 'package:bootpay_webview_flutter_platform_interface/src/webview_flutter_platform_interface_legacy.dart';
 
@@ -29,7 +29,7 @@ void main() {
 
   test('setCookie should throw ArgumentError for cookie with invalid path', () {
     expect(
-      () => WebViewAndroidCookieManager().setCookie(const WebViewCookie(
+          () => WebViewAndroidCookieManager().setCookie(const WebViewCookie(
         name: 'foo',
         value: 'bar',
         domain: 'flutter.dev',
@@ -41,13 +41,13 @@ void main() {
 
   test(
       'setCookie should call android_webview.csetCookie with properly formatted cookie value',
-      () {
-    WebViewAndroidCookieManager().setCookie(const WebViewCookie(
-      name: 'foo&',
-      value: 'bar@',
-      domain: 'flutter.dev',
-    ));
-    verify(android_webview.CookieManager.instance
-        .setCookie('flutter.dev', 'foo%26=bar%40; path=/'));
-  });
+          () {
+        WebViewAndroidCookieManager().setCookie(const WebViewCookie(
+          name: 'foo&',
+          value: 'bar@',
+          domain: 'flutter.dev',
+        ));
+        verify(android_webview.CookieManager.instance
+            .setCookie('flutter.dev', 'foo%26=bar%40; path=/'));
+      });
 }

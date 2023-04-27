@@ -5,6 +5,7 @@
 package kr.co.bootpay.webviewflutter;
 
 import android.webkit.DownloadListener;
+import androidx.annotation.NonNull;
 import io.flutter.plugin.common.BinaryMessenger;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.DownloadListenerFlutterApi;
 
@@ -23,28 +24,28 @@ public class DownloadListenerFlutterApiImpl extends DownloadListenerFlutterApi {
    * @param instanceManager maintains instances stored to communicate with Dart objects
    */
   public DownloadListenerFlutterApiImpl(
-      BinaryMessenger binaryMessenger, InstanceManager instanceManager) {
+          @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
     super(binaryMessenger);
     this.instanceManager = instanceManager;
   }
 
   /** Passes arguments from {@link DownloadListener#onDownloadStart} to Dart. */
   public void onDownloadStart(
-      DownloadListener downloadListener,
-      String url,
-      String userAgent,
-      String contentDisposition,
-      String mimetype,
-      long contentLength,
-      Reply<Void> callback) {
+          @NonNull DownloadListener downloadListener,
+          @NonNull String url,
+          @NonNull String userAgent,
+          @NonNull String contentDisposition,
+          @NonNull String mimetype,
+          long contentLength,
+          @NonNull Reply<Void> callback) {
     onDownloadStart(
-        getIdentifierForListener(downloadListener),
-        url,
-        userAgent,
-        contentDisposition,
-        mimetype,
-        contentLength,
-        callback);
+            getIdentifierForListener(downloadListener),
+            url,
+            userAgent,
+            contentDisposition,
+            mimetype,
+            contentLength,
+            callback);
   }
 
   private long getIdentifierForListener(DownloadListener listener) {

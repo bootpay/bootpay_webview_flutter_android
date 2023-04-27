@@ -10,10 +10,10 @@ import 'dart:ui';
 import 'package:flutter/services.dart' show BinaryMessenger;
 
 import 'android_webview.dart';
-import 'android_webview.pigeon.dart';
+import 'android_webview.g.dart';
 import 'instance_manager.dart';
 
-export 'android_webview.pigeon.dart' show FileChooserMode;
+export 'android_webview.g.dart' show FileChooserMode;
 
 /// Converts [WebResourceRequestData] to [WebResourceRequest]
 WebResourceRequest _toWebResourceRequest(WebResourceRequestData data) {
@@ -45,6 +45,8 @@ class AndroidWebViewFlutterApis {
     WebChromeClientFlutterApiImpl? webChromeClientFlutterApi,
     JavaScriptChannelFlutterApiImpl? javaScriptChannelFlutterApi,
     FileChooserParamsFlutterApiImpl? fileChooserParamsFlutterApi,
+    WebViewFlutterApiImpl? webViewFlutterApi,
+    PermissionRequestFlutterApiImpl? permissionRequestFlutterApi,
   }) {
     this.javaObjectFlutterApi =
         javaObjectFlutterApi ?? JavaObjectFlutterApiImpl();
@@ -58,6 +60,9 @@ class AndroidWebViewFlutterApis {
         javaScriptChannelFlutterApi ?? JavaScriptChannelFlutterApiImpl();
     this.fileChooserParamsFlutterApi =
         fileChooserParamsFlutterApi ?? FileChooserParamsFlutterApiImpl();
+    this.webViewFlutterApi = webViewFlutterApi ?? WebViewFlutterApiImpl();
+    this.permissionRequestFlutterApi =
+        permissionRequestFlutterApi ?? PermissionRequestFlutterApiImpl();
   }
 
   static bool _haveBeenSetUp = false;
@@ -85,6 +90,12 @@ class AndroidWebViewFlutterApis {
   /// Flutter Api for [FileChooserParams].
   late final FileChooserParamsFlutterApiImpl fileChooserParamsFlutterApi;
 
+  /// Flutter Api for [WebView].
+  late final WebViewFlutterApiImpl webViewFlutterApi;
+
+  /// Flutter Api for [PermissionRequest].
+  late final PermissionRequestFlutterApiImpl permissionRequestFlutterApi;
+
   /// Ensures all the Flutter APIs have been setup to receive calls from native code.
   void ensureSetUp() {
     if (!_haveBeenSetUp) {
@@ -94,6 +105,8 @@ class AndroidWebViewFlutterApis {
       WebChromeClientFlutterApi.setup(webChromeClientFlutterApi);
       JavaScriptChannelFlutterApi.setup(javaScriptChannelFlutterApi);
       FileChooserParamsFlutterApi.setup(fileChooserParamsFlutterApi);
+      WebViewFlutterApi.setup(webViewFlutterApi);
+      PermissionRequestFlutterApi.setup(permissionRequestFlutterApi);
       _haveBeenSetUp = true;
     }
   }
@@ -146,19 +159,16 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> createFromInstance(WebView instance) {
-    return create(
-      instanceManager.addDartCreatedInstance(instance),
-      instance.useHybridComposition,
-    );
+    return create(instanceManager.addDartCreatedInstance(instance));
   }
 
   /// Helper method to convert the instances ids to objects.
   Future<void> loadDataFromInstance(
-    WebView instance,
-    String data,
-    String? mimeType,
-    String? encoding,
-  ) {
+      WebView instance,
+      String data,
+      String? mimeType,
+      String? encoding,
+      ) {
     return loadData(
       instanceManager.getIdentifier(instance)!,
       data,
@@ -169,13 +179,13 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> loadDataWithBaseUrlFromInstance(
-    WebView instance,
-    String? baseUrl,
-    String data,
-    String? mimeType,
-    String? encoding,
-    String? historyUrl,
-  ) {
+      WebView instance,
+      String? baseUrl,
+      String data,
+      String? mimeType,
+      String? encoding,
+      String? historyUrl,
+      ) {
     return loadDataWithBaseUrl(
       instanceManager.getIdentifier(instance)!,
       baseUrl,
@@ -188,19 +198,19 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> loadUrlFromInstance(
-    WebView instance,
-    String url,
-    Map<String, String> headers,
-  ) {
+      WebView instance,
+      String url,
+      Map<String, String> headers,
+      ) {
     return loadUrl(instanceManager.getIdentifier(instance)!, url, headers);
   }
 
   /// Helper method to convert instances ids to objects.
   Future<void> postUrlFromInstance(
-    WebView instance,
-    String url,
-    Uint8List data,
-  ) {
+      WebView instance,
+      String url,
+      Uint8List data,
+      ) {
     return postUrl(instanceManager.getIdentifier(instance)!, url, data);
   }
 
@@ -244,9 +254,9 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<String?> evaluateJavascriptFromInstance(
-    WebView instance,
-    String javascriptString,
-  ) {
+      WebView instance,
+      String javascriptString,
+      ) {
     return evaluateJavascript(
       instanceManager.getIdentifier(instance)!,
       javascriptString,
@@ -281,15 +291,15 @@ class WebViewHostApiImpl extends WebViewHostApi {
   /// Helper method to convert instances ids to objects.
   Future<Offset> getScrollPositionFromInstance(WebView instance) async {
     final WebViewPoint position =
-        await getScrollPosition(instanceManager.getIdentifier(instance)!);
+    await getScrollPosition(instanceManager.getIdentifier(instance)!);
     return Offset(position.x.toDouble(), position.y.toDouble());
   }
 
   /// Helper method to convert instances ids to objects.
   Future<void> setWebViewClientFromInstance(
-    WebView instance,
-    WebViewClient webViewClient,
-  ) {
+      WebView instance,
+      WebViewClient webViewClient,
+      ) {
     return setWebViewClient(
       instanceManager.getIdentifier(instance)!,
       instanceManager.getIdentifier(webViewClient)!,
@@ -298,9 +308,9 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> addJavaScriptChannelFromInstance(
-    WebView instance,
-    JavaScriptChannel javaScriptChannel,
-  ) {
+      WebView instance,
+      JavaScriptChannel javaScriptChannel,
+      ) {
     return addJavaScriptChannel(
       instanceManager.getIdentifier(instance)!,
       instanceManager.getIdentifier(javaScriptChannel)!,
@@ -309,9 +319,9 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> removeJavaScriptChannelFromInstance(
-    WebView instance,
-    JavaScriptChannel javaScriptChannel,
-  ) {
+      WebView instance,
+      JavaScriptChannel javaScriptChannel,
+      ) {
     return removeJavaScriptChannel(
       instanceManager.getIdentifier(instance)!,
       instanceManager.getIdentifier(javaScriptChannel)!,
@@ -320,9 +330,9 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setDownloadListenerFromInstance(
-    WebView instance,
-    DownloadListener? listener,
-  ) {
+      WebView instance,
+      DownloadListener? listener,
+      ) {
     return setDownloadListener(
       instanceManager.getIdentifier(instance)!,
       listener != null ? instanceManager.getIdentifier(listener) : null,
@@ -331,9 +341,9 @@ class WebViewHostApiImpl extends WebViewHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setWebChromeClientFromInstance(
-    WebView instance,
-    WebChromeClient? client,
-  ) {
+      WebView instance,
+      WebChromeClient? client,
+      ) {
     return setWebChromeClient(
       instanceManager.getIdentifier(instance)!,
       client != null ? instanceManager.getIdentifier(client) : null,
@@ -343,6 +353,33 @@ class WebViewHostApiImpl extends WebViewHostApi {
   /// Helper method to convert instances ids to objects.
   Future<void> setBackgroundColorFromInstance(WebView instance, int color) {
     return setBackgroundColor(instanceManager.getIdentifier(instance)!, color);
+  }
+}
+
+/// Flutter API implementation for [WebView].
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+class WebViewFlutterApiImpl implements WebViewFlutterApi {
+  /// Constructs a [WebViewFlutterApiImpl].
+  WebViewFlutterApiImpl({
+    this.binaryMessenger,
+    InstanceManager? instanceManager,
+  }) : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
+
+  /// Receives binary data across the Flutter platform barrier.
+  ///
+  /// If it is null, the default BinaryMessenger will be used which routes to
+  /// the host platform.
+  final BinaryMessenger? binaryMessenger;
+
+  /// Maintains instances stored to communicate with native language objects.
+  final InstanceManager instanceManager;
+
+  @override
+  void create(int identifier) {
+    instanceManager.addHostCreatedInstance(WebView.detached(), identifier);
   }
 }
 
@@ -367,17 +404,17 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setDomStorageEnabledFromInstance(
-    WebSettings instance,
-    bool flag,
-  ) {
+      WebSettings instance,
+      bool flag,
+      ) {
     return setDomStorageEnabled(instanceManager.getIdentifier(instance)!, flag);
   }
 
   /// Helper method to convert instances ids to objects.
   Future<void> setJavaScriptCanOpenWindowsAutomaticallyFromInstance(
-    WebSettings instance,
-    bool flag,
-  ) {
+      WebSettings instance,
+      bool flag,
+      ) {
     return setJavaScriptCanOpenWindowsAutomatically(
       instanceManager.getIdentifier(instance)!,
       flag,
@@ -386,18 +423,18 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setSupportMultipleWindowsFromInstance(
-    WebSettings instance,
-    bool support,
-  ) {
+      WebSettings instance,
+      bool support,
+      ) {
     return setSupportMultipleWindows(
         instanceManager.getIdentifier(instance)!, support);
   }
 
   /// Helper method to convert instances ids to objects.
   Future<void> setJavaScriptEnabledFromInstance(
-    WebSettings instance,
-    bool flag,
-  ) {
+      WebSettings instance,
+      bool flag,
+      ) {
     return setJavaScriptEnabled(
       instanceManager.getIdentifier(instance)!,
       flag,
@@ -406,9 +443,9 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setUserAgentStringFromInstance(
-    WebSettings instance,
-    String? userAgentString,
-  ) {
+      WebSettings instance,
+      String? userAgentString,
+      ) {
     return setUserAgentString(
       instanceManager.getIdentifier(instance)!,
       userAgentString,
@@ -417,9 +454,9 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setMediaPlaybackRequiresUserGestureFromInstance(
-    WebSettings instance,
-    bool require,
-  ) {
+      WebSettings instance,
+      bool require,
+      ) {
     return setMediaPlaybackRequiresUserGesture(
       instanceManager.getIdentifier(instance)!,
       require,
@@ -428,17 +465,25 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setSupportZoomFromInstance(
-    WebSettings instance,
-    bool support,
-  ) {
+      WebSettings instance,
+      bool support,
+      ) {
     return setSupportZoom(instanceManager.getIdentifier(instance)!, support);
   }
 
   /// Helper method to convert instances ids to objects.
+  Future<void> setSetTextZoomFromInstance(
+      WebSettings instance,
+      int textZoom,
+      ) {
+    return setTextZoom(instanceManager.getIdentifier(instance)!, textZoom);
+  }
+
+  /// Helper method to convert instances ids to objects.
   Future<void> setLoadWithOverviewModeFromInstance(
-    WebSettings instance,
-    bool overview,
-  ) {
+      WebSettings instance,
+      bool overview,
+      ) {
     return setLoadWithOverviewMode(
       instanceManager.getIdentifier(instance)!,
       overview,
@@ -447,17 +492,17 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setUseWideViewPortFromInstance(
-    WebSettings instance,
-    bool use,
-  ) {
+      WebSettings instance,
+      bool use,
+      ) {
     return setUseWideViewPort(instanceManager.getIdentifier(instance)!, use);
   }
 
   /// Helper method to convert instances ids to objects.
   Future<void> setDisplayZoomControlsFromInstance(
-    WebSettings instance,
-    bool enabled,
-  ) {
+      WebSettings instance,
+      bool enabled,
+      ) {
     return setDisplayZoomControls(
       instanceManager.getIdentifier(instance)!,
       enabled,
@@ -466,9 +511,9 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setBuiltInZoomControlsFromInstance(
-    WebSettings instance,
-    bool enabled,
-  ) {
+      WebSettings instance,
+      bool enabled,
+      ) {
     return setBuiltInZoomControls(
       instanceManager.getIdentifier(instance)!,
       enabled,
@@ -477,9 +522,9 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setAllowFileAccessFromInstance(
-    WebSettings instance,
-    bool enabled,
-  ) {
+      WebSettings instance,
+      bool enabled,
+      ) {
     return setAllowFileAccess(
       instanceManager.getIdentifier(instance)!,
       enabled,
@@ -524,8 +569,8 @@ class JavaScriptChannelFlutterApiImpl extends JavaScriptChannelFlutterApi {
     final JavaScriptChannel? instance = instanceManager
         .getInstanceWithWeakReference(instanceId) as JavaScriptChannel?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an JavaScriptChannel with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a JavaScriptChannel with instanceId: $instanceId',
     );
     instance!.postMessage(message);
   }
@@ -552,9 +597,9 @@ class WebViewClientHostApiImpl extends WebViewClientHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setShouldOverrideUrlLoadingReturnValueFromInstance(
-    WebViewClient instance,
-    bool value,
-  ) {
+      WebViewClient instance,
+      bool value,
+      ) {
     return setSynchronousReturnValueForShouldOverrideUrlLoading(
       instanceManager.getIdentifier(instance)!,
       value,
@@ -578,12 +623,12 @@ class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebViewClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     if (instance!.onPageFinished != null) {
       instance.onPageFinished!(webViewInstance!, url);
@@ -597,12 +642,12 @@ class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebViewClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     if (instance!.onPageStarted != null) {
       instance.onPageStarted!(webViewInstance!, url);
@@ -611,23 +656,23 @@ class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
 
   @override
   void onReceivedError(
-    int instanceId,
-    int webViewInstanceId,
-    int errorCode,
-    String description,
-    String failingUrl,
-  ) {
+      int instanceId,
+      int webViewInstanceId,
+      int errorCode,
+      String description,
+      String failingUrl,
+      ) {
     final WebViewClient? instance = instanceManager
         .getInstanceWithWeakReference(instanceId) as WebViewClient?;
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebViewClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     // ignore: deprecated_member_use_from_same_package
     if (instance!.onReceivedError != null) {
@@ -642,22 +687,22 @@ class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
 
   @override
   void onReceivedRequestError(
-    int instanceId,
-    int webViewInstanceId,
-    WebResourceRequestData request,
-    WebResourceErrorData error,
-  ) {
+      int instanceId,
+      int webViewInstanceId,
+      WebResourceRequestData request,
+      WebResourceErrorData error,
+      ) {
     final WebViewClient? instance = instanceManager
         .getInstanceWithWeakReference(instanceId) as WebViewClient?;
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebViewClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     if (instance!.onReceivedRequestError != null) {
       instance.onReceivedRequestError!(
@@ -670,21 +715,21 @@ class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
 
   @override
   void requestLoading(
-    int instanceId,
-    int webViewInstanceId,
-    WebResourceRequestData request,
-  ) {
+      int instanceId,
+      int webViewInstanceId,
+      WebResourceRequestData request,
+      ) {
     final WebViewClient? instance = instanceManager
         .getInstanceWithWeakReference(instanceId) as WebViewClient?;
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebViewClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     if (instance!.requestLoading != null) {
       instance.requestLoading!(
@@ -696,24 +741,48 @@ class WebViewClientFlutterApiImpl extends WebViewClientFlutterApi {
 
   @override
   void urlLoading(
-    int instanceId,
-    int webViewInstanceId,
-    String url,
-  ) {
+      int instanceId,
+      int webViewInstanceId,
+      String url,
+      ) {
     final WebViewClient? instance = instanceManager
         .getInstanceWithWeakReference(instanceId) as WebViewClient?;
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebViewClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     if (instance!.urlLoading != null) {
       instance.urlLoading!(webViewInstance!, url);
+    }
+  }
+
+  @override
+  void doUpdateVisitedHistory(
+      int instanceId,
+      int webViewInstanceId,
+      String url,
+      bool isReload,
+      ) {
+    final WebViewClient? instance = instanceManager
+        .getInstanceWithWeakReference(instanceId) as WebViewClient?;
+    final WebView? webViewInstance = instanceManager
+        .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
+    assert(
+    instance != null,
+    'InstanceManager does not contain an WebViewClient with instanceId: $instanceId',
+    );
+    assert(
+    webViewInstance != null,
+    'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    );
+    if (instance!.doUpdateVisitedHistory != null) {
+      instance.doUpdateVisitedHistory!(webViewInstance!, url, isReload);
     }
   }
 }
@@ -749,18 +818,18 @@ class DownloadListenerFlutterApiImpl extends DownloadListenerFlutterApi {
 
   @override
   void onDownloadStart(
-    int instanceId,
-    String url,
-    String userAgent,
-    String contentDisposition,
-    String mimetype,
-    int contentLength,
-  ) {
+      int instanceId,
+      String url,
+      String userAgent,
+      String contentDisposition,
+      String mimetype,
+      int contentLength,
+      ) {
     final DownloadListener? instance = instanceManager
         .getInstanceWithWeakReference(instanceId) as DownloadListener?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an DownloadListener with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a DownloadListener with instanceId: $instanceId',
     );
     instance!.onDownloadStart(
       url,
@@ -793,9 +862,9 @@ class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
 
   /// Helper method to convert instances ids to objects.
   Future<void> setSynchronousReturnValueForOnShowFileChooserFromInstance(
-    WebChromeClient instance,
-    bool value,
-  ) {
+      WebChromeClient instance,
+      bool value,
+      ) {
     return setSynchronousReturnValueForOnShowFileChooser(
       instanceManager.getIdentifier(instance)!,
       value,
@@ -819,12 +888,12 @@ class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
     final WebView? webViewInstance = instanceManager
         .getInstanceWithWeakReference(webViewInstanceId) as WebView?;
     assert(
-      instance != null,
-      'InstanceManager does not contain an WebChromeClient with instanceId: $instanceId',
+    instance != null,
+    'InstanceManager does not contain a WebChromeClient with instanceId: $instanceId',
     );
     assert(
-      webViewInstance != null,
-      'InstanceManager does not contain an WebView with instanceId: $webViewInstanceId',
+    webViewInstance != null,
+    'InstanceManager does not contain a WebView with instanceId: $webViewInstanceId',
     );
     if (instance!.onProgressChanged != null) {
       instance.onProgressChanged!(webViewInstance!, progress);
@@ -833,22 +902,44 @@ class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
 
   @override
   Future<List<String?>> onShowFileChooser(
-    int instanceId,
-    int webViewInstanceId,
-    int paramsInstanceId,
-  ) {
+      int instanceId,
+      int webViewInstanceId,
+      int paramsInstanceId,
+      ) {
     final WebChromeClient instance =
-        instanceManager.getInstanceWithWeakReference(instanceId)!;
+    instanceManager.getInstanceWithWeakReference(instanceId)!;
     if (instance.onShowFileChooser != null) {
       return instance.onShowFileChooser!(
         instanceManager.getInstanceWithWeakReference(webViewInstanceId)!
-            as WebView,
+        as WebView,
         instanceManager.getInstanceWithWeakReference(paramsInstanceId)!
-            as FileChooserParams,
+        as FileChooserParams,
       );
     }
 
     return Future<List<String>>.value(const <String>[]);
+  }
+
+  @override
+  void onPermissionRequest(
+      int instanceId,
+      int requestInstanceId,
+      ) {
+    final WebChromeClient instance =
+    instanceManager.getInstanceWithWeakReference(instanceId)!;
+    if (instance.onPermissionRequest != null) {
+      instance.onPermissionRequest!(
+        instance,
+        instanceManager.getInstanceWithWeakReference(requestInstanceId)!,
+      );
+    } else {
+      // The method requires calling grant or deny if the Java method is
+      // overridden, so this calls deny by default if `onPermissionRequest` is
+      // null.
+      final PermissionRequest request =
+      instanceManager.getInstanceWithWeakReference(requestInstanceId)!;
+      request.deny();
+    }
   }
 }
 
@@ -880,28 +971,107 @@ class WebStorageHostApiImpl extends WebStorageHostApi {
 /// Flutter api implementation for [FileChooserParams].
 class FileChooserParamsFlutterApiImpl extends FileChooserParamsFlutterApi {
   /// Constructs a [FileChooserParamsFlutterApiImpl].
-  FileChooserParamsFlutterApiImpl({InstanceManager? instanceManager})
-      : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
+  FileChooserParamsFlutterApiImpl({
+    this.binaryMessenger,
+    InstanceManager? instanceManager,
+  }) : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
+
+  /// Receives binary data across the Flutter platform barrier.
+  ///
+  /// If it is null, the default BinaryMessenger will be used which routes to
+  /// the host platform.
+  final BinaryMessenger? binaryMessenger;
 
   /// Maintains instances stored to communicate with java objects.
   final InstanceManager instanceManager;
 
   @override
   void create(
-    int instanceId,
-    bool isCaptureEnabled,
-    List<String?> acceptTypes,
-    FileChooserModeEnumData mode,
-    String? filenameHint,
-  ) {
+      int instanceId,
+      bool isCaptureEnabled,
+      List<String?> acceptTypes,
+      FileChooserModeEnumData mode,
+      String? filenameHint,
+      ) {
     instanceManager.addHostCreatedInstance(
       FileChooserParams.detached(
         isCaptureEnabled: isCaptureEnabled,
         acceptTypes: acceptTypes.cast(),
         mode: mode.value,
         filenameHint: filenameHint,
+        binaryMessenger: binaryMessenger,
+        instanceManager: instanceManager,
       ),
       instanceId,
+    );
+  }
+}
+
+/// Host api implementation for [PermissionRequest].
+class PermissionRequestHostApiImpl extends PermissionRequestHostApi {
+  /// Constructs a [PermissionRequestHostApiImpl].
+  PermissionRequestHostApiImpl({
+    this.binaryMessenger,
+    InstanceManager? instanceManager,
+  })  : instanceManager = instanceManager ?? JavaObject.globalInstanceManager,
+        super(binaryMessenger: binaryMessenger);
+
+  /// Sends binary data across the Flutter platform barrier.
+  ///
+  /// If it is null, the default BinaryMessenger will be used which routes to
+  /// the host platform.
+  final BinaryMessenger? binaryMessenger;
+
+  /// Maintains instances stored to communicate with native language objects.
+  final InstanceManager instanceManager;
+
+  /// Helper method to convert instance ids to objects.
+  Future<void> grantFromInstances(
+      PermissionRequest instance,
+      List<String> resources,
+      ) {
+    return grant(instanceManager.getIdentifier(instance)!, resources);
+  }
+
+  /// Helper method to convert instance ids to objects.
+  Future<void> denyFromInstances(PermissionRequest instance) {
+    return deny(instanceManager.getIdentifier(instance)!);
+  }
+}
+
+/// Flutter API implementation for [PermissionRequest].
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+class PermissionRequestFlutterApiImpl implements PermissionRequestFlutterApi {
+  /// Constructs a [PermissionRequestFlutterApiImpl].
+  PermissionRequestFlutterApiImpl({
+    this.binaryMessenger,
+    InstanceManager? instanceManager,
+  }) : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
+
+  /// Receives binary data across the Flutter platform barrier.
+  ///
+  /// If it is null, the default BinaryMessenger will be used which routes to
+  /// the host platform.
+  final BinaryMessenger? binaryMessenger;
+
+  /// Maintains instances stored to communicate with native language objects.
+  final InstanceManager instanceManager;
+
+  @override
+  void create(
+      int identifier,
+      List<String?> resources,
+      ) {
+    instanceManager.addHostCreatedInstance(
+      PermissionRequest.detached(
+        resources: resources.cast<String>(),
+        binaryMessenger: binaryMessenger,
+        instanceManager: instanceManager,
+      ),
+      identifier,
     );
   }
 }

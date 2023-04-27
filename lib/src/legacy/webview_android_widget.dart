@@ -19,29 +19,19 @@ class WebViewAndroidWidget extends StatefulWidget {
   const WebViewAndroidWidget({
     super.key,
     required this.creationParams,
-    required this.useHybridComposition,
     required this.callbacksHandler,
     required this.javascriptChannelRegistry,
     required this.onBuildWidget,
-    @visibleForTesting this.webViewProxy = const WebViewProxy(),
     @visibleForTesting
-        this.flutterAssetManager = const android_webview.FlutterAssetManager(),
-    @visibleForTesting this.webStorage,
+    this.webViewProxy = const WebViewProxy(),
+    @visibleForTesting
+    this.flutterAssetManager = const android_webview.FlutterAssetManager(),
+    @visibleForTesting
+    this.webStorage,
   });
 
   /// Initial parameters used to setup the WebView.
   final CreationParams creationParams;
-
-  /// Whether the [android_webview.WebView] will be rendered with an [AndroidViewSurface].
-  ///
-  /// This implementation uses hybrid composition to render the
-  /// [WebViewAndroidWidget]. This comes at the cost of some performance on
-  /// Android versions below 10. See
-  /// https://flutter.dev/docs/development/platform-integration/platform-views#performance
-  /// for more information.
-  ///
-  /// Defaults to false.
-  final bool useHybridComposition;
 
   /// Handles callbacks that are made by [android_webview.WebViewClient], [android_webview.DownloadListener], and [android_webview.WebChromeClient].
   final WebViewPlatformCallbacksHandler callbacksHandler;
@@ -61,7 +51,7 @@ class WebViewAndroidWidget extends StatefulWidget {
 
   /// Callback to build a widget once [android_webview.WebView] has been initialized.
   final Widget Function(WebViewAndroidPlatformController controller)
-      onBuildWidget;
+  onBuildWidget;
 
   /// Manages the JavaScript storage APIs.
   final android_webview.WebStorage? webStorage;
@@ -77,7 +67,6 @@ class _WebViewAndroidWidgetState extends State<WebViewAndroidWidget> {
   void initState() {
     super.initState();
     controller = WebViewAndroidPlatformController(
-      useHybridComposition: widget.useHybridComposition,
       creationParams: widget.creationParams,
       callbacksHandler: widget.callbacksHandler,
       javascriptChannelRegistry: widget.javascriptChannelRegistry,
@@ -97,20 +86,19 @@ class _WebViewAndroidWidgetState extends State<WebViewAndroidWidget> {
 class WebViewAndroidPlatformController extends WebViewPlatformController {
   /// Construct a [WebViewAndroidPlatformController].
   WebViewAndroidPlatformController({
-    required bool useHybridComposition,
     required CreationParams creationParams,
     required this.callbacksHandler,
     required this.javascriptChannelRegistry,
-    @visibleForTesting this.webViewProxy = const WebViewProxy(),
     @visibleForTesting
-        this.flutterAssetManager = const android_webview.FlutterAssetManager(),
-    @visibleForTesting android_webview.WebStorage? webStorage,
+    this.webViewProxy = const WebViewProxy(),
+    @visibleForTesting
+    this.flutterAssetManager = const android_webview.FlutterAssetManager(),
+    @visibleForTesting
+    android_webview.WebStorage? webStorage,
   })  : webStorage = webStorage ?? android_webview.WebStorage.instance,
         assert(creationParams.webSettings?.hasNavigationDelegate != null),
         super(callbacksHandler) {
-    webView = webViewProxy.createWebView(
-      useHybridComposition: useHybridComposition,
-    );
+    webView = webViewProxy.createWebView();
 
     webView.settings.setDomStorageEnabled(true);
     webView.settings.setJavaScriptCanOpenWindowsAutomatically(true);
@@ -132,23 +120,33 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   }
 
   final Map<String, WebViewAndroidJavaScriptChannel> _javaScriptChannels =
-      <String, WebViewAndroidJavaScriptChannel>{};
+  <String, WebViewAndroidJavaScriptChannel>{};
 
-  late final android_webview.WebViewClient _webViewClient = withWeakReferenceTo(
-      this, (WeakReference<WebViewAndroidPlatformController> weakReference) {
-    return webViewProxy.createWebViewClient(
-      onPageStarted: (_, String url) {
+  late final android_webview.WebViewClient _webViewClient =
+  webViewProxy.createWebViewClient(
+    onPageStarted: withWeakReferenceTo(this, (
+        WeakReference<WebViewAndroidPlatformController> weakReference,
+        ) {
+      return (_, String url) {
         weakReference.target?.callbacksHandler.onPageStarted(url);
-      },
-      onPageFinished: (_, String url) {
+      };
+    }),
+    onPageFinished: withWeakReferenceTo(this, (
+        WeakReference<WebViewAndroidPlatformController> weakReference,
+        ) {
+      return (_, String url) {
         weakReference.target?.callbacksHandler.onPageFinished(url);
-      },
-      onReceivedError: (
-        _,
-        int errorCode,
-        String description,
-        String failingUrl,
-      ) {
+      };
+    }),
+    onReceivedError: withWeakReferenceTo(this, (
+        WeakReference<WebViewAndroidPlatformController> weakReference,
+        ) {
+      return (
+          _,
+          int errorCode,
+          String description,
+          String failingUrl,
+          ) {
         weakReference.target?.callbacksHandler
             .onWebResourceError(WebResourceError(
           errorCode: errorCode,
@@ -156,12 +154,16 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
           failingUrl: failingUrl,
           errorType: _errorCodeToErrorType(errorCode),
         ));
-      },
-      onReceivedRequestError: (
-        _,
-        android_webview.WebResourceRequest request,
-        android_webview.WebResourceError error,
-      ) {
+      };
+    }),
+    onReceivedRequestError: withWeakReferenceTo(this, (
+        WeakReference<WebViewAndroidPlatformController> weakReference,
+        ) {
+      return (
+          _,
+          android_webview.WebResourceRequest request,
+          android_webview.WebResourceError error,
+          ) {
         if (request.isForMainFrame) {
           weakReference.target?.callbacksHandler
               .onWebResourceError(WebResourceError(
@@ -171,21 +173,29 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
             errorType: _errorCodeToErrorType(error.errorCode),
           ));
         }
-      },
-      urlLoading: (_, String url) {
+      };
+    }),
+    urlLoading: withWeakReferenceTo(this, (
+        WeakReference<WebViewAndroidPlatformController> weakReference,
+        ) {
+      return (_, String url) {
         weakReference.target?._handleNavigationRequest(
           url: url,
           isForMainFrame: true,
         );
-      },
-      requestLoading: (_, android_webview.WebResourceRequest request) {
+      };
+    }),
+    requestLoading: withWeakReferenceTo(this, (
+        WeakReference<WebViewAndroidPlatformController> weakReference,
+        ) {
+      return (_, android_webview.WebResourceRequest request) {
         weakReference.target?._handleNavigationRequest(
           url: request.url,
           isForMainFrame: request.isForMainFrame,
         );
-      },
-    );
-  });
+      };
+    }),
+  );
 
   bool _hasNavigationDelegate = false;
   bool _hasProgressTracking = false;
@@ -212,17 +222,17 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   /// Receives callbacks when content should be downloaded instead.
   @visibleForTesting
   late final android_webview.DownloadListener downloadListener =
-      android_webview.DownloadListener(
+  android_webview.DownloadListener(
     onDownloadStart: withWeakReferenceTo(
       this,
-      (WeakReference<WebViewAndroidPlatformController> weakReference) {
+          (WeakReference<WebViewAndroidPlatformController> weakReference) {
         return (
-          String url,
-          String userAgent,
-          String contentDisposition,
-          String mimetype,
-          int contentLength,
-        ) {
+            String url,
+            String userAgent,
+            String contentDisposition,
+            String mimetype,
+            int contentLength,
+            ) {
           weakReference.target?._handleNavigationRequest(
             url: url,
             isForMainFrame: true,
@@ -235,19 +245,19 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   /// Handles JavaScript dialogs, favicons, titles, new windows, and the progress for [android_webview.WebView].
   @visibleForTesting
   late final android_webview.WebChromeClient webChromeClient =
-      android_webview.WebChromeClient(
-          onProgressChanged: withWeakReferenceTo(
-    this,
-    (WeakReference<WebViewAndroidPlatformController> weakReference) {
-      return (_, int progress) {
-        final WebViewAndroidPlatformController? controller =
-            weakReference.target;
-        if (controller != null && controller._hasProgressTracking) {
-          controller.callbacksHandler.onProgress(progress);
-        }
-      };
-    },
-  ));
+  android_webview.WebChromeClient(
+      onProgressChanged: withWeakReferenceTo(
+        this,
+            (WeakReference<WebViewAndroidPlatformController> weakReference) {
+          return (_, int progress) {
+            final WebViewAndroidPlatformController? controller =
+                weakReference.target;
+            if (controller != null && controller._hasProgressTracking) {
+              controller.callbacksHandler.onProgress(progress);
+            }
+          };
+        },
+      ));
 
   /// Manages the JavaScript storage APIs.
   final android_webview.WebStorage webStorage;
@@ -278,11 +288,11 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   @override
   Future<void> loadFlutterAsset(String key) async {
     final String assetFilePath =
-        await flutterAssetManager.getAssetFilePathByName(key);
+    await flutterAssetManager.getAssetFilePathByName(key);
     final List<String> pathElements = assetFilePath.split('/');
     final String fileName = pathElements.removeLast();
     final List<String?> paths =
-        await flutterAssetManager.list(pathElements.join('/'));
+    await flutterAssetManager.list(pathElements.join('/'));
 
     if (!paths.contains(fileName)) {
       throw ArgumentError(
@@ -299,9 +309,9 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
 
   @override
   Future<void> loadUrl(
-    String url,
-    Map<String, String>? headers,
-  ) {
+      String url,
+      Map<String, String>? headers,
+      ) {
     return webView.loadUrl(url, headers ?? <String, String>{});
   }
 
@@ -309,8 +319,8 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   /// the request manually and load the response data using [loadHTMLString].
   @override
   Future<void> loadRequest(
-    WebViewRequest request,
-  ) async {
+      WebViewRequest request,
+      ) async {
     if (!request.uri.hasScheme) {
       throw ArgumentError('WebViewRequest#uri is required to have a scheme.');
     }
@@ -329,8 +339,8 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
     // ignore: dead_code
     throw UnimplementedError(
         'This version of webview_android_widget currently has no '
-        'implementation for HTTP method ${request.method.serialize()} in '
-        'loadRequest.');
+            'implementation for HTTP method ${request.method.serialize()} in '
+            'loadRequest.');
   }
 
   @override
@@ -391,14 +401,14 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
   Future<void> addJavascriptChannels(Set<String> javascriptChannelNames) {
     return Future.wait(
       javascriptChannelNames.where(
-        (String channelName) {
+            (String channelName) {
           return !_javaScriptChannels.containsKey(channelName);
         },
       ).map<Future<void>>(
-        (String channelName) {
+            (String channelName) {
           final WebViewAndroidJavaScriptChannel javaScriptChannel =
-              WebViewAndroidJavaScriptChannel(
-                  channelName, javascriptChannelRegistry);
+          WebViewAndroidJavaScriptChannel(
+              channelName, javascriptChannelRegistry);
           _javaScriptChannels[channelName] = javaScriptChannel;
           return webView.addJavaScriptChannel(javaScriptChannel);
         },
@@ -408,17 +418,17 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
 
   @override
   Future<void> removeJavascriptChannels(
-    Set<String> javascriptChannelNames,
-  ) {
+      Set<String> javascriptChannelNames,
+      ) {
     return Future.wait(
       javascriptChannelNames.where(
-        (String channelName) {
+            (String channelName) {
           return _javaScriptChannels.containsKey(channelName);
         },
       ).map<Future<void>>(
-        (String channelName) {
+            (String channelName) {
           final WebViewAndroidJavaScriptChannel javaScriptChannel =
-              _javaScriptChannels[channelName]!;
+          _javaScriptChannels[channelName]!;
           _javaScriptChannels.remove(channelName);
           return webView.removeJavaScriptChannel(javaScriptChannel);
         },
@@ -577,21 +587,21 @@ class WebViewAndroidJavaScriptChannel
     extends android_webview.JavaScriptChannel {
   /// Creates a [WebViewAndroidJavaScriptChannel].
   WebViewAndroidJavaScriptChannel(
-    super.channelName,
-    this.javascriptChannelRegistry,
-  ) : super(
-          postMessage: withWeakReferenceTo(
-            javascriptChannelRegistry,
-            (WeakReference<JavascriptChannelRegistry> weakReference) {
-              return (String message) {
-                weakReference.target?.onJavascriptChannelMessage(
-                  channelName,
-                  message,
-                );
-              };
-            },
-          ),
-        );
+      super.channelName,
+      this.javascriptChannelRegistry,
+      ) : super(
+    postMessage: withWeakReferenceTo(
+      javascriptChannelRegistry,
+          (WeakReference<JavascriptChannelRegistry> weakReference) {
+        return (String message) {
+          weakReference.target?.onJavascriptChannelMessage(
+            channelName,
+            message,
+          );
+        };
+      },
+    ),
+  );
 
   /// Manages named JavaScript channels and forwarding incoming messages on the correct channel.
   final JavascriptChannelRegistry javascriptChannelRegistry;
@@ -606,8 +616,8 @@ class WebViewProxy {
   const WebViewProxy();
 
   /// Constructs a [android_webview.WebView].
-  android_webview.WebView createWebView({required bool useHybridComposition}) {
-    return android_webview.WebView(useHybridComposition: useHybridComposition);
+  android_webview.WebView createWebView() {
+    return android_webview.WebView();
   }
 
   /// Constructs a [android_webview.WebViewClient].
@@ -615,21 +625,19 @@ class WebViewProxy {
     void Function(android_webview.WebView webView, String url)? onPageStarted,
     void Function(android_webview.WebView webView, String url)? onPageFinished,
     void Function(
-      android_webview.WebView webView,
-      android_webview.WebResourceRequest request,
-      android_webview.WebResourceError error,
-    )?
-        onReceivedRequestError,
+        android_webview.WebView webView,
+        android_webview.WebResourceRequest request,
+        android_webview.WebResourceError error,
+        )? onReceivedRequestError,
     void Function(
-      android_webview.WebView webView,
-      int errorCode,
-      String description,
-      String failingUrl,
-    )?
-        onReceivedError,
+        android_webview.WebView webView,
+        int errorCode,
+        String description,
+        String failingUrl,
+        )? onReceivedError,
     void Function(android_webview.WebView webView,
-            android_webview.WebResourceRequest request)?
-        requestLoading,
+        android_webview.WebResourceRequest request)?
+    requestLoading,
     void Function(android_webview.WebView webView, String url)? urlLoading,
   }) {
     return android_webview.WebViewClient(

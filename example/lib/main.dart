@@ -74,7 +74,7 @@ const String kTransparentBackgroundPage = '''
 ''';
 
 class WebViewExample extends StatefulWidget {
-  const WebViewExample({Key? key, this.cookieManager}) : super(key: key);
+  const WebViewExample({super.key, this.cookieManager});
 
   final PlatformWebViewCookieManager? cookieManager;
 
@@ -123,6 +123,9 @@ Page resource error:
             }
             debugPrint('allowing navigation to ${request.url}');
             return NavigationDecision.navigate;
+          })
+          ..setOnUrlChange((UrlChange change) {
+            debugPrint('url change to ${change.url}');
           }),
       )
       ..addJavaScriptChannel(JavaScriptChannelParams(
@@ -133,8 +136,17 @@ Page resource error:
           );
         },
       ))
+      ..setOnPlatformPermissionRequest(
+            (PlatformWebViewPermissionRequest request) {
+          debugPrint(
+            'requesting permissions for ${request.types.map((WebViewPermissionResourceType type) => type.name)}',
+          );
+          request.grant();
+        },
+      )
       ..loadRequest(LoadRequestParams(
-        uri: Uri.parse('https://flutter.dev'),
+        // uri: Uri.parse('https://flutter.dev'),
+          uri: Uri.parse('https://dev-js.bootapi.com/test/payment/'),
       ));
   }
 
@@ -164,9 +176,11 @@ Page resource error:
     return FloatingActionButton(
       onPressed: () async {
         final String? url = await _controller.currentUrl();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Favorited $url')),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Favorited $url')),
+          );
+        }
       },
       child: const Icon(Icons.favorite),
     );
@@ -191,14 +205,13 @@ enum MenuOptions {
 
 class SampleMenu extends StatelessWidget {
   SampleMenu({
-    Key? key,
+    super.key,
     required this.webViewController,
     PlatformWebViewCookieManager? cookieManager,
-  })  : cookieManager = cookieManager ??
-            PlatformWebViewCookieManager(
-              const PlatformWebViewCookieManagerCreationParams(),
-            ),
-        super(key: key);
+  }) : cookieManager = cookieManager ??
+      PlatformWebViewCookieManager(
+        const PlatformWebViewCookieManagerCreationParams(),
+      );
 
   final PlatformWebViewController webViewController;
   late final PlatformWebViewCookieManager cookieManager;
@@ -319,30 +332,34 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onListCookies(BuildContext context) async {
     final String cookies = await webViewController
         .runJavaScriptReturningResult('document.cookie') as String;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const Text('Cookies:'),
-          _getCookieList(cookies),
-        ],
-      ),
-    ));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Text('Cookies:'),
+            _getCookieList(cookies),
+          ],
+        ),
+      ));
+    }
   }
 
   Future<void> _onAddToCache(BuildContext context) async {
     await webViewController.runJavaScript(
       'caches.open("test_caches_entry"); localStorage["test_localStorage"] = "dummy_entry";',
     );
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Added a test entry to cache.'),
-    ));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Added a test entry to cache.'),
+      ));
+    }
   }
 
   Future<void> _onListCache() {
     return webViewController.runJavaScript('caches.keys()'
-        // ignore: missing_whitespace_between_adjacent_strings
+    // ignore: missing_whitespace_between_adjacent_strings
         '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
         '.then((caches) => Toaster.postMessage(caches))');
   }
@@ -350,9 +367,11 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onClearCache(BuildContext context) async {
     await webViewController.clearCache();
     await webViewController.clearLocalStorage();
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Cache cleared.'),
-    ));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Cache cleared.'),
+      ));
+    }
   }
 
   Future<void> _onClearCookies(BuildContext context) async {
@@ -361,9 +380,11 @@ class SampleMenu extends StatelessWidget {
     if (!hadCookies) {
       message = 'There are no cookies.';
     }
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-    ));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+      ));
+    }
   }
 
   Future<void> _onNavigationDelegateExample() {
@@ -426,7 +447,7 @@ class SampleMenu extends StatelessWidget {
     }
     final List<String> cookieList = cookies.split(';');
     final Iterable<Text> cookieWidgets =
-        cookieList.map((String cookie) => Text(cookie));
+    cookieList.map((String cookie) => Text(cookie));
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
@@ -447,8 +468,7 @@ class SampleMenu extends StatelessWidget {
 }
 
 class NavigationControls extends StatelessWidget {
-  const NavigationControls({Key? key, required this.webViewController})
-      : super(key: key);
+  const NavigationControls({super.key, required this.webViewController});
 
   final PlatformWebViewController webViewController;
 
@@ -462,10 +482,11 @@ class NavigationControls extends StatelessWidget {
             if (await webViewController.canGoBack()) {
               await webViewController.goBack();
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('No back history item')),
-              );
-              return;
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('No back history item')),
+                );
+              }
             }
           },
         ),
@@ -475,10 +496,11 @@ class NavigationControls extends StatelessWidget {
             if (await webViewController.canGoForward()) {
               await webViewController.goForward();
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('No forward history item')),
-              );
-              return;
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('No forward history item')),
+                );
+              }
             }
           },
         ),

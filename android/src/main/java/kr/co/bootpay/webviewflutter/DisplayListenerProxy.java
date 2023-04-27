@@ -6,7 +6,6 @@ package kr.co.bootpay.webviewflutter;
 
 import static android.hardware.display.DisplayManager.DisplayListener;
 
-import android.annotation.TargetApi;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.util.Log;
@@ -39,7 +38,6 @@ import java.util.ArrayList;
  * first initialization of a webview within the process the difference between the lists is the
  * webview's display listener.
  */
-@TargetApi(Build.VERSION_CODES.KITKAT)
 class DisplayListenerProxy {
   private static final String TAG = "DisplayListenerProxy";
 
@@ -80,32 +78,32 @@ class DisplayListenerProxy {
       // We never explicitly unregister this listener as the webview's listener is never
       // unregistered (it's released when the process is terminated).
       displayManager.registerDisplayListener(
-          new DisplayListener() {
-            @Override
-            public void onDisplayAdded(int displayId) {
-              for (DisplayListener webViewListener : webViewListeners) {
-                webViewListener.onDisplayAdded(displayId);
-              }
-            }
+              new DisplayListener() {
+                @Override
+                public void onDisplayAdded(int displayId) {
+                  for (DisplayListener webViewListener : webViewListeners) {
+                    webViewListener.onDisplayAdded(displayId);
+                  }
+                }
 
-            @Override
-            public void onDisplayRemoved(int displayId) {
-              for (DisplayListener webViewListener : webViewListeners) {
-                webViewListener.onDisplayRemoved(displayId);
-              }
-            }
+                @Override
+                public void onDisplayRemoved(int displayId) {
+                  for (DisplayListener webViewListener : webViewListeners) {
+                    webViewListener.onDisplayRemoved(displayId);
+                  }
+                }
 
-            @Override
-            public void onDisplayChanged(int displayId) {
-              if (displayManager.getDisplay(displayId) == null) {
-                return;
-              }
-              for (DisplayListener webViewListener : webViewListeners) {
-                webViewListener.onDisplayChanged(displayId);
-              }
-            }
-          },
-          null);
+                @Override
+                public void onDisplayChanged(int displayId) {
+                  if (displayManager.getDisplay(displayId) == null) {
+                    return;
+                  }
+                  for (DisplayListener webViewListener : webViewListeners) {
+                    webViewListener.onDisplayChanged(displayId);
+                  }
+                }
+              },
+              null);
     }
   }
 
@@ -122,10 +120,10 @@ class DisplayListenerProxy {
       displayManagerGlobalField.setAccessible(true);
       Object displayManagerGlobal = displayManagerGlobalField.get(displayManager);
       Field displayListenersField =
-          displayManagerGlobal.getClass().getDeclaredField("mDisplayListeners");
+              displayManagerGlobal.getClass().getDeclaredField("mDisplayListeners");
       displayListenersField.setAccessible(true);
       ArrayList<Object> delegates =
-          (ArrayList<Object>) displayListenersField.get(displayManagerGlobal);
+              (ArrayList<Object>) displayListenersField.get(displayManagerGlobal);
 
       Field listenerField = null;
       ArrayList<DisplayManager.DisplayListener> listeners = new ArrayList<>();
@@ -135,7 +133,7 @@ class DisplayListenerProxy {
           listenerField.setAccessible(true);
         }
         DisplayManager.DisplayListener listener =
-            (DisplayManager.DisplayListener) listenerField.get(delegate);
+                (DisplayManager.DisplayListener) listenerField.get(delegate);
         listeners.add(listener);
       }
       return listeners;

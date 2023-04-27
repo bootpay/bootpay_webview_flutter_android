@@ -4,28 +4,27 @@
 
 package kr.co.bootpay.webviewflutter;
 
-import android.graphics.Bitmap;
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebChromeClientHostApi;
 import java.util.Objects;
-
-import android.widget.FrameLayout;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-
 
 /**
  * Host api implementation for {@link WebChromeClient}.
@@ -49,25 +48,25 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      *
      * @param flutterApi handles sending messages to Dart
      */
-    public WebChromeClientImpl(WebChromeClientFlutterApiImpl flutterApi) {
+    public WebChromeClientImpl(@NonNull WebChromeClientFlutterApiImpl flutterApi) {
       this.flutterApi = flutterApi;
     }
 
     @Override
-    public void onProgressChanged(WebView view, int progress) {
-      if (flutterApi != null)
-        flutterApi.onProgressChanged(this, view, (long) progress, reply -> {});
+    public void onProgressChanged(@NonNull WebView view, int progress) {
+      if (flutterApi != null) flutterApi.onProgressChanged(this, view, (long) progress, reply -> {});
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @SuppressWarnings("LambdaLast")
     @Override
     public boolean onShowFileChooser(
-            WebView webView,
-            ValueCallback<Uri[]> filePathCallback,
-            FileChooserParams fileChooserParams) {
+            @NonNull WebView webView,
+            @NonNull ValueCallback<Uri[]> filePathCallback,
+            @NonNull FileChooserParams fileChooserParams) {
       final boolean currentReturnValueForOnShowFileChooser = returnValueForOnShowFileChooser;
       if (flutterApi != null)
-        flutterApi.onShowFileChooser(
+      flutterApi.onShowFileChooser(
               this,
               webView,
               fileChooserParams,
@@ -85,6 +84,13 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       return currentReturnValueForOnShowFileChooser;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onPermissionRequest(@NonNull PermissionRequest request) {
+      if (flutterApi != null)
+      flutterApi.onPermissionRequest(this, request, reply -> {});
+    }
+
     /** Sets return value for {@link #onShowFileChooser}. */
     public void setReturnValueForOnShowFileChooser(boolean value) {
       returnValueForOnShowFileChooser = value;
@@ -96,9 +102,10 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
    * window.
    */
   public static class SecureWebChromeClient extends WebChromeClient {
-    @Nullable private WebViewClient webViewClient;
+    @Nullable WebViewClient webViewClient;
     private WebChromeClientFlutterApiImpl flutterApi;
     WebView mainView;
+
 
     public SecureWebChromeClient() {}
     public SecureWebChromeClient(WebChromeClientFlutterApiImpl flutterApi) {
@@ -117,7 +124,10 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
     @Override
     public boolean onCreateWindow(
-            final WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+            @NonNull final WebView view,
+            boolean isDialog,
+            boolean isUserGesture,
+            @NonNull Message resultMsg) {
       return onCreateWindow(view, resultMsg, new WebView(view.getContext()));
     }
 
@@ -134,9 +144,12 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      *     false. Returning false from this method but also sending resultMsg will result in
      *     undefined behavior
      */
+    @SuppressLint("ClickableViewAccessibility")
     @VisibleForTesting
     boolean onCreateWindow(
-            final WebView view, Message resultMsg, @Nullable WebView newWebView) {
+            @NonNull final WebView view,
+            @NonNull Message resultMsg,
+            @Nullable WebView newWebView) {
       // WebChromeClient requires a WebViewClient because of a bug fix that makes
       // calls to WebViewClient.requestLoading/WebViewClient.urlLoading when a new
       // window is opened. This is to make sure a url opened by `Window.open` has
@@ -147,17 +160,19 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
       final WebViewClient windowWebViewClient =
               new WebViewClient() {
-
-
+                BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
 
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public boolean shouldOverrideUrlLoading(
                         @NonNull WebView windowWebView, @NonNull WebResourceRequest request) {
-
+//                  if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
+//                    view.loadUrl(request.getUrl().toString());
+//                  }
+//                  return true;
                   String url = request.getUrl().toString();
 
-                  if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+                  if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
                     //do deep link by doDeepLinkIfPayUrl function
                     return true;
                   }
@@ -165,32 +180,40 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
                   return false;
                 }
 
+                // Legacy codepath for < N.
                 @Override
+                @SuppressWarnings({"deprecation", "RedundantSuppression"})
                 public boolean shouldOverrideUrlLoading(WebView windowWebView, String url) {
-                  if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+//                  if (!webViewClient.shouldOverrideUrlLoading(view, url)) {
+//                    view.loadUrl(url);
+//                  }
+//                  return true;
+
+                  if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
                     return true;
                   }
 
                   return false;
                 }
-
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                  if(url.contains("nid.naver.com"))
-                    view.evaluateJavascript("document.getElementById('back').remove()", null);
-                  
-                  super.onPageFinished(view, url);
-                }
               };
+
+      /*
+      if (onCreateWindowWebView == null) {
+        onCreateWindowWebView = new WebView(view.getContext());
+      }
+      onCreateWindowWebView.setWebViewClient(windowWebViewClient);
+
+      final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+      transport.setWebView(onCreateWindowWebView);
+      resultMsg.sendToTarget();
+      */
 
 
       if (newWebView == null) {
         newWebView = new WebView(view.getContext());
       }
 
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        newWebView.getSettings().setMediaPlaybackRequiresUserGesture( view.getSettings().getMediaPlaybackRequiresUserGesture() );
-      }
+      newWebView.getSettings().setMediaPlaybackRequiresUserGesture( view.getSettings().getMediaPlaybackRequiresUserGesture() );
       newWebView.setWebViewClient(windowWebViewClient);
 //      newWebView.setFocusable(true);
 //      newWebView.setFocusableInTouchMode(true);
@@ -202,8 +225,8 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       newWebView.getSettings().setAllowContentAccess(view.getSettings().getAllowContentAccess());
       newWebView.getSettings().setLoadWithOverviewMode(view.getSettings().getLoadWithOverviewMode());
 //      newWebView.getSettings().setEnableSmoothTransition(view.getSettings().);
-      newWebView.getSettings().setSaveFormData(view.getSettings().getSaveFormData());
-      newWebView.getSettings().setSavePassword(view.getSettings().getSavePassword());
+//      newWebView.getSettings().setSaveFormData(view.getSettings().getSaveFormData());
+//      newWebView.getSettings().setSavePassword(view.getSettings().getSavePassword());
       newWebView.getSettings().setTextZoom(view.getSettings().getTextZoom());
 
 
@@ -237,9 +260,9 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         newWebView.getSettings().setSafeBrowsingEnabled(view.getSettings().getSafeBrowsingEnabled());
       }
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        newWebView.getSettings().setForceDark(view.getSettings().getForceDark());
-      }
+//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//        newWebView.getSettings().setForceDark(view.getSettings().getForceDark());
+//      }
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         newWebView.getSettings().setDisabledActionModeMenuItems(view.getSettings().getDisabledActionModeMenuItems());
       }
@@ -270,8 +293,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       transport.setWebView(newWebView);
       resultMsg.sendToTarget();
 
-//      newWebView.loadUrl("https://www.google.com");
-
       return true;
     }
 
@@ -289,12 +310,14 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   /** Handles creating {@link WebChromeClient}s for a {@link WebChromeClientHostApiImpl}. */
   public static class WebChromeClientCreator {
     /**
-     * Creates a {@link DownloadListenerHostApiImpl.DownloadListenerImpl}.
+     * Creates a {@link WebChromeClientHostApiImpl.WebChromeClientImpl}.
      *
      * @param flutterApi handles sending messages to Dart
      * @return the created {@link WebChromeClientHostApiImpl.WebChromeClientImpl}
      */
-    public WebChromeClientImpl createWebChromeClient(WebChromeClientFlutterApiImpl flutterApi) {
+    @NonNull
+    public WebChromeClientImpl createWebChromeClient(
+            @NonNull WebChromeClientFlutterApiImpl flutterApi) {
       return new WebChromeClientImpl(flutterApi);
     }
   }
@@ -307,16 +330,16 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
    * @param flutterApi handles sending messages to Dart
    */
   public WebChromeClientHostApiImpl(
-          InstanceManager instanceManager,
-          WebChromeClientCreator webChromeClientCreator,
-          WebChromeClientFlutterApiImpl flutterApi) {
+          @NonNull InstanceManager instanceManager,
+          @NonNull WebChromeClientCreator webChromeClientCreator,
+          @NonNull WebChromeClientFlutterApiImpl flutterApi) {
     this.instanceManager = instanceManager;
     this.webChromeClientCreator = webChromeClientCreator;
     this.flutterApi = flutterApi;
   }
 
   @Override
-  public void create(Long instanceId) {
+  public void create(@NonNull Long instanceId) {
     final WebChromeClient webChromeClient =
             webChromeClientCreator.createWebChromeClient(flutterApi);
     instanceManager.addDartCreatedInstance(webChromeClient, instanceId);

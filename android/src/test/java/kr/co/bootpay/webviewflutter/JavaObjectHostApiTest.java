@@ -8,13 +8,10 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import kr.co.bootpay.webviewflutter.InstanceManager;
-import kr.co.bootpay.webviewflutter.JavaObjectHostApiImpl;
-
 public class JavaObjectHostApiTest {
   @Test
   public void dispose() {
-    final InstanceManager instanceManager = InstanceManager.open(identifier -> {});
+    final InstanceManager instanceManager = InstanceManager.create(identifier -> {});
 
     final JavaObjectHostApiImpl hostApi = new JavaObjectHostApiImpl(instanceManager);
 
@@ -30,6 +27,6 @@ public class JavaObjectHostApiTest {
 
     assertNull(instanceManager.getInstance(0));
 
-    instanceManager.close();
+    instanceManager.stopFinalizationListener();
   }
 }

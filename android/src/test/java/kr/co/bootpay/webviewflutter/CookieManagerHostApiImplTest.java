@@ -14,15 +14,11 @@ import static org.mockito.Mockito.when;
 import android.os.Build;
 import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
-
+import kr.co.bootpay.webviewflutter.utils.TestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockedStatic;
-
-import kr.co.bootpay.webviewflutter.utils.TestUtils;
-import kr.co.bootpay.webviewflutter.CookieManagerHostApiImpl;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView;
 
 public class CookieManagerHostApiImplTest {
 
@@ -37,7 +33,8 @@ public class CookieManagerHostApiImplTest {
     when(cookieManager.hasCookies()).thenReturn(true);
     doAnswer(
             answer -> {
-              ((ValueCallback<Boolean>) answer.getArgument(0)).onReceiveValue(true);
+              ValueCallback<Boolean> callback = answer.getArgument(0);
+              (callback).onReceiveValue(true);
               return null;
             })
         .when(cookieManager)
@@ -63,6 +60,7 @@ public class CookieManagerHostApiImplTest {
   public void clearCookiesShouldCallRemoveAllCookiesOnAndroidLAbove() {
     // Setup
     TestUtils.setFinalStatic(Build.VERSION.class, "SDK_INT", Build.VERSION_CODES.LOLLIPOP);
+    @SuppressWarnings("unchecked")
     GeneratedAndroidWebView.Result<Boolean> result = mock(GeneratedAndroidWebView.Result.class);
     CookieManagerHostApiImpl impl = new CookieManagerHostApiImpl();
     // Run
@@ -73,9 +71,11 @@ public class CookieManagerHostApiImplTest {
   }
 
   @Test
+  @SuppressWarnings("deprecation")
   public void clearCookiesShouldCallRemoveAllCookieBelowAndroidL() {
     // Setup
     TestUtils.setFinalStatic(Build.VERSION.class, "SDK_INT", Build.VERSION_CODES.KITKAT_WATCH);
+    @SuppressWarnings("unchecked")
     GeneratedAndroidWebView.Result<Boolean> result = mock(GeneratedAndroidWebView.Result.class);
     CookieManagerHostApiImpl impl = new CookieManagerHostApiImpl();
     // Run

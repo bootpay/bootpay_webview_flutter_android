@@ -6,6 +6,7 @@ package kr.co.bootpay.webviewflutter;
 
 import android.os.Build;
 import android.webkit.WebChromeClient;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import io.flutter.plugin.common.BinaryMessenger;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ import java.util.Arrays;
  */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class FileChooserParamsFlutterApiImpl
-    extends GeneratedAndroidWebView.FileChooserParamsFlutterApi {
+        extends GeneratedAndroidWebView.FileChooserParamsFlutterApi {
   private final InstanceManager instanceManager;
 
   /**
@@ -28,14 +29,14 @@ public class FileChooserParamsFlutterApiImpl
    * @param instanceManager maintains instances stored to communicate with Dart objects
    */
   public FileChooserParamsFlutterApiImpl(
-      BinaryMessenger binaryMessenger, InstanceManager instanceManager) {
+          @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
     super(binaryMessenger);
     this.instanceManager = instanceManager;
   }
 
   private static GeneratedAndroidWebView.FileChooserModeEnumData toFileChooserEnumData(int mode) {
     final GeneratedAndroidWebView.FileChooserModeEnumData.Builder builder =
-        new GeneratedAndroidWebView.FileChooserModeEnumData.Builder();
+            new GeneratedAndroidWebView.FileChooserModeEnumData.Builder();
 
     switch (mode) {
       case WebChromeClient.FileChooserParams.MODE_OPEN:
@@ -57,18 +58,17 @@ public class FileChooserParamsFlutterApiImpl
   /**
    * Stores the FileChooserParams instance and notifies Dart to create a new FileChooserParams
    * instance that is attached to this one.
-   *
-   * @return the instanceId of the stored instance
    */
-  public long create(WebChromeClient.FileChooserParams instance, Reply<Void> callback) {
-    final long instanceId = instanceManager.addHostCreatedInstance(instance);
-    create(
-        instanceId,
-        instance.isCaptureEnabled(),
-        Arrays.asList(instance.getAcceptTypes()),
-        toFileChooserEnumData(instance.getMode()),
-        instance.getFilenameHint(),
-        callback);
-    return instanceId;
+  public void create(
+          @NonNull WebChromeClient.FileChooserParams instance, @NonNull Reply<Void> callback) {
+    if (!instanceManager.containsInstance(instance)) {
+      create(
+              instanceManager.addHostCreatedInstance(instance),
+              instance.isCaptureEnabled(),
+              Arrays.asList(instance.getAcceptTypes()),
+              toFileChooserEnumData(instance.getMode()),
+              instance.getFilenameHint(),
+              callback);
+    }
   }
 }

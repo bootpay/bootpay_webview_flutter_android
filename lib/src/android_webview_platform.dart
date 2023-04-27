@@ -16,29 +16,29 @@ class BTAndroidWebViewPlatform extends WebViewPlatform {
 
   @override
   AndroidWebViewController createPlatformWebViewController(
-    PlatformWebViewControllerCreationParams params,
-  ) {
+      PlatformWebViewControllerCreationParams params,
+      ) {
     return AndroidWebViewController(params);
   }
 
   @override
   AndroidNavigationDelegate createPlatformNavigationDelegate(
-    PlatformNavigationDelegateCreationParams params,
-  ) {
+      PlatformNavigationDelegateCreationParams params,
+      ) {
     return AndroidNavigationDelegate(params);
   }
 
   @override
   AndroidWebViewWidget createPlatformWebViewWidget(
-    PlatformWebViewWidgetCreationParams params,
-  ) {
+      PlatformWebViewWidgetCreationParams params,
+      ) {
     return AndroidWebViewWidget(params);
   }
 
   @override
   AndroidWebViewCookieManager createPlatformCookieManager(
-    PlatformWebViewCookieManagerCreationParams params,
-  ) {
+      PlatformWebViewCookieManagerCreationParams params,
+      ) {
     return AndroidWebViewCookieManager(params);
   }
 }

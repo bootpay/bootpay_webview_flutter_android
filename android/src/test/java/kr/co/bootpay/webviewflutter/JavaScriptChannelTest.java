@@ -9,7 +9,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.os.Handler;
-
+import android.os.Looper;
+import kr.co.bootpay.webviewflutter.JavaScriptChannelHostApiImpl.JavaScriptChannelCreator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,12 +18,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
-import kr.co.bootpay.webviewflutter.JavaScriptChannelHostApiImpl.JavaScriptChannelCreator;
-import kr.co.bootpay.webviewflutter.InstanceManager;
-import kr.co.bootpay.webviewflutter.JavaScriptChannel;
-import kr.co.bootpay.webviewflutter.JavaScriptChannelFlutterApiImpl;
-import kr.co.bootpay.webviewflutter.JavaScriptChannelHostApiImpl;
 
 public class JavaScriptChannelTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -35,7 +30,7 @@ public class JavaScriptChannelTest {
 
   @Before
   public void setUp() {
-    instanceManager = InstanceManager.open(identifier -> {});
+    instanceManager = InstanceManager.create(identifier -> {});
 
     final JavaScriptChannelCreator javaScriptChannelCreator =
         new JavaScriptChannelCreator() {
@@ -53,13 +48,16 @@ public class JavaScriptChannelTest {
 
     hostApiImpl =
         new JavaScriptChannelHostApiImpl(
-            instanceManager, javaScriptChannelCreator, mockFlutterApi, new Handler());
+            instanceManager,
+            javaScriptChannelCreator,
+            mockFlutterApi,
+            new Handler(Looper.myLooper()));
     hostApiImpl.create(0L, "aChannelName");
   }
 
   @After
   public void tearDown() {
-    instanceManager.close();
+    instanceManager.stopFinalizationListener();
   }
 
   @Test

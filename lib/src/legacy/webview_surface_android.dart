@@ -30,6 +30,9 @@ import 'webview_android_widget.dart';
 /// https://github.com/flutter/flutter/wiki/Hybrid-Composition for more
 /// information.
 class SurfaceAndroidWebView extends AndroidWebView {
+  /// Constructs a [SurfaceAndroidWebView].
+  SurfaceAndroidWebView({@visibleForTesting super.instanceManager});
+
   @override
   Widget build({
     required BuildContext context,
@@ -40,7 +43,6 @@ class SurfaceAndroidWebView extends AndroidWebView {
     required WebViewPlatformCallbacksHandler webViewPlatformCallbacksHandler,
   }) {
     return WebViewAndroidWidget(
-      useHybridComposition: true,
       creationParams: creationParams,
       callbacksHandler: webViewPlatformCallbacksHandler,
       javascriptChannelRegistry: javascriptChannelRegistry,
@@ -48,9 +50,9 @@ class SurfaceAndroidWebView extends AndroidWebView {
         return PlatformViewLink(
           viewType: 'kr.co.bootpay/webview',
           surfaceFactory: (
-            BuildContext context,
-            PlatformViewController controller,
-          ) {
+              BuildContext context,
+              PlatformViewController controller,
+              ) {
             return AndroidViewSurface(
               controller: controller as AndroidViewController,
               gestureRecognizers: gestureRecognizers ??
@@ -66,16 +68,16 @@ class SurfaceAndroidWebView extends AndroidWebView {
               // AndroidViewSurface. This switches the WebView to Hybrid
               // Composition when the background color is not 100% opaque.
               hybridComposition:
-                  backgroundColor != null && backgroundColor.opacity < 1.0,
+              backgroundColor != null && backgroundColor.opacity < 1.0,
               id: params.id,
               viewType: 'kr.co.bootpay/webview',
               // WebView content is not affected by the Android view's layout direction,
               // we explicitly set it here so that the widget doesn't require an ambient
               // directionality.
               layoutDirection:
-                  Directionality.maybeOf(context) ?? TextDirection.ltr,
-              webViewIdentifier: JavaObject.globalInstanceManager
-                  .getIdentifier(controller.webView)!,
+              Directionality.maybeOf(context) ?? TextDirection.ltr,
+              webViewIdentifier:
+              instanceManager.getIdentifier(controller.webView)!,
             )
               ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
               ..addOnPlatformViewCreatedListener((int id) {

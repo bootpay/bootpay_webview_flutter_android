@@ -15,11 +15,14 @@ import static org.mockito.Mockito.when;
 
 import android.net.Uri;
 import android.os.Message;
+import android.webkit.PermissionRequest;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebView.WebViewTransport;
 import android.webkit.WebViewClient;
-
+import androidx.annotation.NonNull;
+import kr.co.bootpay.webviewflutter.WebChromeClientHostApiImpl.WebChromeClientCreator;
+import kr.co.bootpay.webviewflutter.WebChromeClientHostApiImpl.WebChromeClientImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,12 +31,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
-import kr.co.bootpay.webviewflutter.WebChromeClientHostApiImpl.WebChromeClientCreator;
-import kr.co.bootpay.webviewflutter.WebChromeClientHostApiImpl.WebChromeClientImpl;
-import kr.co.bootpay.webviewflutter.InstanceManager;
-import kr.co.bootpay.webviewflutter.WebChromeClientFlutterApiImpl;
-import kr.co.bootpay.webviewflutter.WebChromeClientHostApiImpl;
 
 public class WebChromeClientTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -50,15 +47,14 @@ public class WebChromeClientTest {
 
   @Before
   public void setUp() {
-    instanceManager = InstanceManager.open(identifier -> {});
-
-    instanceManager.addDartCreatedInstance(mockWebView, 0L);
+    instanceManager = InstanceManager.create(identifier -> {});
 
     final WebChromeClientCreator webChromeClientCreator =
         new WebChromeClientCreator() {
           @Override
+          @NonNull
           public WebChromeClientImpl createWebChromeClient(
-              WebChromeClientFlutterApiImpl flutterApi) {
+              @NonNull WebChromeClientFlutterApiImpl flutterApi) {
             webChromeClient = super.createWebChromeClient(flutterApi);
             return webChromeClient;
           }
@@ -71,7 +67,7 @@ public class WebChromeClientTest {
 
   @After
   public void tearDown() {
-    instanceManager.close();
+    instanceManager.stopFinalizationListener();
   }
 
   @Test
@@ -118,5 +114,15 @@ public class WebChromeClientTest {
         onCreateWindowWebViewClient.shouldOverrideUrlLoading(
             mockOnCreateWindowWebView, mockRequest));
     verify(mockWebView).loadUrl("https://www.google.com");
+  }
+
+  @Test
+  public void onPermissionRequest() {
+    final PermissionRequest mockRequest = mock(PermissionRequest.class);
+    instanceManager.addDartCreatedInstance(mockRequest, 10);
+
+    webChromeClient.onPermissionRequest(mockRequest);
+
+    verify(mockFlutterApi).onPermissionRequest(eq(webChromeClient), eq(mockRequest), any());
   }
 }

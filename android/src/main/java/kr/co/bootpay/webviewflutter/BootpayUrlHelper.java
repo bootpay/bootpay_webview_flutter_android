@@ -7,14 +7,18 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.webkit.WebView;
+import android.util.Log;
 
 import androidx.core.content.IntentCompat;
 
 import java.net.URISyntaxException;
 
+import kotlin.Suppress;
+
 
 public class BootpayUrlHelper {
-    public static boolean doDeepLinkIfPayUrl(WebView view, String url) {
+    public boolean doDeepLinkIfPayUrl(WebView view, String url) {
+
         Intent intent = getIntentWithPackage(url);
         Context context = view.getContext();
 
@@ -28,12 +32,13 @@ public class BootpayUrlHelper {
             if(isInstallApp(intent, context)) return startApp(intent, context);
             else return startGooglePlay(intent, context);
         }
+        Log.d("bootpay", "doDeepLinkIfPayUrl false");
 
 //        return url.contains("vguardend");
         return false;
     }
 
-    public static Boolean isSpecialCase(String url) {
+    public Boolean isSpecialCase(String url) {
         return url.matches("^shinhan\\S+$")
                 || url.startsWith("kftc-bankpay://")
                 || url.startsWith("v3mobileplusweb://")
@@ -44,15 +49,21 @@ public class BootpayUrlHelper {
                 || url.startsWith("kakaotalk://");
     }
 
-    public static Boolean isIntent(String url) {
+    public Boolean isIntent(String url) {
+        Log.d(
+                "bootpay",
+                String.format("url %s: %s.", url, url.startsWith("intent:"))
+        );
+
+
         return url.startsWith("intent:");
     }
-    public static Boolean isMarket(String url) {
+    public Boolean isMarket(String url) {
         return url.startsWith("market://");
     }
 
 
-    public static Intent getIntentWithPackage(String url) {
+    public Intent getIntentWithPackage(String url) {
         try {
             Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
             if(intent.getPackage() == null) {
@@ -77,31 +88,32 @@ public class BootpayUrlHelper {
         }
     }
 
-    public static boolean isInstallApp(Intent intent, Context context) {
-        return isExistPackageInfo(intent, context) || isExistLaunchedIntent(intent, context);
+    public boolean isInstallApp(Intent intent, Context context) {
+//        return isExistPackageInfo(intent, context) || isExistLaunchedIntent(intent, context);
+        return isExistLaunchedIntent(intent, context);
     }
 
 
-    private static boolean isExistPackageInfo(Intent intent, Context context) {
-        try {
-            return intent != null && context.getPackageManager().getPackageInfo(intent.getPackage(), PackageManager.GET_ACTIVITIES) != null;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+//    private boolean isExistPackageInfo(Intent intent, Context context) {
+//        try {
+//            return intent != null && context.getPackageManager().getPackageInfo(intent.getPackage(), PackageManager.PackageInfoFlags.of(0)) != null;
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 
-    private static boolean isExistLaunchedIntent(Intent intent, Context context) {
+    private boolean isExistLaunchedIntent(Intent intent, Context context) {
         return intent != null &&  intent.getPackage() != null && context.getPackageManager().getLaunchIntentForPackage(intent.getPackage()) != null;
     }
 
-    public static boolean startApp(Intent intent, Context context) {
+    public boolean startApp(Intent intent, Context context) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         return true;
     }
 
-    public static boolean startGooglePlay(Intent intent, Context context) {
+    public boolean startGooglePlay(Intent intent, Context context) {
         final String appPackageName = intent.getPackage();
 
         if(appPackageName == null) {
@@ -110,7 +122,7 @@ public class BootpayUrlHelper {
             try {
                 Intent addIntent = new Intent(Intent.ACTION_VIEW, intent.getData());
 //                addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-                addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//                addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(addIntent);
             } catch (Exception e) {
                 String packageName = "com.nhn.android.search"; //appPackageName이 비어있으면 네이버로 보내기(네이버 로그인)
@@ -118,7 +130,7 @@ public class BootpayUrlHelper {
 
                 Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
 //                addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-                addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//                addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(addIntent);
 //                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
             }
@@ -127,12 +139,12 @@ public class BootpayUrlHelper {
         try {
             Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
 //            addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-            addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//            addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(addIntent);
         } catch (android.content.ActivityNotFoundException anfe) {
             Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
 //            addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-            addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+//            addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(addIntent);
         }
         return true;

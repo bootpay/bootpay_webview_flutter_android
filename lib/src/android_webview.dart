@@ -2,11 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// TODO(bparrishMines): Replace unused callback methods in constructors with
-// variables once automatic garbage collection is fully implemented. See
-// https://github.com/flutter/flutter/issues/107199.
-// ignore_for_file: avoid_unused_constructor_parameters
-
 // TODO(a14n): remove this import once Flutter 3.1 or later reaches stable (including flutter/flutter#104231)
 // ignore: unnecessary_import
 import 'dart:typed_data';
@@ -14,9 +9,10 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show BinaryMessenger;
-import 'package:flutter/widgets.dart' show AndroidViewSurface;
 
-import 'android_webview.pigeon.dart';
+import 'package:flutter/widgets.dart' show WidgetsFlutterBinding;
+
+import 'android_webview.g.dart';
 import 'android_webview_api_impls.dart';
 import 'instance_manager.dart';
 
@@ -30,20 +26,28 @@ class JavaObject with Copyable {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
+  @protected
   JavaObject.detached({
     BinaryMessenger? binaryMessenger,
     InstanceManager? instanceManager,
   }) : _api = JavaObjectHostApiImpl(
-          binaryMessenger: binaryMessenger,
-          instanceManager: instanceManager,
-        );
+    binaryMessenger: binaryMessenger,
+    instanceManager: instanceManager,
+  );
 
   /// Global instance of [InstanceManager].
-  static final InstanceManager globalInstanceManager = InstanceManager(
-    onWeakReferenceRemoved: (int identifier) {
-      JavaObjectHostApiImpl().dispose(identifier);
-    },
-  );
+  static final InstanceManager globalInstanceManager = _initInstanceManager();
+
+  static InstanceManager _initInstanceManager() {
+    WidgetsFlutterBinding.ensureInitialized();
+    // Clears the native `InstanceManager` on initial use of the Dart one.
+    InstanceManagerHostApi().clear();
+    return InstanceManager(
+      onWeakReferenceRemoved: (int identifier) {
+        JavaObjectHostApiImpl().dispose(identifier);
+      },
+    );
+  }
 
   /// Pigeon Host Api implementation for [JavaObject].
   final JavaObjectHostApiImpl _api;
@@ -84,7 +88,10 @@ class WebView extends JavaObject {
   /// Due to changes in Flutter 3.0 the [useHybridComposition] doesn't have
   /// any effect and should not be exposed publicly. More info here:
   /// https://github.com/flutter/flutter/issues/108106
-  WebView({this.useHybridComposition = false}) : super.detached() {
+  WebView({
+    @visibleForTesting super.binaryMessenger,
+    @visibleForTesting super.instanceManager,
+  }) : super.detached() {
     api.createFromInstance(this);
   }
 
@@ -92,22 +99,15 @@ class WebView extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
-  WebView.detached({this.useHybridComposition = false}) : super.detached();
+  @protected
+  WebView.detached({
+    super.binaryMessenger,
+    super.instanceManager,
+  }) : super.detached();
 
   /// Pigeon Host Api implementation for [WebView].
   @visibleForTesting
   static WebViewHostApiImpl api = WebViewHostApiImpl();
-
-  /// Whether the [WebView] will be rendered with an [AndroidViewSurface].
-  ///
-  /// This implementation uses hybrid composition to render the WebView Widget.
-  /// This comes at the cost of some performance on Android versions below 10.
-  /// See
-  /// https://flutter.dev/docs/development/platform-integration/platform-views#performance
-  /// for more information.
-  ///
-  /// Defaults to false.
-  final bool useHybridComposition;
 
   /// The [WebSettings] object used to control the settings for this WebView.
   late final WebSettings settings = WebSettings(this);
@@ -399,7 +399,10 @@ class WebView extends JavaObject {
 
   @override
   WebView copy() {
-    return WebView.detached(useHybridComposition: useHybridComposition);
+    return WebView.detached(
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
+    );
   }
 }
 
@@ -459,7 +462,11 @@ class WebSettings extends JavaObject {
   /// This constructor is only used for testing. An instance should be obtained
   /// with [WebView.settings].
   @visibleForTesting
-  WebSettings(WebView webView) : super.detached() {
+  WebSettings(
+      WebView webView, {
+        @visibleForTesting super.binaryMessenger,
+        @visibleForTesting super.instanceManager,
+      }) : super.detached() {
     api.createFromInstance(this, webView);
   }
 
@@ -467,7 +474,11 @@ class WebSettings extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
-  WebSettings.detached() : super.detached();
+  @protected
+  WebSettings.detached({
+    super.binaryMessenger,
+    super.instanceManager,
+  }) : super.detached();
 
   /// Pigeon Host Api implementation for [WebSettings].
   @visibleForTesting
@@ -591,9 +602,19 @@ class WebSettings extends JavaObject {
     return api.setAllowFileAccessFromInstance(this, enabled);
   }
 
+  /// Sets the text zoom of the page in percent.
+  ///
+  /// The default is 100. See https://developer.android.com/reference/android/webkit/WebSettings#setTextZoom(int)
+  Future<void> setTextZoom(int textZoom) {
+    return api.setSetTextZoomFromInstance(this, textZoom);
+  }
+
   @override
   WebSettings copy() {
-    return WebSettings.detached();
+    return WebSettings.detached(
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
+    );
   }
 }
 
@@ -603,9 +624,11 @@ class WebSettings extends JavaObject {
 class JavaScriptChannel extends JavaObject {
   /// Constructs a [JavaScriptChannel].
   JavaScriptChannel(
-    this.channelName, {
-    required this.postMessage,
-  }) : super.detached() {
+      this.channelName, {
+        required this.postMessage,
+        @visibleForTesting super.binaryMessenger,
+        @visibleForTesting super.instanceManager,
+      }) : super.detached() {
     AndroidWebViewFlutterApis.instance.ensureSetUp();
     api.createFromInstance(this);
   }
@@ -615,10 +638,13 @@ class JavaScriptChannel extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
+  @protected
   JavaScriptChannel.detached(
-    this.channelName, {
-    required this.postMessage,
-  }) : super.detached();
+      this.channelName, {
+        required this.postMessage,
+        super.binaryMessenger,
+        super.instanceManager,
+      }) : super.detached();
 
   /// Pigeon Host Api implementation for [JavaScriptChannel].
   @visibleForTesting
@@ -632,7 +658,12 @@ class JavaScriptChannel extends JavaObject {
 
   @override
   JavaScriptChannel copy() {
-    return JavaScriptChannel.detached(channelName, postMessage: postMessage);
+    return JavaScriptChannel.detached(
+      channelName,
+      postMessage: postMessage,
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
+    );
   }
 }
 
@@ -646,6 +677,9 @@ class WebViewClient extends JavaObject {
     @Deprecated('Only called on Android version < 23.') this.onReceivedError,
     this.requestLoading,
     this.urlLoading,
+    this.doUpdateVisitedHistory,
+    @visibleForTesting super.binaryMessenger,
+    @visibleForTesting super.instanceManager,
   }) : super.detached() {
     AndroidWebViewFlutterApis.instance.ensureSetUp();
     api.createFromInstance(this);
@@ -655,6 +689,7 @@ class WebViewClient extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
+  @protected
   WebViewClient.detached({
     this.onPageStarted,
     this.onPageFinished,
@@ -662,6 +697,9 @@ class WebViewClient extends JavaObject {
     @Deprecated('Only called on Android version < 23.') this.onReceivedError,
     this.requestLoading,
     this.urlLoading,
+    this.doUpdateVisitedHistory,
+    super.binaryMessenger,
+    super.instanceManager,
   }) : super.detached();
 
   /// User authentication failed on server.
@@ -774,10 +812,10 @@ class WebViewClient extends JavaObject {
   /// page. Thus, it is recommended to perform minimum required work in this
   /// callback.
   final void Function(
-    WebView webView,
-    WebResourceRequest request,
-    WebResourceError error,
-  )? onReceivedRequestError;
+      WebView webView,
+      WebResourceRequest request,
+      WebResourceError error,
+      )? onReceivedRequestError;
 
   /// Report an error to the host application.
   ///
@@ -785,24 +823,28 @@ class WebViewClient extends JavaObject {
   /// The errorCode parameter corresponds to one of the error* constants.
   @Deprecated('Only called on Android version < 23.')
   final void Function(
-    WebView webView,
-    int errorCode,
-    String description,
-    String failingUrl,
-  )? onReceivedError;
+      WebView webView,
+      int errorCode,
+      String description,
+      String failingUrl,
+      )? onReceivedError;
 
   /// When the current [WebView] wants to load a URL.
   ///
   /// The value set by [setSynchronousReturnValueForShouldOverrideUrlLoading]
   /// indicates whether the [WebView] loaded the request.
   final void Function(WebView webView, WebResourceRequest request)?
-      requestLoading;
+  requestLoading;
 
   /// When the current [WebView] wants to load a URL.
   ///
   /// The value set by [setSynchronousReturnValueForShouldOverrideUrlLoading]
   /// indicates whether the [WebView] loaded the URL.
   final void Function(WebView webView, String url)? urlLoading;
+
+  /// Notify the host application to update its visited links database.
+  final void Function(WebView webView, String url, bool isReload)?
+  doUpdateVisitedHistory;
 
   /// Sets the required synchronous return value for the Java method,
   /// `WebViewClient.shouldOverrideUrlLoading(...)`.
@@ -817,8 +859,8 @@ class WebViewClient extends JavaObject {
   ///
   /// Defaults to false.
   Future<void> setSynchronousReturnValueForShouldOverrideUrlLoading(
-    bool value,
-  ) {
+      bool value,
+      ) {
     return api.setShouldOverrideUrlLoadingReturnValueFromInstance(this, value);
   }
 
@@ -831,6 +873,9 @@ class WebViewClient extends JavaObject {
       onReceivedError: onReceivedError,
       requestLoading: requestLoading,
       urlLoading: urlLoading,
+      doUpdateVisitedHistory: doUpdateVisitedHistory,
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
     );
   }
 }
@@ -839,7 +884,11 @@ class WebViewClient extends JavaObject {
 /// engine for [WebView], and should be downloaded instead.
 class DownloadListener extends JavaObject {
   /// Constructs a [DownloadListener].
-  DownloadListener({required this.onDownloadStart}) : super.detached() {
+  DownloadListener({
+    required this.onDownloadStart,
+    @visibleForTesting super.binaryMessenger,
+    @visibleForTesting super.instanceManager,
+  }) : super.detached() {
     AndroidWebViewFlutterApis.instance.ensureSetUp();
     api.createFromInstance(this);
   }
@@ -849,7 +898,12 @@ class DownloadListener extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
-  DownloadListener.detached({required this.onDownloadStart}) : super.detached();
+  @protected
+  DownloadListener.detached({
+    required this.onDownloadStart,
+    super.binaryMessenger,
+    super.instanceManager,
+  }) : super.detached();
 
   /// Pigeon Host Api implementation for [DownloadListener].
   @visibleForTesting
@@ -857,24 +911,33 @@ class DownloadListener extends JavaObject {
 
   /// Notify the host application that a file should be downloaded.
   final void Function(
-    String url,
-    String userAgent,
-    String contentDisposition,
-    String mimetype,
-    int contentLength,
-  ) onDownloadStart;
+      String url,
+      String userAgent,
+      String contentDisposition,
+      String mimetype,
+      int contentLength,
+      ) onDownloadStart;
 
   @override
   DownloadListener copy() {
-    return DownloadListener.detached(onDownloadStart: onDownloadStart);
+    return DownloadListener.detached(
+      onDownloadStart: onDownloadStart,
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
+    );
   }
 }
 
 /// Handles JavaScript dialogs, favicons, titles, and the progress for [WebView].
 class WebChromeClient extends JavaObject {
   /// Constructs a [WebChromeClient].
-  WebChromeClient({this.onProgressChanged, this.onShowFileChooser})
-      : super.detached() {
+  WebChromeClient({
+    this.onProgressChanged,
+    this.onShowFileChooser,
+    this.onPermissionRequest,
+    @visibleForTesting super.binaryMessenger,
+    @visibleForTesting super.instanceManager,
+  }) : super.detached() {
     AndroidWebViewFlutterApis.instance.ensureSetUp();
     api.createFromInstance(this);
   }
@@ -884,9 +947,13 @@ class WebChromeClient extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
+  @protected
   WebChromeClient.detached({
     this.onProgressChanged,
     this.onShowFileChooser,
+    this.onPermissionRequest,
+    super.binaryMessenger,
+    super.instanceManager,
   }) : super.detached();
 
   /// Pigeon Host Api implementation for [WebChromeClient].
@@ -905,9 +972,19 @@ class WebChromeClient extends JavaObject {
   ///
   /// Only invoked on Android versions 21+.
   final Future<List<String>> Function(
-    WebView webView,
-    FileChooserParams params,
-  )? onShowFileChooser;
+      WebView webView,
+      FileChooserParams params,
+      )? onShowFileChooser;
+
+  /// Notify the host application that web content is requesting permission to
+  /// access the specified resources and the permission currently isn't granted
+  /// or denied.
+  ///
+  /// Only invoked on Android versions 21+.
+  final void Function(
+      WebChromeClient instance,
+      PermissionRequest request,
+      )? onPermissionRequest;
 
   /// Sets the required synchronous return value for the Java method,
   /// `WebChromeClient.onShowFileChooser(...)`.
@@ -925,8 +1002,8 @@ class WebChromeClient extends JavaObject {
   ///
   /// Defaults to false.
   Future<void> setSynchronousReturnValueForOnShowFileChooser(
-    bool value,
-  ) {
+      bool value,
+      ) {
     if (value && onShowFileChooser == null) {
       throw StateError(
         'Setting this to true requires `onShowFileChooser` to be nonnull.',
@@ -943,6 +1020,79 @@ class WebChromeClient extends JavaObject {
     return WebChromeClient.detached(
       onProgressChanged: onProgressChanged,
       onShowFileChooser: onShowFileChooser,
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
+    );
+  }
+}
+
+/// This class defines a permission request and is used when web content
+/// requests access to protected resources.
+///
+/// Only supported on Android versions >= 21.
+///
+/// See https://developer.android.com/reference/android/webkit/PermissionRequest.
+class PermissionRequest extends JavaObject {
+  /// Instantiates a [PermissionRequest] without creating and attaching to an
+  /// instance of the associated native class.
+  ///
+  /// This should only be used outside of tests by subclasses created by this
+  /// library or to create a copy for an [InstanceManager].
+  @protected
+  PermissionRequest.detached({
+    required this.resources,
+    required super.binaryMessenger,
+    required super.instanceManager,
+  })  : _permissionRequestApi = PermissionRequestHostApiImpl(
+    binaryMessenger: binaryMessenger,
+    instanceManager: instanceManager,
+  ),
+        super.detached();
+
+  /// Resource belongs to audio capture device, like microphone.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/PermissionRequest#RESOURCE_AUDIO_CAPTURE.
+  static const String audioCapture = 'android.webkit.resource.AUDIO_CAPTURE';
+
+  /// Resource will allow sysex messages to be sent to or received from MIDI
+  /// devices.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/PermissionRequest#RESOURCE_MIDI_SYSEX.
+  static const String midiSysex = 'android.webkit.resource.MIDI_SYSEX';
+
+  /// Resource belongs to video capture device, like camera.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/PermissionRequest#RESOURCE_VIDEO_CAPTURE.
+  static const String videoCapture = 'android.webkit.resource.VIDEO_CAPTURE';
+
+  /// Resource belongs to protected media identifier.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/PermissionRequest#RESOURCE_VIDEO_CAPTURE.
+  static const String protectedMediaId =
+      'android.webkit.resource.PROTECTED_MEDIA_ID';
+
+  final PermissionRequestHostApiImpl _permissionRequestApi;
+
+  /// Resources the web page is trying to access.
+  final List<String> resources;
+
+  /// Call this method to get the resources the web page is trying to access.
+  Future<void> grant(List<String> resources) {
+    return _permissionRequestApi.grantFromInstances(this, resources);
+  }
+
+  /// Call this method to grant origin the permission to access the given
+  /// resources.
+  Future<void> deny() {
+    return _permissionRequestApi.denyFromInstances(this);
+  }
+
+  @override
+  PermissionRequest copy() {
+    return PermissionRequest.detached(
+      resources: resources,
+      binaryMessenger: _permissionRequestApi.binaryMessenger,
+      instanceManager: _permissionRequestApi.instanceManager,
     );
   }
 }
@@ -956,6 +1106,7 @@ class FileChooserParams extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
+  @protected
   FileChooserParams.detached({
     required this.isCaptureEnabled,
     required this.acceptTypes,
@@ -984,6 +1135,8 @@ class FileChooserParams extends JavaObject {
       acceptTypes: acceptTypes,
       filenameHint: filenameHint,
       mode: mode,
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
     );
   }
 }
@@ -1067,7 +1220,10 @@ class WebStorage extends JavaObject {
   /// This constructor is only used for testing. An instance should be obtained
   /// with [WebStorage.instance].
   @visibleForTesting
-  WebStorage() : super.detached() {
+  WebStorage({
+    @visibleForTesting super.binaryMessenger,
+    @visibleForTesting super.instanceManager,
+  }) : super.detached() {
     AndroidWebViewFlutterApis.instance.ensureSetUp();
     api.createFromInstance(this);
   }
@@ -1076,7 +1232,11 @@ class WebStorage extends JavaObject {
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies.
-  WebStorage.detached() : super.detached();
+  @protected
+  WebStorage.detached({
+    super.binaryMessenger,
+    super.instanceManager,
+  }) : super.detached();
 
   /// Pigeon Host Api implementation for [WebStorage].
   @visibleForTesting
@@ -1092,6 +1252,9 @@ class WebStorage extends JavaObject {
 
   @override
   WebStorage copy() {
-    return WebStorage.detached();
+    return WebStorage.detached(
+      binaryMessenger: _api.binaryMessenger,
+      instanceManager: _api.instanceManager,
+    );
   }
 }

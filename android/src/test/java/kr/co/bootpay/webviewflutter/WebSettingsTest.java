@@ -5,11 +5,13 @@
 package kr.co.bootpay.webviewflutter;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.webkit.WebSettings;
-
+import android.webkit.WebView;
+import kr.co.bootpay.webviewflutter.WebSettingsHostApiImpl.WebSettingsCreator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,10 +19,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
-import kr.co.bootpay.webviewflutter.WebSettingsHostApiImpl.WebSettingsCreator;
-import kr.co.bootpay.webviewflutter.InstanceManager;
-import kr.co.bootpay.webviewflutter.WebSettingsHostApiImpl;
 
 public class WebSettingsTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -34,16 +32,18 @@ public class WebSettingsTest {
 
   @Before
   public void setUp() {
-    testInstanceManager = InstanceManager.open(identifier -> {});
+    testInstanceManager = InstanceManager.create(identifier -> {});
 
     when(mockWebSettingsCreator.createWebSettings(any())).thenReturn(mockWebSettings);
     testHostApiImpl = new WebSettingsHostApiImpl(testInstanceManager, mockWebSettingsCreator);
-    testHostApiImpl.create(0L, 0L);
+
+    testInstanceManager.addDartCreatedInstance(mock(WebView.class), 1);
+    testHostApiImpl.create(0L, 1L);
   }
 
   @After
   public void tearDown() {
-    testInstanceManager.close();
+    testInstanceManager.stopFinalizationListener();
   }
 
   @Test
@@ -110,5 +110,11 @@ public class WebSettingsTest {
   public void setBuiltInZoomControls() {
     testHostApiImpl.setBuiltInZoomControls(0L, true);
     verify(mockWebSettings).setBuiltInZoomControls(true);
+  }
+
+  @Test
+  public void setTextZoom() {
+    testHostApiImpl.setTextZoom(0L, 100L);
+    verify(mockWebSettings).setTextZoom(100);
   }
 }

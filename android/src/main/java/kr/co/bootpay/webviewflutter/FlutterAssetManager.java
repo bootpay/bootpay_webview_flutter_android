@@ -11,6 +11,7 @@ import io.flutter.plugin.common.PluginRegistry;
 import java.io.IOException;
 
 /** Provides access to the assets registered as part of the App bundle. */
+@SuppressWarnings({"deprecation", "DeprecatedIsStillUsed"})
 abstract class FlutterAssetManager {
   final AssetManager assetManager;
 
@@ -95,7 +96,7 @@ abstract class FlutterAssetManager {
      *     paths to assets registered by Flutter.
      */
     PluginBindingFlutterAssetManager(
-        AssetManager assetManager, FlutterPlugin.FlutterAssets flutterAssets) {
+            AssetManager assetManager, FlutterPlugin.FlutterAssets flutterAssets) {
       super(assetManager);
       this.flutterAssets = flutterAssets;
     }

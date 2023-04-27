@@ -17,10 +17,10 @@ class AndroidWebViewCookieManagerCreationParams
     extends PlatformWebViewCookieManagerCreationParams {
   /// Creates a new [AndroidWebViewCookieManagerCreationParams] instance.
   const AndroidWebViewCookieManagerCreationParams._(
-    // This parameter prevents breaking changes later.
-    // ignore: avoid_unused_constructor_parameters
-    PlatformWebViewCookieManagerCreationParams params,
-  ) : super();
+      // This parameter prevents breaking changes later.
+      // ignore: avoid_unused_constructor_parameters
+      PlatformWebViewCookieManagerCreationParams params,
+      ) : super();
 
   /// Creates a [AndroidWebViewCookieManagerCreationParams] instance based on [PlatformWebViewCookieManagerCreationParams].
   factory AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
@@ -33,15 +33,15 @@ class AndroidWebViewCookieManagerCreationParams
 class AndroidWebViewCookieManager extends PlatformWebViewCookieManager {
   /// Creates a new [AndroidWebViewCookieManager].
   AndroidWebViewCookieManager(
-    PlatformWebViewCookieManagerCreationParams params, {
-    CookieManager? cookieManager,
-  })  : _cookieManager = cookieManager ?? CookieManager.instance,
+      PlatformWebViewCookieManagerCreationParams params, {
+        CookieManager? cookieManager,
+      })  : _cookieManager = cookieManager ?? CookieManager.instance,
         super.implementation(
-          params is AndroidWebViewCookieManagerCreationParams
-              ? params
-              : AndroidWebViewCookieManagerCreationParams
-                  .fromPlatformWebViewCookieManagerCreationParams(params),
-        );
+        params is AndroidWebViewCookieManagerCreationParams
+            ? params
+            : AndroidWebViewCookieManagerCreationParams
+            .fromPlatformWebViewCookieManagerCreationParams(params),
+      );
 
   final CookieManager _cookieManager;
 

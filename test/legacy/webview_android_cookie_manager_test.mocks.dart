@@ -29,9 +29,9 @@ class MockCookieManager extends _i1.Mock implements _i2.CookieManager {
 
   @override
   _i3.Future<void> setCookie(
-    String? url,
-    String? value,
-  ) =>
+      String? url,
+      String? value,
+      ) =>
       (super.noSuchMethod(
         Invocation.method(
           #setCookie,
@@ -45,10 +45,11 @@ class MockCookieManager extends _i1.Mock implements _i2.CookieManager {
       ) as _i3.Future<void>);
   @override
   _i3.Future<bool> clearCookies() => (super.noSuchMethod(
-        Invocation.method(
-          #clearCookies,
-          [],
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+    Invocation.method(
+      #clearCookies,
+      [],
+    ),
+    returnValue: _i3.Future<bool>.value(false),
+  ) as _i3.Future<bool>);
 }
+

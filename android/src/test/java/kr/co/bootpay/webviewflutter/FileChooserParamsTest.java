@@ -12,7 +12,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.webkit.WebChromeClient.FileChooserParams;
-
+import io.flutter.plugin.common.BinaryMessenger;
+import java.util.Arrays;
+import java.util.Objects;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,14 +23,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-
-import java.util.Arrays;
-import java.util.Objects;
-
-import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.FileChooserParamsFlutterApiImpl;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView;
-import kr.co.bootpay.webviewflutter.InstanceManager;
 
 public class FileChooserParamsTest {
   @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -41,12 +35,12 @@ public class FileChooserParamsTest {
 
   @Before
   public void setUp() {
-    instanceManager = InstanceManager.open(identifier -> {});
+    instanceManager = InstanceManager.create(identifier -> {});
   }
 
   @After
   public void tearDown() {
-    instanceManager.close();
+    instanceManager.stopFinalizationListener();
   }
 
   @Test

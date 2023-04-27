@@ -6,15 +6,15 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/android_webview.pigeon.dart',
-    dartTestOut: 'test/test_android_webview.pigeon.dart',
+    dartOut: 'lib/src/android_webview.g.dart',
+    dartTestOut: 'test/test_android_webview.g.dart',
     dartOptions: DartOptions(copyrightHeader: <String>[
       'Copyright 2013 The Flutter Authors. All rights reserved.',
       'Use of this source code is governed by a BSD-style license that can be',
       'found in the LICENSE file.',
     ]),
     javaOut:
-        'android/src/main/java/kr/co/bootpay/webviewflutter/GeneratedAndroidWebView.java',
+    'android/src/main/java/kr/co/bootpay/webviewflutter/GeneratedAndroidWebView.java',
     javaOptions: JavaOptions(
       package: 'kr.co.bootpay.webviewflutter',
       className: 'GeneratedAndroidWebView',
@@ -26,6 +26,15 @@ import 'package:pigeon/pigeon.dart';
     ),
   ),
 )
+
+/// Host API for managing the native `InstanceManager`.
+@HostApi(dartHostTestHandler: 'TestInstanceManagerHostApi')
+abstract class InstanceManagerHostApi {
+  /// Clear the native `InstanceManager`.
+  ///
+  /// This is typically only used after a hot restart.
+  void clear();
+}
 
 /// Mode of how to select files for a file chooser.
 ///
@@ -56,13 +65,13 @@ class FileChooserModeEnumData {
 
 class WebResourceRequestData {
   WebResourceRequestData(
-    this.url,
-    this.isForMainFrame,
-    this.isRedirect,
-    this.hasGesture,
-    this.method,
-    this.requestHeaders,
-  );
+      this.url,
+      this.isForMainFrame,
+      this.isRedirect,
+      this.hasGesture,
+      this.method,
+      this.requestHeaders,
+      );
 
   String url;
   bool isForMainFrame;
@@ -114,35 +123,35 @@ abstract class CookieManagerHostApi {
 
 @HostApi(dartHostTestHandler: 'TestWebViewHostApi')
 abstract class WebViewHostApi {
-  void create(int instanceId, bool useHybridComposition);
+  void create(int instanceId);
 
   void loadData(
-    int instanceId,
-    String data,
-    String? mimeType,
-    String? encoding,
-  );
+      int instanceId,
+      String data,
+      String? mimeType,
+      String? encoding,
+      );
 
   void loadDataWithBaseUrl(
-    int instanceId,
-    String? baseUrl,
-    String data,
-    String? mimeType,
-    String? encoding,
-    String? historyUrl,
-  );
+      int instanceId,
+      String? baseUrl,
+      String data,
+      String? mimeType,
+      String? encoding,
+      String? historyUrl,
+      );
 
   void loadUrl(
-    int instanceId,
-    String url,
-    Map<String, String> headers,
-  );
+      int instanceId,
+      String url,
+      Map<String, String> headers,
+      );
 
   void postUrl(
-    int instanceId,
-    String url,
-    Uint8List data,
-  );
+      int instanceId,
+      String url,
+      Uint8List data,
+      );
 
   String? getUrl(int instanceId);
 
@@ -160,9 +169,9 @@ abstract class WebViewHostApi {
 
   @async
   String? evaluateJavascript(
-    int instanceId,
-    String javascriptString,
-  );
+      int instanceId,
+      String javascriptString,
+      );
 
   String? getTitle(int instanceId);
 
@@ -189,6 +198,19 @@ abstract class WebViewHostApi {
   void setWebChromeClient(int instanceId, int? clientInstanceId);
 
   void setBackgroundColor(int instanceId, int color);
+}
+
+/// Flutter API for `WebView`.
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+///
+/// See https://developer.android.com/reference/android/webkit/WebView.
+@FlutterApi()
+abstract class WebViewFlutterApi {
+  /// Create a new Dart instance and add it to the `InstanceManager`.
+  void create(int identifier);
 }
 
 @HostApi(dartHostTestHandler: 'TestWebSettingsHostApi')
@@ -218,6 +240,8 @@ abstract class WebSettingsHostApi {
   void setBuiltInZoomControls(int instanceId, bool enabled);
 
   void setAllowFileAccess(int instanceId, bool enabled);
+
+  void setTextZoom(int instanceId, int textZoom);
 }
 
 @HostApi(dartHostTestHandler: 'TestJavaScriptChannelHostApi')
@@ -235,9 +259,9 @@ abstract class WebViewClientHostApi {
   void create(int instanceId);
 
   void setSynchronousReturnValueForShouldOverrideUrlLoading(
-    int instanceId,
-    bool value,
-  );
+      int instanceId,
+      bool value,
+      );
 }
 
 @FlutterApi()
@@ -247,27 +271,34 @@ abstract class WebViewClientFlutterApi {
   void onPageFinished(int instanceId, int webViewInstanceId, String url);
 
   void onReceivedRequestError(
-    int instanceId,
-    int webViewInstanceId,
-    WebResourceRequestData request,
-    WebResourceErrorData error,
-  );
+      int instanceId,
+      int webViewInstanceId,
+      WebResourceRequestData request,
+      WebResourceErrorData error,
+      );
 
   void onReceivedError(
-    int instanceId,
-    int webViewInstanceId,
-    int errorCode,
-    String description,
-    String failingUrl,
-  );
+      int instanceId,
+      int webViewInstanceId,
+      int errorCode,
+      String description,
+      String failingUrl,
+      );
 
   void requestLoading(
-    int instanceId,
-    int webViewInstanceId,
-    WebResourceRequestData request,
-  );
+      int instanceId,
+      int webViewInstanceId,
+      WebResourceRequestData request,
+      );
 
   void urlLoading(int instanceId, int webViewInstanceId, String url);
+
+  void doUpdateVisitedHistory(
+      int instanceId,
+      int webViewInstanceId,
+      String url,
+      bool isReload,
+      );
 }
 
 @HostApi(dartHostTestHandler: 'TestDownloadListenerHostApi')
@@ -278,13 +309,13 @@ abstract class DownloadListenerHostApi {
 @FlutterApi()
 abstract class DownloadListenerFlutterApi {
   void onDownloadStart(
-    int instanceId,
-    String url,
-    String userAgent,
-    String contentDisposition,
-    String mimetype,
-    int contentLength,
-  );
+      int instanceId,
+      String url,
+      String userAgent,
+      String contentDisposition,
+      String mimetype,
+      int contentLength,
+      );
 }
 
 @HostApi(dartHostTestHandler: 'TestWebChromeClientHostApi')
@@ -292,9 +323,9 @@ abstract class WebChromeClientHostApi {
   void create(int instanceId);
 
   void setSynchronousReturnValueForOnShowFileChooser(
-    int instanceId,
-    bool value,
-  );
+      int instanceId,
+      bool value,
+      );
 }
 
 @HostApi(dartHostTestHandler: 'TestAssetManagerHostApi')
@@ -310,10 +341,13 @@ abstract class WebChromeClientFlutterApi {
 
   @async
   List<String> onShowFileChooser(
-    int instanceId,
-    int webViewInstanceId,
-    int paramsInstanceId,
-  );
+      int instanceId,
+      int webViewInstanceId,
+      int paramsInstanceId,
+      );
+
+  /// Callback to Dart function `WebChromeClient.onPermissionRequest`.
+  void onPermissionRequest(int instanceId, int requestInstanceId);
 }
 
 @HostApi(dartHostTestHandler: 'TestWebStorageHostApi')
@@ -329,10 +363,39 @@ abstract class WebStorageHostApi {
 @FlutterApi()
 abstract class FileChooserParamsFlutterApi {
   void create(
-    int instanceId,
-    bool isCaptureEnabled,
-    List<String> acceptTypes,
-    FileChooserModeEnumData mode,
-    String? filenameHint,
-  );
+      int instanceId,
+      bool isCaptureEnabled,
+      List<String> acceptTypes,
+      FileChooserModeEnumData mode,
+      String? filenameHint,
+      );
+}
+
+/// Host API for `PermissionRequest`.
+///
+/// This class may handle instantiating and adding native object instances that
+/// are attached to a Dart instance or handle method calls on the associated
+/// native class or an instance of the class.
+///
+/// See https://developer.android.com/reference/android/webkit/PermissionRequest.
+@HostApi(dartHostTestHandler: 'TestPermissionRequestHostApi')
+abstract class PermissionRequestHostApi {
+  /// Handles Dart method `PermissionRequest.grant`.
+  void grant(int instanceId, List<String> resources);
+
+  /// Handles Dart method `PermissionRequest.deny`.
+  void deny(int instanceId);
+}
+
+/// Flutter API for `PermissionRequest`.
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+///
+/// See https://developer.android.com/reference/android/webkit/PermissionRequest.
+@FlutterApi()
+abstract class PermissionRequestFlutterApi {
+  /// Create a new Dart instance and add it to the `InstanceManager`.
+  void create(int instanceId, List<String> resources);
 }

@@ -8,7 +8,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -33,7 +32,7 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
   /** Implementation of {@link WebViewClient} that passes arguments of callback methods to Dart. */
   @RequiresApi(Build.VERSION_CODES.N)
   public static class WebViewClientImpl extends WebViewClient {
-    private WebViewClientFlutterApiImpl flutterApi;
+    private final WebViewClientFlutterApiImpl flutterApi;
     private boolean returnValueForShouldOverrideUrlLoading = false;
 
     /**
@@ -41,48 +40,47 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
      *
      * @param flutterApi handles sending messages to Dart
      */
-    public WebViewClientImpl(WebViewClientFlutterApiImpl flutterApi) {
+    public WebViewClientImpl(@NonNull WebViewClientFlutterApiImpl flutterApi) {
       this.flutterApi = flutterApi;
     }
 
     @Override
-    public void onPageStarted(WebView view, String url, Bitmap favicon) {
-      if (flutterApi != null)
-        flutterApi.onPageStarted(this, view, url, reply -> {});
+    public void onPageStarted(@NonNull WebView view, @NonNull String url, @NonNull Bitmap favicon) {
+      flutterApi.onPageStarted(this, view, url, reply -> {});
     }
 
     @Override
-    public void onPageFinished(WebView view, String url) {
-      Log.d("bootpay", "page finish: " + url);
-
-      if(url.contains("nid.naver.com"))
-        view.evaluateJavascript("document.getElementById('back').remove()", null);
-
-      if (flutterApi != null)
-        flutterApi.onPageFinished(this, view, url, reply -> {});
-    }
-
-    @Override
-    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-      if (flutterApi != null)
-        flutterApi.onReceivedRequestError(this, view, request, error, reply -> {});
+    public void onPageFinished(@NonNull WebView view, @NonNull String url) {
+      flutterApi.onPageFinished(this, view, url, reply -> {});
     }
 
     @Override
     public void onReceivedError(
-        WebView view, int errorCode, String description, String failingUrl) {
-      if (flutterApi != null)
-        flutterApi.onReceivedError(
-          this, view, (long) errorCode, description, failingUrl, reply -> {});
+            @NonNull WebView view,
+            @NonNull WebResourceRequest request,
+            @NonNull WebResourceError error) {
+      flutterApi.onReceivedRequestError(this, view, request, error, reply -> {});
+    }
+
+    // Legacy codepath for < 23; newer versions use the variant above.
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onReceivedError(
+            @NonNull WebView view,
+            int errorCode,
+            @NonNull String description,
+            @NonNull String failingUrl) {
+      flutterApi.onReceivedError(
+              this, view, (long) errorCode, description, failingUrl, reply -> {});
     }
 
     @Override
-    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+    public boolean shouldOverrideUrlLoading(
+            @NonNull WebView view, @NonNull WebResourceRequest request) {
       String url = request.getUrl().toString();
+      BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
 
-      Log.d("bootpay", url);
-
-      if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+      if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
         //do deep link by doDeepLinkIfPayUrl function
       } else {
         if (flutterApi != null)
@@ -92,9 +90,12 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
       return returnValueForShouldOverrideUrlLoading;
     }
 
+    // Legacy codepath for < 24; newer versions use the variant above.
+    @SuppressWarnings("deprecation")
     @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      if(BootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+    public boolean shouldOverrideUrlLoading(@NonNull WebView view, @NonNull String url) {
+      BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
+      if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
         //do deep link by doDeepLinkIfPayUrl function
       } else {
         if (flutterApi != null)
@@ -105,7 +106,13 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
     }
 
     @Override
-    public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
+    public void doUpdateVisitedHistory(
+            @NonNull WebView view, @NonNull String url, boolean isReload) {
+      flutterApi.doUpdateVisitedHistory(this, view, url, isReload, reply -> {});
+    }
+
+    @Override
+    public void onUnhandledKeyEvent(@NonNull WebView view, @NonNull KeyEvent event) {
       // Deliberately empty. Occasionally the webview will mark events as having failed to be
       // handled even though they were handled. We don't want to propagate those as they're not
       // truly lost.
@@ -130,20 +137,13 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
     }
 
     @Override
-    public void onPageStarted(WebView view, String url, Bitmap favicon) {
-      if (flutterApi != null)
-        flutterApi.onPageStarted(this, view, url, reply -> {});
+    public void onPageStarted(@NonNull WebView view, @NonNull String url, @NonNull Bitmap favicon) {
+      flutterApi.onPageStarted(this, view, url, reply -> {});
     }
 
     @Override
-    public void onPageFinished(WebView view, String url) {
-      Log.d("bootpay", "page finish: " + url);
-
-      if(url.contains("nid.naver.com"))
-        view.evaluateJavascript("document.getElementById('back').remove()", null);
-
-      if (flutterApi != null)
-        flutterApi.onPageFinished(this, view, url, reply -> {});
+    public void onPageFinished(@NonNull WebView view, @NonNull String url) {
+      flutterApi.onPageFinished(this, view, url, reply -> {});
     }
 
     // This method is only called when the WebViewFeature.RECEIVE_WEB_RESOURCE_ERROR feature is
@@ -152,39 +152,57 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
     @SuppressLint("RequiresFeature")
     @Override
     public void onReceivedError(
-        @NonNull WebView view,
-        @NonNull WebResourceRequest request,
-        @NonNull WebResourceErrorCompat error) {
-      if (flutterApi != null)
-        flutterApi.onReceivedRequestError(this, view, request, error, reply -> {});
+            @NonNull WebView view,
+            @NonNull WebResourceRequest request,
+            @NonNull WebResourceErrorCompat error) {
+      flutterApi.onReceivedRequestError(this, view, request, error, reply -> {});
     }
 
+    // Legacy codepath for versions that don't support the variant above.
+    @SuppressWarnings("deprecation")
     @Override
     public void onReceivedError(
-        WebView view, int errorCode, String description, String failingUrl) {
-      if (flutterApi != null)
-        flutterApi.onReceivedError(
-          this, view, (long) errorCode, description, failingUrl, reply -> {});
+            @NonNull WebView view,
+            int errorCode,
+            @NonNull String description,
+            @NonNull String failingUrl) {
+      flutterApi.onReceivedError(
+              this, view, (long) errorCode, description, failingUrl, reply -> {});
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean shouldOverrideUrlLoading(
-        @NonNull WebView view, @NonNull WebResourceRequest request) {
-      if (flutterApi != null)
-        flutterApi.requestLoading(this, view, request, reply -> {});
+            @NonNull WebView view, @NonNull WebResourceRequest request) {
+      String url = request.getUrl().toString();
+      BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
+
+      if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+        //do deep link by doDeepLinkIfPayUrl function
+      } else {
+        if (flutterApi != null)
+          flutterApi.requestLoading(this, view, request, reply -> {});
+      }
+
+      return returnValueForShouldOverrideUrlLoading;
+    }
+
+    // Legacy codepath for < Lollipop; newer versions use the variant above.
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean shouldOverrideUrlLoading(@NonNull WebView view, @NonNull String url) {
+      flutterApi.urlLoading(this, view, url, reply -> {});
       return returnValueForShouldOverrideUrlLoading;
     }
 
     @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      if (flutterApi != null)
-        flutterApi.urlLoading(this, view, url, reply -> {});
-      return returnValueForShouldOverrideUrlLoading;
+    public void doUpdateVisitedHistory(
+            @NonNull WebView view, @NonNull String url, boolean isReload) {
+      flutterApi.doUpdateVisitedHistory(this, view, url, isReload, reply -> {});
     }
 
     @Override
-    public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
+    public void onUnhandledKeyEvent(@NonNull WebView view, @NonNull KeyEvent event) {
       // Deliberately empty. Occasionally the webview will mark events as having failed to be
       // handled even though they were handled. We don't want to propagate those as they're not
       // truly lost.
@@ -204,7 +222,8 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
      * @param flutterApi handles sending messages to Dart
      * @return the created {@link WebViewClient}
      */
-    public WebViewClient createWebViewClient(WebViewClientFlutterApiImpl flutterApi) {
+    @NonNull
+    public WebViewClient createWebViewClient(@NonNull WebViewClientFlutterApiImpl flutterApi) {
       // WebViewClientCompat is used to get
       // shouldOverrideUrlLoading(WebView view, WebResourceRequest request)
       // invoked by the webview on older Android devices, without it pages that use iframes will
@@ -229,9 +248,9 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
    * @param flutterApi handles sending messages to Dart
    */
   public WebViewClientHostApiImpl(
-      InstanceManager instanceManager,
-      WebViewClientCreator webViewClientCreator,
-      WebViewClientFlutterApiImpl flutterApi) {
+          @NonNull InstanceManager instanceManager,
+          @NonNull WebViewClientCreator webViewClientCreator,
+          @NonNull WebViewClientFlutterApiImpl flutterApi) {
     this.instanceManager = instanceManager;
     this.webViewClientCreator = webViewClientCreator;
     this.flutterApi = flutterApi;
@@ -245,17 +264,17 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
   @Override
   public void setSynchronousReturnValueForShouldOverrideUrlLoading(
-      @NonNull Long instanceId, @NonNull Boolean value) {
+          @NonNull Long instanceId, @NonNull Boolean value) {
     final WebViewClient webViewClient =
-        Objects.requireNonNull(instanceManager.getInstance(instanceId));
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
     if (webViewClient instanceof WebViewClientCompatImpl) {
       ((WebViewClientCompatImpl) webViewClient).setReturnValueForShouldOverrideUrlLoading(value);
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
-        && webViewClient instanceof WebViewClientImpl) {
+            && webViewClient instanceof WebViewClientImpl) {
       ((WebViewClientImpl) webViewClient).setReturnValueForShouldOverrideUrlLoading(value);
     } else {
       throw new IllegalStateException(
-          "This WebViewClient doesn't support setting the returnValueForShouldOverrideUrlLoading.");
+              "This WebViewClient doesn't support setting the returnValueForShouldOverrideUrlLoading.");
     }
   }
 }
