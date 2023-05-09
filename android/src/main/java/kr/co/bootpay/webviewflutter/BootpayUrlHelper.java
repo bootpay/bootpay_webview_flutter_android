@@ -22,6 +22,8 @@ public class BootpayUrlHelper {
         Intent intent = getIntentWithPackage(url);
         Context context = view.getContext();
 
+        Log.d("bootpay", "doDeepLinkIfPayUrl: " + url);
+
         if(isIntent(url)) {
             if(isInstallApp(intent, context)) return startApp(intent, context);
             else return startGooglePlay(intent, context);
@@ -32,7 +34,6 @@ public class BootpayUrlHelper {
             if(isInstallApp(intent, context)) return startApp(intent, context);
             else return startGooglePlay(intent, context);
         }
-        Log.d("bootpay", "doDeepLinkIfPayUrl false");
 
 //        return url.contains("vguardend");
         return false;

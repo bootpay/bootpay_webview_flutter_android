@@ -215,8 +215,8 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
       newWebView.getSettings().setMediaPlaybackRequiresUserGesture( view.getSettings().getMediaPlaybackRequiresUserGesture() );
       newWebView.setWebViewClient(windowWebViewClient);
-//      newWebView.setFocusable(true);
-//      newWebView.setFocusableInTouchMode(true);
+      newWebView.setFocusable(true);
+      newWebView.setFocusableInTouchMode(true);
 
 
       newWebView.getSettings().setBuiltInZoomControls(view.getSettings().getBuiltInZoomControls());
@@ -282,6 +282,18 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       newWebView.setWebChromeClient(new WebChromeClientImpl(null));
 //      newWebView.setWebChromeClient(new WebChromeClient());
 
+//      view.scrollTo(0, 0);
+
+      //기존 웹뷰가 스크롤 되어있을 경우 최신 웹킷 빌드환경에서는 팝업 웹뷰가 안보이는 버그현상이 있어서 처리
+      try {
+        view.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            view.scrollTo(0, 0);
+          }
+        }, 50);
+      }catch (Exception ignored){}
+
       view.addView(newWebView,
               new FrameLayout.LayoutParams(
                       ViewGroup.LayoutParams.MATCH_PARENT,
@@ -289,9 +301,20 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
                       Gravity.NO_GRAVITY)
       );
 
+//      newWebView.pageUp(true);
+//      view.pageUp(true);
+//      newWebView.requestFocus();
+//      view.
+//      view.reqeu
+
+
+      newWebView.requestFocus();
+
       final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
       transport.setWebView(newWebView);
       resultMsg.sendToTarget();
+
+      view.pageUp(true);
 
       return true;
     }
