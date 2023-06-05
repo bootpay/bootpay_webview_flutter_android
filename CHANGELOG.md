@@ -1,3 +1,6 @@
+## 3.6.2
+* dependencies version update
+
 ## 3.6.1
 * 팝업뷰가 더해질때 기존뷰 스크롤 up 수행 
 
