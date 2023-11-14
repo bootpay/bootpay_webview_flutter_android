@@ -1,5 +1,6 @@
-## 3.6.3
+## 3.6.31
 * flutter version update
+* 이니시스 intent 예외처리 추가
 
 ## 3.6.2
 * dependencies version update
