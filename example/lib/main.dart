@@ -145,7 +145,8 @@ Page resource error:
         },
       )
       ..loadRequest(LoadRequestParams(
-        uri: Uri.parse('https://fileport.io/'),
+        // uri: Uri.parse('https://fileport.io/'),
+        uri: Uri.parse('https://dev-js.bootapi.com/test/payment/'),
       ));
   }
 

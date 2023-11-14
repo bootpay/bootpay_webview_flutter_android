@@ -1,3 +1,6 @@
+## 3.6.3
+* flutter version update
+
 ## 3.6.2
 * dependencies version update
 
