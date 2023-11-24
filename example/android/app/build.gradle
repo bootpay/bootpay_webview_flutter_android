@@ -28,9 +28,9 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 
 android {
-
-
-    compileSdkVersion 33
+    namespace 'io.flutter.plugins.webviewflutterexample'
+    compileSdkVersion flutter.compileSdkVersion
+//    compileSdkVersion 33
 
     lintOptions {
         disable 'InvalidPackage'
@@ -39,7 +39,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "io.flutter.plugins.webviewflutterandroidexample"
-        minSdkVersion 23
+        minSdkVersion 19
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -52,6 +52,9 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+    }
+    lint {
+        disable 'InvalidPackage'
     }
 }
 

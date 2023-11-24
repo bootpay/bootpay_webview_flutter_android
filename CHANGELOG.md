@@ -1,3 +1,6 @@
+## 3.7.0
+* gradle 8 support 
+
 ## 3.6.31
 * 이니시스 intent 예외처리 추가
 * flutter version update
