@@ -12,7 +12,7 @@
         <!--         이지페이 [현대, 하나, 국민, 롯데, 삼성, BC(페이북) 신한, 하나, 농협, 씨티, 우리, 페이코] -->
         <!--         티페이 [BC(페이북), 국민, 하나, 삼성, 신한, 현대, 롯데, 농협, 씨티, 우리] -->
         <!--         페이레터 [BC(페이북), 국민, 하나, 삼성, 신한, 현대. 롯데, 농협, 씨티, ] -->
-        <!--         월컴페이먼츠 [카카오, 엘페이, 현대, BC(페이북), 국민, 삼성, 신한, 롯데, 농협, 하나, 씨티, 하나, 우리] -->
+        <!--         월컴페이먼츠 [카카오스, 엘페이, 현대, BC(페이북), 국민, 삼성, 신한, 롯데, 농협, 하나, 씨티, 하나, 우리] -->
 
         <!-- 간편결제 -->
         <package android:name="com.nhnent.payapp" /> <!-- 페이코 -->
@@ -43,6 +43,7 @@
         <package android:name="com.lcacApp" /> <!-- 롯데카드 -->
         <package android:name="kr.co.samsungcard.mpocket" /> <!-- 삼성카드 -->
         <package android:name="com.shcard.smartpay" /> <!-- 신한카드-->
+        <package android:name="com.shinhan.smartcaremgr" /> <!-- 신한 쏠-->
         <package android:name="com.shinhancard.smartshinhan" /> <!-- 신한카드 (ARS/일반결제/Smart결제) -->
         <package android:name="com.hyundaicard.appcard" /> <!-- 현대카드 -->
         <package android:name="nh.smart.nhallonepay" /> <!-- 농협카드 -->
