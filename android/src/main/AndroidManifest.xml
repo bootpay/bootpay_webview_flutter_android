@@ -51,6 +51,8 @@
         <package android:name="com.wooricard.smartapp" /> <!-- 우리 WON 카드 -->
         <package android:name="com.wooribank.smart.npib" /> <!-- 우리 WON 뱅킹 -->
         <package android:name="kr.co.citibank.citimobile" /> <!-- 씨티카드 -->
+        <package android:name="com.mobiletoong.travelwallet" /> <!-- 트레블월렛 -->
+
 
 
         <!-- 계좌이체 -->
