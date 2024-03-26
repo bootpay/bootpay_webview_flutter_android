@@ -702,6 +702,9 @@ class WebViewClient extends JavaObject {
     super.instanceManager,
   }) : super.detached();
 
+
+  static const int errorSSL = 3;
+
   /// User authentication failed on server.
   ///
   /// See https://developer.android.com/reference/android/webkit/WebViewClient#ERROR_AUTHENTICATION

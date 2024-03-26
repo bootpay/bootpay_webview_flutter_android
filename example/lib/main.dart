@@ -101,6 +101,7 @@ class _WebViewExampleState extends State<WebViewExample> {
           ..setOnProgress((int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
           })
+
           ..setOnPageStarted((String url) {
             debugPrint('Page started loading: $url');
           })
@@ -115,6 +116,9 @@ Page resource error:
   errorType: ${error.errorType}
   isForMainFrame: ${error.isForMainFrame}
           ''');
+            // if(error.errorCode == WebResourceErrorType.failedSslHandshake) { // SSL 인증서 에러, update 유도
+              // debugPrint('SSL 인증서 에러');
+            // }
           })
           ..setOnNavigationRequest((NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -128,6 +132,7 @@ Page resource error:
             debugPrint('url change to ${change.url}');
           }),
       )
+
       ..addJavaScriptChannel(JavaScriptChannelParams(
         name: 'Toaster',
         onMessageReceived: (JavaScriptMessage message) {

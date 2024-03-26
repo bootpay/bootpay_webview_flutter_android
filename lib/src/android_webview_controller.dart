@@ -774,6 +774,8 @@ class AndroidWebResourceError extends WebResourceError {
         return WebResourceErrorType.unsupportedAuthScheme;
       case android_webview.WebViewClient.errorUnsupportedScheme:
         return WebResourceErrorType.unsupportedScheme;
+      case android_webview.WebViewClient.errorSSL:
+        return WebResourceErrorType.failedSslHandshake;
     }
 
     throw ArgumentError(

@@ -6,6 +6,9 @@ package kr.co.bootpay.webviewflutter;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
@@ -15,6 +18,8 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebResourceErrorCompat;
@@ -62,11 +67,42 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
             @NonNull WebResourceRequest request,
             @NonNull WebResourceError error) {
       flutterApi.onReceivedRequestError(this, view, request, error, reply -> {});
+
+//      flutterApi.onReceivedError(
+//              this, view, (long) error.getErrorCode(), error.getDescription().toString(), request.getUrl().toString(), reply -> {});
     }
     @SuppressLint("WebViewClientOnReceivedSslError")
     @Override
     public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
-      handler.proceed();
+      flutterApi.onReceivedError(WebViewClientImpl.this, view, (long) error.getPrimaryError(), "sslerror:" + error.toString(), view.getUrl(), reply -> {});
+
+      // for SSLErrorHandler
+      AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+      builder.setTitle("SSL Connection Error");
+      builder.setMessage("Your device's Android version is outdated and may not securely connect to our service. To continue using the app securely, please update your device's operating system. If you choose to proceed without updating, it may expose you to security vulnerabilities.");
+      builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          // Redirect the user to the system update settings
+
+
+          Intent intent = new Intent("android.settings.SYSTEM_UPDATE_SETTINGS");
+          if (intent.resolveActivity(view.getContext().getPackageManager()) != null) {
+            view.getContext().startActivity(intent);
+          } else {
+            // If the device does not support system update settings intent
+            Toast.makeText(view.getContext(), "System update option not available. Please check your device settings manually.", Toast.LENGTH_LONG).show();
+          }
+        }
+      });
+      builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          handler.cancel();
+        }
+      });
+      AlertDialog dialog = builder.create();
+      dialog.show();
     }
 
     // Legacy codepath for < 23; newer versions use the variant above.
