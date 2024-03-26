@@ -7,8 +7,10 @@ package kr.co.bootpay.webviewflutter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Build;
 import android.view.KeyEvent;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -60,6 +62,11 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
             @NonNull WebResourceRequest request,
             @NonNull WebResourceError error) {
       flutterApi.onReceivedRequestError(this, view, request, error, reply -> {});
+    }
+    @SuppressLint("WebViewClientOnReceivedSslError")
+    @Override
+    public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+      handler.proceed();
     }
 
     // Legacy codepath for < 23; newer versions use the variant above.
