@@ -4,21 +4,21 @@
 
 package kr.co.bootpay.webviewflutter;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.webkit.ConsoleMessage;
+import android.webkit.GeolocationPermissions;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -35,6 +35,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   private final InstanceManager instanceManager;
   private final WebChromeClientCreator webChromeClientCreator;
   private final WebChromeClientFlutterApiImpl flutterApi;
+  private Context context;
 
   /**
    * Implementation of {@link WebChromeClient} that passes arguments of callback methods to Dart.
@@ -42,6 +43,11 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   public static class WebChromeClientImpl extends SecureWebChromeClient {
     private final WebChromeClientFlutterApiImpl flutterApi;
     private boolean returnValueForOnShowFileChooser = false;
+    private boolean returnValueForOnConsoleMessage = false;
+
+    private boolean returnValueForOnJsAlert = false;
+    private boolean returnValueForOnJsConfirm = false;
+    private boolean returnValueForOnJsPrompt = false;
 
     /**
      * Creates a {@link WebChromeClient} that passes arguments of callbacks methods to Dart.
@@ -54,7 +60,27 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
     @Override
     public void onProgressChanged(@NonNull WebView view, int progress) {
-      if (flutterApi != null) flutterApi.onProgressChanged(this, view, (long) progress, reply -> {});
+      flutterApi.onProgressChanged(this, view, (long) progress, reply -> {});
+    }
+
+    @Override
+    public void onShowCustomView(View view, WebChromeClient.CustomViewCallback callback) {
+      flutterApi.onShowCustomView(this, view, callback, reply -> {});
+    }
+
+    @Override
+    public void onHideCustomView() {
+      flutterApi.onHideCustomView(this, reply -> {});
+    }
+
+    public void onGeolocationPermissionsShowPrompt(
+            @NonNull String origin, @NonNull GeolocationPermissions.Callback callback) {
+      flutterApi.onGeolocationPermissionsShowPrompt(this, origin, callback, reply -> {});
+    }
+
+    @Override
+    public void onGeolocationPermissionsHidePrompt() {
+      flutterApi.onGeolocationPermissionsHidePrompt(this, reply -> {});
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -65,7 +91,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
             @NonNull ValueCallback<Uri[]> filePathCallback,
             @NonNull FileChooserParams fileChooserParams) {
       final boolean currentReturnValueForOnShowFileChooser = returnValueForOnShowFileChooser;
-      if (flutterApi != null)
       flutterApi.onShowFileChooser(
               this,
               webView,
@@ -87,13 +112,94 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onPermissionRequest(@NonNull PermissionRequest request) {
-      if (flutterApi != null)
       flutterApi.onPermissionRequest(this, request, reply -> {});
+    }
+
+    @Override
+    public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+      flutterApi.onConsoleMessage(this, consoleMessage, reply -> {});
+      return returnValueForOnConsoleMessage;
     }
 
     /** Sets return value for {@link #onShowFileChooser}. */
     public void setReturnValueForOnShowFileChooser(boolean value) {
       returnValueForOnShowFileChooser = value;
+    }
+
+    /** Sets return value for {@link #onConsoleMessage}. */
+    public void setReturnValueForOnConsoleMessage(boolean value) {
+      returnValueForOnConsoleMessage = value;
+    }
+
+    public void setReturnValueForOnJsAlert(boolean value) {
+      returnValueForOnJsAlert = value;
+    }
+
+    public void setReturnValueForOnJsConfirm(boolean value) {
+      returnValueForOnJsConfirm = value;
+    }
+
+    public void setReturnValueForOnJsPrompt(boolean value) {
+      returnValueForOnJsPrompt = value;
+    }
+
+    @Override
+    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+      if (returnValueForOnJsAlert) {
+        flutterApi.onJsAlert(
+                this,
+                url,
+                message,
+                reply -> {
+                  result.confirm();
+                });
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    @Override
+    public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+      if (returnValueForOnJsConfirm) {
+        flutterApi.onJsConfirm(
+                this,
+                url,
+                message,
+                reply -> {
+                  if (reply) {
+                    result.confirm();
+                  } else {
+                    result.cancel();
+                  }
+                });
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    @Override
+    public boolean onJsPrompt(
+            WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+      if (returnValueForOnJsPrompt) {
+        flutterApi.onJsPrompt(
+                this,
+                url,
+                message,
+                defaultValue,
+                reply -> {
+                  @Nullable String inputMessage = reply;
+                  if (inputMessage != null) {
+                    result.confirm(inputMessage);
+                  } else {
+                    result.cancel();
+                  }
+                });
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
@@ -103,24 +209,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
    */
   public static class SecureWebChromeClient extends WebChromeClient {
     @Nullable WebViewClient webViewClient;
-    private WebChromeClientFlutterApiImpl flutterApi;
-    WebView mainView;
-
-
-    public SecureWebChromeClient() {}
-    public SecureWebChromeClient(WebChromeClientFlutterApiImpl flutterApi) {
-      this.flutterApi = flutterApi;
-    }
-    public void setFlutterApi(WebChromeClientFlutterApiImpl flutterApi) {
-      this.flutterApi = flutterApi;
-    }
-
-    @Override
-    public void onCloseWindow(WebView window) {
-      super.onCloseWindow(window);
-      if(mainView != null) mainView.removeView(window);
-      window.setVisibility(View.GONE);
-    }
 
     @Override
     public boolean onCreateWindow(
@@ -144,12 +232,11 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      *     false. Returning false from this method but also sending resultMsg will result in
      *     undefined behavior
      */
-    @SuppressLint("ClickableViewAccessibility")
     @VisibleForTesting
     boolean onCreateWindow(
             @NonNull final WebView view,
             @NonNull Message resultMsg,
-            @Nullable WebView newWebView) {
+            @Nullable WebView onCreateWindowWebView) {
       // WebChromeClient requires a WebViewClient because of a bug fix that makes
       // calls to WebViewClient.requestLoading/WebViewClient.urlLoading when a new
       // window is opened. This is to make sure a url opened by `Window.open` has
@@ -160,44 +247,27 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
       final WebViewClient windowWebViewClient =
               new WebViewClient() {
-                BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
-
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public boolean shouldOverrideUrlLoading(
                         @NonNull WebView windowWebView, @NonNull WebResourceRequest request) {
-//                  if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
-//                    view.loadUrl(request.getUrl().toString());
-//                  }
-//                  return true;
-                  String url = request.getUrl().toString();
-
-                  if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
-                    //do deep link by doDeepLinkIfPayUrl function
-                    return true;
+                  if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
+                    view.loadUrl(request.getUrl().toString());
                   }
-
-                  return false;
+                  return true;
                 }
 
                 // Legacy codepath for < N.
                 @Override
                 @SuppressWarnings({"deprecation", "RedundantSuppression"})
                 public boolean shouldOverrideUrlLoading(WebView windowWebView, String url) {
-//                  if (!webViewClient.shouldOverrideUrlLoading(view, url)) {
-//                    view.loadUrl(url);
-//                  }
-//                  return true;
-
-                  if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
-                    return true;
+                  if (!webViewClient.shouldOverrideUrlLoading(view, url)) {
+                    view.loadUrl(url);
                   }
-
-                  return false;
+                  return true;
                 }
               };
 
-      /*
       if (onCreateWindowWebView == null) {
         onCreateWindowWebView = new WebView(view.getContext());
       }
@@ -206,115 +276,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
       transport.setWebView(onCreateWindowWebView);
       resultMsg.sendToTarget();
-      */
-
-
-      if (newWebView == null) {
-        newWebView = new WebView(view.getContext());
-      }
-
-      newWebView.getSettings().setMediaPlaybackRequiresUserGesture( view.getSettings().getMediaPlaybackRequiresUserGesture() );
-      newWebView.setWebViewClient(windowWebViewClient);
-      newWebView.setFocusable(true);
-      newWebView.setFocusableInTouchMode(true);
-
-
-      newWebView.getSettings().setBuiltInZoomControls(view.getSettings().getBuiltInZoomControls());
-      newWebView.getSettings().setDisplayZoomControls(view.getSettings().getDisplayZoomControls());
-      newWebView.getSettings().setAllowFileAccess(view.getSettings().getAllowFileAccess());
-      newWebView.getSettings().setAllowContentAccess(view.getSettings().getAllowContentAccess());
-      newWebView.getSettings().setLoadWithOverviewMode(view.getSettings().getLoadWithOverviewMode());
-//      newWebView.getSettings().setEnableSmoothTransition(view.getSettings().);
-//      newWebView.getSettings().setSaveFormData(view.getSettings().getSaveFormData());
-//      newWebView.getSettings().setSavePassword(view.getSettings().getSavePassword());
-      newWebView.getSettings().setTextZoom(view.getSettings().getTextZoom());
-
-
-      newWebView.getSettings().setUseWideViewPort(view.getSettings().getUseWideViewPort());
-      newWebView.getSettings().setSupportMultipleWindows(true);
-      newWebView.getSettings().setLayoutAlgorithm(view.getSettings().getLayoutAlgorithm());
-      newWebView.getSettings().setStandardFontFamily(view.getSettings().getStandardFontFamily());
-      newWebView.getSettings().setFixedFontFamily(view.getSettings().getFixedFontFamily());
-      newWebView.getSettings().setSansSerifFontFamily(view.getSettings().getSansSerifFontFamily());
-      newWebView.getSettings().setSerifFontFamily(view.getSettings().getSerifFontFamily());
-      newWebView.getSettings().setCursiveFontFamily(view.getSettings().getCursiveFontFamily());
-      newWebView.getSettings().setFantasyFontFamily(view.getSettings().getFantasyFontFamily());
-      newWebView.getSettings().setMinimumFontSize(view.getSettings().getMinimumFontSize());
-      newWebView.getSettings().setMinimumLogicalFontSize(view.getSettings().getMinimumLogicalFontSize());
-      newWebView.getSettings().setDefaultFontSize(view.getSettings().getDefaultFontSize());
-      newWebView.getSettings().setDefaultFixedFontSize(view.getSettings().getDefaultFixedFontSize());
-      newWebView.getSettings().setLoadsImagesAutomatically(view.getSettings().getLoadsImagesAutomatically());
-      newWebView.getSettings().setBlockNetworkImage(view.getSettings().getBlockNetworkImage());
-      newWebView.getSettings().setJavaScriptEnabled(view.getSettings().getJavaScriptEnabled());
-      newWebView.getSettings().setDatabaseEnabled(view.getSettings().getDatabaseEnabled());
-      newWebView.getSettings().setDomStorageEnabled(view.getSettings().getDomStorageEnabled());
-
-      newWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(view.getSettings().getJavaScriptCanOpenWindowsAutomatically());
-      newWebView.getSettings().setDefaultTextEncodingName(view.getSettings().getDefaultTextEncodingName());
-      newWebView.getSettings().setUserAgentString(view.getSettings().getUserAgentString());
-      newWebView.getSettings().setCacheMode(view.getSettings().getCacheMode());
-
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        newWebView.getSettings().setMixedContentMode(view.getSettings().getMixedContentMode());
-      }
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        newWebView.getSettings().setSafeBrowsingEnabled(view.getSettings().getSafeBrowsingEnabled());
-      }
-//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//        newWebView.getSettings().setForceDark(view.getSettings().getForceDark());
-//      }
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        newWebView.getSettings().setDisabledActionModeMenuItems(view.getSettings().getDisabledActionModeMenuItems());
-      }
-      newWebView.requestFocus(View.FOCUS_DOWN);
-      newWebView.setOnTouchListener((v, event) -> {
-        switch (event.getAction()) {
-          case MotionEvent.ACTION_DOWN:
-          case MotionEvent.ACTION_UP:
-            if (!v.hasFocus()) {
-              v.requestFocus();
-            }
-            break;
-        }
-        return false;
-      });
-
-      newWebView.setWebChromeClient(new WebChromeClientImpl(null));
-//      newWebView.setWebChromeClient(new WebChromeClient());
-
-//      view.scrollTo(0, 0);
-
-      //기존 웹뷰가 스크롤 되어있을 경우 최신 웹킷 빌드환경에서는 팝업 웹뷰가 안보이는 버그현상이 있어서 처리
-      try {
-        view.postDelayed(new Runnable() {
-          @Override
-          public void run() {
-            view.scrollTo(0, 0);
-          }
-        }, 50);
-      }catch (Exception ignored){}
-
-      view.addView(newWebView,
-              new FrameLayout.LayoutParams(
-                      ViewGroup.LayoutParams.MATCH_PARENT,
-                      ViewGroup.LayoutParams.MATCH_PARENT,
-                      Gravity.NO_GRAVITY)
-      );
-
-//      newWebView.pageUp(true);
-//      view.pageUp(true);
-//      newWebView.requestFocus();
-//      view.
-//      view.reqeu
-
-
-      newWebView.requestFocus();
-
-      final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
-      transport.setWebView(newWebView);
-      resultMsg.sendToTarget();
-
-      view.pageUp(true);
 
       return true;
     }
@@ -374,5 +335,37 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     final WebChromeClientImpl webChromeClient =
             Objects.requireNonNull(instanceManager.getInstance(instanceId));
     webChromeClient.setReturnValueForOnShowFileChooser(value);
+  }
+
+  @Override
+  public void setSynchronousReturnValueForOnConsoleMessage(
+          @NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setReturnValueForOnConsoleMessage(value);
+  }
+
+  @Override
+  public void setSynchronousReturnValueForOnJsAlert(
+          @NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setReturnValueForOnJsAlert(value);
+  }
+
+  @Override
+  public void setSynchronousReturnValueForOnJsConfirm(
+          @NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setReturnValueForOnJsConfirm(value);
+  }
+
+  @Override
+  public void setSynchronousReturnValueForOnJsPrompt(
+          @NonNull Long instanceId, @NonNull Boolean value) {
+    final WebChromeClientImpl webChromeClient =
+            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+    webChromeClient.setReturnValueForOnJsPrompt(value);
   }
 }

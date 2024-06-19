@@ -14,9 +14,13 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.platform.PlatformViewRegistry;
+
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.CookieManagerHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.CustomViewCallbackHostApi;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.DownloadListenerHostApi;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.FlutterAssetManagerHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.GeolocationPermissionsCallbackHostApi;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.HttpAuthHandlerHostApi;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.InstanceManagerHostApi;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaObjectHostApi;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.JavaScriptChannelHostApi;
@@ -45,34 +49,10 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
    * Add an instance of this to {@link io.flutter.embedding.engine.plugins.PluginRegistry} to
    * register it.
    *
-   * <p>THIS PLUGIN CODE PATH DEPENDS ON A NEWER VERSION OF FLUTTER THAN THE ONE DEFINED IN THE
-   * PUBSPEC.YAML. Text input will fail on some Android devices unless this is used with at least
-   * flutter/flutter@1d4d63ace1f801a022ea9ec737bf8c15395588b9. Use the V1 embedding with {@link
-   * #registerWith} to use this plugin with older Flutter versions.
-   *
    * <p>Registration should eventually be handled automatically by v2 of the
    * GeneratedPluginRegistrant. https://github.com/flutter/flutter/issues/42694
    */
   public WebViewFlutterPlugin() {}
-
-  /**
-   * Registers a plugin implementation that uses the stable {@code io.flutter.plugin.common}
-   * package.
-   *
-   * <p>Calling this automatically initializes the plugin. However plugins initialized this way
-   * won't react to changes in activity or context, unlike {@link WebViewFlutterPlugin}.
-   */
-  @SuppressWarnings({"unused", "deprecation"})
-  public static void registerWith(
-          @NonNull io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
-    new WebViewFlutterPlugin()
-            .setUp(
-                    registrar.messenger(),
-                    registrar.platformViewRegistry(),
-                    registrar.activity(),
-                    new FlutterAssetManager.RegistrarFlutterAssetManager(
-                            registrar.context().getAssets(), registrar));
-  }
 
   private void setUp(
           BinaryMessenger binaryMessenger,
@@ -88,7 +68,7 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
     InstanceManagerHostApi.setup(binaryMessenger, () -> instanceManager.clear());
 
     viewRegistry.registerViewFactory(
-            "kr.co.bootpay/webview", new FlutterWebViewFactory(instanceManager));
+            "plugins.flutter.io/webview", new FlutterViewFactory(instanceManager));
 
     webViewHostApi =
             new WebViewHostApiImpl(
@@ -127,7 +107,8 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
                     instanceManager, new WebSettingsHostApiImpl.WebSettingsCreator()));
     FlutterAssetManagerHostApi.setup(
             binaryMessenger, new FlutterAssetManagerHostApiImpl(flutterAssetManager));
-    CookieManagerHostApi.setup(binaryMessenger, new CookieManagerHostApiImpl());
+    CookieManagerHostApi.setup(
+            binaryMessenger, new CookieManagerHostApiImpl(binaryMessenger, instanceManager));
     WebStorageHostApi.setup(
             binaryMessenger,
             new WebStorageHostApiImpl(instanceManager, new WebStorageHostApiImpl.WebStorageCreator()));
@@ -136,6 +117,13 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
       PermissionRequestHostApi.setup(
               binaryMessenger, new PermissionRequestHostApiImpl(binaryMessenger, instanceManager));
     }
+    GeolocationPermissionsCallbackHostApi.setup(
+            binaryMessenger,
+            new GeolocationPermissionsCallbackHostApiImpl(binaryMessenger, instanceManager));
+    CustomViewCallbackHostApi.setup(
+            binaryMessenger, new CustomViewCallbackHostApiImpl(binaryMessenger, instanceManager));
+    HttpAuthHandlerHostApi.setup(
+            binaryMessenger, new HttpAuthHandlerHostApiImpl(binaryMessenger, instanceManager));
   }
 
   @Override

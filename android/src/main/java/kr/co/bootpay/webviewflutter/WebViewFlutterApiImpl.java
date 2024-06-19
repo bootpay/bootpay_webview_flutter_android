@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import io.flutter.plugin.common.BinaryMessenger;
 import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.WebViewFlutterApi;
+import java.util.Objects;
 
 /**
  * Flutter API implementation for `WebView`.
@@ -31,7 +32,7 @@ public class WebViewFlutterApiImpl {
    * @param instanceManager maintains instances stored to communicate with attached Dart objects
    */
   public WebViewFlutterApiImpl(
-      @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
+          @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
     this.binaryMessenger = binaryMessenger;
     this.instanceManager = instanceManager;
     api = new WebViewFlutterApi(binaryMessenger);
@@ -55,5 +56,21 @@ public class WebViewFlutterApiImpl {
   @VisibleForTesting
   void setApi(@NonNull WebViewFlutterApi api) {
     this.api = api;
+  }
+
+  public void onScrollChanged(
+          @NonNull WebView instance,
+          @NonNull Long left,
+          @NonNull Long top,
+          @NonNull Long oldLeft,
+          @NonNull Long oldTop,
+          @NonNull WebViewFlutterApi.Reply<Void> callback) {
+    api.onScrollChanged(
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+            left,
+            top,
+            oldLeft,
+            oldTop,
+            callback);
   }
 }

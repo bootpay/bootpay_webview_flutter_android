@@ -13,6 +13,11 @@ import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.DownloadListenerHost
  *
  * <p>Handles creating {@link DownloadListener}s that intercommunicate with a paired Dart object.
  */
+
+
+/**
+ * Implementation of {@link DownloadListener} that passes arguments of callback methods to Dart.
+ */
 public class DownloadListenerHostApiImpl implements DownloadListenerHostApi {
   private final InstanceManager instanceManager;
   private final DownloadListenerCreator downloadListenerCreator;

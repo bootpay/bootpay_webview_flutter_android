@@ -48,7 +48,7 @@ class SurfaceAndroidWebView extends AndroidWebView {
       javascriptChannelRegistry: javascriptChannelRegistry,
       onBuildWidget: (WebViewAndroidPlatformController controller) {
         return PlatformViewLink(
-          viewType: 'kr.co.bootpay/webview',
+          viewType: 'plugins.flutter.io/webview',
           surfaceFactory: (
               BuildContext context,
               PlatformViewController controller,
@@ -70,7 +70,7 @@ class SurfaceAndroidWebView extends AndroidWebView {
               hybridComposition:
               backgroundColor != null && backgroundColor.opacity < 1.0,
               id: params.id,
-              viewType: 'kr.co.bootpay/webview',
+              viewType: 'plugins.flutter.io/webview',
               // WebView content is not affected by the Android view's layout direction,
               // we explicitly set it here so that the widget doesn't require an ambient
               // directionality.

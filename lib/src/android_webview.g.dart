@@ -32,25 +32,40 @@ enum FileChooserMode {
   save,
 }
 
-class FileChooserModeEnumData {
-  FileChooserModeEnumData({
-    required this.value,
-  });
+/// Indicates the type of message logged to the console.
+///
+/// See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel.
+enum ConsoleMessageLevel {
+  /// Indicates a message is logged for debugging.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#DEBUG.
+  debug,
 
-  FileChooserMode value;
+  /// Indicates a message is provided as an error.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#ERROR.
+  error,
 
-  Object encode() {
-    return <Object?>[
-      value.index,
-    ];
-  }
+  /// Indicates a message is provided as a basic log message.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#LOG.
+  log,
 
-  static FileChooserModeEnumData decode(Object result) {
-    result as List<Object?>;
-    return FileChooserModeEnumData(
-      value: FileChooserMode.values[result[0]! as int],
-    );
-  }
+  /// Indicates a message is provided as a tip.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#TIP.
+  tip,
+
+  /// Indicates a message is provided as a warning.
+  ///
+  /// See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#WARNING.
+  warning,
+
+  /// Indicates a message with an unknown level.
+  ///
+  /// This does not represent an actual value provided by the platform and only
+  /// indicates a value was provided that isn't currently supported.
+  unknown,
 }
 
 class WebResourceRequestData {
@@ -96,6 +111,27 @@ class WebResourceRequestData {
       method: result[4]! as String,
       requestHeaders:
       (result[5] as Map<Object?, Object?>?)!.cast<String?, String?>(),
+    );
+  }
+}
+
+class WebResourceResponseData {
+  WebResourceResponseData({
+    required this.statusCode,
+  });
+
+  int statusCode;
+
+  Object encode() {
+    return <Object?>[
+      statusCode,
+    ];
+  }
+
+  static WebResourceResponseData decode(Object result) {
+    result as List<Object?>;
+    return WebResourceResponseData(
+      statusCode: result[0]! as int,
     );
   }
 }
@@ -152,6 +188,45 @@ class WebViewPoint {
   }
 }
 
+/// Represents a JavaScript console message from WebCore.
+///
+/// See https://developer.android.com/reference/android/webkit/ConsoleMessage
+class ConsoleMessage {
+  ConsoleMessage({
+    required this.lineNumber,
+    required this.message,
+    required this.level,
+    required this.sourceId,
+  });
+
+  int lineNumber;
+
+  String message;
+
+  ConsoleMessageLevel level;
+
+  String sourceId;
+
+  Object encode() {
+    return <Object?>[
+      lineNumber,
+      message,
+      level.index,
+      sourceId,
+    ];
+  }
+
+  static ConsoleMessage decode(Object result) {
+    result as List<Object?>;
+    return ConsoleMessage(
+      lineNumber: result[0]! as int,
+      message: result[1]! as String,
+      level: ConsoleMessageLevel.values[result[2]! as int],
+      sourceId: result[3]! as String,
+    );
+  }
+}
+
 /// Host API for managing the native `InstanceManager`.
 class InstanceManagerHostApi {
   /// Constructor for [InstanceManagerHostApi].  The [binaryMessenger] named argument is
@@ -168,7 +243,8 @@ class InstanceManagerHostApi {
   /// This is typically only used after a hot restart.
   Future<void> clear() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.InstanceManagerHostApi.clear', codec,
+        'kr.co.bootpay.InstanceManagerHostApi.clear',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
@@ -205,7 +281,8 @@ class JavaObjectHostApi {
 
   Future<void> dispose(int arg_identifier) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.JavaObjectHostApi.dispose', codec,
+        'kr.co.bootpay.JavaObjectHostApi.dispose',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_identifier]) as List<Object?>?;
@@ -238,7 +315,8 @@ abstract class JavaObjectFlutterApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.JavaObjectFlutterApi.dispose', codec,
+          'kr.co.bootpay.JavaObjectFlutterApi.dispose',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -258,6 +336,11 @@ abstract class JavaObjectFlutterApi {
   }
 }
 
+/// Host API for `CookieManager`.
+///
+/// This class may handle instantiating and adding native object instances that
+/// are attached to a Dart instance or handle method calls on the associated
+/// native class or an instance of the class.
 class CookieManagerHostApi {
   /// Constructor for [CookieManagerHostApi].  The [binaryMessenger] named argument is
   /// available for dependency injection.  If it is left null, the default
@@ -268,11 +351,63 @@ class CookieManagerHostApi {
 
   static const MessageCodec<Object?> codec = StandardMessageCodec();
 
-  Future<bool> clearCookies() async {
+  /// Handles attaching `CookieManager.instance` to a native instance.
+  Future<void> attachInstance(int arg_instanceIdentifier) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.CookieManagerHostApi.clearCookies', codec,
+        'kr.co.bootpay.CookieManagerHostApi.attachInstance',
+        codec,
         binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
+    final List<Object?>? replyList =
+    await channel.send(<Object?>[arg_instanceIdentifier]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Handles Dart method `CookieManager.setCookie`.
+  Future<void> setCookie(
+      int arg_identifier, String arg_url, String arg_value) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.CookieManagerHostApi.setCookie',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_identifier, arg_url, arg_value]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Handles Dart method `CookieManager.removeAllCookies`.
+  Future<bool> removeAllCookies(int arg_identifier) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.CookieManagerHostApi.removeAllCookies',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList =
+    await channel.send(<Object?>[arg_identifier]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
         code: 'channel-error',
@@ -294,12 +429,16 @@ class CookieManagerHostApi {
     }
   }
 
-  Future<void> setCookie(String arg_url, String arg_value) async {
+  /// Handles Dart method `CookieManager.setAcceptThirdPartyCookies`.
+  Future<void> setAcceptThirdPartyCookies(
+      int arg_identifier, int arg_webViewIdentifier, bool arg_accept) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.CookieManagerHostApi.setCookie', codec,
+        'kr.co.bootpay.CookieManagerHostApi.setAcceptThirdPartyCookies',
+        codec,
         binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-    await channel.send(<Object?>[arg_url, arg_value]) as List<Object?>?;
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_identifier, arg_webViewIdentifier, arg_accept])
+    as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
         code: 'channel-error',
@@ -352,7 +491,8 @@ class WebViewHostApi {
 
   Future<void> create(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.create', codec,
+        'kr.co.bootpay.WebViewHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -375,7 +515,8 @@ class WebViewHostApi {
   Future<void> loadData(int arg_instanceId, String arg_data,
       String? arg_mimeType, String? arg_encoding) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.loadData', codec,
+        'kr.co.bootpay.WebViewHostApi.loadData',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel.send(
         <Object?>[arg_instanceId, arg_data, arg_mimeType, arg_encoding])
@@ -404,7 +545,8 @@ class WebViewHostApi {
       String? arg_encoding,
       String? arg_historyUrl) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.loadDataWithBaseUrl', codec,
+        'kr.co.bootpay.WebViewHostApi.loadDataWithBaseUrl',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel.send(<Object?>[
       arg_instanceId,
@@ -433,7 +575,8 @@ class WebViewHostApi {
   Future<void> loadUrl(int arg_instanceId, String arg_url,
       Map<String?, String?> arg_headers) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.loadUrl', codec,
+        'kr.co.bootpay.WebViewHostApi.loadUrl',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId, arg_url, arg_headers])
@@ -457,7 +600,8 @@ class WebViewHostApi {
   Future<void> postUrl(
       int arg_instanceId, String arg_url, Uint8List arg_data) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.postUrl', codec,
+        'kr.co.bootpay.WebViewHostApi.postUrl',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_url, arg_data]) as List<Object?>?;
@@ -479,7 +623,8 @@ class WebViewHostApi {
 
   Future<String?> getUrl(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.getUrl', codec,
+        'kr.co.bootpay.WebViewHostApi.getUrl',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -501,7 +646,8 @@ class WebViewHostApi {
 
   Future<bool> canGoBack(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.canGoBack', codec,
+        'kr.co.bootpay.WebViewHostApi.canGoBack',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -528,7 +674,8 @@ class WebViewHostApi {
 
   Future<bool> canGoForward(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.canGoForward', codec,
+        'kr.co.bootpay.WebViewHostApi.canGoForward',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -555,7 +702,8 @@ class WebViewHostApi {
 
   Future<void> goBack(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.goBack', codec,
+        'kr.co.bootpay.WebViewHostApi.goBack',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -577,7 +725,8 @@ class WebViewHostApi {
 
   Future<void> goForward(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.goForward', codec,
+        'kr.co.bootpay.WebViewHostApi.goForward',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -599,7 +748,8 @@ class WebViewHostApi {
 
   Future<void> reload(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.reload', codec,
+        'kr.co.bootpay.WebViewHostApi.reload',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -621,7 +771,8 @@ class WebViewHostApi {
 
   Future<void> clearCache(int arg_instanceId, bool arg_includeDiskFiles) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.clearCache', codec,
+        'kr.co.bootpay.WebViewHostApi.clearCache',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId, arg_includeDiskFiles])
@@ -645,7 +796,8 @@ class WebViewHostApi {
   Future<String?> evaluateJavascript(
       int arg_instanceId, String arg_javascriptString) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.evaluateJavascript', codec,
+        'kr.co.bootpay.WebViewHostApi.evaluateJavascript',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId, arg_javascriptString])
@@ -668,7 +820,8 @@ class WebViewHostApi {
 
   Future<String?> getTitle(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.getTitle', codec,
+        'kr.co.bootpay.WebViewHostApi.getTitle',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -690,7 +843,8 @@ class WebViewHostApi {
 
   Future<void> scrollTo(int arg_instanceId, int arg_x, int arg_y) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.scrollTo', codec,
+        'kr.co.bootpay.WebViewHostApi.scrollTo',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_x, arg_y]) as List<Object?>?;
@@ -712,7 +866,8 @@ class WebViewHostApi {
 
   Future<void> scrollBy(int arg_instanceId, int arg_x, int arg_y) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.scrollBy', codec,
+        'kr.co.bootpay.WebViewHostApi.scrollBy',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_x, arg_y]) as List<Object?>?;
@@ -734,7 +889,8 @@ class WebViewHostApi {
 
   Future<int> getScrollX(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.getScrollX', codec,
+        'kr.co.bootpay.WebViewHostApi.getScrollX',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -761,7 +917,8 @@ class WebViewHostApi {
 
   Future<int> getScrollY(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.getScrollY', codec,
+        'kr.co.bootpay.WebViewHostApi.getScrollY',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -788,7 +945,8 @@ class WebViewHostApi {
 
   Future<WebViewPoint> getScrollPosition(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.getScrollPosition', codec,
+        'kr.co.bootpay.WebViewHostApi.getScrollPosition',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -839,7 +997,8 @@ class WebViewHostApi {
   Future<void> setWebViewClient(
       int arg_instanceId, int arg_webViewClientInstanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.setWebViewClient', codec,
+        'kr.co.bootpay.WebViewHostApi.setWebViewClient',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_webViewClientInstanceId])
@@ -863,7 +1022,8 @@ class WebViewHostApi {
   Future<void> addJavaScriptChannel(
       int arg_instanceId, int arg_javaScriptChannelInstanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.addJavaScriptChannel', codec,
+        'kr.co.bootpay.WebViewHostApi.addJavaScriptChannel',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_javaScriptChannelInstanceId])
@@ -887,7 +1047,8 @@ class WebViewHostApi {
   Future<void> removeJavaScriptChannel(
       int arg_instanceId, int arg_javaScriptChannelInstanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.removeJavaScriptChannel', codec,
+        'kr.co.bootpay.WebViewHostApi.removeJavaScriptChannel',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_javaScriptChannelInstanceId])
@@ -911,7 +1072,8 @@ class WebViewHostApi {
   Future<void> setDownloadListener(
       int arg_instanceId, int? arg_listenerInstanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.setDownloadListener', codec,
+        'kr.co.bootpay.WebViewHostApi.setDownloadListener',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId, arg_listenerInstanceId])
@@ -935,7 +1097,8 @@ class WebViewHostApi {
   Future<void> setWebChromeClient(
       int arg_instanceId, int? arg_clientInstanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.setWebChromeClient', codec,
+        'kr.co.bootpay.WebViewHostApi.setWebChromeClient',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId, arg_clientInstanceId])
@@ -958,7 +1121,8 @@ class WebViewHostApi {
 
   Future<void> setBackgroundColor(int arg_instanceId, int arg_color) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewHostApi.setBackgroundColor', codec,
+        'kr.co.bootpay.WebViewHostApi.setBackgroundColor',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_color]) as List<Object?>?;
@@ -992,11 +1156,15 @@ abstract class WebViewFlutterApi {
   /// Create a new Dart instance and add it to the `InstanceManager`.
   void create(int identifier);
 
+  void onScrollChanged(
+      int webViewInstanceId, int left, int top, int oldLeft, int oldTop);
+
   static void setup(WebViewFlutterApi? api,
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.WebViewFlutterApi.create', codec,
+          'kr.co.bootpay.WebViewFlutterApi.create',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1009,6 +1177,39 @@ abstract class WebViewFlutterApi {
           assert(arg_identifier != null,
           'Argument for kr.co.bootpay.WebViewFlutterApi.create was null, expected non-null int.');
           api.create(arg_identifier!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebViewFlutterApi.onScrollChanged',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebViewFlutterApi.onScrollChanged was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_webViewInstanceId = (args[0] as int?);
+          assert(arg_webViewInstanceId != null,
+          'Argument for kr.co.bootpay.WebViewFlutterApi.onScrollChanged was null, expected non-null int.');
+          final int? arg_left = (args[1] as int?);
+          assert(arg_left != null,
+          'Argument for kr.co.bootpay.WebViewFlutterApi.onScrollChanged was null, expected non-null int.');
+          final int? arg_top = (args[2] as int?);
+          assert(arg_top != null,
+          'Argument for kr.co.bootpay.WebViewFlutterApi.onScrollChanged was null, expected non-null int.');
+          final int? arg_oldLeft = (args[3] as int?);
+          assert(arg_oldLeft != null,
+          'Argument for kr.co.bootpay.WebViewFlutterApi.onScrollChanged was null, expected non-null int.');
+          final int? arg_oldTop = (args[4] as int?);
+          assert(arg_oldTop != null,
+          'Argument for kr.co.bootpay.WebViewFlutterApi.onScrollChanged was null, expected non-null int.');
+          api.onScrollChanged(arg_webViewInstanceId!, arg_left!, arg_top!,
+              arg_oldLeft!, arg_oldTop!);
           return;
         });
       }
@@ -1028,7 +1229,8 @@ class WebSettingsHostApi {
 
   Future<void> create(int arg_instanceId, int arg_webViewInstanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.create', codec,
+        'kr.co.bootpay.WebSettingsHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId, arg_webViewInstanceId])
@@ -1051,7 +1253,8 @@ class WebSettingsHostApi {
 
   Future<void> setDomStorageEnabled(int arg_instanceId, bool arg_flag) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setDomStorageEnabled', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setDomStorageEnabled',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_flag]) as List<Object?>?;
@@ -1121,7 +1324,8 @@ class WebSettingsHostApi {
 
   Future<void> setJavaScriptEnabled(int arg_instanceId, bool arg_flag) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setJavaScriptEnabled', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setJavaScriptEnabled',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_flag]) as List<Object?>?;
@@ -1144,7 +1348,8 @@ class WebSettingsHostApi {
   Future<void> setUserAgentString(
       int arg_instanceId, String? arg_userAgentString) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setUserAgentString', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setUserAgentString',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_userAgentString]) as List<Object?>?;
@@ -1190,7 +1395,8 @@ class WebSettingsHostApi {
 
   Future<void> setSupportZoom(int arg_instanceId, bool arg_support) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setSupportZoom', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setSupportZoom',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_support]) as List<Object?>?;
@@ -1213,7 +1419,8 @@ class WebSettingsHostApi {
   Future<void> setLoadWithOverviewMode(
       int arg_instanceId, bool arg_overview) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setLoadWithOverviewMode', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setLoadWithOverviewMode',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_overview]) as List<Object?>?;
@@ -1235,7 +1442,8 @@ class WebSettingsHostApi {
 
   Future<void> setUseWideViewPort(int arg_instanceId, bool arg_use) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setUseWideViewPort', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setUseWideViewPort',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_use]) as List<Object?>?;
@@ -1258,7 +1466,8 @@ class WebSettingsHostApi {
   Future<void> setDisplayZoomControls(
       int arg_instanceId, bool arg_enabled) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setDisplayZoomControls', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setDisplayZoomControls',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_enabled]) as List<Object?>?;
@@ -1281,7 +1490,8 @@ class WebSettingsHostApi {
   Future<void> setBuiltInZoomControls(
       int arg_instanceId, bool arg_enabled) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setBuiltInZoomControls', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setBuiltInZoomControls',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_enabled]) as List<Object?>?;
@@ -1303,7 +1513,8 @@ class WebSettingsHostApi {
 
   Future<void> setAllowFileAccess(int arg_instanceId, bool arg_enabled) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setAllowFileAccess', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setAllowFileAccess',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_enabled]) as List<Object?>?;
@@ -1325,7 +1536,8 @@ class WebSettingsHostApi {
 
   Future<void> setTextZoom(int arg_instanceId, int arg_textZoom) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebSettingsHostApi.setTextZoom', codec,
+        'kr.co.bootpay.WebSettingsHostApi.setTextZoom',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_textZoom]) as List<Object?>?;
@@ -1344,6 +1556,34 @@ class WebSettingsHostApi {
       return;
     }
   }
+
+  Future<String> getUserAgentString(int arg_instanceId) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.WebSettingsHostApi.getUserAgentString',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList =
+    await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else if (replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (replyList[0] as String?)!;
+    }
+  }
 }
 
 class JavaScriptChannelHostApi {
@@ -1358,7 +1598,8 @@ class JavaScriptChannelHostApi {
 
   Future<void> create(int arg_instanceId, String arg_channelName) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.JavaScriptChannelHostApi.create', codec,
+        'kr.co.bootpay.JavaScriptChannelHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_channelName]) as List<Object?>?;
@@ -1388,7 +1629,8 @@ abstract class JavaScriptChannelFlutterApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.JavaScriptChannelFlutterApi.postMessage', codec,
+          'kr.co.bootpay.JavaScriptChannelFlutterApi.postMessage',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1423,7 +1665,8 @@ class WebViewClientHostApi {
 
   Future<void> create(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebViewClientHostApi.create', codec,
+        'kr.co.bootpay.WebViewClientHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -1478,6 +1721,9 @@ class _WebViewClientFlutterApiCodec extends StandardMessageCodec {
     } else if (value is WebResourceRequestData) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
+    } else if (value is WebResourceResponseData) {
+      buffer.putUint8(130);
+      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -1490,6 +1736,8 @@ class _WebViewClientFlutterApiCodec extends StandardMessageCodec {
         return WebResourceErrorData.decode(readValue(buffer)!);
       case 129:
         return WebResourceRequestData.decode(readValue(buffer)!);
+      case 130:
+        return WebResourceResponseData.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -1502,6 +1750,9 @@ abstract class WebViewClientFlutterApi {
   void onPageStarted(int instanceId, int webViewInstanceId, String url);
 
   void onPageFinished(int instanceId, int webViewInstanceId, String url);
+
+  void onReceivedHttpError(int instanceId, int webViewInstanceId,
+      WebResourceRequestData request, WebResourceResponseData response);
 
   void onReceivedRequestError(int instanceId, int webViewInstanceId,
       WebResourceRequestData request, WebResourceErrorData error);
@@ -1517,11 +1768,15 @@ abstract class WebViewClientFlutterApi {
   void doUpdateVisitedHistory(
       int instanceId, int webViewInstanceId, String url, bool isReload);
 
+  void onReceivedHttpAuthRequest(int instanceId, int webViewInstanceId,
+      int httpAuthHandlerInstanceId, String host, String realm);
+
   static void setup(WebViewClientFlutterApi? api,
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.WebViewClientFlutterApi.onPageStarted', codec,
+          'kr.co.bootpay.WebViewClientFlutterApi.onPageStarted',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1546,7 +1801,8 @@ abstract class WebViewClientFlutterApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.WebViewClientFlutterApi.onPageFinished', codec,
+          'kr.co.bootpay.WebViewClientFlutterApi.onPageFinished',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1565,6 +1821,38 @@ abstract class WebViewClientFlutterApi {
           assert(arg_url != null,
           'Argument for kr.co.bootpay.WebViewClientFlutterApi.onPageFinished was null, expected non-null String.');
           api.onPageFinished(arg_instanceId!, arg_webViewInstanceId!, arg_url!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError was null, expected non-null int.');
+          final int? arg_webViewInstanceId = (args[1] as int?);
+          assert(arg_webViewInstanceId != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError was null, expected non-null int.');
+          final WebResourceRequestData? arg_request =
+          (args[2] as WebResourceRequestData?);
+          assert(arg_request != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError was null, expected non-null WebResourceRequestData.');
+          final WebResourceResponseData? arg_response =
+          (args[3] as WebResourceResponseData?);
+          assert(arg_response != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError was null, expected non-null WebResourceResponseData.');
+          api.onReceivedHttpError(arg_instanceId!, arg_webViewInstanceId!,
+              arg_request!, arg_response!);
           return;
         });
       }
@@ -1603,7 +1891,8 @@ abstract class WebViewClientFlutterApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.WebViewClientFlutterApi.onReceivedError', codec,
+          'kr.co.bootpay.WebViewClientFlutterApi.onReceivedError',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1635,7 +1924,8 @@ abstract class WebViewClientFlutterApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.WebViewClientFlutterApi.requestLoading', codec,
+          'kr.co.bootpay.WebViewClientFlutterApi.requestLoading',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1662,7 +1952,8 @@ abstract class WebViewClientFlutterApi {
     }
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.WebViewClientFlutterApi.urlLoading', codec,
+          'kr.co.bootpay.WebViewClientFlutterApi.urlLoading',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -1715,6 +2006,39 @@ abstract class WebViewClientFlutterApi {
         });
       }
     }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest was null, expected non-null int.');
+          final int? arg_webViewInstanceId = (args[1] as int?);
+          assert(arg_webViewInstanceId != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest was null, expected non-null int.');
+          final int? arg_httpAuthHandlerInstanceId = (args[2] as int?);
+          assert(arg_httpAuthHandlerInstanceId != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest was null, expected non-null int.');
+          final String? arg_host = (args[3] as String?);
+          assert(arg_host != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest was null, expected non-null String.');
+          final String? arg_realm = (args[4] as String?);
+          assert(arg_realm != null,
+          'Argument for kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest was null, expected non-null String.');
+          api.onReceivedHttpAuthRequest(arg_instanceId!, arg_webViewInstanceId!,
+              arg_httpAuthHandlerInstanceId!, arg_host!, arg_realm!);
+          return;
+        });
+      }
+    }
   }
 }
 
@@ -1730,7 +2054,8 @@ class DownloadListenerHostApi {
 
   Future<void> create(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.DownloadListenerHostApi.create', codec,
+        'kr.co.bootpay.DownloadListenerHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -1810,7 +2135,8 @@ class WebChromeClientHostApi {
 
   Future<void> create(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebChromeClientHostApi.create', codec,
+        'kr.co.bootpay.WebChromeClientHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -1853,6 +2179,102 @@ class WebChromeClientHostApi {
       return;
     }
   }
+
+  Future<void> setSynchronousReturnValueForOnConsoleMessage(
+      int arg_instanceId, bool arg_value) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnConsoleMessage',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_instanceId, arg_value]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<void> setSynchronousReturnValueForOnJsAlert(
+      int arg_instanceId, bool arg_value) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnJsAlert',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_instanceId, arg_value]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<void> setSynchronousReturnValueForOnJsConfirm(
+      int arg_instanceId, bool arg_value) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnJsConfirm',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_instanceId, arg_value]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<void> setSynchronousReturnValueForOnJsPrompt(
+      int arg_instanceId, bool arg_value) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnJsPrompt',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_instanceId, arg_value]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
 }
 
 class FlutterAssetManagerHostApi {
@@ -1867,7 +2289,8 @@ class FlutterAssetManagerHostApi {
 
   Future<List<String?>> list(String arg_path) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.FlutterAssetManagerHostApi.list', codec,
+        'kr.co.bootpay.FlutterAssetManagerHostApi.list',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_path]) as List<Object?>?;
@@ -1921,8 +2344,31 @@ class FlutterAssetManagerHostApi {
   }
 }
 
+class _WebChromeClientFlutterApiCodec extends StandardMessageCodec {
+  const _WebChromeClientFlutterApiCodec();
+  @override
+  void writeValue(WriteBuffer buffer, Object? value) {
+    if (value is ConsoleMessage) {
+      buffer.putUint8(128);
+      writeValue(buffer, value.encode());
+    } else {
+      super.writeValue(buffer, value);
+    }
+  }
+
+  @override
+  Object? readValueOfType(int type, ReadBuffer buffer) {
+    switch (type) {
+      case 128:
+        return ConsoleMessage.decode(readValue(buffer)!);
+      default:
+        return super.readValueOfType(type, buffer);
+    }
+  }
+}
+
 abstract class WebChromeClientFlutterApi {
-  static const MessageCodec<Object?> codec = StandardMessageCodec();
+  static const MessageCodec<Object?> codec = _WebChromeClientFlutterApiCodec();
 
   void onProgressChanged(int instanceId, int webViewInstanceId, int progress);
 
@@ -1931,6 +2377,30 @@ abstract class WebChromeClientFlutterApi {
 
   /// Callback to Dart function `WebChromeClient.onPermissionRequest`.
   void onPermissionRequest(int instanceId, int requestInstanceId);
+
+  /// Callback to Dart function `WebChromeClient.onShowCustomView`.
+  void onShowCustomView(
+      int instanceId, int viewIdentifier, int callbackIdentifier);
+
+  /// Callback to Dart function `WebChromeClient.onHideCustomView`.
+  void onHideCustomView(int instanceId);
+
+  /// Callback to Dart function `WebChromeClient.onGeolocationPermissionsShowPrompt`.
+  void onGeolocationPermissionsShowPrompt(
+      int instanceId, int paramsInstanceId, String origin);
+
+  /// Callback to Dart function `WebChromeClient.onGeolocationPermissionsHidePrompt`.
+  void onGeolocationPermissionsHidePrompt(int identifier);
+
+  /// Callback to Dart function `WebChromeClient.onConsoleMessage`.
+  void onConsoleMessage(int instanceId, ConsoleMessage message);
+
+  Future<void> onJsAlert(int instanceId, String url, String message);
+
+  Future<bool> onJsConfirm(int instanceId, String url, String message);
+
+  Future<String> onJsPrompt(
+      int instanceId, String url, String message, String defaultValue);
 
   static void setup(WebChromeClientFlutterApi? api,
       {BinaryMessenger? binaryMessenger}) {
@@ -2011,6 +2481,206 @@ abstract class WebChromeClientFlutterApi {
         });
       }
     }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onShowCustomView',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onShowCustomView was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onShowCustomView was null, expected non-null int.');
+          final int? arg_viewIdentifier = (args[1] as int?);
+          assert(arg_viewIdentifier != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onShowCustomView was null, expected non-null int.');
+          final int? arg_callbackIdentifier = (args[2] as int?);
+          assert(arg_callbackIdentifier != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onShowCustomView was null, expected non-null int.');
+          api.onShowCustomView(
+              arg_instanceId!, arg_viewIdentifier!, arg_callbackIdentifier!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onHideCustomView',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onHideCustomView was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onHideCustomView was null, expected non-null int.');
+          api.onHideCustomView(arg_instanceId!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsShowPrompt',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsShowPrompt was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsShowPrompt was null, expected non-null int.');
+          final int? arg_paramsInstanceId = (args[1] as int?);
+          assert(arg_paramsInstanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsShowPrompt was null, expected non-null int.');
+          final String? arg_origin = (args[2] as String?);
+          assert(arg_origin != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsShowPrompt was null, expected non-null String.');
+          api.onGeolocationPermissionsShowPrompt(
+              arg_instanceId!, arg_paramsInstanceId!, arg_origin!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsHidePrompt',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsHidePrompt was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsHidePrompt was null, expected non-null int.');
+          api.onGeolocationPermissionsHidePrompt(arg_identifier!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onConsoleMessage',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onConsoleMessage was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onConsoleMessage was null, expected non-null int.');
+          final ConsoleMessage? arg_message = (args[1] as ConsoleMessage?);
+          assert(arg_message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onConsoleMessage was null, expected non-null ConsoleMessage.');
+          api.onConsoleMessage(arg_instanceId!, arg_message!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onJsAlert',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsAlert was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsAlert was null, expected non-null int.');
+          final String? arg_url = (args[1] as String?);
+          assert(arg_url != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsAlert was null, expected non-null String.');
+          final String? arg_message = (args[2] as String?);
+          assert(arg_message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsAlert was null, expected non-null String.');
+          await api.onJsAlert(arg_instanceId!, arg_url!, arg_message!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onJsConfirm',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsConfirm was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null int.');
+          final String? arg_url = (args[1] as String?);
+          assert(arg_url != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null String.');
+          final String? arg_message = (args[2] as String?);
+          assert(arg_message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null String.');
+          final bool output =
+          await api.onJsConfirm(arg_instanceId!, arg_url!, arg_message!);
+          return output;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null int.');
+          final String? arg_url = (args[1] as String?);
+          assert(arg_url != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null String.');
+          final String? arg_message = (args[2] as String?);
+          assert(arg_message != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null String.');
+          final String? arg_defaultValue = (args[3] as String?);
+          assert(arg_defaultValue != null,
+          'Argument for kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null String.');
+          final String output = await api.onJsPrompt(
+              arg_instanceId!, arg_url!, arg_message!, arg_defaultValue!);
+          return output;
+        });
+      }
+    }
   }
 }
 
@@ -2026,7 +2696,8 @@ class WebStorageHostApi {
 
   Future<void> create(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebStorageHostApi.create', codec,
+        'kr.co.bootpay.WebStorageHostApi.create',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -2048,7 +2719,8 @@ class WebStorageHostApi {
 
   Future<void> deleteAllData(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.WebStorageHostApi.deleteAllData', codec,
+        'kr.co.bootpay.WebStorageHostApi.deleteAllData',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -2069,44 +2741,21 @@ class WebStorageHostApi {
   }
 }
 
-class _FileChooserParamsFlutterApiCodec extends StandardMessageCodec {
-  const _FileChooserParamsFlutterApiCodec();
-  @override
-  void writeValue(WriteBuffer buffer, Object? value) {
-    if (value is FileChooserModeEnumData) {
-      buffer.putUint8(128);
-      writeValue(buffer, value.encode());
-    } else {
-      super.writeValue(buffer, value);
-    }
-  }
-
-  @override
-  Object? readValueOfType(int type, ReadBuffer buffer) {
-    switch (type) {
-      case 128:
-        return FileChooserModeEnumData.decode(readValue(buffer)!);
-      default:
-        return super.readValueOfType(type, buffer);
-    }
-  }
-}
-
 /// Handles callbacks methods for the native Java FileChooserParams class.
 ///
 /// See https://developer.android.com/reference/android/webkit/WebChromeClient.FileChooserParams.
 abstract class FileChooserParamsFlutterApi {
-  static const MessageCodec<Object?> codec =
-  _FileChooserParamsFlutterApiCodec();
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
 
   void create(int instanceId, bool isCaptureEnabled, List<String?> acceptTypes,
-      FileChooserModeEnumData mode, String? filenameHint);
+      FileChooserMode mode, String? filenameHint);
 
   static void setup(FileChooserParamsFlutterApi? api,
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.FileChooserParamsFlutterApi.create', codec,
+          'kr.co.bootpay.FileChooserParamsFlutterApi.create',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -2125,10 +2774,10 @@ abstract class FileChooserParamsFlutterApi {
           (args[2] as List<Object?>?)?.cast<String?>();
           assert(arg_acceptTypes != null,
           'Argument for kr.co.bootpay.FileChooserParamsFlutterApi.create was null, expected non-null List<String?>.');
-          final FileChooserModeEnumData? arg_mode =
-          (args[3] as FileChooserModeEnumData?);
+          final FileChooserMode? arg_mode =
+          args[3] == null ? null : FileChooserMode.values[args[3]! as int];
           assert(arg_mode != null,
-          'Argument for kr.co.bootpay.FileChooserParamsFlutterApi.create was null, expected non-null FileChooserModeEnumData.');
+          'Argument for kr.co.bootpay.FileChooserParamsFlutterApi.create was null, expected non-null FileChooserMode.');
           final String? arg_filenameHint = (args[4] as String?);
           api.create(arg_instanceId!, arg_isCaptureEnabled!, arg_acceptTypes!,
               arg_mode!, arg_filenameHint);
@@ -2159,7 +2808,8 @@ class PermissionRequestHostApi {
   /// Handles Dart method `PermissionRequest.grant`.
   Future<void> grant(int arg_instanceId, List<String?> arg_resources) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.PermissionRequestHostApi.grant', codec,
+        'kr.co.bootpay.PermissionRequestHostApi.grant',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList = await channel
         .send(<Object?>[arg_instanceId, arg_resources]) as List<Object?>?;
@@ -2182,7 +2832,8 @@ class PermissionRequestHostApi {
   /// Handles Dart method `PermissionRequest.deny`.
   Future<void> deny(int arg_instanceId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'kr.co.bootpay.PermissionRequestHostApi.deny', codec,
+        'kr.co.bootpay.PermissionRequestHostApi.deny',
+        codec,
         binaryMessenger: _binaryMessenger);
     final List<Object?>? replyList =
     await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
@@ -2220,7 +2871,8 @@ abstract class PermissionRequestFlutterApi {
       {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'kr.co.bootpay.PermissionRequestFlutterApi.create', codec,
+          'kr.co.bootpay.PermissionRequestFlutterApi.create',
+          codec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMessageHandler(null);
@@ -2243,3 +2895,340 @@ abstract class PermissionRequestFlutterApi {
     }
   }
 }
+
+/// Host API for `CustomViewCallback`.
+///
+/// This class may handle instantiating and adding native object instances that
+/// are attached to a Dart instance or handle method calls on the associated
+/// native class or an instance of the class.
+///
+/// See https://developer.android.com/reference/android/webkit/WebChromeClient.CustomViewCallback.
+class CustomViewCallbackHostApi {
+  /// Constructor for [CustomViewCallbackHostApi].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  CustomViewCallbackHostApi({BinaryMessenger? binaryMessenger})
+      : _binaryMessenger = binaryMessenger;
+  final BinaryMessenger? _binaryMessenger;
+
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Handles Dart method `CustomViewCallback.onCustomViewHidden`.
+  Future<void> onCustomViewHidden(int arg_identifier) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.CustomViewCallbackHostApi.onCustomViewHidden',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList =
+    await channel.send(<Object?>[arg_identifier]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+}
+
+/// Flutter API for `CustomViewCallback`.
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+///
+/// See https://developer.android.com/reference/android/webkit/WebChromeClient.CustomViewCallback.
+abstract class CustomViewCallbackFlutterApi {
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Create a new Dart instance and add it to the `InstanceManager`.
+  void create(int identifier);
+
+  static void setup(CustomViewCallbackFlutterApi? api,
+      {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.CustomViewCallbackFlutterApi.create',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.CustomViewCallbackFlutterApi.create was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+          'Argument for kr.co.bootpay.CustomViewCallbackFlutterApi.create was null, expected non-null int.');
+          api.create(arg_identifier!);
+          return;
+        });
+      }
+    }
+  }
+}
+
+/// Flutter API for `View`.
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+///
+/// See https://developer.android.com/reference/android/view/View.
+abstract class ViewFlutterApi {
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Create a new Dart instance and add it to the `InstanceManager`.
+  void create(int identifier);
+
+  static void setup(ViewFlutterApi? api, {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.ViewFlutterApi.create',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.ViewFlutterApi.create was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+          'Argument for kr.co.bootpay.ViewFlutterApi.create was null, expected non-null int.');
+          api.create(arg_identifier!);
+          return;
+        });
+      }
+    }
+  }
+}
+
+/// Host API for `GeolocationPermissionsCallback`.
+///
+/// This class may handle instantiating and adding native object instances that
+/// are attached to a Dart instance or handle method calls on the associated
+/// native class or an instance of the class.
+///
+/// See https://developer.android.com/reference/android/webkit/GeolocationPermissions.Callback.
+class GeolocationPermissionsCallbackHostApi {
+  /// Constructor for [GeolocationPermissionsCallbackHostApi].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  GeolocationPermissionsCallbackHostApi({BinaryMessenger? binaryMessenger})
+      : _binaryMessenger = binaryMessenger;
+  final BinaryMessenger? _binaryMessenger;
+
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Handles Dart method `GeolocationPermissionsCallback.invoke`.
+  Future<void> invoke(int arg_instanceId, String arg_origin, bool arg_allow,
+      bool arg_retain) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.GeolocationPermissionsCallbackHostApi.invoke',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_instanceId, arg_origin, arg_allow, arg_retain])
+    as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+}
+
+/// Flutter API for `GeolocationPermissionsCallback`.
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+///
+/// See https://developer.android.com/reference/android/webkit/GeolocationPermissions.Callback.
+abstract class GeolocationPermissionsCallbackFlutterApi {
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Create a new Dart instance and add it to the `InstanceManager`.
+  void create(int instanceId);
+
+  static void setup(GeolocationPermissionsCallbackFlutterApi? api,
+      {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.GeolocationPermissionsCallbackFlutterApi.create',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.GeolocationPermissionsCallbackFlutterApi.create was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.GeolocationPermissionsCallbackFlutterApi.create was null, expected non-null int.');
+          api.create(arg_instanceId!);
+          return;
+        });
+      }
+    }
+  }
+}
+
+/// Host API for `HttpAuthHandler`.
+///
+/// This class may handle instantiating and adding native object instances that
+/// are attached to a Dart instance or handle method calls on the associated
+/// native class or an instance of the class.
+///
+/// See https://developer.android.com/reference/android/webkit/HttpAuthHandler.
+class HttpAuthHandlerHostApi {
+  /// Constructor for [HttpAuthHandlerHostApi].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  HttpAuthHandlerHostApi({BinaryMessenger? binaryMessenger})
+      : _binaryMessenger = binaryMessenger;
+  final BinaryMessenger? _binaryMessenger;
+
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Handles Dart method `HttpAuthHandler.useHttpAuthUsernamePassword`.
+  Future<bool> useHttpAuthUsernamePassword(int arg_instanceId) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.HttpAuthHandlerHostApi.useHttpAuthUsernamePassword',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList =
+    await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else if (replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (replyList[0] as bool?)!;
+    }
+  }
+
+  /// Handles Dart method `HttpAuthHandler.cancel`.
+  Future<void> cancel(int arg_instanceId) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.HttpAuthHandlerHostApi.cancel',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList =
+    await channel.send(<Object?>[arg_instanceId]) as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  /// Handles Dart method `HttpAuthHandler.proceed`.
+  Future<void> proceed(
+      int arg_instanceId, String arg_username, String arg_password) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'kr.co.bootpay.HttpAuthHandlerHostApi.proceed',
+        codec,
+        binaryMessenger: _binaryMessenger);
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_instanceId, arg_username, arg_password])
+    as List<Object?>?;
+    if (replyList == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyList.length > 1) {
+      throw PlatformException(
+        code: replyList[0]! as String,
+        message: replyList[1] as String?,
+        details: replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+}
+
+/// Flutter API for `HttpAuthHandler`.
+///
+/// This class may handle instantiating and adding Dart instances that are
+/// attached to a native instance or receiving callback methods from an
+/// overridden native class.
+///
+/// See https://developer.android.com/reference/android/webkit/HttpAuthHandler.
+abstract class HttpAuthHandlerFlutterApi {
+  static const MessageCodec<Object?> codec = StandardMessageCodec();
+
+  /// Create a new Dart instance and add it to the `InstanceManager`.
+  void create(int instanceId);
+
+  static void setup(HttpAuthHandlerFlutterApi? api,
+      {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'kr.co.bootpay.HttpAuthHandlerFlutterApi.create',
+          codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for kr.co.bootpay.HttpAuthHandlerFlutterApi.create was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+          'Argument for kr.co.bootpay.HttpAuthHandlerFlutterApi.create was null, expected non-null int.');
+          api.create(arg_instanceId!);
+          return;
+        });
+      }
+    }
+  }
+}
+
+// Argument for kr.co.bootpay.PermissionRequestFlutterApi.create was null.
+

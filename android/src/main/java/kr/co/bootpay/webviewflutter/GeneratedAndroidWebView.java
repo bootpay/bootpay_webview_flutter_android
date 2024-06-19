@@ -94,52 +94,59 @@ public class GeneratedAndroidWebView {
     }
   }
 
-  /** Generated class from Pigeon that represents data sent in messages. */
-  public static final class FileChooserModeEnumData {
-    private @NonNull FileChooserMode value;
+  /**
+   * Indicates the type of message logged to the console.
+   *
+   * <p>See https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel.
+   */
+  public enum ConsoleMessageLevel {
+    /**
+     * Indicates a message is logged for debugging.
+     *
+     * <p>See
+     * https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#DEBUG.
+     */
+    DEBUG(0),
+    /**
+     * Indicates a message is provided as an error.
+     *
+     * <p>See
+     * https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#ERROR.
+     */
+    ERROR(1),
+    /**
+     * Indicates a message is provided as a basic log message.
+     *
+     * <p>See
+     * https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#LOG.
+     */
+    LOG(2),
+    /**
+     * Indicates a message is provided as a tip.
+     *
+     * <p>See
+     * https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#TIP.
+     */
+    TIP(3),
+    /**
+     * Indicates a message is provided as a warning.
+     *
+     * <p>See
+     * https://developer.android.com/reference/android/webkit/ConsoleMessage.MessageLevel#WARNING.
+     */
+    WARNING(4),
+    /**
+     * Indicates a message with an unknown level.
+     *
+     * <p>This does not represent an actual value provided by the platform and only indicates a
+     * value was provided that isn't currently supported.
+     */
+    UNKNOWN(5);
 
-    public @NonNull FileChooserMode getValue() {
-      return value;
-    }
+    final int index;
 
-    public void setValue(@NonNull FileChooserMode setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"value\" is null.");
-      }
-      this.value = setterArg;
-    }
-
-    /** Constructor is non-public to enforce null safety; use Builder. */
-    FileChooserModeEnumData() {}
-
-    public static final class Builder {
-
-      private @Nullable FileChooserMode value;
-
-      public @NonNull Builder setValue(@NonNull FileChooserMode setterArg) {
-        this.value = setterArg;
-        return this;
-      }
-
-      public @NonNull FileChooserModeEnumData build() {
-        FileChooserModeEnumData pigeonReturn = new FileChooserModeEnumData();
-        pigeonReturn.setValue(value);
-        return pigeonReturn;
-      }
-    }
-
-    @NonNull
-    ArrayList<Object> toList() {
-      ArrayList<Object> toListResult = new ArrayList<Object>(1);
-      toListResult.add(value == null ? null : value.index);
-      return toListResult;
-    }
-
-    static @NonNull FileChooserModeEnumData fromList(@NonNull ArrayList<Object> list) {
-      FileChooserModeEnumData pigeonResult = new FileChooserModeEnumData();
-      Object value = list.get(0);
-      pigeonResult.setValue(value == null ? null : FileChooserMode.values()[(int) value]);
-      return pigeonResult;
+    private ConsoleMessageLevel(final int index) {
+      this.index = index;
     }
   }
 
@@ -310,6 +317,58 @@ public class GeneratedAndroidWebView {
   }
 
   /** Generated class from Pigeon that represents data sent in messages. */
+  public static final class WebResourceResponseData {
+    private @NonNull Long statusCode;
+
+    public @NonNull Long getStatusCode() {
+      return statusCode;
+    }
+
+    public void setStatusCode(@NonNull Long setterArg) {
+      if (setterArg == null) {
+        throw new IllegalStateException("Nonnull field \"statusCode\" is null.");
+      }
+      this.statusCode = setterArg;
+    }
+
+    /** Constructor is non-public to enforce null safety; use Builder. */
+    WebResourceResponseData() {}
+
+    public static final class Builder {
+
+      private @Nullable Long statusCode;
+
+      public @NonNull Builder setStatusCode(@NonNull Long setterArg) {
+        this.statusCode = setterArg;
+        return this;
+      }
+
+      public @NonNull WebResourceResponseData build() {
+        WebResourceResponseData pigeonReturn = new WebResourceResponseData();
+        pigeonReturn.setStatusCode(statusCode);
+        return pigeonReturn;
+      }
+    }
+
+    @NonNull
+    ArrayList<Object> toList() {
+      ArrayList<Object> toListResult = new ArrayList<Object>(1);
+      toListResult.add(statusCode);
+      return toListResult;
+    }
+
+    static @NonNull WebResourceResponseData fromList(@NonNull ArrayList<Object> list) {
+      WebResourceResponseData pigeonResult = new WebResourceResponseData();
+      Object statusCode = list.get(0);
+      pigeonResult.setStatusCode(
+              (statusCode == null)
+                      ? null
+                      : ((statusCode instanceof Integer) ? (Integer) statusCode : (Long) statusCode));
+      return pigeonResult;
+    }
+  }
+
+  /** Generated class from Pigeon that represents data sent in messages. */
   public static final class WebResourceErrorData {
     private @NonNull Long errorCode;
 
@@ -458,6 +517,136 @@ public class GeneratedAndroidWebView {
     }
   }
 
+  /**
+   * Represents a JavaScript console message from WebCore.
+   *
+   * <p>See https://developer.android.com/reference/android/webkit/ConsoleMessage
+   *
+   * <p>Generated class from Pigeon that represents data sent in messages.
+   */
+  public static final class ConsoleMessage {
+    private @NonNull Long lineNumber;
+
+    public @NonNull Long getLineNumber() {
+      return lineNumber;
+    }
+
+    public void setLineNumber(@NonNull Long setterArg) {
+      if (setterArg == null) {
+        throw new IllegalStateException("Nonnull field \"lineNumber\" is null.");
+      }
+      this.lineNumber = setterArg;
+    }
+
+    private @NonNull String message;
+
+    public @NonNull String getMessage() {
+      return message;
+    }
+
+    public void setMessage(@NonNull String setterArg) {
+      if (setterArg == null) {
+        throw new IllegalStateException("Nonnull field \"message\" is null.");
+      }
+      this.message = setterArg;
+    }
+
+    private @NonNull ConsoleMessageLevel level;
+
+    public @NonNull ConsoleMessageLevel getLevel() {
+      return level;
+    }
+
+    public void setLevel(@NonNull ConsoleMessageLevel setterArg) {
+      if (setterArg == null) {
+        throw new IllegalStateException("Nonnull field \"level\" is null.");
+      }
+      this.level = setterArg;
+    }
+
+    private @NonNull String sourceId;
+
+    public @NonNull String getSourceId() {
+      return sourceId;
+    }
+
+    public void setSourceId(@NonNull String setterArg) {
+      if (setterArg == null) {
+        throw new IllegalStateException("Nonnull field \"sourceId\" is null.");
+      }
+      this.sourceId = setterArg;
+    }
+
+    /** Constructor is non-public to enforce null safety; use Builder. */
+    ConsoleMessage() {}
+
+    public static final class Builder {
+
+      private @Nullable Long lineNumber;
+
+      public @NonNull Builder setLineNumber(@NonNull Long setterArg) {
+        this.lineNumber = setterArg;
+        return this;
+      }
+
+      private @Nullable String message;
+
+      public @NonNull Builder setMessage(@NonNull String setterArg) {
+        this.message = setterArg;
+        return this;
+      }
+
+      private @Nullable ConsoleMessageLevel level;
+
+      public @NonNull Builder setLevel(@NonNull ConsoleMessageLevel setterArg) {
+        this.level = setterArg;
+        return this;
+      }
+
+      private @Nullable String sourceId;
+
+      public @NonNull Builder setSourceId(@NonNull String setterArg) {
+        this.sourceId = setterArg;
+        return this;
+      }
+
+      public @NonNull ConsoleMessage build() {
+        ConsoleMessage pigeonReturn = new ConsoleMessage();
+        pigeonReturn.setLineNumber(lineNumber);
+        pigeonReturn.setMessage(message);
+        pigeonReturn.setLevel(level);
+        pigeonReturn.setSourceId(sourceId);
+        return pigeonReturn;
+      }
+    }
+
+    @NonNull
+    ArrayList<Object> toList() {
+      ArrayList<Object> toListResult = new ArrayList<Object>(4);
+      toListResult.add(lineNumber);
+      toListResult.add(message);
+      toListResult.add(level == null ? null : level.index);
+      toListResult.add(sourceId);
+      return toListResult;
+    }
+
+    static @NonNull ConsoleMessage fromList(@NonNull ArrayList<Object> list) {
+      ConsoleMessage pigeonResult = new ConsoleMessage();
+      Object lineNumber = list.get(0);
+      pigeonResult.setLineNumber(
+              (lineNumber == null)
+                      ? null
+                      : ((lineNumber instanceof Integer) ? (Integer) lineNumber : (Long) lineNumber));
+      Object message = list.get(1);
+      pigeonResult.setMessage((String) message);
+      Object level = list.get(2);
+      pigeonResult.setLevel(ConsoleMessageLevel.values()[(int) level]);
+      Object sourceId = list.get(3);
+      pigeonResult.setSourceId((String) sourceId);
+      return pigeonResult;
+    }
+  }
+
   public interface Result<T> {
     @SuppressWarnings("UnknownNullness")
     void success(T result);
@@ -490,7 +679,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.InstanceManagerHostApi.clear", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.InstanceManagerHostApi.clear",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -534,7 +725,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.JavaObjectHostApi.dispose", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.JavaObjectHostApi.dispose",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -583,18 +776,33 @@ public class GeneratedAndroidWebView {
     public void dispose(@NonNull Long identifierArg, @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
               new BasicMessageChannel<>(
-                      binaryMessenger, "kr.co.bootpay.JavaObjectFlutterApi.dispose", getCodec());
+                      binaryMessenger,
+                      "kr.co.bootpay.JavaObjectFlutterApi.dispose",
+                      getCodec());
       channel.send(
               new ArrayList<Object>(Collections.singletonList(identifierArg)),
               channelReply -> callback.reply(null));
     }
   }
-  /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
+  /**
+   * Host API for `CookieManager`.
+   *
+   * <p>This class may handle instantiating and adding native object instances that are attached to
+   * a Dart instance or handle method calls on the associated native class or an instance of the
+   * class.
+   *
+   * <p>Generated interface from Pigeon that represents a handler of messages from Flutter.
+   */
   public interface CookieManagerHostApi {
-
-    void clearCookies(@NonNull Result<Boolean> result);
-
-    void setCookie(@NonNull String url, @NonNull String value);
+    /** Handles attaching `CookieManager.instance` to a native instance. */
+    void attachInstance(@NonNull Long instanceIdentifier);
+    /** Handles Dart method `CookieManager.setCookie`. */
+    void setCookie(@NonNull Long identifier, @NonNull String url, @NonNull String value);
+    /** Handles Dart method `CookieManager.removeAllCookies`. */
+    void removeAllCookies(@NonNull Long identifier, @NonNull Result<Boolean> result);
+    /** Handles Dart method `CookieManager.setAcceptThirdPartyCookies`. */
+    void setAcceptThirdPartyCookies(
+            @NonNull Long identifier, @NonNull Long webViewIdentifier, @NonNull Boolean accept);
 
     /** The codec used by CookieManagerHostApi. */
     static @NonNull MessageCodec<Object> getCodec() {
@@ -610,12 +818,68 @@ public class GeneratedAndroidWebView {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
                         binaryMessenger,
-                        "kr.co.bootpay.CookieManagerHostApi.clearCookies",
+                        "kr.co.bootpay.CookieManagerHostApi.attachInstance",
                         getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
                     ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdentifierArg = (Number) args.get(0);
+                    try {
+                      api.attachInstance(
+                              (instanceIdentifierArg == null) ? null : instanceIdentifierArg.longValue());
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.CookieManagerHostApi.setCookie",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number identifierArg = (Number) args.get(0);
+                    String urlArg = (String) args.get(1);
+                    String valueArg = (String) args.get(2);
+                    try {
+                      api.setCookie(
+                              (identifierArg == null) ? null : identifierArg.longValue(), urlArg, valueArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.CookieManagerHostApi.removeAllCookies",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number identifierArg = (Number) args.get(0);
                     Result<Boolean> resultCallback =
                             new Result<Boolean>() {
                               public void success(Boolean result) {
@@ -629,7 +893,8 @@ public class GeneratedAndroidWebView {
                               }
                             };
 
-                    api.clearCookies(resultCallback);
+                    api.removeAllCookies(
+                            (identifierArg == null) ? null : identifierArg.longValue(), resultCallback);
                   });
         } else {
           channel.setMessageHandler(null);
@@ -638,16 +903,22 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.CookieManagerHostApi.setCookie", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.CookieManagerHostApi.setAcceptThirdPartyCookies",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
                     ArrayList<Object> wrapped = new ArrayList<Object>();
                     ArrayList<Object> args = (ArrayList<Object>) message;
-                    String urlArg = (String) args.get(0);
-                    String valueArg = (String) args.get(1);
+                    Number identifierArg = (Number) args.get(0);
+                    Number webViewIdentifierArg = (Number) args.get(1);
+                    Boolean acceptArg = (Boolean) args.get(2);
                     try {
-                      api.setCookie(urlArg, valueArg);
+                      api.setAcceptThirdPartyCookies(
+                              (identifierArg == null) ? null : identifierArg.longValue(),
+                              (webViewIdentifierArg == null) ? null : webViewIdentifierArg.longValue(),
+                              acceptArg);
                       wrapped.add(0, null);
                     } catch (Throwable exception) {
                       ArrayList<Object> wrappedError = wrapError(exception);
@@ -772,7 +1043,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -795,7 +1068,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.loadData", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.loadData",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -861,7 +1136,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.loadUrl", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.loadUrl",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -889,7 +1166,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.postUrl", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.postUrl",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -915,7 +1194,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.getUrl", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.getUrl",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -939,7 +1220,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.canGoBack", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.canGoBack",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -963,7 +1246,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.canGoForward", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.canGoForward",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -987,7 +1272,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.goBack", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.goBack",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1010,7 +1297,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.goForward", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.goForward",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1033,7 +1322,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.reload", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.reload",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1056,7 +1347,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.clearCache", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.clearCache",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1117,7 +1410,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.getTitle", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.getTitle",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1141,7 +1436,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.scrollTo", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.scrollTo",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1169,7 +1466,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.scrollBy", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.scrollBy",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1197,7 +1496,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.getScrollX", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.getScrollX",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1221,7 +1522,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.getScrollY", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.getScrollY",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1245,7 +1548,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.getScrollPosition", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.getScrollPosition",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1295,7 +1600,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewHostApi.setWebViewClient", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewHostApi.setWebViewClient",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1496,9 +1803,29 @@ public class GeneratedAndroidWebView {
     public void create(@NonNull Long identifierArg, @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
               new BasicMessageChannel<>(
-                      binaryMessenger, "kr.co.bootpay.WebViewFlutterApi.create", getCodec());
+                      binaryMessenger,
+                      "kr.co.bootpay.WebViewFlutterApi.create",
+                      getCodec());
       channel.send(
               new ArrayList<Object>(Collections.singletonList(identifierArg)),
+              channelReply -> callback.reply(null));
+    }
+
+    public void onScrollChanged(
+            @NonNull Long webViewInstanceIdArg,
+            @NonNull Long leftArg,
+            @NonNull Long topArg,
+            @NonNull Long oldLeftArg,
+            @NonNull Long oldTopArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebViewFlutterApi.onScrollChanged",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(
+                      Arrays.asList(webViewInstanceIdArg, leftArg, topArg, oldLeftArg, oldTopArg)),
               channelReply -> callback.reply(null));
     }
   }
@@ -1533,6 +1860,9 @@ public class GeneratedAndroidWebView {
 
     void setTextZoom(@NonNull Long instanceId, @NonNull Long textZoom);
 
+    @NonNull
+    String getUserAgentString(@NonNull Long instanceId);
+
     /** The codec used by WebSettingsHostApi. */
     static @NonNull MessageCodec<Object> getCodec() {
       return new StandardMessageCodec();
@@ -1544,7 +1874,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebSettingsHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebSettingsHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1895,7 +2227,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebSettingsHostApi.setTextZoom", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebSettingsHostApi.setTextZoom",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -1908,6 +2242,33 @@ public class GeneratedAndroidWebView {
                               (instanceIdArg == null) ? null : instanceIdArg.longValue(),
                               (textZoomArg == null) ? null : textZoomArg.longValue());
                       wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.WebSettingsHostApi.getUserAgentString",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    try {
+                      String output =
+                              api.getUserAgentString(
+                                      (instanceIdArg == null) ? null : instanceIdArg.longValue());
+                      wrapped.add(0, output);
                     } catch (Throwable exception) {
                       ArrayList<Object> wrappedError = wrapError(exception);
                       wrapped = wrappedError;
@@ -1938,7 +2299,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.JavaScriptChannelHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.JavaScriptChannelHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2013,7 +2376,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebViewClientHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebViewClientHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2075,6 +2440,8 @@ public class GeneratedAndroidWebView {
           return WebResourceErrorData.fromList((ArrayList<Object>) readValue(buffer));
         case (byte) 129:
           return WebResourceRequestData.fromList((ArrayList<Object>) readValue(buffer));
+        case (byte) 130:
+          return WebResourceResponseData.fromList((ArrayList<Object>) readValue(buffer));
         default:
           return super.readValueOfType(type, buffer);
       }
@@ -2088,6 +2455,9 @@ public class GeneratedAndroidWebView {
       } else if (value instanceof WebResourceRequestData) {
         stream.write(129);
         writeValue(stream, ((WebResourceRequestData) value).toList());
+      } else if (value instanceof WebResourceResponseData) {
+        stream.write(130);
+        writeValue(stream, ((WebResourceResponseData) value).toList());
       } else {
         super.writeValue(stream, value);
       }
@@ -2139,6 +2509,23 @@ public class GeneratedAndroidWebView {
                       getCodec());
       channel.send(
               new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)),
+              channelReply -> callback.reply(null));
+    }
+
+    public void onReceivedHttpError(
+            @NonNull Long instanceIdArg,
+            @NonNull Long webViewInstanceIdArg,
+            @NonNull WebResourceRequestData requestArg,
+            @NonNull WebResourceResponseData responseArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpError",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(
+                      Arrays.asList(instanceIdArg, webViewInstanceIdArg, requestArg, responseArg)),
               channelReply -> callback.reply(null));
     }
 
@@ -2204,7 +2591,9 @@ public class GeneratedAndroidWebView {
             @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
               new BasicMessageChannel<>(
-                      binaryMessenger, "kr.co.bootpay.WebViewClientFlutterApi.urlLoading", getCodec());
+                      binaryMessenger,
+                      "kr.co.bootpay.WebViewClientFlutterApi.urlLoading",
+                      getCodec());
       channel.send(
               new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)),
               channelReply -> callback.reply(null));
@@ -2226,6 +2615,29 @@ public class GeneratedAndroidWebView {
                       Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg, isReloadArg)),
               channelReply -> callback.reply(null));
     }
+
+    public void onReceivedHttpAuthRequest(
+            @NonNull Long instanceIdArg,
+            @NonNull Long webViewInstanceIdArg,
+            @NonNull Long httpAuthHandlerInstanceIdArg,
+            @NonNull String hostArg,
+            @NonNull String realmArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebViewClientFlutterApi.onReceivedHttpAuthRequest",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(
+                      Arrays.asList(
+                              instanceIdArg,
+                              webViewInstanceIdArg,
+                              httpAuthHandlerInstanceIdArg,
+                              hostArg,
+                              realmArg)),
+              channelReply -> callback.reply(null));
+    }
   }
   /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
   public interface DownloadListenerHostApi {
@@ -2245,7 +2657,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.DownloadListenerHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.DownloadListenerHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2318,6 +2732,15 @@ public class GeneratedAndroidWebView {
     void setSynchronousReturnValueForOnShowFileChooser(
             @NonNull Long instanceId, @NonNull Boolean value);
 
+    void setSynchronousReturnValueForOnConsoleMessage(
+            @NonNull Long instanceId, @NonNull Boolean value);
+
+    void setSynchronousReturnValueForOnJsAlert(@NonNull Long instanceId, @NonNull Boolean value);
+
+    void setSynchronousReturnValueForOnJsConfirm(@NonNull Long instanceId, @NonNull Boolean value);
+
+    void setSynchronousReturnValueForOnJsPrompt(@NonNull Long instanceId, @NonNull Boolean value);
+
     /** The codec used by WebChromeClientHostApi. */
     static @NonNull MessageCodec<Object> getCodec() {
       return new StandardMessageCodec();
@@ -2331,7 +2754,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebChromeClientHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebChromeClientHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2378,6 +2803,114 @@ public class GeneratedAndroidWebView {
           channel.setMessageHandler(null);
         }
       }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnConsoleMessage",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    Boolean valueArg = (Boolean) args.get(1);
+                    try {
+                      api.setSynchronousReturnValueForOnConsoleMessage(
+                              (instanceIdArg == null) ? null : instanceIdArg.longValue(), valueArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnJsAlert",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    Boolean valueArg = (Boolean) args.get(1);
+                    try {
+                      api.setSynchronousReturnValueForOnJsAlert(
+                              (instanceIdArg == null) ? null : instanceIdArg.longValue(), valueArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnJsConfirm",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    Boolean valueArg = (Boolean) args.get(1);
+                    try {
+                      api.setSynchronousReturnValueForOnJsConfirm(
+                              (instanceIdArg == null) ? null : instanceIdArg.longValue(), valueArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.WebChromeClientHostApi.setSynchronousReturnValueForOnJsPrompt",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    Boolean valueArg = (Boolean) args.get(1);
+                    try {
+                      api.setSynchronousReturnValueForOnJsPrompt(
+                              (instanceIdArg == null) ? null : instanceIdArg.longValue(), valueArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
     }
   }
   /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
@@ -2402,7 +2935,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.FlutterAssetManagerHostApi.list", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.FlutterAssetManagerHostApi.list",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2449,6 +2984,34 @@ public class GeneratedAndroidWebView {
       }
     }
   }
+
+  private static class WebChromeClientFlutterApiCodec extends StandardMessageCodec {
+    public static final WebChromeClientFlutterApiCodec INSTANCE =
+            new WebChromeClientFlutterApiCodec();
+
+    private WebChromeClientFlutterApiCodec() {}
+
+    @Override
+    protected Object readValueOfType(byte type, @NonNull ByteBuffer buffer) {
+      switch (type) {
+        case (byte) 128:
+          return ConsoleMessage.fromList((ArrayList<Object>) readValue(buffer));
+        default:
+          return super.readValueOfType(type, buffer);
+      }
+    }
+
+    @Override
+    protected void writeValue(@NonNull ByteArrayOutputStream stream, Object value) {
+      if (value instanceof ConsoleMessage) {
+        stream.write(128);
+        writeValue(stream, ((ConsoleMessage) value).toList());
+      } else {
+        super.writeValue(stream, value);
+      }
+    }
+  }
+
   /** Generated class from Pigeon that represents Flutter messages that can be called from Java. */
   public static class WebChromeClientFlutterApi {
     private final @NonNull BinaryMessenger binaryMessenger;
@@ -2464,7 +3027,7 @@ public class GeneratedAndroidWebView {
     }
     /** The codec used by WebChromeClientFlutterApi. */
     static @NonNull MessageCodec<Object> getCodec() {
-      return new StandardMessageCodec();
+      return WebChromeClientFlutterApiCodec.INSTANCE;
     }
 
     public void onProgressChanged(
@@ -2515,6 +3078,128 @@ public class GeneratedAndroidWebView {
               new ArrayList<Object>(Arrays.asList(instanceIdArg, requestInstanceIdArg)),
               channelReply -> callback.reply(null));
     }
+    /** Callback to Dart function `WebChromeClient.onShowCustomView`. */
+    public void onShowCustomView(
+            @NonNull Long instanceIdArg,
+            @NonNull Long viewIdentifierArg,
+            @NonNull Long callbackIdentifierArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onShowCustomView",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(
+                      Arrays.asList(instanceIdArg, viewIdentifierArg, callbackIdentifierArg)),
+              channelReply -> callback.reply(null));
+    }
+    /** Callback to Dart function `WebChromeClient.onHideCustomView`. */
+    public void onHideCustomView(@NonNull Long instanceIdArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onHideCustomView",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Collections.singletonList(instanceIdArg)),
+              channelReply -> callback.reply(null));
+    }
+    /** Callback to Dart function `WebChromeClient.onGeolocationPermissionsShowPrompt`. */
+    public void onGeolocationPermissionsShowPrompt(
+            @NonNull Long instanceIdArg,
+            @NonNull Long paramsInstanceIdArg,
+            @NonNull String originArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsShowPrompt",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Arrays.asList(instanceIdArg, paramsInstanceIdArg, originArg)),
+              channelReply -> callback.reply(null));
+    }
+    /** Callback to Dart function `WebChromeClient.onGeolocationPermissionsHidePrompt`. */
+    public void onGeolocationPermissionsHidePrompt(
+            @NonNull Long identifierArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onGeolocationPermissionsHidePrompt",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Collections.singletonList(identifierArg)),
+              channelReply -> callback.reply(null));
+    }
+    /** Callback to Dart function `WebChromeClient.onConsoleMessage`. */
+    public void onConsoleMessage(
+            @NonNull Long instanceIdArg,
+            @NonNull ConsoleMessage messageArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onConsoleMessage",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Arrays.asList(instanceIdArg, messageArg)),
+              channelReply -> callback.reply(null));
+    }
+
+    public void onJsAlert(
+            @NonNull Long instanceIdArg,
+            @NonNull String urlArg,
+            @NonNull String messageArg,
+            @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onJsAlert",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Arrays.asList(instanceIdArg, urlArg, messageArg)),
+              channelReply -> callback.reply(null));
+    }
+
+    public void onJsConfirm(
+            @NonNull Long instanceIdArg,
+            @NonNull String urlArg,
+            @NonNull String messageArg,
+            @NonNull Reply<Boolean> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onJsConfirm",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Arrays.asList(instanceIdArg, urlArg, messageArg)),
+              channelReply -> {
+                @SuppressWarnings("ConstantConditions")
+                Boolean output = (Boolean) channelReply;
+                callback.reply(output);
+              });
+    }
+
+    public void onJsPrompt(
+            @NonNull Long instanceIdArg,
+            @NonNull String urlArg,
+            @NonNull String messageArg,
+            @NonNull String defaultValueArg,
+            @NonNull Reply<String> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.WebChromeClientFlutterApi.onJsPrompt",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Arrays.asList(instanceIdArg, urlArg, messageArg, defaultValueArg)),
+              channelReply -> {
+                @SuppressWarnings("ConstantConditions")
+                String output = (String) channelReply;
+                callback.reply(output);
+              });
+    }
   }
   /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
   public interface WebStorageHostApi {
@@ -2534,7 +3219,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebStorageHostApi.create", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebStorageHostApi.create",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2557,7 +3244,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.WebStorageHostApi.deleteAllData", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.WebStorageHostApi.deleteAllData",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2579,34 +3268,6 @@ public class GeneratedAndroidWebView {
       }
     }
   }
-
-  private static class FileChooserParamsFlutterApiCodec extends StandardMessageCodec {
-    public static final FileChooserParamsFlutterApiCodec INSTANCE =
-            new FileChooserParamsFlutterApiCodec();
-
-    private FileChooserParamsFlutterApiCodec() {}
-
-    @Override
-    protected Object readValueOfType(byte type, @NonNull ByteBuffer buffer) {
-      switch (type) {
-        case (byte) 128:
-          return FileChooserModeEnumData.fromList((ArrayList<Object>) readValue(buffer));
-        default:
-          return super.readValueOfType(type, buffer);
-      }
-    }
-
-    @Override
-    protected void writeValue(@NonNull ByteArrayOutputStream stream, Object value) {
-      if (value instanceof FileChooserModeEnumData) {
-        stream.write(128);
-        writeValue(stream, ((FileChooserModeEnumData) value).toList());
-      } else {
-        super.writeValue(stream, value);
-      }
-    }
-  }
-
   /**
    * Handles callbacks methods for the native Java FileChooserParams class.
    *
@@ -2629,23 +3290,29 @@ public class GeneratedAndroidWebView {
     }
     /** The codec used by FileChooserParamsFlutterApi. */
     static @NonNull MessageCodec<Object> getCodec() {
-      return FileChooserParamsFlutterApiCodec.INSTANCE;
+      return new StandardMessageCodec();
     }
 
     public void create(
             @NonNull Long instanceIdArg,
             @NonNull Boolean isCaptureEnabledArg,
             @NonNull List<String> acceptTypesArg,
-            @NonNull FileChooserModeEnumData modeArg,
+            @NonNull FileChooserMode modeArg,
             @Nullable String filenameHintArg,
             @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
               new BasicMessageChannel<>(
-                      binaryMessenger, "kr.co.bootpay.FileChooserParamsFlutterApi.create", getCodec());
+                      binaryMessenger,
+                      "kr.co.bootpay.FileChooserParamsFlutterApi.create",
+                      getCodec());
       channel.send(
               new ArrayList<Object>(
                       Arrays.asList(
-                              instanceIdArg, isCaptureEnabledArg, acceptTypesArg, modeArg, filenameHintArg)),
+                              instanceIdArg,
+                              isCaptureEnabledArg,
+                              acceptTypesArg,
+                              modeArg.index,
+                              filenameHintArg)),
               channelReply -> callback.reply(null));
     }
   }
@@ -2679,7 +3346,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.PermissionRequestHostApi.grant", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.PermissionRequestHostApi.grant",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2704,7 +3373,9 @@ public class GeneratedAndroidWebView {
       {
         BasicMessageChannel<Object> channel =
                 new BasicMessageChannel<>(
-                        binaryMessenger, "kr.co.bootpay.PermissionRequestHostApi.deny", getCodec());
+                        binaryMessenger,
+                        "kr.co.bootpay.PermissionRequestHostApi.deny",
+                        getCodec());
         if (api != null) {
           channel.setMessageHandler(
                   (message, reply) -> {
@@ -2759,9 +3430,396 @@ public class GeneratedAndroidWebView {
             @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
               new BasicMessageChannel<>(
-                      binaryMessenger, "kr.co.bootpay.PermissionRequestFlutterApi.create", getCodec());
+                      binaryMessenger,
+                      "kr.co.bootpay.PermissionRequestFlutterApi.create",
+                      getCodec());
       channel.send(
               new ArrayList<Object>(Arrays.asList(instanceIdArg, resourcesArg)),
+              channelReply -> callback.reply(null));
+    }
+  }
+  /**
+   * Host API for `CustomViewCallback`.
+   *
+   * <p>This class may handle instantiating and adding native object instances that are attached to
+   * a Dart instance or handle method calls on the associated native class or an instance of the
+   * class.
+   *
+   * <p>See
+   * https://developer.android.com/reference/android/webkit/WebChromeClient.CustomViewCallback.
+   *
+   * <p>Generated interface from Pigeon that represents a handler of messages from Flutter.
+   */
+  public interface CustomViewCallbackHostApi {
+    /** Handles Dart method `CustomViewCallback.onCustomViewHidden`. */
+    void onCustomViewHidden(@NonNull Long identifier);
+
+    /** The codec used by CustomViewCallbackHostApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /**
+     * Sets up an instance of `CustomViewCallbackHostApi` to handle messages through the
+     * `binaryMessenger`.
+     */
+    static void setup(
+            @NonNull BinaryMessenger binaryMessenger, @Nullable CustomViewCallbackHostApi api) {
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.CustomViewCallbackHostApi.onCustomViewHidden",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number identifierArg = (Number) args.get(0);
+                    try {
+                      api.onCustomViewHidden(
+                              (identifierArg == null) ? null : identifierArg.longValue());
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+    }
+  }
+  /**
+   * Flutter API for `CustomViewCallback`.
+   *
+   * <p>This class may handle instantiating and adding Dart instances that are attached to a native
+   * instance or receiving callback methods from an overridden native class.
+   *
+   * <p>See
+   * https://developer.android.com/reference/android/webkit/WebChromeClient.CustomViewCallback.
+   *
+   * <p>Generated class from Pigeon that represents Flutter messages that can be called from Java.
+   */
+  public static class CustomViewCallbackFlutterApi {
+    private final @NonNull BinaryMessenger binaryMessenger;
+
+    public CustomViewCallbackFlutterApi(@NonNull BinaryMessenger argBinaryMessenger) {
+      this.binaryMessenger = argBinaryMessenger;
+    }
+
+    /** Public interface for sending reply. */
+    @SuppressWarnings("UnknownNullness")
+    public interface Reply<T> {
+      void reply(T reply);
+    }
+    /** The codec used by CustomViewCallbackFlutterApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /** Create a new Dart instance and add it to the `InstanceManager`. */
+    public void create(@NonNull Long identifierArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.CustomViewCallbackFlutterApi.create",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Collections.singletonList(identifierArg)),
+              channelReply -> callback.reply(null));
+    }
+  }
+  /**
+   * Flutter API for `View`.
+   *
+   * <p>This class may handle instantiating and adding Dart instances that are attached to a native
+   * instance or receiving callback methods from an overridden native class.
+   *
+   * <p>See https://developer.android.com/reference/android/view/View.
+   *
+   * <p>Generated class from Pigeon that represents Flutter messages that can be called from Java.
+   */
+  public static class ViewFlutterApi {
+    private final @NonNull BinaryMessenger binaryMessenger;
+
+    public ViewFlutterApi(@NonNull BinaryMessenger argBinaryMessenger) {
+      this.binaryMessenger = argBinaryMessenger;
+    }
+
+    /** Public interface for sending reply. */
+    @SuppressWarnings("UnknownNullness")
+    public interface Reply<T> {
+      void reply(T reply);
+    }
+    /** The codec used by ViewFlutterApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /** Create a new Dart instance and add it to the `InstanceManager`. */
+    public void create(@NonNull Long identifierArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.ViewFlutterApi.create",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Collections.singletonList(identifierArg)),
+              channelReply -> callback.reply(null));
+    }
+  }
+  /**
+   * Host API for `GeolocationPermissionsCallback`.
+   *
+   * <p>This class may handle instantiating and adding native object instances that are attached to
+   * a Dart instance or handle method calls on the associated native class or an instance of the
+   * class.
+   *
+   * <p>See https://developer.android.com/reference/android/webkit/GeolocationPermissions.Callback.
+   *
+   * <p>Generated interface from Pigeon that represents a handler of messages from Flutter.
+   */
+  public interface GeolocationPermissionsCallbackHostApi {
+    /** Handles Dart method `GeolocationPermissionsCallback.invoke`. */
+    void invoke(
+            @NonNull Long instanceId,
+            @NonNull String origin,
+            @NonNull Boolean allow,
+            @NonNull Boolean retain);
+
+    /** The codec used by GeolocationPermissionsCallbackHostApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /**
+     * Sets up an instance of `GeolocationPermissionsCallbackHostApi` to handle messages through the
+     * `binaryMessenger`.
+     */
+    static void setup(
+            @NonNull BinaryMessenger binaryMessenger,
+            @Nullable GeolocationPermissionsCallbackHostApi api) {
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.GeolocationPermissionsCallbackHostApi.invoke",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    String originArg = (String) args.get(1);
+                    Boolean allowArg = (Boolean) args.get(2);
+                    Boolean retainArg = (Boolean) args.get(3);
+                    try {
+                      api.invoke(
+                              (instanceIdArg == null) ? null : instanceIdArg.longValue(),
+                              originArg,
+                              allowArg,
+                              retainArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+    }
+  }
+  /**
+   * Flutter API for `GeolocationPermissionsCallback`.
+   *
+   * <p>This class may handle instantiating and adding Dart instances that are attached to a native
+   * instance or receiving callback methods from an overridden native class.
+   *
+   * <p>See https://developer.android.com/reference/android/webkit/GeolocationPermissions.Callback.
+   *
+   * <p>Generated class from Pigeon that represents Flutter messages that can be called from Java.
+   */
+  public static class GeolocationPermissionsCallbackFlutterApi {
+    private final @NonNull BinaryMessenger binaryMessenger;
+
+    public GeolocationPermissionsCallbackFlutterApi(@NonNull BinaryMessenger argBinaryMessenger) {
+      this.binaryMessenger = argBinaryMessenger;
+    }
+
+    /** Public interface for sending reply. */
+    @SuppressWarnings("UnknownNullness")
+    public interface Reply<T> {
+      void reply(T reply);
+    }
+    /** The codec used by GeolocationPermissionsCallbackFlutterApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /** Create a new Dart instance and add it to the `InstanceManager`. */
+    public void create(@NonNull Long instanceIdArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.GeolocationPermissionsCallbackFlutterApi.create",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Collections.singletonList(instanceIdArg)),
+              channelReply -> callback.reply(null));
+    }
+  }
+  /**
+   * Host API for `HttpAuthHandler`.
+   *
+   * <p>This class may handle instantiating and adding native object instances that are attached to
+   * a Dart instance or handle method calls on the associated native class or an instance of the
+   * class.
+   *
+   * <p>See https://developer.android.com/reference/android/webkit/HttpAuthHandler.
+   *
+   * <p>Generated interface from Pigeon that represents a handler of messages from Flutter.
+   */
+  public interface HttpAuthHandlerHostApi {
+    /** Handles Dart method `HttpAuthHandler.useHttpAuthUsernamePassword`. */
+    @NonNull
+    Boolean useHttpAuthUsernamePassword(@NonNull Long instanceId);
+    /** Handles Dart method `HttpAuthHandler.cancel`. */
+    void cancel(@NonNull Long instanceId);
+    /** Handles Dart method `HttpAuthHandler.proceed`. */
+    void proceed(@NonNull Long instanceId, @NonNull String username, @NonNull String password);
+
+    /** The codec used by HttpAuthHandlerHostApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /**
+     * Sets up an instance of `HttpAuthHandlerHostApi` to handle messages through the
+     * `binaryMessenger`.
+     */
+    static void setup(
+            @NonNull BinaryMessenger binaryMessenger, @Nullable HttpAuthHandlerHostApi api) {
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.HttpAuthHandlerHostApi.useHttpAuthUsernamePassword",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    try {
+                      Boolean output =
+                              api.useHttpAuthUsernamePassword(
+                                      (instanceIdArg == null) ? null : instanceIdArg.longValue());
+                      wrapped.add(0, output);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.HttpAuthHandlerHostApi.cancel",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    try {
+                      api.cancel((instanceIdArg == null) ? null : instanceIdArg.longValue());
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+                new BasicMessageChannel<>(
+                        binaryMessenger,
+                        "kr.co.bootpay.HttpAuthHandlerHostApi.proceed",
+                        getCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+                  (message, reply) -> {
+                    ArrayList<Object> wrapped = new ArrayList<Object>();
+                    ArrayList<Object> args = (ArrayList<Object>) message;
+                    Number instanceIdArg = (Number) args.get(0);
+                    String usernameArg = (String) args.get(1);
+                    String passwordArg = (String) args.get(2);
+                    try {
+                      api.proceed(
+                              (instanceIdArg == null) ? null : instanceIdArg.longValue(),
+                              usernameArg,
+                              passwordArg);
+                      wrapped.add(0, null);
+                    } catch (Throwable exception) {
+                      ArrayList<Object> wrappedError = wrapError(exception);
+                      wrapped = wrappedError;
+                    }
+                    reply.reply(wrapped);
+                  });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+    }
+  }
+  /**
+   * Flutter API for `HttpAuthHandler`.
+   *
+   * <p>This class may handle instantiating and adding Dart instances that are attached to a native
+   * instance or receiving callback methods from an overridden native class.
+   *
+   * <p>See https://developer.android.com/reference/android/webkit/HttpAuthHandler.
+   *
+   * <p>Generated class from Pigeon that represents Flutter messages that can be called from Java.
+   */
+  public static class HttpAuthHandlerFlutterApi {
+    private final @NonNull BinaryMessenger binaryMessenger;
+
+    public HttpAuthHandlerFlutterApi(@NonNull BinaryMessenger argBinaryMessenger) {
+      this.binaryMessenger = argBinaryMessenger;
+    }
+
+    /** Public interface for sending reply. */
+    @SuppressWarnings("UnknownNullness")
+    public interface Reply<T> {
+      void reply(T reply);
+    }
+    /** The codec used by HttpAuthHandlerFlutterApi. */
+    static @NonNull MessageCodec<Object> getCodec() {
+      return new StandardMessageCodec();
+    }
+    /** Create a new Dart instance and add it to the `InstanceManager`. */
+    public void create(@NonNull Long instanceIdArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+              new BasicMessageChannel<>(
+                      binaryMessenger,
+                      "kr.co.bootpay.HttpAuthHandlerFlutterApi.create",
+                      getCodec());
+      channel.send(
+              new ArrayList<Object>(Collections.singletonList(instanceIdArg)),
               channelReply -> callback.reply(null));
     }
   }

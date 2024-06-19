@@ -4,23 +4,19 @@
 
 package kr.co.bootpay.webviewflutter;
 
-import android.os.Build;
-import android.webkit.PermissionRequest;
+import android.webkit.WebChromeClient.CustomViewCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import io.flutter.plugin.common.BinaryMessenger;
-import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.PermissionRequestHostApi;
-import java.util.List;
+import kr.co.bootpay.webviewflutter.GeneratedAndroidWebView.CustomViewCallbackHostApi;
 import java.util.Objects;
 
 /**
- * Host API implementation for `PermissionRequest`.
+ * Host API implementation for `CustomViewCallback`.
  *
  * <p>This class may handle instantiating and adding native object instances that are attached to a
  * Dart instance or handle method calls on the associated native class or an instance of the class.
  */
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class PermissionRequestHostApiImpl implements PermissionRequestHostApi {
+public class CustomViewCallbackHostApiImpl implements CustomViewCallbackHostApi {
   // To ease adding additional methods, this value is added prematurely.
   @SuppressWarnings({"unused", "FieldCanBeLocal"})
   private final BinaryMessenger binaryMessenger;
@@ -28,28 +24,23 @@ public class PermissionRequestHostApiImpl implements PermissionRequestHostApi {
   private final InstanceManager instanceManager;
 
   /**
-   * Constructs a {@link PermissionRequestHostApiImpl}.
+   * Constructs a {@link CustomViewCallbackHostApiImpl}.
    *
    * @param binaryMessenger used to communicate with Dart over asynchronous messages
    * @param instanceManager maintains instances stored to communicate with attached Dart objects
    */
-  public PermissionRequestHostApiImpl(
-          @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
+  public CustomViewCallbackHostApiImpl(
+      @NonNull BinaryMessenger binaryMessenger, @NonNull InstanceManager instanceManager) {
     this.binaryMessenger = binaryMessenger;
     this.instanceManager = instanceManager;
   }
 
   @Override
-  public void grant(@NonNull Long instanceId, @NonNull List<String> resources) {
-    getPermissionRequestInstance(instanceId).grant(resources.toArray(new String[0]));
+  public void onCustomViewHidden(@NonNull Long identifier) {
+    getCustomViewCallbackInstance(identifier).onCustomViewHidden();
   }
 
-  @Override
-  public void deny(@NonNull Long instanceId) {
-    getPermissionRequestInstance(instanceId).deny();
-  }
-
-  private PermissionRequest getPermissionRequestInstance(@NonNull Long identifier) {
+  private CustomViewCallback getCustomViewCallbackInstance(@NonNull Long identifier) {
     return Objects.requireNonNull(instanceManager.getInstance(identifier));
   }
 }
