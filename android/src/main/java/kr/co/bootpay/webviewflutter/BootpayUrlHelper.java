@@ -88,23 +88,9 @@ public class BootpayUrlHelper {
     }
 
     public boolean isInstallApp(Intent intent, Context context) {
-//        return isExistPackageInfo(intent, context) || isExistLaunchedIntent(intent, context);
-        return isExistLaunchedIntent(intent, context);
-    }
-
-
-//    private boolean isExistPackageInfo(Intent intent, Context context) {
-//        try {
-//            return intent != null && context.getPackageManager().getPackageInfo(intent.getPackage(), PackageManager.PackageInfoFlags.of(0)) != null;
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-
-    private boolean isExistLaunchedIntent(Intent intent, Context context) {
         return intent != null &&  intent.getPackage() != null && context.getPackageManager().getLaunchIntentForPackage(intent.getPackage()) != null;
     }
+
 
     public boolean startApp(Intent intent, Context context) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -120,30 +106,21 @@ public class BootpayUrlHelper {
 
             try {
                 Intent addIntent = new Intent(Intent.ACTION_VIEW, intent.getData());
-//                addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(addIntent);
             } catch (Exception e) {
                 String packageName = "com.nhn.android.search"; //appPackageName이 비어있으면 네이버로 보내기(네이버 로그인)
                 if(dataUri != null && dataUri.toString().startsWith("wooripay://")) packageName = "com.wooricard.wpay"; //우리카드 예외처리
 
                 Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
-//                addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(addIntent);
-//                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
             }
             return true;
         }
         try {
             Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
-//            addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(addIntent);
         } catch (android.content.ActivityNotFoundException anfe) {
             Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
-//            addIntent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            addIntent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(addIntent);
         }
         return true;

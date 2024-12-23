@@ -293,6 +293,8 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
                 }
 
 
+
+
                 // Legacy codepath for < N.
                 @Override
                 @SuppressWarnings({"deprecation", "RedundantSuppression"})
@@ -390,7 +392,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
         return false;
       });
 
-      newWebView.setWebChromeClient(new WebChromeClientImpl(null));
+      newWebView.setWebChromeClient(new WebChromeClientImpl(flutterApi));
 //      newWebView.setWebChromeClient(new WebChromeClient());
 
 //      view.scrollTo(0, 0);
@@ -429,6 +431,8 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
       return true;
     }
+
+
 
     /**
      * Set the {@link WebViewClient} that calls to {@link WebChromeClient#onCreateWindow} are passed

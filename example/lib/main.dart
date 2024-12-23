@@ -132,7 +132,20 @@ Page resource error:
             debugPrint('url change to ${change.url}');
           }),
       )
-
+      ..setOnJavaScriptAlertDialog((JavaScriptAlertDialogRequest request) async {
+          await _showAlert(context, request.message);
+        })
+      ..setOnJavaScriptConfirmDialog(
+              (JavaScriptConfirmDialogRequest request) async {
+            final bool result = await _showConfirm(context, request.message);
+            return result;
+          })
+      ..setOnJavaScriptTextInputDialog(
+              (JavaScriptTextInputDialogRequest request) async {
+            final String result =
+            await _showTextInput(context, request.message, request.defaultText);
+            return result;
+          })
       ..addJavaScriptChannel(JavaScriptChannelParams(
         name: 'Toaster',
         onMessageReceived: (JavaScriptMessage message) {
@@ -152,6 +165,65 @@ Page resource error:
       ..loadRequest(LoadRequestParams(
         uri: Uri.parse('https://dev-js.bootapi.com/test/payment/'),
       ));
+  }
+
+  Future<void> _showAlert(BuildContext context, String message) async {
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: const Text('OK'))
+            ],
+          );
+        });
+  }
+
+  Future<bool> _showConfirm(BuildContext context, String message) async {
+    return await showDialog<bool>(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop(false);
+                  },
+                  child: const Text('Cancel')),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop(true);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        }) ??
+        false;
+  }
+
+  Future<String> _showTextInput(
+      BuildContext context, String message, String? defaultText) async {
+    return await showDialog<String>(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop('Text test');
+                  },
+                  child: const Text('Enter')),
+            ],
+          );
+        }) ??
+        '';
   }
 
   @override

@@ -1,3 +1,6 @@
+## 3.17 
+* gradle version 8 지원
+
 ## 3.16.41
 * 3.16.41 version forked 
 
