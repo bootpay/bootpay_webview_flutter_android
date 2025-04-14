@@ -499,7 +499,7 @@ abstract class DownloadListener {
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'io.flutter.plugins.webviewflutter.WebChromeClientProxyApi.WebChromeClientImpl',
+        'kr.co.bootpay.webviewflutter.WebChromeClientProxyApi.WebChromeClientImpl',
   ),
 )
 abstract class WebChromeClient {
@@ -649,7 +649,7 @@ abstract class WebChromeClient {
 /// Convenience class for accessing Flutter asset resources.
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'io.flutter.plugins.webviewflutter.FlutterAssetManager',
+    fullClassName: 'kr.co.bootpay.webviewflutter.FlutterAssetManager',
   ),
 )
 abstract class FlutterAssetManager {

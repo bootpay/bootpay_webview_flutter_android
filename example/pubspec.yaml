@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^2.0.6
+  webview_flutter: ^4.10.0
   bootpay_webview_flutter_android:
     # When depending on this package from a real application you should use:
     #   webview_flutter: ^x.y.z
