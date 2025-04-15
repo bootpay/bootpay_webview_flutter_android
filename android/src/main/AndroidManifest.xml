@@ -58,6 +58,9 @@
         <!-- 계좌이체 -->
         <package android:name="com.kftc.bankpay.android" /> <!-- 뱅크페이 -->
         <package android:name="com.kbankwith.smartbank" /> <!-- 케이뱅크 -->
+        <package android:name="com.kakaobank.channel" /> <!-- 카카오뱅크 -->
+
+
         <package android:name="com.knb.psb" /> <!-- BNK 경남은행 모바일뱅킹 -->
         <package android:name="kr.co.kfcc.mobilebank" /> <!-- MG 새마을금고 -->
         <package android:name="com.nh.cashcardapp" /> <!-- NH앱캐시 -->
