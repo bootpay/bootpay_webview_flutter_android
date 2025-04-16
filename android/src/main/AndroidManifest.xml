@@ -44,6 +44,7 @@
         <package android:name="kr.co.samsungcard.mpocket" /> <!-- 삼성카드 -->
         <package android:name="com.shcard.smartpay" /> <!-- 신한카드-->
         <package android:name="com.shinhan.smartcaremgr" /> <!-- 신한 쏠-->
+        <package android:name="com.shinhan.sbanking" /> <!-- 신한 SQL 뱅크-->
         <package android:name="com.shinhancard.smartshinhan" /> <!-- 신한카드 (ARS/일반결제/Smart결제) -->
         <package android:name="com.hyundaicard.appcard" /> <!-- 현대카드 -->
         <package android:name="nh.smart.nhallonepay" /> <!-- 농협카드 -->
@@ -52,6 +53,7 @@
         <package android:name="com.wooribank.smart.npib" /> <!-- 우리 WON 뱅킹 -->
         <package android:name="kr.co.citibank.citimobile" /> <!-- 씨티카드 -->
         <package android:name="com.mobiletoong.travelwallet" /> <!-- 트레블월렛 -->
+        <package android:name="net.ib.android.smcard" /> <!-- 삼성 monimo -->
 
 
 
@@ -74,13 +76,21 @@
         <package android:name="com.TouchEn.mVaccine.webs" /> <!-- 신한, 씨티 -->
         <package android:name="kr.co.shiftworks.vguardweb" /> <!-- 삼성  -->
         <package android:name="com.ahnlab.v3mobileplus" /> <!-- 하나, 농협, 우리, 국민 리브  -->
+        <package android:name="net.nshc.droidxantivirus" /> <!-- 안심클릭 백신  -->
+
 
         <!-- 휴대폰 결제 -->
         <package android:name="com.kt.ktauth" /> <!-- KT 본인인증 -->
         <package android:name="kr.danal.app.damoum" /> <!-- 다모음 -->
         <package android:name="uplus.membership" /> <!-- U+ 멤버스 -->
         <package android:name="com.sktelecom.tauth" /> <!--PASS-->
+        <package android:name="com om.sktelecom.tauth" /> <!--KCB휴대폰본인인증(SKT)-->
         <package android:name="com.lguplus.smartotp" /> <!--PASS-->
+
+        <package android:name="com.tmoney.inapp" /> <!--티머니-->
+        <package android:name="com.tmoney.nfc_pay" /> <!--티머니-->
+        <package android:name="com.ebcard.cashbeeinapp" /> <!-- 캐시비 인앱 -->
+        <package android:name="com.skt.skaf.A000Z00040" /> <!-- 원스토어 -->
 
         <!--해외결제-->
         <package android:name="com.eg.android.AlipayGphone" />
