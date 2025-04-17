@@ -1,19 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="kr.co.bootpay.webviewflutter">
-    <!-- android 11 모든 앱 접근 권한 사용  (Google Play 가이드라인 참고 - 2021-02-19 기준 못찾았음) -->
-    <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />-->
-    <!-- android 11 Package Visibility 설정 (compileSdkVersion, targetSdkVersion 30 이상 설정시 필수) -->
-    <!-- 2021-02-19 -->
-    <queries>
-        <!--         다날[신한, BC(페이북), 국민, 현대, 삼성, 하나, 롯데, 농협, 우리, 씨티, 페이코, 삼성페이, 카카오페이, 뱅크페이, SSG페이, 스마일페이, 엘페이] -->
-        <!--         KCP [페이코, 현대, BC(페이북), 롯데, 국민, 농협, 삼성, 신한, 우리, 하나, 씨티] -->
-        <!--         이니시스 [카카오페이, 네이버페이, 신한, 하나, 현대, 삼성, 국민, BC(페이북), 농협, 롯데, 씨티, 페이코, 엘페이, SSG페이, 차이, 토스, 삼성페이] -->
-        <!--         나이스페이 [신한, 국민, 삼성, BC(페이북), 롯데, 현대, 하나 농협, 씨티, 우리] -->
-        <!--         토스페이먼츠 [현대, 신한, 페이북, 국민, 삼성, 롯데, 농협, 우리] -->
-        <!--         이지페이 [현대, 하나, 국민, 롯데, 삼성, BC(페이북) 신한, 하나, 농협, 씨티, 우리, 페이코] -->
-        <!--         티페이 [BC(페이북), 국민, 하나, 삼성, 신한, 현대, 롯데, 농협, 씨티, 우리] -->
-        <!--         페이레터 [BC(페이북), 국민, 하나, 삼성, 신한, 현대. 롯데, 농협, 씨티, ] -->
-        <!--         월컴페이먼츠 [카카오스, 엘페이, 현대, BC(페이북), 국민, 삼성, 신한, 롯데, 농협, 하나, 씨티, 하나, 우리] -->
 
+    <queries>
         <!-- 간편결제 -->
         <package android:name="com.nhnent.payapp" /> <!-- 페이코 -->
         <package android:name="com.lottemembers.android" /> <!-- LPAY -->
@@ -84,7 +71,6 @@
         <package android:name="kr.danal.app.damoum" /> <!-- 다모음 -->
         <package android:name="uplus.membership" /> <!-- U+ 멤버스 -->
         <package android:name="com.sktelecom.tauth" /> <!--PASS-->
-        <package android:name="com om.sktelecom.tauth" /> <!--KCB휴대폰본인인증(SKT)-->
         <package android:name="com.lguplus.smartotp" /> <!--PASS-->
 
         <package android:name="com.tmoney.inapp" /> <!--티머니-->
