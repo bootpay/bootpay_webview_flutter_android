@@ -1,0 +1,14 @@
+allprojects {
+    buildscript {
+        configurations.all {
+            resolutionStrategy {
+                eachDependency { DependencyResolveDetails details ->
+                    if (details.requested.group == 'com.android.tools.build' && details.requested.name == 'gradle') {
+                        details.useVersion '8.7.3'
+                        details.because 'Force AGP version to 8.7.3 to avoid Build Tools 35.0.0 requirement'
+                    }
+                }
+            }
+        }
+    }
+}
