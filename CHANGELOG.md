@@ -1,3 +1,7 @@
+## 4.10.54
+
+* Updates dependency to use published version of bootpay_webview_flutter_platform_interface.
+
 ## 4.10.5
 
 * **Bootpay Fork**: 최신 webview_flutter_android v4.10.5 기반 마이그레이션

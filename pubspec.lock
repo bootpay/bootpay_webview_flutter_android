@@ -44,9 +44,10 @@ packages:
   bootpay_webview_flutter_platform_interface:
     dependency: "direct main"
     description:
-      path: "../bootpay_webview_flutter_platform_interface"
-      relative: true
-    source: path
+      name: bootpay_webview_flutter_platform_interface
+      sha256: "88e4113d41878bc83bf8cc2753914d1aa019fbae176f64512129d49a6cedb84c"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.14.1"
   build:
     dependency: transitive

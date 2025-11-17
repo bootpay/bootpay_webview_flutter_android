@@ -2,7 +2,7 @@ name: bootpay_webview_flutter_android
 description: A Flutter plugin that provides a WebView widget on Android with enhanced popup handling, SSL error management, and payment app support.
 repository: https://github.com/bootpay/bootpay_webview_flutter_android
 issue_tracker: https://github.com/bootpay/bootpay_webview_flutter_android/issues
-version: 4.10.54
+version: 4.10.55
 
 environment:
   sdk: ^3.5.0
@@ -21,8 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.10.0
-  bootpay_webview_flutter_platform_interface:
-    path: ../bootpay_webview_flutter_platform_interface
+  bootpay_webview_flutter_platform_interface: ^2.14.2
 
 dev_dependencies:
   build_runner: ^2.1.4
