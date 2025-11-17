@@ -40,7 +40,7 @@ public class SslErrorTest {
     final PigeonApiSslError api = new TestProxyApiRegistrar().getPigeonApiSslError();
 
     final SslError instance = mock(SslError.class);
-    final SslErrorType value = io.flutter.plugins.webviewflutter.SslErrorType.DATE_INVALID;
+    final SslErrorType value = kr.co.bootpay.webviewflutter.SslErrorType.DATE_INVALID;
     when(instance.getPrimaryError()).thenReturn(SslError.SSL_DATE_INVALID);
 
     assertEquals(value, api.getPrimaryError(instance));
@@ -51,7 +51,7 @@ public class SslErrorTest {
     final PigeonApiSslError api = new TestProxyApiRegistrar().getPigeonApiSslError();
 
     final SslError instance = mock(SslError.class);
-    final SslErrorType error = io.flutter.plugins.webviewflutter.SslErrorType.DATE_INVALID;
+    final SslErrorType error = kr.co.bootpay.webviewflutter.SslErrorType.DATE_INVALID;
     final Boolean value = true;
     when(instance.hasError(SslError.SSL_DATE_INVALID)).thenReturn(value);
 

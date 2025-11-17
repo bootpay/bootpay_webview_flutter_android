@@ -39,7 +39,7 @@ public class ConsoleMessageTest {
     final PigeonApiConsoleMessage api = new TestProxyApiRegistrar().getPigeonApiConsoleMessage();
 
     final ConsoleMessage instance = mock(ConsoleMessage.class);
-    final ConsoleMessageLevel value = io.flutter.plugins.webviewflutter.ConsoleMessageLevel.DEBUG;
+    final ConsoleMessageLevel value = kr.co.bootpay.webviewflutter.ConsoleMessageLevel.DEBUG;
     when(instance.messageLevel()).thenReturn(ConsoleMessage.MessageLevel.DEBUG);
 
     assertEquals(value, api.level(instance));

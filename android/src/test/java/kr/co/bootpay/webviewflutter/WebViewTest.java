@@ -278,7 +278,7 @@ public class WebViewTest {
     final PigeonApiWebView api = new TestProxyApiRegistrar().getPigeonApiWebView();
 
     final WebView instance = mock(WebView.class);
-    final io.flutter.plugins.webviewflutter.WebChromeClientProxyApi.WebChromeClientImpl client =
+    final kr.co.bootpay.webviewflutter.WebChromeClientProxyApi.WebChromeClientImpl client =
         mock(WebChromeClientProxyApi.WebChromeClientImpl.class);
     api.setWebChromeClient(instance, client);
 

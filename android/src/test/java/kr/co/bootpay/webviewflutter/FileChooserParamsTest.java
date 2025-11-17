@@ -44,7 +44,7 @@ public class FileChooserParamsTest {
         new TestProxyApiRegistrar().getPigeonApiFileChooserParams();
 
     final FileChooserParams instance = mock(FileChooserParams.class);
-    final FileChooserMode value = io.flutter.plugins.webviewflutter.FileChooserMode.OPEN;
+    final FileChooserMode value = kr.co.bootpay.webviewflutter.FileChooserMode.OPEN;
     when(instance.getMode()).thenReturn(FileChooserParams.MODE_OPEN);
 
     assertEquals(value, api.mode(instance));
