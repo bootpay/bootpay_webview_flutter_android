@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:bootpay_webview_flutter_android/webview_flutter_android.dart';
+import 'package:bootpay_webview_flutter_android/bootpay_webview_flutter_android.dart';
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
 
 /// Example function for README demonstration of Payment Request API.

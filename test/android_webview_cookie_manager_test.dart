@@ -7,7 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:bootpay_webview_flutter_android/src/android_webkit.g.dart'
     as android_webview;
-import 'package:bootpay_webview_flutter_android/webview_flutter_android.dart';
+import 'package:bootpay_webview_flutter_android/bootpay_webview_flutter_android.dart';
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
 
 import 'android_webview_cookie_manager_test.mocks.dart';

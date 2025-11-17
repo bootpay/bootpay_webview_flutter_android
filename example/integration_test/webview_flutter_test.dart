@@ -18,7 +18,7 @@ import 'package:bootpay_webview_flutter_android/src/android_proxy.dart';
 import 'package:bootpay_webview_flutter_android/src/android_webkit.g.dart'
     as android_webkit;
 import 'package:bootpay_webview_flutter_android/src/weak_reference_utils.dart';
-import 'package:bootpay_webview_flutter_android/webview_flutter_android.dart';
+import 'package:bootpay_webview_flutter_android/bootpay_webview_flutter_android.dart';
 import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutter_platform_interface.dart';
 
 // `IntegrationTestWidgetsFlutterBinding.watchPerformance` is throwing an
