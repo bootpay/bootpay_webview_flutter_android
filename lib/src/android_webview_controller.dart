@@ -1231,7 +1231,7 @@ class AndroidWebViewWidget extends PlatformWebViewWidget {
           ValueKey<AndroidWebViewWidgetCreationParams>(
             params as AndroidWebViewWidgetCreationParams,
           ),
-      viewType: 'plugins.flutter.io/webview',
+      viewType: 'kr.co.bootpay/webview',
       surfaceFactory:
           (BuildContext context, PlatformViewController controller) {
             return AndroidViewSurface(
@@ -1336,7 +1336,7 @@ class AndroidCustomViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformViewLink(
       key: key,
-      viewType: 'plugins.flutter.io/webview',
+      viewType: 'kr.co.bootpay/webview',
       surfaceFactory:
           (BuildContext context, PlatformViewController controller) {
             return AndroidViewSurface(
@@ -1374,7 +1374,7 @@ AndroidViewController _initAndroidView(
   if (displayWithHybridComposition) {
     return platformViewsServiceProxy.initExpensiveAndroidView(
       id: params.id,
-      viewType: 'plugins.flutter.io/webview',
+      viewType: 'kr.co.bootpay/webview',
       layoutDirection: layoutDirection,
       creationParams: identifier,
       creationParamsCodec: const StandardMessageCodec(),
@@ -1382,7 +1382,7 @@ AndroidViewController _initAndroidView(
   } else {
     return platformViewsServiceProxy.initSurfaceAndroidView(
       id: params.id,
-      viewType: 'plugins.flutter.io/webview',
+      viewType: 'kr.co.bootpay/webview',
       layoutDirection: layoutDirection,
       creationParams: identifier,
       creationParamsCodec: const StandardMessageCodec(),

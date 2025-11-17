@@ -42,7 +42,7 @@ public class WebViewFlutterPlugin implements FlutterPlugin, ActivityAware {
     binding
         .getPlatformViewRegistry()
         .registerViewFactory(
-            "plugins.flutter.io/webview",
+            "kr.co.bootpay/webview",
             new FlutterViewFactory(proxyApiRegistrar.getInstanceManager()));
 
     proxyApiRegistrar.setUp();

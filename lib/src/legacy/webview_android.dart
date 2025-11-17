@@ -54,7 +54,7 @@ class AndroidWebView implements WebViewPlatform {
           onLongPress: () {},
           excludeFromSemantics: true,
           child: AndroidView(
-            viewType: 'plugins.flutter.io/webview',
+            viewType: 'kr.co.bootpay/webview',
             onPlatformViewCreated: (int id) {
               if (onWebViewPlatformCreated != null) {
                 onWebViewPlatformCreated(controller);
