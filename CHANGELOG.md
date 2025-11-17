@@ -1,4 +1,4 @@
-## 4.10.54
+## 4.10.56
 
 * Updates dependency to use published version of bootpay_webview_flutter_platform_interface.
 

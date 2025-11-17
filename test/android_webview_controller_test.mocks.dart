@@ -1869,12 +1869,12 @@ class MockAndroidWebViewProxy extends _i1.Mock
       ));
 }
 
-/// A class which mocks [BootpayAndroidWebViewWidgetCreationParams].
+/// A class which mocks [AndroidWebViewWidgetCreationParams].
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockBootpayAndroidWebViewWidgetCreationParams extends _i1.Mock
-    implements _i7.BootpayAndroidWebViewWidgetCreationParams {
+class MockAndroidWebViewWidgetCreationParams extends _i1.Mock
+    implements _i7.AndroidWebViewWidgetCreationParams {
   @override
   _i2.PigeonInstanceManager get instanceManager => (super.noSuchMethod(
         Invocation.getter(#instanceManager),

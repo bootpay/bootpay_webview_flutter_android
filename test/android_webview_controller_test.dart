@@ -22,7 +22,7 @@ import 'android_webview_controller_test.mocks.dart';
   MockSpec<BootpayAndroidNavigationDelegate>(),
   MockSpec<AndroidWebViewController>(),
   MockSpec<AndroidWebViewProxy>(),
-  MockSpec<BootpayAndroidWebViewWidgetCreationParams>(),
+  MockSpec<AndroidWebViewWidgetCreationParams>(),
   MockSpec<ExpensiveAndroidViewController>(),
   MockSpec<android_webview.FlutterAssetManager>(),
   MockSpec<android_webview.GeolocationPermissionsCallback>(),
@@ -2100,7 +2100,7 @@ void main() {
     expect(expectedEnabled, capturedEnabled);
   });
 
-  group('BootpayAndroidWebViewWidget', () {
+  group('AndroidWebViewWidget', () {
     testWidgets('Builds Android view using supplied parameters', (
       WidgetTester tester,
     ) async {
@@ -2113,8 +2113,8 @@ void main() {
           android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});
       instanceManager.addDartCreatedInstance(mockWebView);
 
-      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
-        BootpayAndroidWebViewWidgetCreationParams(
+      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
+        AndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           instanceManager: instanceManager,
@@ -2157,8 +2157,8 @@ void main() {
         ),
       ).thenReturn(MockSurfaceAndroidViewController());
 
-      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
-        BootpayAndroidWebViewWidgetCreationParams(
+      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
+        AndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           platformViewsServiceProxy: mockPlatformViewsService,
@@ -2211,8 +2211,8 @@ void main() {
         ),
       ).thenReturn(MockExpensiveAndroidViewController());
 
-      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
-        BootpayAndroidWebViewWidgetCreationParams(
+      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
+        AndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           platformViewsServiceProxy: mockPlatformViewsService,
@@ -2297,8 +2297,8 @@ void main() {
         ),
       ).thenReturn(MockSurfaceAndroidViewController());
 
-      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
-        BootpayAndroidWebViewWidgetCreationParams(
+      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
+        AndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           platformViewsServiceProxy: mockPlatformViewsService,
@@ -2355,8 +2355,8 @@ void main() {
       await tester.pumpWidget(
         Builder(
           builder: (BuildContext context) {
-            return BootpayAndroidWebViewWidget(
-              BootpayAndroidWebViewWidgetCreationParams(
+            return AndroidWebViewWidget(
+              AndroidWebViewWidgetCreationParams(
                 controller: createControllerWithMocks(mockWebView: mockWebView),
                 platformViewsServiceProxy: mockPlatformViewsService,
                 instanceManager: instanceManager,
@@ -2381,8 +2381,8 @@ void main() {
       await tester.pumpWidget(
         Builder(
           builder: (BuildContext context) {
-            return BootpayAndroidWebViewWidget(
-              BootpayAndroidWebViewWidgetCreationParams(
+            return AndroidWebViewWidget(
+              AndroidWebViewWidgetCreationParams(
                 controller: createControllerWithMocks(mockWebView: mockWebView),
                 platformViewsServiceProxy: mockPlatformViewsService,
                 instanceManager: instanceManager,
@@ -2436,8 +2436,8 @@ void main() {
         await tester.pumpWidget(
           Builder(
             builder: (BuildContext context) {
-              return BootpayAndroidWebViewWidget(
-                BootpayAndroidWebViewWidgetCreationParams(
+              return AndroidWebViewWidget(
+                AndroidWebViewWidgetCreationParams(
                   controller: controller,
                   platformViewsServiceProxy: mockPlatformViewsService,
                   instanceManager: instanceManager,
@@ -2462,8 +2462,8 @@ void main() {
         await tester.pumpWidget(
           Builder(
             builder: (BuildContext context) {
-              return BootpayAndroidWebViewWidget(
-                BootpayAndroidWebViewWidgetCreationParams(
+              return AndroidWebViewWidget(
+                AndroidWebViewWidgetCreationParams(
                   controller: controller,
                   platformViewsServiceProxy: mockPlatformViewsService,
                   instanceManager: instanceManager,

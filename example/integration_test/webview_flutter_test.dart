@@ -135,7 +135,7 @@ Future<void> main() async {
         Builder(
           builder: (BuildContext context) {
             return PlatformWebViewWidget(
-              BootpayAndroidWebViewWidgetCreationParams(
+              AndroidWebViewWidgetCreationParams(
                 controller: PlatformWebViewController(
                   AndroidWebViewControllerCreationParams(
                     androidWebViewProxy: AndroidWebViewProxy(
@@ -171,7 +171,7 @@ Future<void> main() async {
         Builder(
           builder: (BuildContext context) {
             return PlatformWebViewWidget(
-              BootpayAndroidWebViewWidgetCreationParams(
+              AndroidWebViewWidgetCreationParams(
                 controller: PlatformWebViewController(
                   const PlatformWebViewControllerCreationParams(),
                 ),
@@ -1318,7 +1318,7 @@ Future<void> main() async {
       Builder(
         builder: (BuildContext context) {
           return PlatformWebViewWidget(
-            BootpayAndroidWebViewWidgetCreationParams(controller: controller),
+            AndroidWebViewWidgetCreationParams(controller: controller),
           ).build(context);
         },
       ),
@@ -1359,7 +1359,7 @@ Future<void> main() async {
       Builder(
         builder: (BuildContext context) {
           return PlatformWebViewWidget(
-            BootpayAndroidWebViewWidgetCreationParams(controller: controller),
+            AndroidWebViewWidgetCreationParams(controller: controller),
           ).build(context);
         },
       ),

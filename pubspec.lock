@@ -45,10 +45,10 @@ packages:
     dependency: "direct main"
     description:
       name: bootpay_webview_flutter_platform_interface
-      sha256: "88e4113d41878bc83bf8cc2753914d1aa019fbae176f64512129d49a6cedb84c"
+      sha256: f714d8cba3d17d771005a310b97cda7878e1a8c4f7407f475ab078cbbabe21c2
       url: "https://pub.dev"
     source: hosted
-    version: "2.14.1"
+    version: "2.14.2"
   build:
     dependency: transitive
     description:

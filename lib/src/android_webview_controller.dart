@@ -760,7 +760,7 @@ class AndroidWebViewController extends PlatformWebViewController {
   /// often show its own UI to close out of fullscreen. Regardless of how the
   /// WebView exits fullscreen mode, WebView will invoke [onHideCustomWidget],
   /// signaling for the application to remove the custom widget. If this value
-  /// is `null` when passed to an `BootpayAndroidWebViewWidget`, a default handler
+  /// is `null` when passed to an `AndroidWebViewWidget`, a default handler
   /// will be set.
   ///
   /// The [onHideCustomWidget] notifies the host application that the custom
@@ -1118,16 +1118,16 @@ class BootpayAndroidJavaScriptChannelParams extends JavaScriptChannelParams {
   final android_webview.JavaScriptChannel _javaScriptChannel;
 }
 
-/// Object specifying creation parameters for creating a [BootpayAndroidWebViewWidget].
+/// Object specifying creation parameters for creating a [AndroidWebViewWidget].
 ///
 /// When adding additional fields make sure they can be null or have a default
 /// value to avoid breaking changes. See [PlatformWebViewWidgetCreationParams] for
 /// more information.
 @immutable
-class BootpayAndroidWebViewWidgetCreationParams
+class AndroidWebViewWidgetCreationParams
     extends PlatformWebViewWidgetCreationParams {
   /// Creates [AndroidWebWidgetCreationParams].
-  BootpayAndroidWebViewWidgetCreationParams({
+  AndroidWebViewWidgetCreationParams({
     super.key,
     required super.controller,
     super.layoutDirection,
@@ -1141,7 +1141,7 @@ class BootpayAndroidWebViewWidgetCreationParams
 
   /// Constructs a [WebKitWebViewWidgetCreationParams] using a
   /// [PlatformWebViewWidgetCreationParams].
-  BootpayAndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
+  AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
     PlatformWebViewWidgetCreationParams params, {
     bool displayWithHybridComposition = false,
     @visibleForTesting android_webview.PigeonInstanceManager? instanceManager,
@@ -1196,7 +1196,7 @@ class BootpayAndroidWebViewWidgetCreationParams
 
   @override
   bool operator ==(Object other) {
-    return other is BootpayAndroidWebViewWidgetCreationParams &&
+    return other is AndroidWebViewWidgetCreationParams &&
         controller == other.controller &&
         layoutDirection == other.layoutDirection &&
         displayWithHybridComposition == other.displayWithHybridComposition &&
@@ -1206,19 +1206,19 @@ class BootpayAndroidWebViewWidgetCreationParams
 }
 
 /// An implementation of [PlatformWebViewWidget] with the Android WebView API.
-class BootpayAndroidWebViewWidget extends PlatformWebViewWidget {
+class AndroidWebViewWidget extends PlatformWebViewWidget {
   /// Constructs a [WebKitWebViewWidget].
-  BootpayAndroidWebViewWidget(PlatformWebViewWidgetCreationParams params)
+  AndroidWebViewWidget(PlatformWebViewWidgetCreationParams params)
     : super.implementation(
-        params is BootpayAndroidWebViewWidgetCreationParams
+        params is AndroidWebViewWidgetCreationParams
             ? params
-            : BootpayAndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
+            : AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
                 params,
               ),
       );
 
-  BootpayAndroidWebViewWidgetCreationParams get _androidParams =>
-      params as BootpayAndroidWebViewWidgetCreationParams;
+  AndroidWebViewWidgetCreationParams get _androidParams =>
+      params as AndroidWebViewWidgetCreationParams;
 
   @override
   Widget build(BuildContext context) {
@@ -1228,8 +1228,8 @@ class BootpayAndroidWebViewWidget extends PlatformWebViewWidget {
       // recreates the PlatformView when changes are made.
       key:
           _androidParams.key ??
-          ValueKey<BootpayAndroidWebViewWidgetCreationParams>(
-            params as BootpayAndroidWebViewWidgetCreationParams,
+          ValueKey<AndroidWebViewWidgetCreationParams>(
+            params as AndroidWebViewWidgetCreationParams,
           ),
       viewType: 'kr.co.bootpay/webview',
       surfaceFactory:

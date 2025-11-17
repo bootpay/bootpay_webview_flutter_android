@@ -230,6 +230,32 @@ flutter:
         pluginClass: WebViewFlutterPlugin
 ```
 
+## 테스트 파일 패키지 참조 변경
+
+> ⚠️ **중요**: 테스트 파일에서 원본 패키지를 참조하면 충돌이 발생할 수 있습니다.
+
+**파일들**:
+- `android/src/test/java/kr/co/bootpay/webviewflutter/FileChooserParamsTest.java`
+- `android/src/test/java/kr/co/bootpay/webviewflutter/ViewTest.java`
+- `android/src/test/java/kr/co/bootpay/webviewflutter/ConsoleMessageTest.java`
+- `android/src/test/java/kr/co/bootpay/webviewflutter/WebViewTest.java`
+- `android/src/test/java/kr/co/bootpay/webviewflutter/SslErrorTest.java`
+
+```bash
+# 테스트 파일의 원본 패키지 참조를 Bootpay 패키지로 변경
+find android/src/test -name "*.java" -type f -exec \
+  sed -i '' 's/io\.flutter\.plugins\.webviewflutter/kr.co.bootpay.webviewflutter/g' {} \;
+```
+
+**변경 예시**:
+```java
+// ❌ 변경 전
+final FileChooserMode value = io.flutter.plugins.webviewflutter.FileChooserMode.OPEN;
+
+// ✅ 변경 후
+final FileChooserMode value = kr.co.bootpay.webviewflutter.FileChooserMode.OPEN;
+```
+
 ## 체크리스트
 
 새 버전 fork 시 다음 항목을 확인하세요:
@@ -239,6 +265,7 @@ flutter:
 - [ ] `lib/src/android_webview_controller.dart` - viewType 변경 (4군데)
 - [ ] `lib/src/legacy/webview_android.dart` - viewType 변경 (1군데)
 - [ ] `lib/src/legacy/webview_surface_android.dart` - viewType 변경 (2군데)
+- [ ] 테스트 파일들 - 패키지 참조 변경 (5개 파일)
 - [ ] `grep`으로 변경 확인
 - [ ] `flutter pub get` 실행
 - [ ] `flutter build apk` 테스트
