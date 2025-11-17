@@ -19,7 +19,7 @@ import 'platform_views_service_proxy.dart';
 import 'weak_reference_utils.dart';
 
 /// Object specifying parameters for loading a local file in a
-/// [BootpayAndroidWebViewController].
+/// [AndroidWebViewController].
 @immutable
 base class BootpayAndroidLoadFileParams extends LoadFileParams {
   /// Constructs a [BootpayAndroidLoadFileParams], the subclass of a [LoadFileParams].
@@ -53,24 +53,24 @@ base class BootpayAndroidLoadFileParams extends LoadFileParams {
   final Map<String, String> headers;
 }
 
-/// Object specifying creation parameters for creating a [BootpayAndroidWebViewController].
+/// Object specifying creation parameters for creating a [AndroidWebViewController].
 ///
 /// When adding additional fields make sure they can be null or have a default
 /// value to avoid breaking changes. See [PlatformWebViewControllerCreationParams] for
 /// more information.
 @immutable
-class BootpayAndroidWebViewControllerCreationParams
+class AndroidWebViewControllerCreationParams
     extends PlatformWebViewControllerCreationParams {
-  /// Creates a new [BootpayAndroidWebViewControllerCreationParams] instance.
-  BootpayAndroidWebViewControllerCreationParams({
+  /// Creates a new [AndroidWebViewControllerCreationParams] instance.
+  AndroidWebViewControllerCreationParams({
     @visibleForTesting this.androidWebViewProxy = const AndroidWebViewProxy(),
     @visibleForTesting android_webview.WebStorage? androidWebStorage,
   }) : androidWebStorage =
            androidWebStorage ?? android_webview.WebStorage.instance,
        super();
 
-  /// Creates a [BootpayAndroidWebViewControllerCreationParams] instance based on [PlatformWebViewControllerCreationParams].
-  factory BootpayAndroidWebViewControllerCreationParams.fromPlatformWebViewControllerCreationParams(
+  /// Creates a [AndroidWebViewControllerCreationParams] instance based on [PlatformWebViewControllerCreationParams].
+  factory AndroidWebViewControllerCreationParams.fromPlatformWebViewControllerCreationParams(
     // Recommended placeholder to prevent being broken by platform interface.
     // ignore: avoid_unused_constructor_parameters
     PlatformWebViewControllerCreationParams params, {
@@ -78,7 +78,7 @@ class BootpayAndroidWebViewControllerCreationParams
     AndroidWebViewProxy androidWebViewProxy = const AndroidWebViewProxy(),
     @visibleForTesting android_webview.WebStorage? androidWebStorage,
   }) {
-    return BootpayAndroidWebViewControllerCreationParams(
+    return AndroidWebViewControllerCreationParams(
       androidWebViewProxy: androidWebViewProxy,
       androidWebStorage:
           androidWebStorage ?? android_webview.WebStorage.instance,
@@ -111,13 +111,13 @@ class BootpayAndroidWebViewPermissionResourceType
 }
 
 /// Implementation of the [PlatformWebViewController] with the Android WebView API.
-class BootpayAndroidWebViewController extends PlatformWebViewController {
-  /// Creates a new [BootpayAndroidWebViewController].
-  BootpayAndroidWebViewController(PlatformWebViewControllerCreationParams params)
+class AndroidWebViewController extends PlatformWebViewController {
+  /// Creates a new [AndroidWebViewController].
+  AndroidWebViewController(PlatformWebViewControllerCreationParams params)
     : super.implementation(
-        params is BootpayAndroidWebViewControllerCreationParams
+        params is AndroidWebViewControllerCreationParams
             ? params
-            : BootpayAndroidWebViewControllerCreationParams.fromPlatformWebViewControllerCreationParams(
+            : AndroidWebViewControllerCreationParams.fromPlatformWebViewControllerCreationParams(
                 params,
               ),
       ) {
@@ -132,15 +132,15 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
     _webView.setWebChromeClient(_webChromeClient);
   }
 
-  BootpayAndroidWebViewControllerCreationParams get _androidWebViewParams =>
-      params as BootpayAndroidWebViewControllerCreationParams;
+  AndroidWebViewControllerCreationParams get _androidWebViewParams =>
+      params as AndroidWebViewControllerCreationParams;
 
   /// The native [android_webview.WebView] being controlled.
   late final android_webview.WebView _webView = _androidWebViewParams
       .androidWebViewProxy
       .newWebView(
         onScrollChanged: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (_, int left, int top, int oldLeft, int oldTop) async {
             final void Function(ScrollPositionChange)? callback =
@@ -155,7 +155,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
   late final android_webview.WebChromeClient _webChromeClient =
       _androidWebViewParams.androidWebViewProxy.newWebChromeClient(
         onProgressChanged: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (_, android_webview.WebView webView, int progress) {
             if (weakReference.target?._currentNavigationDelegate?._onProgress !=
@@ -167,7 +167,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onGeolocationPermissionsShowPrompt: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (
             _,
@@ -189,7 +189,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onGeolocationPermissionsHidePrompt: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (android_webview.WebChromeClient instance) {
             final OnGeolocationPermissionsHidePrompt? onHidePrompt =
@@ -200,14 +200,14 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onShowCustomView: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (
             _,
             android_webview.View view,
             android_webview.CustomViewCallback callback,
           ) {
-            final BootpayAndroidWebViewController? webViewController =
+            final AndroidWebViewController? webViewController =
                 weakReference.target;
             if (webViewController == null) {
               callback.onCustomViewHidden();
@@ -231,7 +231,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onHideCustomView: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (android_webview.WebChromeClient instance) {
             final OnHideCustomWidgetCallback? onHideCustomViewCallback =
@@ -242,7 +242,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onShowFileChooser: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (
             _,
@@ -258,7 +258,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onConsoleMessage: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (
             android_webview.WebChromeClient webChromeClient,
@@ -293,7 +293,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onPermissionRequest: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (_, android_webview.PermissionRequest request) async {
             final void Function(PlatformWebViewPermissionRequest)? callback =
@@ -339,7 +339,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onJsAlert: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (_, __, String url, String message) async {
             final Future<void> Function(JavaScriptAlertDialogRequest)?
@@ -354,7 +354,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onJsConfirm: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (_, __, String url, String message) async {
             final Future<bool> Function(JavaScriptConfirmDialogRequest)?
@@ -369,7 +369,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
           };
         }),
         onJsPrompt: withWeakReferenceTo(this, (
-          WeakReference<BootpayAndroidWebViewController> weakReference,
+          WeakReference<AndroidWebViewController> weakReference,
         ) {
           return (
             _,
@@ -526,7 +526,7 @@ class BootpayAndroidWebViewController extends PlatformWebViewController {
     // so that the linter will flag the switch as needing an update.
     // ignore: dead_code
     throw UnimplementedError(
-      'This version of `BootpayAndroidWebViewController` currently has no '
+      'This version of `AndroidWebViewController` currently has no '
       'implementation for HTTP method ${params.method.serialize()} in '
       'loadRequest.',
     );
@@ -991,7 +991,7 @@ enum BootpayFileSelectorMode {
 
 /// Mode for controlling mixed content handling.
 
-/// See [BootpayAndroidWebViewController.setBootpayMixedContentMode].
+/// See [AndroidWebViewController.setBootpayMixedContentMode].
 enum BootpayMixedContentMode {
   /// The WebView will allow a secure origin to load content from any other
   /// origin, even if that origin is insecure.
@@ -1080,7 +1080,7 @@ class BootpayFileSelectorParams {
 
 /// An implementation of [JavaScriptChannelParams] with the Android WebView API.
 ///
-/// See [BootpayAndroidWebViewController.addJavaScriptChannel].
+/// See [AndroidWebViewController.addJavaScriptChannel].
 @immutable
 class BootpayAndroidJavaScriptChannelParams extends JavaScriptChannelParams {
   /// Constructs a [BootpayAndroidJavaScriptChannelParams].
@@ -1246,7 +1246,7 @@ class BootpayAndroidWebViewWidget extends PlatformWebViewWidget {
             displayWithHybridComposition:
                 _androidParams.displayWithHybridComposition,
             platformViewsServiceProxy: _androidParams.platformViewsServiceProxy,
-            view: (_androidParams.controller as BootpayAndroidWebViewController)
+            view: (_androidParams.controller as AndroidWebViewController)
                 ._webView,
             instanceManager: _androidParams.instanceManager,
             layoutDirection: _androidParams.layoutDirection,
@@ -1260,8 +1260,8 @@ class BootpayAndroidWebViewWidget extends PlatformWebViewWidget {
   // Attempt to handle custom views with a default implementation if it has not
   // been set.
   void _trySetDefaultOnShowCustomWidgetCallbacks(BuildContext context) {
-    final BootpayAndroidWebViewController controller =
-        _androidParams.controller as BootpayAndroidWebViewController;
+    final AndroidWebViewController controller =
+        _androidParams.controller as AndroidWebViewController;
 
     if (controller._onShowCustomWidgetCallback == null) {
       controller.setCustomWidgetCallbacks(
@@ -1288,7 +1288,7 @@ class BootpayAndroidWebViewWidget extends PlatformWebViewWidget {
 ///
 /// The [BootpayAndroidCustomViewWidget] cannot be manually instantiated and is
 /// provided to the host application through the callbacks specified using the
-/// [BootpayAndroidWebViewController.setCustomWidgetCallbacks] method.
+/// [AndroidWebViewController.setCustomWidgetCallbacks] method.
 ///
 /// The [BootpayAndroidCustomViewWidget] is initialized internally and should only be
 /// exposed as a [Widget] externally. The type [BootpayAndroidCustomViewWidget] is
@@ -1706,9 +1706,9 @@ class BootpayAndroidNavigationDelegate extends PlatformNavigationDelegate {
 
   /// Gets the native [android_webview.WebChromeClient] that is bridged by this [BootpayAndroidNavigationDelegate].
   ///
-  /// Used by the [BootpayAndroidWebViewController] to set the `android_webview.WebView.setWebChromeClient`.
+  /// Used by the [AndroidWebViewController] to set the `android_webview.WebView.setWebChromeClient`.
   @Deprecated(
-    'This value is not used by `BootpayAndroidWebViewController` and has no effect on the `WebView`.',
+    'This value is not used by `AndroidWebViewController` and has no effect on the `WebView`.',
   )
   android_webview.WebChromeClient get androidWebChromeClient =>
       _webChromeClient;
@@ -1717,14 +1717,14 @@ class BootpayAndroidNavigationDelegate extends PlatformNavigationDelegate {
 
   /// Gets the native [android_webview.WebViewClient] that is bridged by this [BootpayAndroidNavigationDelegate].
   ///
-  /// Used by the [BootpayAndroidWebViewController] to set the `android_webview.WebView.setWebViewClient`.
+  /// Used by the [AndroidWebViewController] to set the `android_webview.WebView.setWebViewClient`.
   android_webview.WebViewClient get androidWebViewClient => _webViewClient;
 
   late final android_webview.DownloadListener _downloadListener;
 
   /// Gets the native [android_webview.DownloadListener] that is bridged by this [BootpayAndroidNavigationDelegate].
   ///
-  /// Used by the [BootpayAndroidWebViewController] to set the `android_webview.WebView.setDownloadListener`.
+  /// Used by the [AndroidWebViewController] to set the `android_webview.WebView.setDownloadListener`.
   android_webview.DownloadListener get androidDownloadListener =>
       _downloadListener;
 

@@ -176,7 +176,7 @@ class _WebViewExampleState extends State<WebViewExample> {
     super.initState();
 
     _controller =
-        PlatformWebViewController(BootpayAndroidWebViewControllerCreationParams())
+        PlatformWebViewController(AndroidWebViewControllerCreationParams())
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..setBackgroundColor(const Color(0x80000000))
           ..setPlatformNavigationDelegate(
@@ -581,8 +581,8 @@ class SampleMenu extends StatelessWidget {
   }
 
   Future<void> _onVideoExample(BuildContext context) {
-    final BootpayAndroidWebViewController androidController =
-        webViewController as BootpayAndroidWebViewController;
+    final AndroidWebViewController androidController =
+        webViewController as AndroidWebViewController;
     // #docregion fullscreen_example
     androidController.setCustomWidgetCallbacks(
       onShowCustomWidget: (Widget widget, OnHideCustomWidgetCallback callback) {

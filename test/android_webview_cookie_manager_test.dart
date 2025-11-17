@@ -12,7 +12,7 @@ import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutt
 
 import 'android_webview_cookie_manager_test.mocks.dart';
 
-@GenerateMocks(<Type>[android_webview.CookieManager, BootpayAndroidWebViewController])
+@GenerateMocks(<Type>[android_webview.CookieManager, AndroidWebViewController])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -83,8 +83,8 @@ void main() {
   );
 
   test('setAcceptThirdPartyCookies', () async {
-    final MockBootpayAndroidWebViewController mockController =
-        MockBootpayAndroidWebViewController();
+    final MockAndroidWebViewController mockController =
+        MockAndroidWebViewController();
 
     final android_webview.PigeonInstanceManager instanceManager =
         android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});

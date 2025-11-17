@@ -80,7 +80,7 @@ class BootpayAndroidWebViewCookieManager extends PlatformWebViewCookieManager {
   ///
   /// Defaults to false.
   Future<void> setAcceptThirdPartyCookies(
-    BootpayAndroidWebViewController controller,
+    AndroidWebViewController controller,
     bool accept,
   ) {
     // ignore: invalid_use_of_protected_member

@@ -137,7 +137,7 @@ Future<void> main() async {
             return PlatformWebViewWidget(
               BootpayAndroidWebViewWidgetCreationParams(
                 controller: PlatformWebViewController(
-                  BootpayAndroidWebViewControllerCreationParams(
+                  AndroidWebViewControllerCreationParams(
                     androidWebViewProxy: AndroidWebViewProxy(
                       newWebView:
                           ({
@@ -450,7 +450,7 @@ Future<void> main() async {
     testWidgets('Auto media playback', (WidgetTester tester) async {
       Completer<void> pageLoaded = Completer<void>();
 
-      BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
+      AndroidWebViewController controller = AndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -486,7 +486,7 @@ Future<void> main() async {
       expect(isPaused, false);
 
       pageLoaded = Completer<void>();
-      controller = BootpayAndroidWebViewController(
+      controller = AndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -525,7 +525,7 @@ Future<void> main() async {
       final Completer<void> pageLoaded = Completer<void>();
       final Completer<void> videoPlaying = Completer<void>();
 
-      final BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
+      final AndroidWebViewController controller = AndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -588,7 +588,7 @@ Future<void> main() async {
       final Completer<void> fullscreenExited = Completer<void>();
       final Completer<void> pageLoaded = Completer<void>();
 
-      final BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
+      final AndroidWebViewController controller = AndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -684,7 +684,7 @@ Future<void> main() async {
     testWidgets('Auto media playback', (WidgetTester tester) async {
       Completer<void> pageLoaded = Completer<void>();
 
-      BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
+      AndroidWebViewController controller = AndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -720,7 +720,7 @@ Future<void> main() async {
       expect(isPaused, false);
 
       pageLoaded = Completer<void>();
-      controller = BootpayAndroidWebViewController(
+      controller = AndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
@@ -1523,7 +1523,7 @@ Future<void> main() async {
   });
 
   testWidgets(
-    '`BootpayAndroidWebViewController` can be reused with a new `AndroidWebViewWidget`',
+    '`AndroidWebViewController` can be reused with a new `AndroidWebViewWidget`',
     (WidgetTester tester) async {
       Completer<void> pageLoaded = Completer<void>();
 

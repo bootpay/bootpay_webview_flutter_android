@@ -15,10 +15,10 @@ class BTAndroidWebViewPlatform extends WebViewPlatform {
   }
 
   @override
-  BootpayAndroidWebViewController createPlatformWebViewController(
+  AndroidWebViewController createPlatformWebViewController(
     PlatformWebViewControllerCreationParams params,
   ) {
-    return BootpayAndroidWebViewController(params);
+    return AndroidWebViewController(params);
   }
 
   @override
