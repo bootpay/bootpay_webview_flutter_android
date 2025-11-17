@@ -135,9 +135,9 @@ Future<void> main() async {
         Builder(
           builder: (BuildContext context) {
             return PlatformWebViewWidget(
-              AndroidWebViewWidgetCreationParams(
+              BootpayAndroidWebViewWidgetCreationParams(
                 controller: PlatformWebViewController(
-                  AndroidWebViewControllerCreationParams(
+                  BootpayAndroidWebViewControllerCreationParams(
                     androidWebViewProxy: AndroidWebViewProxy(
                       newWebView:
                           ({
@@ -171,7 +171,7 @@ Future<void> main() async {
         Builder(
           builder: (BuildContext context) {
             return PlatformWebViewWidget(
-              AndroidWebViewWidgetCreationParams(
+              BootpayAndroidWebViewWidgetCreationParams(
                 controller: PlatformWebViewController(
                   const PlatformWebViewControllerCreationParams(),
                 ),
@@ -450,12 +450,12 @@ Future<void> main() async {
     testWidgets('Auto media playback', (WidgetTester tester) async {
       Completer<void> pageLoaded = Completer<void>();
 
-      AndroidWebViewController controller = AndroidWebViewController(
+      BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       await controller.setMediaPlaybackRequiresUserGesture(false);
-      AndroidNavigationDelegate delegate = AndroidNavigationDelegate(
+      BootpayAndroidNavigationDelegate delegate = BootpayAndroidNavigationDelegate(
         const PlatformNavigationDelegateCreationParams(),
       );
       await delegate.setOnPageFinished((_) => pageLoaded.complete());
@@ -486,11 +486,11 @@ Future<void> main() async {
       expect(isPaused, false);
 
       pageLoaded = Completer<void>();
-      controller = AndroidWebViewController(
+      controller = BootpayAndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-      delegate = AndroidNavigationDelegate(
+      delegate = BootpayAndroidNavigationDelegate(
         const PlatformNavigationDelegateCreationParams(),
       );
       await delegate.setOnPageFinished((_) => pageLoaded.complete());
@@ -525,12 +525,12 @@ Future<void> main() async {
       final Completer<void> pageLoaded = Completer<void>();
       final Completer<void> videoPlaying = Completer<void>();
 
-      final AndroidWebViewController controller = AndroidWebViewController(
+      final BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       await controller.setMediaPlaybackRequiresUserGesture(false);
-      final AndroidNavigationDelegate delegate = AndroidNavigationDelegate(
+      final BootpayAndroidNavigationDelegate delegate = BootpayAndroidNavigationDelegate(
         const PlatformNavigationDelegateCreationParams(),
       );
       await delegate.setOnPageFinished((_) => pageLoaded.complete());
@@ -588,12 +588,12 @@ Future<void> main() async {
       final Completer<void> fullscreenExited = Completer<void>();
       final Completer<void> pageLoaded = Completer<void>();
 
-      final AndroidWebViewController controller = AndroidWebViewController(
+      final BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       await controller.setMediaPlaybackRequiresUserGesture(false);
-      final AndroidNavigationDelegate delegate = AndroidNavigationDelegate(
+      final BootpayAndroidNavigationDelegate delegate = BootpayAndroidNavigationDelegate(
         const PlatformNavigationDelegateCreationParams(),
       );
       await delegate.setOnPageFinished((_) => pageLoaded.complete());
@@ -684,12 +684,12 @@ Future<void> main() async {
     testWidgets('Auto media playback', (WidgetTester tester) async {
       Completer<void> pageLoaded = Completer<void>();
 
-      AndroidWebViewController controller = AndroidWebViewController(
+      BootpayAndroidWebViewController controller = BootpayAndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       await controller.setMediaPlaybackRequiresUserGesture(false);
-      AndroidNavigationDelegate delegate = AndroidNavigationDelegate(
+      BootpayAndroidNavigationDelegate delegate = BootpayAndroidNavigationDelegate(
         const PlatformNavigationDelegateCreationParams(),
       );
       await delegate.setOnPageFinished((_) => pageLoaded.complete());
@@ -720,11 +720,11 @@ Future<void> main() async {
       expect(isPaused, false);
 
       pageLoaded = Completer<void>();
-      controller = AndroidWebViewController(
+      controller = BootpayAndroidWebViewController(
         const PlatformWebViewControllerCreationParams(),
       );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-      delegate = AndroidNavigationDelegate(
+      delegate = BootpayAndroidNavigationDelegate(
         const PlatformNavigationDelegateCreationParams(),
       );
       await delegate.setOnPageFinished((_) => pageLoaded.complete());
@@ -1318,7 +1318,7 @@ Future<void> main() async {
       Builder(
         builder: (BuildContext context) {
           return PlatformWebViewWidget(
-            AndroidWebViewWidgetCreationParams(controller: controller),
+            BootpayAndroidWebViewWidgetCreationParams(controller: controller),
           ).build(context);
         },
       ),
@@ -1359,7 +1359,7 @@ Future<void> main() async {
       Builder(
         builder: (BuildContext context) {
           return PlatformWebViewWidget(
-            AndroidWebViewWidgetCreationParams(controller: controller),
+            BootpayAndroidWebViewWidgetCreationParams(controller: controller),
           ).build(context);
         },
       ),
@@ -1523,7 +1523,7 @@ Future<void> main() async {
   });
 
   testWidgets(
-    '`AndroidWebViewController` can be reused with a new `AndroidWebViewWidget`',
+    '`BootpayAndroidWebViewController` can be reused with a new `AndroidWebViewWidget`',
     (WidgetTester tester) async {
       Completer<void> pageLoaded = Completer<void>();
 

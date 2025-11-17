@@ -8,13 +8,13 @@ import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutt
 /// Example function for README demonstration of Payment Request API.
 Future<void> enablePaymentRequest() async {
   final PlatformWebViewController controller = PlatformWebViewController(
-    AndroidWebViewControllerCreationParams(),
+    BootpayAndroidWebViewControllerCreationParams(),
   );
-  final AndroidWebViewController androidController =
-      controller as AndroidWebViewController;
+  final BootpayAndroidWebViewController androidController =
+      controller as BootpayAndroidWebViewController;
   // #docregion payment_request_example
   final bool paymentRequestEnabled = await androidController
-      .isWebViewFeatureSupported(WebViewFeatureType.paymentRequest);
+      .isWebViewFeatureSupported(BootpayWebViewFeatureType.paymentRequest);
 
   if (paymentRequestEnabled) {
     await androidController.setPaymentRequestEnabled(true);
@@ -28,10 +28,10 @@ Future<void> enablePaymentRequest() async {
 /// should always be allowed.
 Future<void> setGeolocationPermissionsPrompt() async {
   final PlatformWebViewController controller = PlatformWebViewController(
-    AndroidWebViewControllerCreationParams(),
+    BootpayAndroidWebViewControllerCreationParams(),
   );
-  final AndroidWebViewController androidController =
-      controller as AndroidWebViewController;
+  final BootpayAndroidWebViewController androidController =
+      controller as BootpayAndroidWebViewController;
   // #docregion geolocation_example
   await androidController.setGeolocationPermissionsPromptCallbacks(
     onShowPrompt: (GeolocationPermissionsRequestParams request) async {

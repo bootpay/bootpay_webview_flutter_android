@@ -7,9 +7,9 @@ import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutt
 import 'android_webkit.g.dart' as android;
 
 /// Implementation of the [PlatformSslAuthError] with the Android WebView API.
-class AndroidSslAuthError extends PlatformSslAuthError {
-  /// Creates an [AndroidSslAuthError].
-  AndroidSslAuthError._({
+class BootpayAndroidSslAuthError extends PlatformSslAuthError {
+  /// Creates an [BootpayAndroidSslAuthError].
+  BootpayAndroidSslAuthError._({
     required super.certificate,
     required super.description,
     required android.SslErrorHandler handler,
@@ -21,10 +21,10 @@ class AndroidSslAuthError extends PlatformSslAuthError {
   /// The URL associated with the error.
   final String url;
 
-  /// Creates an [AndroidSslAuthError] from the parameters from the native
+  /// Creates an [BootpayAndroidSslAuthError] from the parameters from the native
   /// `WebViewClient.onReceivedSslError`.
   @internal
-  static Future<AndroidSslAuthError> fromNativeCallback({
+  static Future<BootpayAndroidSslAuthError> fromNativeCallback({
     required android.SslError error,
     required android.SslErrorHandler handler,
   }) async {
@@ -45,7 +45,7 @@ class AndroidSslAuthError extends PlatformSslAuthError {
       android.SslErrorType.unknown => 'The certificate has an unknown error.',
     };
 
-    return AndroidSslAuthError._(
+    return BootpayAndroidSslAuthError._(
       certificate: X509Certificate(
         data: x509Certificate != null
             ? await x509Certificate.getEncoded()

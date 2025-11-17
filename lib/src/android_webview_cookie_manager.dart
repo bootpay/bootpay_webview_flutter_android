@@ -8,40 +8,40 @@ import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutt
 import 'android_webkit.g.dart';
 import 'android_webview_controller.dart';
 
-/// Object specifying creation parameters for creating a [AndroidWebViewCookieManager].
+/// Object specifying creation parameters for creating a [BootpayAndroidWebViewCookieManager].
 ///
 /// When adding additional fields make sure they can be null or have a default
 /// value to avoid breaking changes. See [PlatformWebViewCookieManagerCreationParams] for
 /// more information.
 @immutable
-class AndroidWebViewCookieManagerCreationParams
+class BootpayAndroidWebViewCookieManagerCreationParams
     extends PlatformWebViewCookieManagerCreationParams {
-  /// Creates a new [AndroidWebViewCookieManagerCreationParams] instance.
-  const AndroidWebViewCookieManagerCreationParams._(
+  /// Creates a new [BootpayAndroidWebViewCookieManagerCreationParams] instance.
+  const BootpayAndroidWebViewCookieManagerCreationParams._(
     // This parameter prevents breaking changes later.
     // ignore: avoid_unused_constructor_parameters
     PlatformWebViewCookieManagerCreationParams params,
   ) : super();
 
-  /// Creates a [AndroidWebViewCookieManagerCreationParams] instance based on [PlatformWebViewCookieManagerCreationParams].
-  factory AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
+  /// Creates a [BootpayAndroidWebViewCookieManagerCreationParams] instance based on [PlatformWebViewCookieManagerCreationParams].
+  factory BootpayAndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
     PlatformWebViewCookieManagerCreationParams params,
   ) {
-    return AndroidWebViewCookieManagerCreationParams._(params);
+    return BootpayAndroidWebViewCookieManagerCreationParams._(params);
   }
 }
 
 /// Handles all cookie operations for the Android platform.
-class AndroidWebViewCookieManager extends PlatformWebViewCookieManager {
-  /// Creates a new [AndroidWebViewCookieManager].
-  AndroidWebViewCookieManager(
+class BootpayAndroidWebViewCookieManager extends PlatformWebViewCookieManager {
+  /// Creates a new [BootpayAndroidWebViewCookieManager].
+  BootpayAndroidWebViewCookieManager(
     PlatformWebViewCookieManagerCreationParams params, {
     CookieManager? cookieManager,
   }) : _cookieManager = cookieManager ?? CookieManager.instance,
        super.implementation(
-         params is AndroidWebViewCookieManagerCreationParams
+         params is BootpayAndroidWebViewCookieManagerCreationParams
              ? params
-             : AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
+             : BootpayAndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
                  params,
                ),
        );
@@ -80,7 +80,7 @@ class AndroidWebViewCookieManager extends PlatformWebViewCookieManager {
   ///
   /// Defaults to false.
   Future<void> setAcceptThirdPartyCookies(
-    AndroidWebViewController controller,
+    BootpayAndroidWebViewController controller,
     bool accept,
   ) {
     // ignore: invalid_use_of_protected_member

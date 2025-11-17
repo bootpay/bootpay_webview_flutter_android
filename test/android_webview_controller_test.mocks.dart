@@ -686,7 +686,7 @@ class MockAndroidWebViewController extends _i1.Mock
 
   @override
   _i8.Future<void> setOnShowFileSelector(
-    _i8.Future<List<String>> Function(_i7.FileSelectorParams)?
+    _i8.Future<List<String>> Function(_i7.BootpayFileSelectorParams)?
     onShowFileSelector,
   ) =>
       (super.noSuchMethod(
@@ -838,9 +838,9 @@ class MockAndroidWebViewController extends _i1.Mock
           as _i8.Future<void>);
 
   @override
-  _i8.Future<void> setMixedContentMode(_i7.MixedContentMode? mode) =>
+  _i8.Future<void> setBootpayMixedContentMode(_i7.BootpayMixedContentMode? mode) =>
       (super.noSuchMethod(
-            Invocation.method(#setMixedContentMode, [mode]),
+            Invocation.method(#setBootpayMixedContentMode, [mode]),
             returnValue: _i8.Future<void>.value(),
             returnValueForMissingStub: _i8.Future<void>.value(),
           )
@@ -848,7 +848,7 @@ class MockAndroidWebViewController extends _i1.Mock
 
   @override
   _i8.Future<bool> isWebViewFeatureSupported(
-    _i7.WebViewFeatureType? featureType,
+    _i7.BootpayWebViewFeatureType? featureType,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#isWebViewFeatureSupported, [featureType]),
@@ -2621,9 +2621,9 @@ class MockWebSettings extends _i1.Mock implements _i2.WebSettings {
           as _i8.Future<String>);
 
   @override
-  _i8.Future<void> setMixedContentMode(_i2.MixedContentMode? mode) =>
+  _i8.Future<void> setBootpayMixedContentMode(_i2.BootpayMixedContentMode? mode) =>
       (super.noSuchMethod(
-            Invocation.method(#setMixedContentMode, [mode]),
+            Invocation.method(#setBootpayMixedContentMode, [mode]),
             returnValue: _i8.Future<void>.value(),
             returnValueForMissingStub: _i8.Future<void>.value(),
           )

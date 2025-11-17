@@ -12,7 +12,7 @@ import 'package:bootpay_webview_flutter_platform_interface/bootpay_webview_flutt
 
 import 'android_webview_cookie_manager_test.mocks.dart';
 
-@GenerateMocks(<Type>[android_webview.CookieManager, AndroidWebViewController])
+@GenerateMocks(<Type>[android_webview.CookieManager, BootpayAndroidWebViewController])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -23,12 +23,12 @@ void main() {
       mockCookieManager.removeAllCookies(),
     ).thenAnswer((_) => Future<bool>.value(true));
 
-    final AndroidWebViewCookieManagerCreationParams params =
-        AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
+    final BootpayAndroidWebViewCookieManagerCreationParams params =
+        BootpayAndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
           const PlatformWebViewCookieManagerCreationParams(),
         );
 
-    final bool hasClearedCookies = await AndroidWebViewCookieManager(
+    final bool hasClearedCookies = await BootpayAndroidWebViewCookieManager(
       params,
       cookieManager: mockCookieManager,
     ).clearCookies();
@@ -38,13 +38,13 @@ void main() {
   });
 
   test('setCookie should throw ArgumentError for cookie with invalid path', () {
-    final AndroidWebViewCookieManagerCreationParams params =
-        AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
+    final BootpayAndroidWebViewCookieManagerCreationParams params =
+        BootpayAndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
           const PlatformWebViewCookieManagerCreationParams(),
         );
 
-    final AndroidWebViewCookieManager androidCookieManager =
-        AndroidWebViewCookieManager(params, cookieManager: MockCookieManager());
+    final BootpayAndroidWebViewCookieManager androidCookieManager =
+        BootpayAndroidWebViewCookieManager(params, cookieManager: MockCookieManager());
 
     expect(
       () => androidCookieManager.setCookie(
@@ -64,12 +64,12 @@ void main() {
     () {
       final android_webview.CookieManager mockCookieManager =
           MockCookieManager();
-      final AndroidWebViewCookieManagerCreationParams params =
-          AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
+      final BootpayAndroidWebViewCookieManagerCreationParams params =
+          BootpayAndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
             const PlatformWebViewCookieManagerCreationParams(),
           );
 
-      AndroidWebViewCookieManager(
+      BootpayAndroidWebViewCookieManager(
         params,
         cookieManager: mockCookieManager,
       ).setCookie(
@@ -83,8 +83,8 @@ void main() {
   );
 
   test('setAcceptThirdPartyCookies', () async {
-    final MockAndroidWebViewController mockController =
-        MockAndroidWebViewController();
+    final MockBootpayAndroidWebViewController mockController =
+        MockBootpayAndroidWebViewController();
 
     final android_webview.PigeonInstanceManager instanceManager =
         android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});
@@ -97,8 +97,8 @@ void main() {
 
     when(mockController.webViewIdentifier).thenReturn(webViewIdentifier);
 
-    final AndroidWebViewCookieManagerCreationParams params =
-        AndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
+    final BootpayAndroidWebViewCookieManagerCreationParams params =
+        BootpayAndroidWebViewCookieManagerCreationParams.fromPlatformWebViewCookieManagerCreationParams(
           const PlatformWebViewCookieManagerCreationParams(),
         );
 
@@ -106,7 +106,7 @@ void main() {
     // ignore: invalid_use_of_protected_member
     when(mockCookieManager.pigeon_instanceManager).thenReturn(instanceManager);
 
-    await AndroidWebViewCookieManager(
+    await BootpayAndroidWebViewCookieManager(
       params,
       cookieManager: mockCookieManager,
     ).setAcceptThirdPartyCookies(mockController, false);

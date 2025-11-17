@@ -19,10 +19,10 @@ import 'android_navigation_delegate_test.dart';
 import 'android_webview_controller_test.mocks.dart';
 
 @GenerateNiceMocks(<MockSpec<Object>>[
-  MockSpec<AndroidNavigationDelegate>(),
-  MockSpec<AndroidWebViewController>(),
+  MockSpec<BootpayAndroidNavigationDelegate>(),
+  MockSpec<BootpayAndroidWebViewController>(),
   MockSpec<AndroidWebViewProxy>(),
-  MockSpec<AndroidWebViewWidgetCreationParams>(),
+  MockSpec<BootpayAndroidWebViewWidgetCreationParams>(),
   MockSpec<ExpensiveAndroidViewController>(),
   MockSpec<android_webview.FlutterAssetManager>(),
   MockSpec<android_webview.GeolocationPermissionsCallback>(),
@@ -39,7 +39,7 @@ import 'android_webview_controller_test.mocks.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  AndroidWebViewController createControllerWithMocks({
+  BootpayAndroidWebViewController createControllerWithMocks({
     android_webview.FlutterAssetManager? mockFlutterAssetManager,
     android_webview.JavaScriptChannel? mockJavaScriptChannel,
     android_webview.WebChromeClient Function({
@@ -115,8 +115,8 @@ void main() {
     final android_webview.WebView nonNullMockWebView =
         mockWebView ?? MockWebView();
 
-    final AndroidWebViewControllerCreationParams
-    creationParams = AndroidWebViewControllerCreationParams(
+    final BootpayAndroidWebViewControllerCreationParams
+    creationParams = BootpayAndroidWebViewControllerCreationParams(
       androidWebStorage: mockWebStorage ?? MockWebStorage(),
       androidWebViewProxy: AndroidWebViewProxy(
         newWebChromeClient:
@@ -329,16 +329,16 @@ void main() {
       nonNullMockWebView.settings,
     ).thenReturn(mockSettings ?? MockWebSettings());
 
-    return AndroidWebViewController(creationParams);
+    return BootpayAndroidWebViewController(creationParams);
   }
 
-  group('AndroidWebViewController', () {
-    AndroidJavaScriptChannelParams
-    createAndroidJavaScriptChannelParamsWithMocks({
+  group('BootpayAndroidWebViewController', () {
+    BootpayAndroidJavaScriptChannelParams
+    createBootpayAndroidJavaScriptChannelParamsWithMocks({
       String? name,
       MockJavaScriptChannel? mockJavaScriptChannel,
     }) {
-      return AndroidJavaScriptChannelParams(
+      return BootpayAndroidJavaScriptChannelParams(
         name: name ?? 'test',
         onMessageReceived: (JavaScriptMessage message) {},
         webViewProxy: AndroidWebViewProxy(
@@ -378,7 +378,7 @@ void main() {
       test('Without file prefix', () async {
         final MockWebView mockWebView = MockWebView();
         final MockWebSettings mockWebSettings = MockWebSettings();
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           mockWebView: mockWebView,
           mockSettings: mockWebSettings,
         );
@@ -394,7 +394,7 @@ void main() {
       test('Without file prefix and characters to be escaped', () async {
         final MockWebView mockWebView = MockWebView();
         final MockWebSettings mockWebSettings = MockWebSettings();
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           mockWebView: mockWebView,
           mockSettings: mockWebSettings,
         );
@@ -413,7 +413,7 @@ void main() {
       test('With file prefix', () async {
         final MockWebView mockWebView = MockWebView();
         final MockWebSettings mockWebSettings = MockWebSettings();
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           mockWebView: mockWebView,
         );
 
@@ -433,7 +433,7 @@ void main() {
         test('Without file prefix', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
@@ -454,7 +454,7 @@ void main() {
         test('Without file prefix and characters to be escaped', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
@@ -475,7 +475,7 @@ void main() {
         test('With file prefix', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
@@ -498,13 +498,13 @@ void main() {
         test('Without file prefix', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
 
           await controller.loadFileWithParams(
-            AndroidLoadFileParams(absoluteFilePath: '/path/to/file.html'),
+            BootpayAndroidLoadFileParams(absoluteFilePath: '/path/to/file.html'),
           );
 
           verify(mockWebSettings.setAllowFileAccess(true)).called(1);
@@ -519,13 +519,13 @@ void main() {
         test('Without file prefix and characters to be escaped', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
 
           await controller.loadFileWithParams(
-            AndroidLoadFileParams(absoluteFilePath: '/path/to/?_<_>_.html'),
+            BootpayAndroidLoadFileParams(absoluteFilePath: '/path/to/?_<_>_.html'),
           );
 
           verify(mockWebSettings.setAllowFileAccess(true)).called(1);
@@ -540,13 +540,13 @@ void main() {
         test('With file prefix', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
 
           await controller.loadFileWithParams(
-            AndroidLoadFileParams(
+            BootpayAndroidLoadFileParams(
               absoluteFilePath: 'file:///path/to/file.html',
             ),
           );
@@ -563,13 +563,13 @@ void main() {
         test('With additional headers', () async {
           final MockWebView mockWebView = MockWebView();
           final MockWebSettings mockWebSettings = MockWebSettings();
-          final AndroidWebViewController controller = createControllerWithMocks(
+          final BootpayAndroidWebViewController controller = createControllerWithMocks(
             mockWebView: mockWebView,
             mockSettings: mockWebSettings,
           );
 
           await controller.loadFileWithParams(
-            AndroidLoadFileParams(
+            BootpayAndroidLoadFileParams(
               absoluteFilePath: 'file:///path/to/file.html',
               headers: const <String, String>{
                 'Authorization': 'Bearer test_token',
@@ -596,7 +596,7 @@ void main() {
       final MockWebView mockWebView = MockWebView();
       final MockFlutterAssetManager mockAssetManager =
           MockFlutterAssetManager();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockFlutterAssetManager: mockAssetManager,
         mockWebView: mockWebView,
       );
@@ -627,7 +627,7 @@ void main() {
       final MockWebView mockWebView = MockWebView();
       final MockFlutterAssetManager mockAssetManager =
           MockFlutterAssetManager();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockFlutterAssetManager: mockAssetManager,
         mockWebView: mockWebView,
       );
@@ -657,7 +657,7 @@ void main() {
         final MockWebView mockWebView = MockWebView();
         final MockFlutterAssetManager mockAssetManager =
             MockFlutterAssetManager();
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           mockFlutterAssetManager: mockAssetManager,
           mockWebView: mockWebView,
         );
@@ -684,7 +684,7 @@ void main() {
 
     test('loadHtmlString without baseUrl', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -703,7 +703,7 @@ void main() {
 
     test('loadHtmlString with baseUrl', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -725,7 +725,7 @@ void main() {
 
     test('loadRequest without URI scheme', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
       final LoadRequestParams requestParams = LoadRequestParams(
@@ -747,7 +747,7 @@ void main() {
 
     test('loadRequest using the GET method', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
       final LoadRequestParams requestParams = LoadRequestParams(
@@ -767,7 +767,7 @@ void main() {
 
     test('loadRequest using the POST method without body', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
       final LoadRequestParams requestParams = LoadRequestParams(
@@ -784,7 +784,7 @@ void main() {
 
     test('loadRequest using the POST method with body', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
       final LoadRequestParams requestParams = LoadRequestParams(
@@ -807,7 +807,7 @@ void main() {
 
     test('currentUrl', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -818,7 +818,7 @@ void main() {
 
     test('canGoBack', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -829,7 +829,7 @@ void main() {
 
     test('canGoForward', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -840,7 +840,7 @@ void main() {
 
     test('goBack', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -851,7 +851,7 @@ void main() {
 
     test('goForward', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -862,7 +862,7 @@ void main() {
 
     test('reload', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -873,7 +873,7 @@ void main() {
 
     test('clearCache', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -884,7 +884,7 @@ void main() {
 
     test('clearLocalStorage', () async {
       final MockWebStorage mockWebStorage = MockWebStorage();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebStorage: mockWebStorage,
       );
 
@@ -894,12 +894,12 @@ void main() {
     });
 
     test('setPlatformNavigationDelegate', () async {
-      final MockAndroidNavigationDelegate mockNavigationDelegate =
-          MockAndroidNavigationDelegate();
+      final MockBootpayAndroidNavigationDelegate mockNavigationDelegate =
+          MockBootpayAndroidNavigationDelegate();
       final MockWebView mockWebView = MockWebView();
       final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
       final MockWebViewClient mockWebViewClient = MockWebViewClient();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -917,9 +917,9 @@ void main() {
     });
 
     test('onProgress', () {
-      final AndroidNavigationDelegate
-      androidNavigationDelegate = AndroidNavigationDelegate(
-        AndroidNavigationDelegateCreationParams.fromPlatformNavigationDelegateCreationParams(
+      final BootpayAndroidNavigationDelegate
+      androidNavigationDelegate = BootpayAndroidNavigationDelegate(
+        BootpayAndroidNavigationDelegateCreationParams.fromPlatformNavigationDelegateCreationParams(
           const PlatformNavigationDelegateCreationParams(),
           androidWebViewProxy: const AndroidWebViewProxy(
             newWebViewClient: TestWebViewClient.new,
@@ -934,7 +934,7 @@ void main() {
         (int progress) => callbackProgress = progress,
       );
 
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient: CapturingWebChromeClient.new,
       );
       controller.setPlatformNavigationDelegate(androidNavigationDelegate);
@@ -953,7 +953,7 @@ void main() {
 
     test('onProgress does not cause LateInitializationError', () {
       // ignore: unused_local_variable
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient: CapturingWebChromeClient.new,
       );
 
@@ -976,7 +976,7 @@ void main() {
       )
       onShowFileChooserCallback;
       final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient:
             ({
               dynamic onProgressChanged,
@@ -1001,8 +1001,8 @@ void main() {
             },
       );
 
-      late final FileSelectorParams fileSelectorParams;
-      await controller.setOnShowFileSelector((FileSelectorParams params) async {
+      late final BootpayFileSelectorParams fileSelectorParams;
+      await controller.setOnShowFileSelector((BootpayFileSelectorParams params) async {
         fileSelectorParams = params;
         return <String>[];
       });
@@ -1026,7 +1026,7 @@ void main() {
       expect(fileSelectorParams.isCaptureEnabled, isFalse);
       expect(fileSelectorParams.acceptTypes, <String>['png']);
       expect(fileSelectorParams.filenameHint, 'filenameHint');
-      expect(fileSelectorParams.mode, FileSelectorMode.open);
+      expect(fileSelectorParams.mode, BootpayFileSelectorMode.open);
     });
 
     test('setGeolocationPermissionsPromptCallbacks', () async {
@@ -1040,7 +1040,7 @@ void main() {
       onGeoPermissionHidePromptHandle;
 
       final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient:
             ({
               dynamic onProgressChanged,
@@ -1119,7 +1119,7 @@ void main() {
       onHideCustomViewHandle;
 
       final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient:
             ({
               dynamic onProgressChanged,
@@ -1183,7 +1183,7 @@ void main() {
       onPermissionRequestCallback;
 
       final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient:
             ({
               dynamic onProgressChanged,
@@ -1248,7 +1248,7 @@ void main() {
         onPermissionRequestCallback;
 
         final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           createWebChromeClient:
               ({
                 dynamic onProgressChanged,
@@ -1310,7 +1310,7 @@ void main() {
 
         final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
 
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           createWebChromeClient:
               ({
                 dynamic onProgressChanged,
@@ -1365,7 +1365,7 @@ void main() {
 
         final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
 
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           createWebChromeClient:
               ({
                 dynamic onProgressChanged,
@@ -1423,7 +1423,7 @@ void main() {
         onJsPromptCallback;
         final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
 
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           createWebChromeClient:
               ({
                 dynamic onProgressChanged,
@@ -1486,7 +1486,7 @@ void main() {
       onConsoleMessageCallback;
 
       final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient:
             ({
               dynamic onProgressChanged,
@@ -1590,7 +1590,7 @@ void main() {
 
     test('runJavaScript', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1603,7 +1603,7 @@ void main() {
 
     test('runJavaScriptReturningResult with return value', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1622,7 +1622,7 @@ void main() {
 
     test('runJavaScriptReturningResult returning null', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1641,7 +1641,7 @@ void main() {
 
     test('runJavaScriptReturningResult parses num', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1660,7 +1660,7 @@ void main() {
 
     test('runJavaScriptReturningResult parses true', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1679,7 +1679,7 @@ void main() {
 
     test('runJavaScriptReturningResult parses false', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1698,11 +1698,11 @@ void main() {
 
     test('addJavaScriptChannel', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
-      final AndroidJavaScriptChannelParams paramsWithMock =
-          createAndroidJavaScriptChannelParamsWithMocks(name: 'test');
+      final BootpayAndroidJavaScriptChannelParams paramsWithMock =
+          createBootpayAndroidJavaScriptChannelParamsWithMocks(name: 'test');
       await controller.addJavaScriptChannel(paramsWithMock);
       verify(
         mockWebView.addJavaScriptChannel(
@@ -1715,11 +1715,11 @@ void main() {
       'addJavaScriptChannel add channel with same name should remove existing channel',
       () async {
         final MockWebView mockWebView = MockWebView();
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           mockWebView: mockWebView,
         );
-        final AndroidJavaScriptChannelParams paramsWithMock =
-            createAndroidJavaScriptChannelParamsWithMocks(name: 'test');
+        final BootpayAndroidJavaScriptChannelParams paramsWithMock =
+            createBootpayAndroidJavaScriptChannelParamsWithMocks(name: 'test');
         await controller.addJavaScriptChannel(paramsWithMock);
         verify(
           mockWebView.addJavaScriptChannel(
@@ -1739,7 +1739,7 @@ void main() {
 
     test('removeJavaScriptChannel when channel is not registered', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1749,11 +1749,11 @@ void main() {
 
     test('removeJavaScriptChannel when channel exists', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
-      final AndroidJavaScriptChannelParams paramsWithMock =
-          createAndroidJavaScriptChannelParamsWithMocks(name: 'test');
+      final BootpayAndroidJavaScriptChannelParams paramsWithMock =
+          createBootpayAndroidJavaScriptChannelParamsWithMocks(name: 'test');
 
       // Make sure channel exists before removing it.
       await controller.addJavaScriptChannel(paramsWithMock);
@@ -1769,7 +1769,7 @@ void main() {
 
     test('getTitle', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1780,7 +1780,7 @@ void main() {
 
     test('scrollTo', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1791,7 +1791,7 @@ void main() {
 
     test('scrollBy', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1802,7 +1802,7 @@ void main() {
 
     test('verticalScrollBarEnabled', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1813,7 +1813,7 @@ void main() {
 
     test('horizontalScrollBarEnabled', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1824,7 +1824,7 @@ void main() {
 
     test('getScrollPosition', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
       when(mockWebView.getScrollPosition()).thenAnswer(
@@ -1847,7 +1847,7 @@ void main() {
     test('enableZoom', () async {
       final MockWebView mockWebView = MockWebView();
       final MockWebSettings mockSettings = MockWebSettings();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
         mockSettings: mockSettings,
       );
@@ -1862,7 +1862,7 @@ void main() {
 
     test('setBackgroundColor', () async {
       final MockWebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -1874,7 +1874,7 @@ void main() {
     test('setJavaScriptMode', () async {
       final MockWebView mockWebView = MockWebView();
       final MockWebSettings mockSettings = MockWebSettings();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
         mockSettings: mockSettings,
       );
@@ -1890,7 +1890,7 @@ void main() {
     test('setUserAgent', () async {
       final MockWebView mockWebView = MockWebView();
       final MockWebSettings mockSettings = MockWebSettings();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
         mockSettings: mockSettings,
       );
@@ -1905,7 +1905,7 @@ void main() {
 
     test('getUserAgent', () async {
       final MockWebSettings mockSettings = MockWebSettings();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockSettings: mockSettings,
       );
 
@@ -1921,7 +1921,7 @@ void main() {
     test('setAllowFileAccess', () async {
       final MockWebView mockWebView = MockWebView();
       final MockWebSettings mockSettings = MockWebSettings();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
         mockSettings: mockSettings,
       );
@@ -1938,7 +1938,7 @@ void main() {
   test('setMediaPlaybackRequiresUserGesture', () async {
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
     );
@@ -1951,7 +1951,7 @@ void main() {
   test('setUseWideViewPort', () async {
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
     );
@@ -1967,7 +1967,7 @@ void main() {
   test('setAllowContentAccess', () async {
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
     );
@@ -1983,7 +1983,7 @@ void main() {
   test('setGeolocationEnabled', () async {
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
     );
@@ -1999,7 +1999,7 @@ void main() {
   test('setTextZoom', () async {
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
     );
@@ -2012,15 +2012,15 @@ void main() {
     verify(mockSettings.setTextZoom(100)).called(1);
   });
 
-  test('setMixedContentMode', () async {
+  test('setBootpayMixedContentMode', () async {
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
     );
 
-    await controller.setMixedContentMode(MixedContentMode.compatibilityMode);
+    await controller.setBootpayMixedContentMode(BootpayMixedContentMode.compatibilityMode);
 
     verify(
       mockSettings.setMixedContentMode(
@@ -2031,7 +2031,7 @@ void main() {
 
   test('setOverScrollMode', () async {
     final MockWebView mockWebView = MockWebView();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
     );
 
@@ -2051,7 +2051,7 @@ void main() {
 
     when(mockWebView.pigeon_instanceManager).thenReturn(instanceManager);
 
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
     );
 
@@ -2062,7 +2062,7 @@ void main() {
     String? captured;
     const bool expectedIsWebViewFeatureEnabled = true;
 
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       isWebViewFeatureSupported: (String feature) async {
         captured = feature;
         return expectedIsWebViewFeatureEnabled;
@@ -2070,7 +2070,7 @@ void main() {
     );
 
     final bool result = await controller.isWebViewFeatureSupported(
-      WebViewFeatureType.paymentRequest,
+      BootpayWebViewFeatureType.paymentRequest,
     );
 
     expect(WebViewFeatureConstants.paymentRequest, captured);
@@ -2084,7 +2084,7 @@ void main() {
 
     final MockWebView mockWebView = MockWebView();
     final MockWebSettings mockSettings = MockWebSettings();
-    final AndroidWebViewController controller = createControllerWithMocks(
+    final BootpayAndroidWebViewController controller = createControllerWithMocks(
       mockWebView: mockWebView,
       mockSettings: mockSettings,
       setPaymentRequestEnabled:
@@ -2100,12 +2100,12 @@ void main() {
     expect(expectedEnabled, capturedEnabled);
   });
 
-  group('AndroidWebViewWidget', () {
+  group('BootpayAndroidWebViewWidget', () {
     testWidgets('Builds Android view using supplied parameters', (
       WidgetTester tester,
     ) async {
       final android_webview.WebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -2113,8 +2113,8 @@ void main() {
           android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});
       instanceManager.addDartCreatedInstance(mockWebView);
 
-      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
-        AndroidWebViewWidgetCreationParams(
+      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
+        BootpayAndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           instanceManager: instanceManager,
@@ -2135,7 +2135,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final android_webview.WebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -2157,8 +2157,8 @@ void main() {
         ),
       ).thenReturn(MockSurfaceAndroidViewController());
 
-      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
-        AndroidWebViewWidgetCreationParams(
+      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
+        BootpayAndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           platformViewsServiceProxy: mockPlatformViewsService,
@@ -2189,7 +2189,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final android_webview.WebView mockWebView = MockWebView();
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -2211,8 +2211,8 @@ void main() {
         ),
       ).thenReturn(MockExpensiveAndroidViewController());
 
-      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
-        AndroidWebViewWidgetCreationParams(
+      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
+        BootpayAndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           platformViewsServiceProxy: mockPlatformViewsService,
@@ -2257,7 +2257,7 @@ void main() {
           android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});
       instanceManager.addDartCreatedInstance(mockWebView);
 
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         createWebChromeClient:
             ({
               dynamic onProgressChanged,
@@ -2297,8 +2297,8 @@ void main() {
         ),
       ).thenReturn(MockSurfaceAndroidViewController());
 
-      final AndroidWebViewWidget webViewWidget = AndroidWebViewWidget(
-        AndroidWebViewWidgetCreationParams(
+      final BootpayAndroidWebViewWidget webViewWidget = BootpayAndroidWebViewWidget(
+        BootpayAndroidWebViewWidgetCreationParams(
           key: const Key('test_web_view'),
           controller: controller,
           platformViewsServiceProxy: mockPlatformViewsService,
@@ -2327,7 +2327,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(AndroidCustomViewWidget), findsOneWidget);
+      expect(find.byType(BootpayAndroidCustomViewWidget), findsOneWidget);
     });
 
     testWidgets('PlatformView is recreated when the controller changes', (
@@ -2355,8 +2355,8 @@ void main() {
       await tester.pumpWidget(
         Builder(
           builder: (BuildContext context) {
-            return AndroidWebViewWidget(
-              AndroidWebViewWidgetCreationParams(
+            return BootpayAndroidWebViewWidget(
+              BootpayAndroidWebViewWidgetCreationParams(
                 controller: createControllerWithMocks(mockWebView: mockWebView),
                 platformViewsServiceProxy: mockPlatformViewsService,
                 instanceManager: instanceManager,
@@ -2381,8 +2381,8 @@ void main() {
       await tester.pumpWidget(
         Builder(
           builder: (BuildContext context) {
-            return AndroidWebViewWidget(
-              AndroidWebViewWidgetCreationParams(
+            return BootpayAndroidWebViewWidget(
+              BootpayAndroidWebViewWidgetCreationParams(
                 controller: createControllerWithMocks(mockWebView: mockWebView),
                 platformViewsServiceProxy: mockPlatformViewsService,
                 instanceManager: instanceManager,
@@ -2418,7 +2418,7 @@ void main() {
         final MockPlatformViewsServiceProxy mockPlatformViewsService =
             MockPlatformViewsServiceProxy();
 
-        final AndroidWebViewController controller = createControllerWithMocks(
+        final BootpayAndroidWebViewController controller = createControllerWithMocks(
           mockWebView: mockWebView,
         );
 
@@ -2436,8 +2436,8 @@ void main() {
         await tester.pumpWidget(
           Builder(
             builder: (BuildContext context) {
-              return AndroidWebViewWidget(
-                AndroidWebViewWidgetCreationParams(
+              return BootpayAndroidWebViewWidget(
+                BootpayAndroidWebViewWidgetCreationParams(
                   controller: controller,
                   platformViewsServiceProxy: mockPlatformViewsService,
                   instanceManager: instanceManager,
@@ -2462,8 +2462,8 @@ void main() {
         await tester.pumpWidget(
           Builder(
             builder: (BuildContext context) {
-              return AndroidWebViewWidget(
-                AndroidWebViewWidgetCreationParams(
+              return BootpayAndroidWebViewWidget(
+                BootpayAndroidWebViewWidgetCreationParams(
                   controller: controller,
                   platformViewsServiceProxy: mockPlatformViewsService,
                   instanceManager: instanceManager,
@@ -2488,7 +2488,7 @@ void main() {
     );
   });
 
-  group('AndroidCustomViewWidget', () {
+  group('BootpayAndroidCustomViewWidget', () {
     testWidgets('Builds Android custom view using supplied parameters', (
       WidgetTester tester,
     ) async {
@@ -2497,12 +2497,12 @@ void main() {
           android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});
       instanceManager.addDartCreatedInstance(mockWebView);
 
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
-      final AndroidCustomViewWidget customViewWidget =
-          AndroidCustomViewWidget.private(
+      final BootpayAndroidCustomViewWidget customViewWidget =
+          BootpayAndroidCustomViewWidget.private(
             key: const Key('test_custom_view'),
             customView: mockWebView,
             controller: controller,
@@ -2527,7 +2527,7 @@ void main() {
           android_webview.PigeonInstanceManager(onWeakReferenceRemoved: (_) {});
       instanceManager.addDartCreatedInstance(mockWebView);
 
-      final AndroidWebViewController controller = createControllerWithMocks(
+      final BootpayAndroidWebViewController controller = createControllerWithMocks(
         mockWebView: mockWebView,
       );
 
@@ -2545,8 +2545,8 @@ void main() {
         ),
       ).thenReturn(MockSurfaceAndroidViewController());
 
-      final AndroidCustomViewWidget customViewWidget =
-          AndroidCustomViewWidget.private(
+      final BootpayAndroidCustomViewWidget customViewWidget =
+          BootpayAndroidCustomViewWidget.private(
             controller: controller,
             customView: mockWebView,
             platformViewsServiceProxy: mockPlatformViewsService,

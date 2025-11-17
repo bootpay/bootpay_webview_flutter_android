@@ -9,9 +9,9 @@ import 'package:pigeon/pigeon.dart';
     copyrightHeader: 'pigeons/copyright.txt',
     dartOut: 'lib/src/android_webkit.g.dart',
     kotlinOut:
-        'android/src/main/java/io/flutter/plugins/webviewflutter/AndroidWebkitLibrary.g.kt',
+        'android/src/main/java/kr/co/bootpay/webviewflutter/AndroidWebkitLibrary.g.kt',
     kotlinOptions: KotlinOptions(
-      package: 'io.flutter.plugins.webviewflutter',
+      package: 'kr.co.bootpay.webviewflutter',
       errorClassName: 'AndroidWebKitError',
     ),
   ),
