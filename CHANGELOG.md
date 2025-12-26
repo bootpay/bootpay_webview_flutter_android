@@ -1,3 +1,7 @@
+## 4.10.57
+
+* compileSdkVersion fallback 추가 - 오래된 Flutter 프로젝트에서 빌드 실패 문제 해결
+
 ## 4.10.56
 
 * Updates dependency to use published version of bootpay_webview_flutter_platform_interface.
