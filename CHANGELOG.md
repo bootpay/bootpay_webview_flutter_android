@@ -1,3 +1,10 @@
+## 4.10.58
+
+* Kotlin 1.7.0+ 호환성 개선 (최대 하위 호환성 확보)
+  - 호스트 앱의 kotlin_version 자동 사용 (없으면 1.7.10 기본값)
+  - androidx.annotation 1.5.0, androidx.webkit 1.8.0으로 다운그레이드
+  - Kotlin 1.7.x, 1.8.x, 1.9.x, 2.0.x 모두 지원
+
 ## 4.10.57
 
 * compileSdkVersion fallback 추가 - 오래된 Flutter 프로젝트에서 빌드 실패 문제 해결

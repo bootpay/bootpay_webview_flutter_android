@@ -1,6 +1,27 @@
-# webview\_flutter\_android
+# bootpay\_webview\_flutter\_android
 
-The Android implementation of [`webview_flutter`][1].
+The Android implementation of [`bootpay_webview_flutter`][1] - A forked version of webview_flutter with enhanced payment support for Bootpay.
+
+## Requirements
+
+| Requirement | Minimum Version |
+|-------------|-----------------|
+| Flutter | 3.24.0 |
+| Kotlin | 1.7.0+ |
+| Android SDK | 21 (minSdk) |
+| Android Gradle Plugin | 7.0+ |
+
+### Kotlin Version Compatibility
+
+This package supports **Kotlin 1.7.0 and above** (tested with 1.7.x, 1.8.x, 1.9.x, 2.0.x). It automatically uses your project's Kotlin version if available.
+
+```gradle
+// android/build.gradle
+buildscript {
+    ext.kotlin_version = '1.7.10'  // or '1.8.x', '1.9.x', '2.0.x'
+    ...
+}
+```
 
 ## Usage
 
@@ -133,5 +154,5 @@ WebView to have access to geolocation.
 
 For information on contributing to this plugin, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-[1]: https://pub.dev/packages/webview_flutter
+[1]: https://pub.dev/packages/bootpay_webview_flutter
 [2]: https://flutter.dev/to/endorsed-federated-plugin
