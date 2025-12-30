@@ -1,3 +1,16 @@
+## 4.10.61
+
+* Gradle plugins DSL 방식으로 변경 - 새로운 Flutter 프로젝트(settings.gradle에서 Kotlin 버전 지정)와 호환성 개선
+  - 구식 buildscript 블록 제거, plugins {} 블록 사용
+  - Kotlin 2.0.x+ 및 AGP 8.x와의 호환성 문제 해결
+  - "cannot find symbol: PigeonApi*" 빌드 에러 수정
+
+## 4.10.60
+
+* androidx.webkit 1.12.0 → 1.14.0으로 업그레이드
+  - WebSettingsCompat.setPaymentRequestEnabled 메서드 지원을 위해 필요
+  - 1.14.0 버전에서 Payment Request API가 추가되어 해당 버전 이상 필요
+
 ## 4.10.59
 
 * androidx.webkit 1.8.0 → 1.12.0으로 업그레이드
