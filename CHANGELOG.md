@@ -1,3 +1,9 @@
+## 4.10.59
+
+* androidx.webkit 1.8.0 → 1.12.0으로 업그레이드
+  - WebSettingsCompat.setPaymentRequestEnabled 메서드 지원을 위해 필요
+  - 4.10.58에서 하위 호환성을 위해 1.8.0으로 다운그레이드했으나, Payment Request API 기능 사용 불가 이슈 수정
+
 ## 4.10.58
 
 * Kotlin 1.7.0+ 호환성 개선 (최대 하위 호환성 확보)
