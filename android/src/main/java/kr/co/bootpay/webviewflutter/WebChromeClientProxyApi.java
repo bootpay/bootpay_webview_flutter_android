@@ -250,7 +250,11 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
     @Override
     public void onCloseWindow(WebView window) {
       super.onCloseWindow(window);
-      if(mainView != null) mainView.removeView(window);
+      // Since popup URL was loaded in main WebView via redirect approach,
+      // go back to restore the previous page (e.g., order page)
+      if (mainView != null && mainView.canGoBack()) {
+        mainView.goBack();
+      }
       window.setVisibility(View.GONE);
       window.destroy();
     }
@@ -290,14 +294,13 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
       if (webViewClient == null) {
         return false;
       }
+
+      // Store reference to main WebView for onCloseWindow to use goBack()
       this.mainView = view;
 
-      // Redirect popup URLs to the main (Flutter-managed) WebView.
-      // Adding a child WebView via view.addView() causes rendering issues with
-      // Flutter's PlatformView Virtual Display — the child view's content isn't
-      // captured by the texture, so it only appears after a touch event.
-      // Instead, we intercept the popup URL and load it in the main WebView,
-      // matching the official webview_flutter behavior.
+      // Use the official webview_flutter approach: redirect popup URLs to main WebView.
+      // This ensures proper rendering in Flutter's PlatformView system.
+      // The popup WebView is only used temporarily to intercept the URL.
       final WebViewClient windowWebViewClient =
           new WebViewClient() {
             BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
@@ -315,9 +318,9 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
                 }
               }
 
-              // For HTTP/HTTPS URLs, delegate to parent WebViewClient and load in main WebView
+              // Delegate to parent WebViewClient for URL validation, then load in main WebView
               if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
-                view.loadUrl(request.getUrl().toString());
+                view.loadUrl(url);
               }
               return true;
             }
