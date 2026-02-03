@@ -4,10 +4,17 @@
 
 package kr.co.bootpay.webviewflutter;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JsPromptResult;
@@ -18,6 +25,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -236,24 +244,40 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
   /**
    * Implementation of {@link WebChromeClient} that only allows secure urls when opening a new
    * window.
+   *
+   * Based on official webview_flutter approach: redirect popup URLs to main WebView.
+   * Added bootpay-specific deep link handling for payment apps.
    */
   public static class SecureWebChromeClient extends WebChromeClient {
     @Nullable WebViewClient webViewClient;
     WebChromeClientProxyApi api;
-    WebView mainView;
+    @Nullable WebView mainWebView;
+    @Nullable ViewGroup popupParentView;
 
     public SecureWebChromeClient() {}
     public SecureWebChromeClient(WebChromeClientProxyApi api) {
       this.api = api;
     }
 
+    /** Helper to get Activity from Context */
+    @Nullable
+    private static Activity getActivity(Context context) {
+      if (context == null) return null;
+      if (context instanceof Activity) return (Activity) context;
+      if (context instanceof ContextWrapper) {
+        return getActivity(((ContextWrapper) context).getBaseContext());
+      }
+      return null;
+    }
+
     @Override
     public void onCloseWindow(WebView window) {
       super.onCloseWindow(window);
-      // Since popup URL was loaded in main WebView via redirect approach,
-      // go back to restore the previous page (e.g., order page)
-      if (mainView != null && mainView.canGoBack()) {
-        mainView.goBack();
+      // Remove popup WebView from parent view
+      if (popupParentView != null) {
+        popupParentView.removeView(window);
+      } else if (mainWebView != null) {
+        mainWebView.removeView(window);
       }
       window.setVisibility(View.GONE);
       window.destroy();
@@ -275,18 +299,17 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
      * @param resultMsg the message to send when once a new WebView has been created. resultMsg.obj
      *     is a {@link WebView.WebViewTransport} object. This should be used to transport the new
      *     WebView, by calling WebView.WebViewTransport.setWebView(WebView)
-     * @param newWebView the temporary WebView used to verify the url is secure
+     * @param onCreateWindowWebView the temporary WebView used to verify the url is secure
      * @return this method should return true if the host application will create a new window, in
      *     which case resultMsg should be sent to its target. Otherwise, this method should return
      *     false. Returning false from this method but also sending resultMsg will result in
      *     undefined behavior
      */
-    @SuppressWarnings("deprecation")
     @VisibleForTesting
     boolean onCreateWindow(
         @NonNull final WebView view,
         @NonNull Message resultMsg,
-        @Nullable WebView newWebView) {
+        @Nullable WebView onCreateWindowWebView) {
       // WebChromeClient requires a WebViewClient because of a bug fix that makes
       // calls to WebViewClient.requestLoading/WebViewClient.urlLoading when a new
       // window is opened. This is to make sure a url opened by `Window.open` has
@@ -295,12 +318,9 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
         return false;
       }
 
-      // Store reference to main WebView for onCloseWindow to use goBack()
-      this.mainView = view;
+      // Store main WebView reference for onCloseWindow to call goBack()
+      this.mainWebView = view;
 
-      // Use the official webview_flutter approach: redirect popup URLs to main WebView.
-      // This ensures proper rendering in Flutter's PlatformView system.
-      // The popup WebView is only used temporarily to intercept the URL.
       final WebViewClient windowWebViewClient =
           new WebViewClient() {
             BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
@@ -311,45 +331,108 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
                 @NonNull WebView windowWebView, @NonNull WebResourceRequest request) {
               String url = request.getUrl().toString();
 
-              // Handle payment app deep links (intent://, market://, etc.)
+              // Bootpay: Handle payment app deep links (intent://, market://, etc.)
               if (!url.startsWith("http://") && !url.startsWith("https://")) {
                 if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
                   return true;
                 }
               }
 
-              // Delegate to parent WebViewClient for URL validation, then load in main WebView
-              if (!webViewClient.shouldOverrideUrlLoading(view, request)) {
-                view.loadUrl(url);
-              }
-              return true;
+              // Let popup WebView handle HTTP/HTTPS URLs normally
+              return false;
             }
 
             // Legacy codepath for < N.
             @Override
             @SuppressWarnings({"deprecation", "RedundantSuppression"})
             public boolean shouldOverrideUrlLoading(WebView windowWebView, String url) {
-              // Handle payment app deep links
+              // Bootpay: Handle payment app deep links
               if (!url.startsWith("http://") && !url.startsWith("https://")) {
                 if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
                   return true;
                 }
               }
 
-              if (!webViewClient.shouldOverrideUrlLoading(view, url)) {
-                view.loadUrl(url);
-              }
-              return true;
+              // Let popup WebView handle HTTP/HTTPS URLs normally
+              return false;
             }
           };
 
-      if (newWebView == null) {
-        newWebView = new WebView(view.getContext());
+      if (onCreateWindowWebView == null) {
+        onCreateWindowWebView = new WebView(view.getContext());
       }
-      newWebView.setWebViewClient(windowWebViewClient);
+
+      // Inherit settings from parent WebView for proper payment processing
+      onCreateWindowWebView.getSettings().setJavaScriptEnabled(view.getSettings().getJavaScriptEnabled());
+      onCreateWindowWebView.getSettings().setDomStorageEnabled(view.getSettings().getDomStorageEnabled());
+      onCreateWindowWebView.getSettings().setMediaPlaybackRequiresUserGesture(view.getSettings().getMediaPlaybackRequiresUserGesture());
+      onCreateWindowWebView.getSettings().setBuiltInZoomControls(view.getSettings().getBuiltInZoomControls());
+      onCreateWindowWebView.getSettings().setDisplayZoomControls(view.getSettings().getDisplayZoomControls());
+      onCreateWindowWebView.getSettings().setAllowFileAccess(view.getSettings().getAllowFileAccess());
+      onCreateWindowWebView.getSettings().setAllowContentAccess(view.getSettings().getAllowContentAccess());
+      onCreateWindowWebView.getSettings().setLoadWithOverviewMode(view.getSettings().getLoadWithOverviewMode());
+      onCreateWindowWebView.getSettings().setUseWideViewPort(view.getSettings().getUseWideViewPort());
+      onCreateWindowWebView.getSettings().setSupportMultipleWindows(true);
+      onCreateWindowWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(view.getSettings().getJavaScriptCanOpenWindowsAutomatically());
+      onCreateWindowWebView.getSettings().setUserAgentString(view.getSettings().getUserAgentString());
+      onCreateWindowWebView.getSettings().setCacheMode(view.getSettings().getCacheMode());
+      onCreateWindowWebView.getSettings().setTextZoom(view.getSettings().getTextZoom());
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        onCreateWindowWebView.getSettings().setMixedContentMode(view.getSettings().getMixedContentMode());
+      }
+
+      onCreateWindowWebView.setWebViewClient(windowWebViewClient);
+
+      // Set WebChromeClient on popup to handle window.close()
+      SecureWebChromeClient popupChromeClient = new SecureWebChromeClient(this.api);
+      popupChromeClient.mainWebView = view;  // Pass main WebView reference for removeView()
+      onCreateWindowWebView.setWebChromeClient(popupChromeClient);
+
+      // Set background to ensure immediate rendering (avoid transparent initial state)
+      onCreateWindowWebView.setBackgroundColor(android.graphics.Color.WHITE);
+
+      // Add popup to Activity's DecorView (outside Flutter PlatformView hierarchy)
+      // This ensures touch events work properly
+      Activity activity = getActivity(view.getContext());
+      ViewGroup decorView = null;
+      int statusBarHeight = 0;
+      if (activity != null) {
+        decorView = (ViewGroup) activity.getWindow().getDecorView().findViewById(android.R.id.content);
+        // Get status bar height for SafeArea
+        int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+          statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
+        }
+      }
+
+      FrameLayout.LayoutParams popupParams = new FrameLayout.LayoutParams(
+              ViewGroup.LayoutParams.MATCH_PARENT,
+              ViewGroup.LayoutParams.MATCH_PARENT);
+      // Apply status bar height as top margin (SafeArea)
+      popupParams.topMargin = statusBarHeight;
+
+      if (decorView != null) {
+        decorView.addView(onCreateWindowWebView, popupParams);
+        onCreateWindowWebView.bringToFront();
+        popupChromeClient.popupParentView = decorView;
+      } else {
+        // Fallback: add to WebView's parent
+        ViewGroup parentView = (view.getParent() instanceof ViewGroup)
+                ? (ViewGroup) view.getParent()
+                : null;
+        if (parentView != null) {
+          parentView.addView(onCreateWindowWebView, popupParams);
+          onCreateWindowWebView.bringToFront();
+          popupChromeClient.popupParentView = parentView;
+        } else {
+          // Last fallback: add to WebView itself
+          view.addView(onCreateWindowWebView, popupParams);
+          onCreateWindowWebView.bringToFront();
+        }
+      }
 
       final WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
-      transport.setWebView(newWebView);
+      transport.setWebView(onCreateWindowWebView);
       resultMsg.sendToTarget();
 
       return true;
