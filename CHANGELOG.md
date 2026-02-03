@@ -1,3 +1,10 @@
+## 4.10.62
+
+* 팝업 WebView 터치 이벤트 정상화 - Activity DecorView에 팝업 추가
+  - Flutter PlatformView 계층 외부에서 팝업 렌더링으로 터치 이벤트 직접 전달
+  - status bar 높이를 고려한 SafeArea 적용
+  - window.close() 호출 시 팝업 정상 제거 및 메인뷰 유지
+
 ## 4.10.61
 
 * Gradle plugins DSL 방식으로 변경 - 새로운 Flutter 프로젝트(settings.gradle에서 Kotlin 버전 지정)와 호환성 개선
