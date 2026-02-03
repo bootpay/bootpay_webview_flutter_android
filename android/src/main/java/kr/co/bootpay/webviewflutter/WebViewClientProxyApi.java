@@ -85,9 +85,11 @@ public class WebViewClientProxyApi extends PigeonApiWebViewClient {
         @NonNull WebView view, @NonNull WebResourceRequest request) {
       String url = request.getUrl().toString();
 
-      // Handle intent URLs and special payment schemes using BootpayUrlHelper
-      if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
-        return true;
+      // Handle non-HTTP(S) URLs: intent://, market://, payment app schemes (kftc-bankpay://, etc.)
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+          return true;
+        }
       }
 
       api.getPigeonRegistrar()
@@ -102,9 +104,10 @@ public class WebViewClientProxyApi extends PigeonApiWebViewClient {
     @SuppressWarnings("deprecation")
     @Override
     public boolean shouldOverrideUrlLoading(@NonNull WebView view, @NonNull String url) {
-      // Handle intent URLs and special payment schemes using BootpayUrlHelper
-      if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
-        return true;
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+          return true;
+        }
       }
 
       api.getPigeonRegistrar()
@@ -280,9 +283,11 @@ public class WebViewClientProxyApi extends PigeonApiWebViewClient {
         @NonNull WebView view, @NonNull WebResourceRequest request) {
       String url = request.getUrl().toString();
 
-      // Handle intent URLs and special payment schemes using BootpayUrlHelper
-      if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
-        return true;
+      // Handle non-HTTP(S) URLs: intent://, market://, payment app schemes (kftc-bankpay://, etc.)
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+          return true;
+        }
       }
 
       api.getPigeonRegistrar()
@@ -296,9 +301,11 @@ public class WebViewClientProxyApi extends PigeonApiWebViewClient {
     @SuppressWarnings("deprecation")
     @Override
     public boolean shouldOverrideUrlLoading(@NonNull WebView view, @NonNull String url) {
-      // Handle intent URLs and special payment schemes using BootpayUrlHelper
-      if(bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
-        return true;
+      // Handle non-HTTP(S) URLs: intent://, market://, payment app schemes
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        if (bootpayUrlHelper.doDeepLinkIfPayUrl(view, url)) {
+          return true;
+        }
       }
 
       api.getPigeonRegistrar()

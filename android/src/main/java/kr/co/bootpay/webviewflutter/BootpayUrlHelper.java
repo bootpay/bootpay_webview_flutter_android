@@ -14,6 +14,12 @@ import java.net.URISyntaxException;
 
 public class BootpayUrlHelper {
     public boolean doDeepLinkIfPayUrl(WebView view, String url) {
+        // HTTP/HTTPS URLs are never payment app deep links - skip processing entirely.
+        // This avoids unnecessary Intent.parseUri() and PackageManager lookups for regular web URLs,
+        // and ensures the standard webview_flutter navigation flow is not disrupted.
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            return false;
+        }
 
         Intent intent = getIntentWithPackage(url);
         Context context = view.getContext();
