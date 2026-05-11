@@ -71,6 +71,7 @@
         <package android:name="kr.danal.app.damoum" /> <!-- 다모음 -->
         <package android:name="uplus.membership" /> <!-- U+ 멤버스 -->
         <package android:name="com.sktelecom.tauth" /> <!--PASS-->
+        <package android:name="com.om.sktelecom.tauth" /> <!--KCB휴대폰본인인증(SKT)-->
         <package android:name="com.lguplus.smartotp" /> <!--PASS-->
 
         <package android:name="com.tmoney.inapp" /> <!--티머니-->

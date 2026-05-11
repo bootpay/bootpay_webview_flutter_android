@@ -26,6 +26,16 @@ public class BootpayUrlHelper {
 
         Log.d("bootpay", "doDeepLinkIfPayUrl: " + url);
 
+        // mpocket.online.ansimclick://는 삼성카드 mPOCKET / 삼성 모니모 둘 다 handle 가능.
+        // mPOCKET 미설치 + 모니모 설치 상태에서 무조건 mPOCKET으로 지정해 결제가 끊기는 것을 방지.
+        if (url.startsWith("mpocket.online.ansimclick")
+                && intent != null
+                && "kr.co.samsungcard.mpocket".equals(intent.getPackage())
+                && !isPackageInstalled(context, "kr.co.samsungcard.mpocket")
+                && isPackageInstalled(context, "net.ib.android.smcard")) {
+            intent.setPackage("net.ib.android.smcard");
+        }
+
         if(isIntent(url)) {
             if(isInstallApp(intent, context)) return startApp(intent, context);
             else return startGooglePlay(intent, context);
@@ -51,8 +61,20 @@ public class BootpayUrlHelper {
                 || url.startsWith("wooripay://")
                 || url.startsWith("ispmobile://")
                 || url.startsWith("kb-acp://")
-                || url.startsWith("kakaotalk://");
+                || url.startsWith("kakaotalk://")
+                || url.startsWith("kakaobank://")
+                || url.startsWith("monimopay://")
+                || url.startsWith("smcard://");
 
+    }
+
+    private boolean isPackageInstalled(Context context, String packageName) {
+        if (context == null || packageName == null) return false;
+        try {
+            return context.getPackageManager().getLaunchIntentForPackage(packageName) != null;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public Boolean isIntent(String url) {
@@ -85,6 +107,8 @@ public class BootpayUrlHelper {
                 else if (url.startsWith("nhappvardansimclick")) intent.setPackage("nh.smart.nhallonepay");
                 else if (url.startsWith("citispay")) intent.setPackage("kr.co.citibank.citimobile");
                 else if (url.startsWith("kakaotalk")) intent.setPackage("com.kakao.talk");
+                else if (url.startsWith("kakaobank")) intent.setPackage("com.kakaobank.channel");
+                else if (url.startsWith("monimopay") || url.startsWith("smcard")) intent.setPackage("net.ib.android.smcard");
 //                kvp.jjy.MispAndroid320
             }
             return intent;
@@ -106,28 +130,43 @@ public class BootpayUrlHelper {
     }
 
     public boolean startGooglePlay(Intent intent, Context context) {
-        final String appPackageName = intent.getPackage();
+        // intent:// URL의 표준 fallback (S.browser_fallback_url) 우선 처리
+        String fallbackUrl = intent != null ? intent.getStringExtra("browser_fallback_url") : null;
+        if (fallbackUrl != null && !fallbackUrl.isEmpty()) {
+            try {
+                Intent fallback = new Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl));
+                fallback.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(fallback);
+                return true;
+            } catch (Exception ignored) { /* fall through */ }
+        }
+
+        final String appPackageName = intent != null ? intent.getPackage() : null;
 
         if(appPackageName == null) {
-            Uri dataUri = intent.getData();
+            Uri dataUri = intent != null ? intent.getData() : null;
 
             try {
-                Intent addIntent = new Intent(Intent.ACTION_VIEW, intent.getData());
+                Intent addIntent = new Intent(Intent.ACTION_VIEW, dataUri);
+                addIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(addIntent);
             } catch (Exception e) {
                 String packageName = "com.nhn.android.search"; //appPackageName이 비어있으면 네이버로 보내기(네이버 로그인)
                 if(dataUri != null && dataUri.toString().startsWith("wooripay://")) packageName = "com.wooricard.wpay"; //우리카드 예외처리
 
                 Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
+                addIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(addIntent);
             }
             return true;
         }
         try {
             Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
+            addIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(addIntent);
         } catch (android.content.ActivityNotFoundException anfe) {
             Intent addIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName));
+            addIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(addIntent);
         }
         return true;

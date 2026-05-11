@@ -1,3 +1,15 @@
+## 4.10.63
+
+* `BootpayUrlHelper` URL 라우팅 개선 (나이스페이 앱카드 관련)
+  - `isSpecialCase()`에 `kakaobank://`, `monimopay://`, `smcard://` 스킴 추가
+    - 기존: 매칭되는 분기가 없어 `shouldOverrideUrlLoading`이 false를 반환 → 버튼 눌러도 무반응
+  - 삼성카드 mPOCKET 미설치 + 삼성 모니모 설치 상태에서 `mpocket.online.ansimclick://`를 모니모로 자동 라우팅
+    - mPOCKET 고정 지정으로 결제가 끊기던 문제 해결
+  - `getIntentWithPackage()` 패키지 매핑 추가: `kakaobank://` → `com.kakaobank.channel`, `monimopay://`/`smcard://` → `net.ib.android.smcard`
+  - `startGooglePlay()`에 Android 표준 `browser_fallback_url` (S.browser_fallback_url) 지원 추가
+  - 모든 `context.startActivity()`에 `FLAG_ACTIVITY_NEW_TASK` 보강
+* AndroidManifest `<queries>`에 `com.om.sktelecom.tauth` (KCB 휴대폰본인인증 SKT) 패키지 추가
+
 ## 4.10.62
 
 * 팝업 WebView 터치 이벤트 정상화 - Activity DecorView에 팝업 추가
