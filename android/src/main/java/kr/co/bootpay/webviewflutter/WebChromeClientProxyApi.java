@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JsPromptResult;
@@ -26,6 +28,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -253,10 +256,32 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
     WebChromeClientProxyApi api;
     @Nullable WebView mainWebView;
     @Nullable ViewGroup popupParentView;
+    @Nullable View popupContainer;
+
+    /**
+     * The most recently created popup container / web view, so Dart can dismiss
+     * the active popup via {@code Bootpay.closePopupWebView()} (e.g. on an
+     * ad-finished event). Cleared on dismissal so a closed popup is not retained.
+     */
+    @Nullable private static View sActivePopupContainer;
+    @Nullable private static WebView sActivePopupWebView;
 
     public SecureWebChromeClient() {}
     public SecureWebChromeClient(WebChromeClientProxyApi api) {
       this.api = api;
+    }
+
+    /**
+     * Dismisses the currently displayed popup, if any. No-op when none is open.
+     * Invoked on the platform main thread from the {@code closePopup} method
+     * channel, so it is safe to touch views here.
+     */
+    static void closeActivePopup() {
+      final View container = sActivePopupContainer;
+      final WebView webView = sActivePopupWebView;
+      if (container != null && webView != null) {
+        dismissPopupContainer(container, webView);
+      }
     }
 
     /** Helper to get Activity from Context */
@@ -273,14 +298,28 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
     @Override
     public void onCloseWindow(WebView window) {
       super.onCloseWindow(window);
-      // Remove popup WebView from parent view
-      if (popupParentView != null) {
+      // The popup WebView is wrapped in a container (floating ✕ + WebView);
+      // remove the whole container so the button disappears together with the
+      // popup. Fall back to removing the bare WebView for any unwrapped popup.
+      if (popupContainer != null) {
+        ViewParent parent = popupContainer.getParent();
+        if (parent instanceof ViewGroup) {
+          ((ViewGroup) parent).removeView(popupContainer);
+        } else if (popupParentView != null) {
+          popupParentView.removeView(popupContainer);
+        }
+      } else if (popupParentView != null) {
         popupParentView.removeView(window);
       } else if (mainWebView != null) {
         mainWebView.removeView(window);
       }
       window.setVisibility(View.GONE);
       window.destroy();
+      // Drop the static reference so a closed popup is not retained / re-closed.
+      if (sActivePopupWebView == window || sActivePopupContainer == popupContainer) {
+        sActivePopupContainer = null;
+        sActivePopupWebView = null;
+      }
     }
 
     @Override
@@ -325,6 +364,15 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
           new WebViewClient() {
             BootpayUrlHelper bootpayUrlHelper = new BootpayUrlHelper();
 
+            @Override
+            public void onPageStarted(
+                WebView windowWebView, String url, android.graphics.Bitmap favicon) {
+              // AdSense click-throughs route through an ad-network domain on each
+              // navigation; reveal the close button as soon as one is seen.
+              revealCloseButtonIfNeeded(windowWebView, url);
+              super.onPageStarted(windowWebView, url, favicon);
+            }
+
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public boolean shouldOverrideUrlLoading(
@@ -337,6 +385,9 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
                   return true;
                 }
               }
+
+              // Reveal the close button if this navigation should show it.
+              revealCloseButtonIfNeeded(windowWebView, url);
 
               // Let popup WebView handle HTTP/HTTPS URLs normally
               return false;
@@ -352,6 +403,9 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
                   return true;
                 }
               }
+
+              // Reveal the close button if this navigation should show it.
+              revealCloseButtonIfNeeded(windowWebView, url);
 
               // Let popup WebView handle HTTP/HTTPS URLs normally
               return false;
@@ -391,6 +445,20 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
       // Set background to ensure immediate rendering (avoid transparent initial state)
       onCreateWindowWebView.setBackgroundColor(android.graphics.Color.WHITE);
 
+      // Wrap the popup WebView in a container that overlays a single floating,
+      // semi-transparent close (✕) button on top of it. The button is hidden by
+      // default, so payment popups render full-bleed exactly as before and
+      // auto-dismiss via `window.close()` (-> onCloseWindow). It is shown per the
+      // configured mode (auto: ad popups only — the default; always; never) — see
+      // revealCloseButtonIfNeeded / BootpayPopupAdFilter — giving users a manual
+      // escape hatch from ad pages opened via window.open / target="_blank"
+      // (e.g. AdSense) while still displaying the ad in-app.
+      final FrameLayout popupContainer = buildPopupContainer(view.getContext(), onCreateWindowWebView);
+      popupChromeClient.popupContainer = popupContainer;
+      // Track the active popup so Dart can dismiss it via closePopupWebView().
+      sActivePopupContainer = popupContainer;
+      sActivePopupWebView = onCreateWindowWebView;
+
       // Add popup to Activity's DecorView (outside Flutter PlatformView hierarchy)
       // This ensures touch events work properly
       Activity activity = getActivity(view.getContext());
@@ -412,8 +480,8 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
       popupParams.topMargin = statusBarHeight;
 
       if (decorView != null) {
-        decorView.addView(onCreateWindowWebView, popupParams);
-        onCreateWindowWebView.bringToFront();
+        decorView.addView(popupContainer, popupParams);
+        popupContainer.bringToFront();
         popupChromeClient.popupParentView = decorView;
       } else {
         // Fallback: add to WebView's parent
@@ -421,13 +489,13 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
                 ? (ViewGroup) view.getParent()
                 : null;
         if (parentView != null) {
-          parentView.addView(onCreateWindowWebView, popupParams);
-          onCreateWindowWebView.bringToFront();
+          parentView.addView(popupContainer, popupParams);
+          popupContainer.bringToFront();
           popupChromeClient.popupParentView = parentView;
         } else {
           // Last fallback: add to WebView itself
-          view.addView(onCreateWindowWebView, popupParams);
-          onCreateWindowWebView.bringToFront();
+          view.addView(popupContainer, popupParams);
+          popupContainer.bringToFront();
         }
       }
 
@@ -446,6 +514,109 @@ public class WebChromeClientProxyApi extends PigeonApiWebChromeClient {
      */
     public void setWebViewClient(@NonNull WebViewClient webViewClient) {
       this.webViewClient = webViewClient;
+    }
+
+    /**
+     * Builds a {@link FrameLayout} that overlays a single floating, semi-
+     * transparent close (✕) button on top of the popup {@link WebView}.
+     *
+     * <p>The button's initial visibility follows
+     * {@link BootpayPopupAdFilter#shouldShowCloseButton} for a null URL: shown
+     * immediately in "always" mode, hidden in "auto" (revealed later once the
+     * popup navigates to a known ad network) and "never". This keeps payment
+     * popups chrome-less while giving users a manual escape hatch from ad pages
+     * (e.g. AdSense window.open / target="_blank") without altering the payment
+     * success path.
+     *
+     * <p>The container exposes its close button via {@link View#setTag(Object)}
+     * so the popup's {@link WebViewClient} can reveal it from a navigation
+     * callback (see {@link #revealCloseButtonIfNeeded}).
+     */
+    @NonNull
+    private static FrameLayout buildPopupContainer(
+        @NonNull Context context, @NonNull final WebView popupWebView) {
+      final float density = context.getResources().getDisplayMetrics().density;
+      final int buttonSize = (int) (18 * density);
+      final int margin = (int) (12 * density);
+
+      final FrameLayout container = new FrameLayout(context);
+      container.setBackgroundColor(android.graphics.Color.WHITE);
+
+      // Popup web view fills the whole container.
+      container.addView(popupWebView, new FrameLayout.LayoutParams(
+          ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+      // Circular, semi-transparent ✕ floated at the top-right corner.
+      final TextView closeButton = new TextView(context);
+      closeButton.setText("✕");
+      closeButton.setTextColor(android.graphics.Color.WHITE);
+      closeButton.setTextSize(11);
+      closeButton.setGravity(Gravity.CENTER);
+      final GradientDrawable buttonBackground = new GradientDrawable();
+      buttonBackground.setShape(GradientDrawable.OVAL);
+      buttonBackground.setColor(android.graphics.Color.argb(115, 0, 0, 0)); // ~0.45 alpha
+      closeButton.setBackground(buttonBackground);
+      closeButton.setClickable(true);
+      // Hidden by default; "always" mode shows it immediately.
+      closeButton.setVisibility(
+          BootpayPopupAdFilter.getInstance().shouldShowCloseButton(null)
+              ? View.VISIBLE
+              : View.GONE);
+
+      final FrameLayout.LayoutParams buttonParams =
+          new FrameLayout.LayoutParams(buttonSize, buttonSize);
+      buttonParams.gravity = Gravity.TOP | Gravity.END;
+      buttonParams.setMargins(0, margin, margin, 0);
+      container.addView(closeButton, buttonParams);
+
+      closeButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          dismissPopupContainer(container, popupWebView);
+        }
+      });
+
+      // Expose the close button so the popup's WebViewClient can reveal it.
+      container.setTag(closeButton);
+
+      return container;
+    }
+
+    /**
+     * Reveals the popup's floating ✕ button when the popup navigates to a URL
+     * that should show it (per the configured mode). Reveal-only: once shown it
+     * stays. In "auto" mode payment popups never match and stay chrome-less. The
+     * button is located via the container tag set in {@link #buildPopupContainer}.
+     */
+    private static void revealCloseButtonIfNeeded(
+        @NonNull WebView popupWebView, @Nullable String url) {
+      if (!BootpayPopupAdFilter.getInstance().shouldShowCloseButton(url)) {
+        return;
+      }
+      ViewParent parent = popupWebView.getParent();
+      if (parent instanceof View) {
+        Object tag = ((View) parent).getTag();
+        if (tag instanceof View) {
+          ((View) tag).setVisibility(View.VISIBLE);
+        }
+      }
+    }
+
+    /** Removes the popup container from its parent and destroys its WebView. */
+    private static void dismissPopupContainer(
+        @NonNull View container, @NonNull WebView popupWebView) {
+      popupWebView.stopLoading();
+      ViewParent parent = container.getParent();
+      if (parent instanceof ViewGroup) {
+        ((ViewGroup) parent).removeView(container);
+      }
+      popupWebView.setVisibility(View.GONE);
+      popupWebView.destroy();
+      // Drop the static reference so a closed popup is not retained / re-closed.
+      if (sActivePopupContainer == container) {
+        sActivePopupContainer = null;
+        sActivePopupWebView = null;
+      }
     }
   }
 

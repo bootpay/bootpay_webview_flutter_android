@@ -1,3 +1,18 @@
+## 4.10.64
+
+* feat: Android 팝업(window.open / target="_blank")에 **반투명 플로팅 닫기(✕) 버튼** 추가 — 광고 등 `window.close()`를 호출하지 않는 새 창에 사용자가 갇히던 문제 해결
+  - 닫기 UI 를 상단 바(‹ 뒤로 / ✕ 닫기)에서 **팝업 위에 겹쳐 뜨는 반투명 원형 ✕ 버튼 하나**로 단순화 (DecorView 부착 컨테이너 우상단에 `FrameLayout` 오버레이, `GradientDrawable` 원형 반투명 배경)
+  - 노출 모드 3종을 `Bootpay.setPopupCloseButtonMode(BootpayPopupCloseButtonMode.auto | always | never)` 로 제어:
+    - `auto`(기본): 광고 네트워크 도메인 팝업에만 ✕ 노출 (기존 동작 유지)
+    - `always`: 모든 팝업에 ✕ 노출
+    - `never`: ✕ 미노출
+  - `Bootpay.closePopupWebView()` 로 현재 떠 있는 팝업을 코드로 즉시 닫는 API 추가 — 개발자가 광고 종료 이벤트를 받았을 때 호출 (`SecureWebChromeClient.closeActivePopup()` static 추적)
+  - 광고 분류는 광고 도메인 목록 방식 — 팝업/광고를 차단하지 않고 ✕ 노출 여부만 결정. 결제창은 동적 PG gateway 도메인이라 열거가 불가능하므로 auto 기본값은 "✕ 없음", 알려진 광고 도메인(`doubleclick.net` / `googleadservices.com` / `googlesyndication.com` 등)만 매칭 (`BootpayPopupAdFilter`)
+  - `onCreateWindow`가 생성한 팝업 `WebView`를 `FrameLayout` 컨테이너로 래핑(✕ 는 모드별 기본 `GONE`/`VISIBLE`)해 DecorView에 부착하고, 팝업 `WebViewClient.onPageStarted`/`shouldOverrideUrlLoading`에서 `shouldShowCloseButton` 판정 시 ✕ 노출 (reveal-only)
+  - `bootpay` 패키지의 `Bootpay.addPopupAdHosts([...])`로 광고 도메인 목록을 런타임 확장 가능 (`kr.co.bootpay/webview_popup` 채널 — `addAdHosts` / `setCloseButtonMode` / `closePopup`)
+  - 결제 흐름은 기존 그대로 — `window.close()` 자동 닫힘(`onCloseWindow`), 결제/인증 앱 딥링크(`doDeepLinkIfPayUrl`) 모두 유지
+  - iOS `bootpay_webview_flutter_wkwebview` 3.23.32의 동일 변경과 동기화
+
 ## 4.10.63
 
 * `BootpayUrlHelper` URL 라우팅 개선 (나이스페이 앱카드 관련)
