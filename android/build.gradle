@@ -1,6 +1,16 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+}
+
+// AGP 9+ 는 Kotlin 을 내장한다(Built-in Kotlin). 앱이 android.builtInKotlin=false 로 끈 경우와
+// AGP 8 이하에서만 KGP 를 적용한다.
+// - Groovy 의 `?:` 는 false 도 비어 있다고 보므로 getOrElse 로 읽는다.
+// - `apply plugin:` 표기는 Flutter 의 KGP 감지 정규식에 조건과 무관하게 잡히므로 pluginManager 로 적용한다.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
+def builtInKotlinEnabled = agpMajor >= 9 &&
+    providers.gradleProperty('android.builtInKotlin').getOrElse('true').toBoolean()
+if (!builtInKotlinEnabled) {
+    pluginManager.apply('org.jetbrains.kotlin.android')
 }
 
 group = 'kr.co.bootpay.webviewflutter'
@@ -18,12 +28,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     defaultConfig {
-        minSdkVersion 21
+        minSdk = 21
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,5 +60,20 @@ android {
                showStandardStreams = true
             }
         }
+    }
+}
+
+// kotlin { compilerOptions } 는 KGP 2.0+ 에서만 있다. 오래된 앱(KGP 1.x)은 기존 kotlinOptions 를 쓴다.
+def kgpMajor = builtInKotlinEnabled ? 2 :
+    org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapperKt.getKotlinPluginVersion(project).tokenize('.')[0].toInteger()
+if (kgpMajor >= 2) {
+    kotlin {
+        compilerOptions {
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        }
+    }
+} else {
+    android.kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }

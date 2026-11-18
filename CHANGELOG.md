@@ -1,3 +1,10 @@
+## 4.10.65
+
+* fix: AGP 9 Built-in Kotlin 지원 — `android.builtInKotlin` 이 켜진 앱에서 빌드되지 않던 문제 수정
+  - AGP 9+ 이고 Built-in Kotlin 이 켜져 있으면 Kotlin Gradle Plugin(KGP) 을 적용하지 않는다. AGP 8 이하 또는 `android.builtInKotlin=false` 에서는 기존처럼 적용
+  - `kotlinOptions` → `kotlin { compilerOptions }` (KGP 1.x 앱은 기존 `kotlinOptions` 유지)
+  - Flutter 3.44+ 빌드의 "plugins that apply Kotlin Gradle Plugin (KGP)" 경고에서 빠진다
+
 ## 4.10.64
 
 * feat: Android 팝업(window.open / target="_blank")에 **반투명 플로팅 닫기(✕) 버튼** 추가 — 광고 등 `window.close()`를 호출하지 않는 새 창에 사용자가 갇히던 문제 해결
